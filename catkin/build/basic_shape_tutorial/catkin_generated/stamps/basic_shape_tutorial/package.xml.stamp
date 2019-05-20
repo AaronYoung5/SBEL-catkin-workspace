@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>basic_shape_tutorial</name>
+  <version>0.0.0</version>
+  <description>The using_markers package</description>
+  <maintainer email="aaron@todo.todo">aaron</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

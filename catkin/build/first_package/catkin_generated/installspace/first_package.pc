@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/catkin/install
+
+Name: first_package
+Description: Description of first_package
+Version: 0.1.0
+Cflags: -I/home/aaron/ROS/catkin/install/include
+Libs: -L/home/aaron/ROS/catkin/install/lib 
+Requires: message_runtime

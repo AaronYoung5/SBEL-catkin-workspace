@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/catkin/devel
+
+Name: basic_line_tutorial
+Description: Description of basic_line_tutorial
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/catkin/devel/lib 
+Requires: 

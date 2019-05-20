@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/catkin/install
+
+Name: chrono_test
+Description: Description of chrono_test
+Version: 0.0.0
+Cflags: -I/home/aaron/ROS/catkin/install/include
+Libs: -L/home/aaron/ROS/catkin/install/lib 
+Requires: 
