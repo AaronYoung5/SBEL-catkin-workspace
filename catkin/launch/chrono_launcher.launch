@@ -1,0 +1,14 @@
+<launch>
+  <node pkg="chrono_launch" type="chrono_launcher" name="chrono_launcher" required="true"/>
+
+  <!-- <node pkg="rviz_visualizer" type="rviz_visualize" name="rviz_visualize" required="true"/> -->
+
+  <node pkg="path_publisher" type="path_publisher" name = "path_publisher" required="true"/>
+
+  <node pkg="path_follower" type="path_follower_2.py" name="path_follower" required="true" output="screen"/>
+
+  <!-- <node pkg="keyboard_control" type="keyboard_input" name="keyboard_control" output="screen" launch-prefix="gnome-terminal "/> -->
+
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d /home/aaron/.rviz/rviz_visualizer.rviz" required="true"/> -->
+
+</launch>

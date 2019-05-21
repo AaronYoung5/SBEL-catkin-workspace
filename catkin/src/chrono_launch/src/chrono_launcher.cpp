@@ -1,5 +1,6 @@
 // ROS includes
 #include "ros/ros.h"
+#include "std_msgs/Float32.h"
 #include "std_msgs/Float32MultiArray.h"
 #include "std_msgs/Int8.h"
 
@@ -8,14 +9,14 @@
 #include <chrono/core/ChStream.h>
 #include <chrono/utils/ChUtilsInputOutput.h>
 
+#include "chrono/geometry/ChLineBezier.h"
+#include "chrono_vehicle/utils/ChVehiclePath.h"
 #include <chrono_vehicle/ChConfigVehicle.h>
 #include <chrono_vehicle/ChVehicleModelData.h>
 #include <chrono_vehicle/driver/ChDataDriver.h>
 #include <chrono_vehicle/driver/ChIrrGuiDriver.h>
 #include <chrono_vehicle/terrain/RigidTerrain.h>
 #include <chrono_vehicle/wheeled_vehicle/utils/ChWheeledVehicleIrrApp.h>
-#include "chrono_vehicle/utils/ChVehiclePath.h"
-#include "chrono/geometry/ChLineBezier.h"
 
 #include <chrono_models/vehicle/sedan/Sedan.h>
 
@@ -44,11 +45,14 @@ private:
   double throttleDelta, steeringDelta;
 
   ros::NodeHandle n;
-  ros::Subscriber sub;
+  ros::Subscriber key_sub;
+  ros::Subscriber throttle_sub;
+  ros::Subscriber steering_sub;
+  ros::Subscriber braking_sub;
 
   ros::Publisher gps_pub;
   ros::Publisher steering_pub;
-  ros::Publisher throttle_pub;
+  ros::Publisher vel_pub;
 
   ChWheeledVehicleIrrApp *app;
 
@@ -90,7 +94,14 @@ public:
   void setSteering(double steering) { this->steering = steering; }
   void setBraking(double braking) { this->braking = braking; }
 
-  void updateDriver(const std_msgs::Int8::ConstPtr &msg);
+  double getThrottle() { return throttle; }
+  double getSteering() { return steering; }
+  double getBraking() { return braking; }
+
+  void keyCallback(const std_msgs::Int8::ConstPtr &msg);
+  void steeringCallback(const std_msgs::Float32::ConstPtr &msg);
+  void throttleCallback(const std_msgs::Float32::ConstPtr &msg);
+  void brakingCallback(const std_msgs::Float32::ConstPtr &msg);
 
 private:
   void initVehicle();
@@ -99,8 +110,8 @@ private:
   void initOutput();
   void initDriver();
 
-  void increaseThrottle() { throttle = clamp(throttle + throttleDelta, -1, 1); }
-  void decreaseThrottle() { throttle = clamp(throttle - throttleDelta, -1, 1); }
+  void increaseThrottle() { throttle = clamp(throttle + throttleDelta, 0.0, +1.0); }
+  void decreaseThrottle() { throttle = clamp(throttle - throttleDelta*3, 0.0, +1.0); }
 
   void turnRight() { steering = clamp(steering + steeringDelta, -1, 1); }
   void turnLeft() { steering = clamp(steering - steeringDelta, -1, 1); }
@@ -114,8 +125,14 @@ ChronoVehicleLauncher::ChronoVehicleLauncher() {
   steering = 0;
   braking = 0;
 
-  sub = n.subscribe<std_msgs::Int8>("key_msgs", 1000,
-                                    &ChronoVehicleLauncher::updateDriver, this);
+  key_sub = n.subscribe<std_msgs::Int8>(
+      "key_msgs", 1000, &ChronoVehicleLauncher::keyCallback, this);
+  steering_sub = n.subscribe<std_msgs::Float32>(
+      "steering_control", 1000, &ChronoVehicleLauncher::steeringCallback, this);
+  throttle_sub = n.subscribe<std_msgs::Float32>(
+      "throttle_control", 1000, &ChronoVehicleLauncher::throttleCallback, this);
+  braking_sub = n.subscribe<std_msgs::Float32>(
+      "braking_control", 1000, &ChronoVehicleLauncher::brakingCallback, this);
 
   gps_pub = n.advertise<std_msgs::Float32MultiArray>("veh_gps", 1000);
   // sub = n.subscribe<std_msgs::Int8>("key_msgs", 1000,
@@ -264,8 +281,8 @@ void ChronoVehicleLauncher::initDriver() {
   driver->SetThrottleDelta(render_step_size / throttle_time);
   driver->SetBrakingDelta(render_step_size / braking_time);
 
-  this->throttleDelta = render_step_size / throttle_time;
-  this->steeringDelta = render_step_size / steering_time;
+  this->throttleDelta = render_step_size / throttle_time / 10;
+  this->steeringDelta = render_step_size / steering_time / 10;
 
   // If in playback mode, attach the data file to the driver system and
   // force it to playback the driver inputs.
@@ -287,28 +304,28 @@ void ChronoVehicleLauncher::loop() {
   std::cout << "VEHICLE MASS: " << my_veh.GetVehicle().GetVehicleMass()
             << std::endl;
 
-  std::string path_file("paths/ISO_double_lane_change.txt");
-
-  // ----------------------
-  // Create the Bezier path
-  // ----------------------
-
-  // From data file
-  auto path = ChBezierCurve::read(vehicle::GetDataFile(path_file));
-  // Create a fixed body to carry a visualization asset for the path
-    auto road = std::shared_ptr<ChBody>(my_veh.GetSystem()->NewBody());
-    road->SetBodyFixed(true);
-
-const std::string m_pathName = "my_path";
-    auto bezier_curve = path;
-    auto num_points = static_cast<unsigned int>(bezier_curve->getNumPoints());
-    auto path_asset = std::make_shared<ChLineShape>();
-    path_asset->SetLineGeometry(std::make_shared<geometry::ChLineBezier>(bezier_curve));
-    path_asset->SetColor(ChColor(0.0f, 0.8f, 0.0f));
-    path_asset->SetName(m_pathName);
-    path_asset->SetNumRenderPoints(std::max<unsigned int>(2 * num_points, 400));
-    road->AddAsset(path_asset);
-    my_veh.GetSystem()->AddBody(road);
+  // std::string path_file("paths/ISO_double_lane_change.txt");
+  //
+  // // ----------------------
+  // // Create the Bezier path
+  // // ----------------------
+  //
+  // // From data file
+  // auto path = ChBezierCurve::read(vehicle::GetDataFile(path_file));
+  // // Create a fixed body to carry a visualization asset for the path
+  // auto road = std::shared_ptr<ChBody>(my_veh.GetSystem()->NewBody());
+  // road->SetBodyFixed(true);
+  //
+  // const std::string m_pathName = "my_path";
+  // auto bezier_curve = path;
+  // auto num_points = static_cast<unsigned int>(bezier_curve->getNumPoints());
+  // auto path_asset = std::make_shared<ChLineShape>();
+  // path_asset->SetLineGeometry(
+  //     std::make_shared<geometry::ChLineBezier>(bezier_curve));
+  // path_asset->SetColor(ChColor(0.0f, 0.8f, 0.0f));
+  // path_asset->SetName(m_pathName);
+  // path_asset->SetNumRenderPoints(std::max<unsigned int>(2 * num_points,
+  // 400)); road->AddAsset(path_asset); my_veh.GetSystem()->AddBody(road);
 
   // Number of simulation steps between miscellaneous events
   int render_steps = (int)std::ceil(render_step_size / step_size);
@@ -367,8 +384,6 @@ const std::string m_pathName = "my_path";
     // std::cout << typeid(my_veh.GetVehicle().GetVehicleCOMPos().x()).name() <<
     // std::endl; std::cout << my_veh.GetVehicle().G
 
-    ChClamp(1, 1, 1);
-
     // Update modules (process inputs from other modules)
     // todo the steering,ChronoVehicleLauncher::throttle, brake order is
     // different for these elements
@@ -406,7 +421,7 @@ const std::string m_pathName = "my_path";
   }
 }
 
-void ChronoVehicleLauncher::updateDriver(const std_msgs::Int8::ConstPtr &msg) {
+void ChronoVehicleLauncher::keyCallback(const std_msgs::Int8::ConstPtr &msg) {
   switch (msg->data) {
   case KEYCODE_R:
     // ROS_INFO("RIGHT");
@@ -426,6 +441,25 @@ void ChronoVehicleLauncher::updateDriver(const std_msgs::Int8::ConstPtr &msg) {
     break;
   }
 }
+
+void ChronoVehicleLauncher::steeringCallback(
+    const std_msgs::Float32::ConstPtr &msg) {
+  float target_steering = msg->data;
+  float current_steering = this->getSteering();
+
+  target_steering < current_steering ? this->turnLeft() : this->turnRight();
+}
+
+void ChronoVehicleLauncher::throttleCallback(
+    const std_msgs::Float32::ConstPtr &msg) {
+  float target_throttle = msg->data;
+  float current_throttle = this->getThrottle();
+
+  target_throttle < current_throttle ? this->decreaseThrottle() : this->increaseThrottle();
+}
+
+void ChronoVehicleLauncher::brakingCallback(
+    const std_msgs::Float32::ConstPtr &msg) {}
 
 void quit(int sig) {
   ros::shutdown();

@@ -1,4 +1,0 @@
-<launch>
-  <node pkg="chrono_launch" type="chrono_launcher" name="chrono_launcher" required="true"/>
-  <node pkg="keyboard_control" type="keyboard_input" name="keyboard_control" required="true"/>
-</launch>

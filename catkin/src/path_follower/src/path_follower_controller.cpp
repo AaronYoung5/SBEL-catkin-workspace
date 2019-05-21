@@ -17,8 +17,8 @@ void pathCallback(const std_msgs::Float32MultiArray::ConstPtr &msg) {
 
 void gpsCallback(const std_msgs::Float32MultiArray::ConstPtr &msg) {
   int i = 0;
-  for (std::vector<float>::const_iterator it = array->data.begin();
-       it != array->data.end(); ++it) {
+  for (std::vector<float>::const_iterator it = msg->data.begin();
+       it != msg->data.end(); ++it) {
     pos[i] = *it;
     i++;
   }
@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
   ros::Rate r(60);
 
   while(ros::ok()) {
-    
+
 
 
 

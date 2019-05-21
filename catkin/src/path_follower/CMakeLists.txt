@@ -9,9 +9,11 @@ project(path_follower)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rospy
   std_msgs
   message_generation
   genmsg
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -52,7 +54,7 @@ add_message_files(
   DIRECTORY
   msg
   FILES
-  path.msg
+  path_msg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -69,11 +71,13 @@ add_message_files(
 #   Action1.action
 #   Action2.action
 # )
+catkin_python_setup()
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
   std_msgs  # Or other packages containing msgs
+  geometry_msgs
 )
 
 ################################################
@@ -108,7 +112,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES chrono_control
- CATKIN_DEPENDS roscpp std_msgs message_runtime
+ CATKIN_DEPENDS roscpp rospy std_msgs message_runtime geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -162,10 +166,12 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(PROGRAMS
+  scripts/path_follower_controller.py
+  nodes/path_follower_2.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+#
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
@@ -200,6 +206,10 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+# catkin_python_setup()
 
 add_executable(path_follower_controller src/path_follower_controller.cpp)
 target_link_libraries(path_follower_controller ${catkin_LIBRARIES})
+#
+# add_executable(path_follower_controller_py src/path_follower_controller.py)
+# target_link_libraries(path_follower_controller_py ${catkin_LIBRARIES})

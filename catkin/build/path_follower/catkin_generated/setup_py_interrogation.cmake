@@ -1,0 +1,6 @@
+set(path_follower_SETUP_PY_VERSION "0.0.0")
+set(path_follower_SETUP_PY_SCRIPTS "")
+set(path_follower_SETUP_PY_PACKAGES "path_follower")
+set(path_follower_SETUP_PY_PACKAGE_DIRS "src/path_follower")
+set(path_follower_SETUP_PY_MODULES "")
+set(path_follower_SETUP_PY_MODULE_DIRS "")

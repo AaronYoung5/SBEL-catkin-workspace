@@ -367,6 +367,7 @@ chrono_launch/CMakeFiles/chrono_launcher.dir/src/chrono_launcher.cpp.o
  /opt/ros/melodic/include/ros/wall_timer.h
  /opt/ros/melodic/include/ros/wall_timer_options.h
  /opt/ros/melodic/include/rosconsole/macros_generated.h
+ /opt/ros/melodic/include/std_msgs/Float32.h
  /opt/ros/melodic/include/std_msgs/Float32MultiArray.h
  /opt/ros/melodic/include/std_msgs/Int8.h
  /opt/ros/melodic/include/std_msgs/MultiArrayDimension.h

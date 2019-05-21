@@ -1,23 +1,30 @@
-#include "msg/path_msg.msg"
+#include "geometry_msgs/Point.h"
 #include "ros/ros.h"
+#include "rviz_visualizer/path_msg.h"
 #include "std_msgs/Float32MultiArray.h"
 #include "visualization_msgs/Marker.h"
 
-std::vector<float> path;
+std::vector<geometry_msgs::Point> path;
+
 float pos[3];
 bool pos_found = false;
 bool path_recieved = false;
 
-void draw_path(const msg::path_msg::ConstPtr &msg) {
+void draw_path(const rviz_visualizer::path_msg::ConstPtr &msg) {
   path_recieved = true;
-  for (std::vector<float>::const_iterator it = msg->data.begin();
-       it != msg->data.end(); ++it) {
-    path.push_back(*it);
+  // path = msg;
+
+  ROS_INFO_ONCE("PATH RECIEVED");
+
+  int i = 0;
+  for (const geometry_msgs::Point p : msg->points) {
+    path.push_back(p);
   }
 }
 
 void gps_update(const std_msgs::Float32MultiArray::ConstPtr &array) {
   pos_found = true;
+  ROS_INFO_ONCE("GPS RECIEVED");
   int i = 0;
   for (std::vector<float>::const_iterator it = array->data.begin();
        it != array->data.end(); ++it) {
@@ -31,41 +38,38 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   ros::Subscriber path_sub =
-      n.subscribe<msg::path_msg>("path_msg", 1, draw_path);
+      n.subscribe<rviz_visualizer::path_msg>("path_msg", 1, draw_path);
   ros::Subscriber gps_sub =
       n.subscribe<std_msgs::Float32MultiArray>("veh_gps", 1000, gps_update);
 
   ros::Publisher pub =
-      n.advertise<visualization_msgs::Marker>("rviz_visualizer", 1);
+      n.advertise<visualization_msgs::Marker>("rviz_visualizer", 1000);
 
-  ros::Rate r(60);
+  ros::Rate r(30);
 
   while (ros::ok()) {
+    ros::spinOnce();
     if (!(pos_found && path_recieved)) {
+      ROS_WARN_ONCE("Please provide a car position and path");
       continue;
     }
 
-    visualization_marker::Marker veh, path_line;
+    visualization_msgs::Marker veh, path_points;
 
-    veh.header.frame_id = path_line.header.frame_id = "rviz_visualizer_frame";
-    veh.header.stamp = path_line.header.stamp = ros::Time::now();
-    veh.ns = "veh";
-    path_line.ns = "path";
-    veh.action = path_line.action = visualization::Marker::ADD;
-    veh.pose.orientation.w = path_line.pose.orientation.w = 1.0;
+    veh.header.frame_id = path_points.header.frame_id = "/rv_frame";
+    veh.header.stamp = path_points.header.stamp = ros::Time::now();
+    veh.ns = path_points.ns = "veh_and_path";
+    veh.action = path_points.action = visualization_msgs::Marker::ADD;
 
     veh.id = 0;
-    path_line.id = 0;
+    path_points.id = 1;
     veh.type = visualization_msgs::Marker::CUBE;
-    path_line.type = visualization_msgs::Marker::LINE_STRIP;
+    path_points.type = visualization_msgs::Marker::POINTS;
 
-    veh.pose.position.x = path[0];
-    veh.pose.position.y = path[1];
-    veh.pose.position.z = path[2];
     veh.pose.orientation.x = 0.0;
     veh.pose.orientation.y = 0.0;
     veh.pose.orientation.z = 0.0;
-    veh.pose.orientation.q = 1.0;
+    veh.pose.orientation.w = 1.0;
     veh.scale.x = 1.0;
     veh.scale.y = 1.0;
     veh.scale.z = 1.0;
@@ -75,14 +79,34 @@ int main(int argc, char **argv) {
     veh.color.a = 1.0f;
     veh.lifetime = ros::Duration();
 
-    path_line.scale.x = 0.1f;
-    path_line.color.b = 1.0f;
-    path_line.a = 1.0f;
-    path_line.points = path;
+    path_points.scale.x = 0.2;
+    path_points.scale.y = 0.2;
+    path_points.color.g = 1.0f;
+    path_points.color.a = 1.0;
+    path_points.pose.orientation.w = 1.0;
 
-    pub.publish(path_line);
+    for (const geometry_msgs::Point p : path) {
+      path_points.points.push_back(p);
+    }
+
+    while (pub.getNumSubscribers() < 1) {
+      if (!ros::ok()) {
+        return 0;
+      }
+      ROS_WARN_ONCE("Please create a subscriber to the marker");
+      sleep(1);
+    }
+    ROS_DEBUG_ONCE("Subscriber detected");
+    veh.pose.position.x = pos[0];
+    veh.pose.position.y = pos[1];
+    veh.pose.position.z = pos[2];
+
+    // ROS_INFO("%lui",sizeof(path_points.points));
+
     pub.publish(veh);
+    pub.publish(path_points);
 
+    // ros::spinOnce();
     r.sleep();
   }
 }

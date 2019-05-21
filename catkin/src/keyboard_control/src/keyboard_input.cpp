@@ -48,19 +48,19 @@ void Teleop::keyLoop() {
 
     switch (c) {
     case KEYCODE_L:
-      ROS_INFO("LEFT");
+      // ROS_INFO("LEFT");
       dirty = true;
       break;
     case KEYCODE_R:
-      ROS_INFO("RIGHT");
+      // ROS_INFO("RIGHT");
       dirty = true;
       break;
     case KEYCODE_U:
-      ROS_INFO("UP");
+      // ROS_INFO("UP");
       dirty = true;
       break;
     case KEYCODE_D:
-      ROS_INFO("DOWN");
+      // ROS_INFO("DOWN");
       dirty = true;
       break;
     }

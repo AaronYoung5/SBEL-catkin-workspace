@@ -9,6 +9,8 @@
 /home/aaron/ROS/catkin/src/chrono_launch/src/chrono_launcher.cpp
 ros/ros.h
 /home/aaron/ROS/catkin/src/chrono_launch/src/ros/ros.h
+std_msgs/Float32.h
+/home/aaron/ROS/catkin/src/chrono_launch/src/std_msgs/Float32.h
 std_msgs/Float32MultiArray.h
 /home/aaron/ROS/catkin/src/chrono_launch/src/std_msgs/Float32MultiArray.h
 std_msgs/Int8.h
@@ -19,6 +21,10 @@ chrono/core/ChStream.h
 -
 chrono/utils/ChUtilsInputOutput.h
 -
+chrono/geometry/ChLineBezier.h
+/home/aaron/ROS/catkin/src/chrono_launch/src/chrono/geometry/ChLineBezier.h
+chrono_vehicle/utils/ChVehiclePath.h
+/home/aaron/ROS/catkin/src/chrono_launch/src/chrono_vehicle/utils/ChVehiclePath.h
 chrono_vehicle/ChConfigVehicle.h
 -
 chrono_vehicle/ChVehicleModelData.h
@@ -31,10 +37,6 @@ chrono_vehicle/terrain/RigidTerrain.h
 -
 chrono_vehicle/wheeled_vehicle/utils/ChWheeledVehicleIrrApp.h
 -
-chrono_vehicle/utils/ChVehiclePath.h
-/home/aaron/ROS/catkin/src/chrono_launch/src/chrono_vehicle/utils/ChVehiclePath.h
-chrono/geometry/ChLineBezier.h
-/home/aaron/ROS/catkin/src/chrono_launch/src/chrono/geometry/ChLineBezier.h
 chrono_models/vehicle/sedan/Sedan.h
 -
 chrono_thirdparty/filesystem/path.h
@@ -3515,6 +3517,22 @@ ros/forwards.h
 /opt/ros/melodic/include/ros/ros/forwards.h
 
 /opt/ros/melodic/include/rosconsole/macros_generated.h
+
+/opt/ros/melodic/include/std_msgs/Float32.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
 
 /opt/ros/melodic/include/std_msgs/Float32MultiArray.h
 string
