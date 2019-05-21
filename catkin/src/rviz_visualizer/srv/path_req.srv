@@ -1,0 +1,7 @@
+#request constants
+#request fields
+string str
+---
+#response constants
+#response fields
+std::vector[] array
