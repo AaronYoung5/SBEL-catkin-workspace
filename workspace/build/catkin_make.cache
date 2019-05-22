@@ -1,0 +1,2 @@
+chrono_ros:keyboard_control:path_follower:rviz_vis
+-DCATKIN_WHITELIST_PACKAGES=path_follower -DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/workspace/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/workspace/install -G Unix Makefiles

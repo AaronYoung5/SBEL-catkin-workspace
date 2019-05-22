@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/catkin/install
-
-Name: basic_shape_tutorial
-Description: Description of basic_shape_tutorial
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/catkin/install/lib 
-Requires: 

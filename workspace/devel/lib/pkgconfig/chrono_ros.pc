@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/workspace/devel
+
+Name: chrono_ros
+Description: Description of chrono_ros
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/workspace/devel/lib 
+Requires: std_msgs geometry_msgs message_runtime

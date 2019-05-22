@@ -648,46 +648,46 @@ rviz_visualizer_generate_messages_py/fast:
 .PHONY : rviz_visualizer_generate_messages_py/fast
 
 # Convenience name for target.
-rviz_visualizer/CMakeFiles/rviz_visualize.dir/rule:
-	cd /home/aaron/ROS/catkin/build && $(MAKE) -f CMakeFiles/Makefile2 rviz_visualizer/CMakeFiles/rviz_visualize.dir/rule
-.PHONY : rviz_visualizer/CMakeFiles/rviz_visualize.dir/rule
+rviz_visualizer/CMakeFiles/rviz_visualizer.dir/rule:
+	cd /home/aaron/ROS/catkin/build && $(MAKE) -f CMakeFiles/Makefile2 rviz_visualizer/CMakeFiles/rviz_visualizer.dir/rule
+.PHONY : rviz_visualizer/CMakeFiles/rviz_visualizer.dir/rule
 
 # Convenience name for target.
-rviz_visualize: rviz_visualizer/CMakeFiles/rviz_visualize.dir/rule
+rviz_visualizer: rviz_visualizer/CMakeFiles/rviz_visualizer.dir/rule
 
-.PHONY : rviz_visualize
+.PHONY : rviz_visualizer
 
 # fast build rule for target.
-rviz_visualize/fast:
-	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualize.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualize.dir/build
-.PHONY : rviz_visualize/fast
+rviz_visualizer/fast:
+	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualizer.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualizer.dir/build
+.PHONY : rviz_visualizer/fast
 
-src/rviz_visualize.o: src/rviz_visualize.cpp.o
+src/rviz_visualizer.o: src/rviz_visualizer.cpp.o
 
-.PHONY : src/rviz_visualize.o
+.PHONY : src/rviz_visualizer.o
 
 # target to build an object file
-src/rviz_visualize.cpp.o:
-	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualize.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualize.dir/src/rviz_visualize.cpp.o
-.PHONY : src/rviz_visualize.cpp.o
+src/rviz_visualizer.cpp.o:
+	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualizer.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualizer.dir/src/rviz_visualizer.cpp.o
+.PHONY : src/rviz_visualizer.cpp.o
 
-src/rviz_visualize.i: src/rviz_visualize.cpp.i
+src/rviz_visualizer.i: src/rviz_visualizer.cpp.i
 
-.PHONY : src/rviz_visualize.i
+.PHONY : src/rviz_visualizer.i
 
 # target to preprocess a source file
-src/rviz_visualize.cpp.i:
-	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualize.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualize.dir/src/rviz_visualize.cpp.i
-.PHONY : src/rviz_visualize.cpp.i
+src/rviz_visualizer.cpp.i:
+	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualizer.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualizer.dir/src/rviz_visualizer.cpp.i
+.PHONY : src/rviz_visualizer.cpp.i
 
-src/rviz_visualize.s: src/rviz_visualize.cpp.s
+src/rviz_visualizer.s: src/rviz_visualizer.cpp.s
 
-.PHONY : src/rviz_visualize.s
+.PHONY : src/rviz_visualizer.s
 
 # target to generate assembly for a file
-src/rviz_visualize.cpp.s:
-	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualize.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualize.dir/src/rviz_visualize.cpp.s
-.PHONY : src/rviz_visualize.cpp.s
+src/rviz_visualizer.cpp.s:
+	cd /home/aaron/ROS/catkin/build && $(MAKE) -f rviz_visualizer/CMakeFiles/rviz_visualizer.dir/build.make rviz_visualizer/CMakeFiles/rviz_visualizer.dir/src/rviz_visualizer.cpp.s
+.PHONY : src/rviz_visualizer.cpp.s
 
 # Help Target
 help:
@@ -734,10 +734,10 @@ help:
 	@echo "... rviz_visualizer_gennodejs"
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... rviz_visualizer_generate_messages_py"
-	@echo "... rviz_visualize"
-	@echo "... src/rviz_visualize.o"
-	@echo "... src/rviz_visualize.i"
-	@echo "... src/rviz_visualize.s"
+	@echo "... rviz_visualizer"
+	@echo "... src/rviz_visualizer.o"
+	@echo "... src/rviz_visualizer.i"
+	@echo "... src/rviz_visualizer.s"
 .PHONY : help
 
 

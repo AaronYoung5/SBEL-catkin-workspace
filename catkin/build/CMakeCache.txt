@@ -39,11 +39,8 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 // using symlinks instead of copying resources
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
-//No help, variable specified on the command line.
-CATKIN_WHITELISTS_PACKAGES:UNINITIALIZED=path_follower
-
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=chrono_launch
+CATKIN_WHITELIST_PACKAGES:STRING=chrono_ros
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
@@ -212,9 +209,6 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//No help, variable specified on the command line.
-Chrono_DIR:UNINITIALIZED=/home/aaron/chrono/build/cmake
-
 //Path to a program.
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
 
@@ -290,44 +284,26 @@ _gtest_INCLUDES:FILEPATH=/usr/include/gtest/gtest.h
 //Path to a file.
 _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
 
-//Value Computed by CMake
-basic_line_tutorial_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/basic_line_tutorial
-
-//Value Computed by CMake
-basic_line_tutorial_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/basic_line_tutorial
-
-//Value Computed by CMake
-basic_shape_tutorial_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/basic_shape_tutorial
-
-//Value Computed by CMake
-basic_shape_tutorial_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/basic_shape_tutorial
-
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake
 
-//The directory containing a CMake configuration file for chrono.
-chrono_DIR:PATH=chrono_DIR-NOTFOUND
+//Value Computed by CMake
+chrono_ros_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/chrono_ros
+
+//Dependencies for the target
+chrono_ros_LIB_DEPENDS:STATIC=general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/usr/lib/x86_64-linux-gnu/libboost_signals.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
 //Value Computed by CMake
-chrono_launch_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/chrono_launch
+chrono_ros_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/chrono_ros
 
-//Value Computed by CMake
-chrono_launch_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/chrono_launch
+//Dependencies for the target
+chrono_ros_library_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/libIrrlicht.so;general;-lXxf86vm;general;-lglut;general;-lX11;general;-lGL;general;/home/aaron/chrono/build/lib/libChronoEngine.so;general;/home/aaron/chrono/build/lib/libChronoEngine_irrlicht.so;general;/home/aaron/chrono/build/lib/libChronoEngine_vehicle.so;general;/home/aaron/chrono/build/lib/libChronoModels_vehicle.so;
 
-//Value Computed by CMake
-chrono_test_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/chrono_test
-
-//Value Computed by CMake
-chrono_test_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/chrono_test
+//Dependencies for target
+chrono_ros_vehicle.cpp_LIB_DEPENDS:STATIC=
 
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
-
-//Value Computed by CMake
-first_package_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/first_package
-
-//Value Computed by CMake
-first_package_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/first_package
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/melodic/share/gencpp/cmake
@@ -408,6 +384,9 @@ keyboard_control_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/keyboard_control
 //Path to a library.
 lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
+//Dependencies for the target
+lib_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/libIrrlicht.so;general;-lXxf86vm;general;-lglut;general;-lX11;general;-lGL;general;/home/aaron/chrono/build/lib/libChronoEngine.so;general;/home/aaron/chrono/build/lib/libChronoEngine_irrlicht.so;general;/home/aaron/chrono/build/lib/libChronoEngine_vehicle.so;general;/home/aaron/chrono/build/lib/libChronoModels_vehicle.so;
+
 //The directory containing a CMake configuration file for message_generation.
 message_generation_DIR:PATH=/opt/ros/melodic/share/message_generation/cmake
 
@@ -416,18 +395,6 @@ message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
 
 //Path to a library.
 onelib:FILEPATH=/home/aaron/chrono/build/lib/libChronoModels_vehicle.so
-
-//Value Computed by CMake
-path_follower_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/path_follower
-
-//Value Computed by CMake
-path_follower_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/path_follower
-
-//Value Computed by CMake
-path_publisher_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/path_publisher
-
-//Value Computed by CMake
-path_publisher_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/path_publisher
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
@@ -444,11 +411,14 @@ roscpp_traits_DIR:PATH=/opt/ros/melodic/share/roscpp_traits/cmake
 //The directory containing a CMake configuration file for rosgraph_msgs.
 rosgraph_msgs_DIR:PATH=/opt/ros/melodic/share/rosgraph_msgs/cmake
 
-//The directory containing a CMake configuration file for rospy.
-rospy_DIR:PATH=/opt/ros/melodic/share/rospy/cmake
-
 //The directory containing a CMake configuration file for rostime.
 rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
+
+//Value Computed by CMake
+rviz_vis_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/rviz_vis
+
+//Value Computed by CMake
+rviz_vis_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/rviz_vis
 
 //Value Computed by CMake
 rviz_visualizer_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/rviz_visualizer
@@ -458,15 +428,6 @@ rviz_visualizer_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/rviz_visualizer
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
-
-//Value Computed by CMake
-teleop_test_BINARY_DIR:STATIC=/home/aaron/ROS/catkin/build/teleop_test
-
-//Value Computed by CMake
-teleop_test_SOURCE_DIR:STATIC=/home/aaron/ROS/catkin/src/teleop_test
-
-//The directory containing a CMake configuration file for visualization_msgs.
-visualization_msgs_DIR:PATH=/opt/ros/melodic/share/visualization_msgs/cmake
 
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/melodic/share/xmlrpcpp/cmake

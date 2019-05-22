@@ -203,5 +203,5 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(rviz_visualize src/rviz_visualize.cpp)
-target_link_libraries(rviz_visualize ${catkin_LIBRARIES})
+add_executable(rviz_visualizer src/rviz_visualizer.cpp)
+target_link_libraries(rviz_visualizer ${catkin_LIBRARIES})

@@ -1,2 +1,2 @@
-basic_line_tutorial:basic_shape_tutorial:chrono_launch:chrono_test:first_package:keyboard_control:path_follower:path_publisher:rviz_visualizer:teleop_test
--DCATKIN_WHITELIST_PACKAGES=chrono_launch -DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/catkin/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/catkin/install -G Unix Makefiles
+basic_line_tutorial:basic_shape_tutorial:chrono_launch:chrono_ros:chrono_test:first_package:keyboard_control:path_follower:path_publisher:rviz_vis:rviz_visualizer:teleop_test
+-DCATKIN_WHITELIST_PACKAGES=chrono_ros -DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/catkin/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/catkin/install -G Unix Makefiles
