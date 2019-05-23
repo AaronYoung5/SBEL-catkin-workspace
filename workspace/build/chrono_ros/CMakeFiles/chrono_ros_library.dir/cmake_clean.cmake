@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o"
+  "CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o"
   "/home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.pdb"
   "/home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so"
 )

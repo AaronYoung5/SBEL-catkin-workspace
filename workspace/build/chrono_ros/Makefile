@@ -80,29 +80,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -124,6 +101,18 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -134,6 +123,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,124 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
-.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-geometry_msgs_generate_messages_py: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+std_msgs_generate_messages_py: chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
-.PHONY : geometry_msgs_generate_messages_py
+.PHONY : std_msgs_generate_messages_py
 
 # fast build rule for target.
-geometry_msgs_generate_messages_py/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
-.PHONY : geometry_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
-.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_ros: chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
-
-.PHONY : run_tests_chrono_ros
-
-# fast build rule for target.
-run_tests_chrono_ros/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/build
-.PHONY : run_tests_chrono_ros/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
-.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_ros_roslaunch-check: chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
-
-.PHONY : run_tests_chrono_ros_roslaunch-check
-
-# fast build rule for target.
-run_tests_chrono_ros_roslaunch-check/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/build
-.PHONY : run_tests_chrono_ros_roslaunch-check/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
-.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_ros_roslaunch-check_launch: chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
-
-.PHONY : run_tests_chrono_ros_roslaunch-check_launch
-
-# fast build rule for target.
-run_tests_chrono_ros_roslaunch-check_launch/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/build
-.PHONY : run_tests_chrono_ros_roslaunch-check_launch/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/chrono_ros.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/chrono_ros.dir/rule
-.PHONY : chrono_ros/CMakeFiles/chrono_ros.dir/rule
-
-# Convenience name for target.
-chrono_ros: chrono_ros/CMakeFiles/chrono_ros.dir/rule
-
-.PHONY : chrono_ros
-
-# fast build rule for target.
-chrono_ros/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros.dir/build.make chrono_ros/CMakeFiles/chrono_ros.dir/build
-.PHONY : chrono_ros/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_cpp: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_eus: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_eus
-
-# fast build rule for target.
-geometry_msgs_generate_messages_eus/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
-.PHONY : geometry_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
-.PHONY : chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_ros: chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
-
-.PHONY : _run_tests_chrono_ros
-
-# fast build rule for target.
-_run_tests_chrono_ros/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/build.make chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/build
-.PHONY : _run_tests_chrono_ros/fast
+std_msgs_generate_messages_py/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build.make chrono_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 chrono_ros/CMakeFiles/_run_tests_chrono_ros_roslaunch-check.dir/rule:
@@ -303,6 +198,96 @@ _run_tests_chrono_ros_roslaunch-check/fast:
 .PHONY : _run_tests_chrono_ros_roslaunch-check/fast
 
 # Convenience name for target.
+chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+.PHONY : chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_nodejs: chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : std_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+std_msgs_generate_messages_nodejs/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make chrono_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+.PHONY : std_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_eus: chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+.PHONY : std_msgs_generate_messages_eus
+
+# fast build rule for target.
+std_msgs_generate_messages_eus/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make chrono_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+.PHONY : chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_nodejs: chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_nodejs/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_cpp: chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : std_msgs_generate_messages_cpp
+
+# fast build rule for target.
+std_msgs_generate_messages_cpp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make chrono_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+.PHONY : std_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_lisp: chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
 chrono_ros/CMakeFiles/_run_tests_chrono_ros_roslaunch-check_launch.dir/rule:
 	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/_run_tests_chrono_ros_roslaunch-check_launch.dir/rule
 .PHONY : chrono_ros/CMakeFiles/_run_tests_chrono_ros_roslaunch-check_launch.dir/rule
@@ -318,34 +303,49 @@ _run_tests_chrono_ros_roslaunch-check_launch/fast:
 .PHONY : _run_tests_chrono_ros_roslaunch-check_launch/fast
 
 # Convenience name for target.
-chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
-.PHONY : chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
+chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+.PHONY : chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-clean_test_results_chrono_ros: chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
+rosgraph_msgs_generate_messages_eus: chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
-.PHONY : clean_test_results_chrono_ros
+.PHONY : rosgraph_msgs_generate_messages_eus
 
 # fast build rule for target.
-clean_test_results_chrono_ros/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/build.make chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/build
-.PHONY : clean_test_results_chrono_ros/fast
+rosgraph_msgs_generate_messages_eus/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-geometry_msgs_generate_messages_lisp: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+rosgraph_msgs_generate_messages_cpp: chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : geometry_msgs_generate_messages_lisp
+.PHONY : rosgraph_msgs_generate_messages_cpp
 
 # fast build rule for target.
-geometry_msgs_generate_messages_lisp/fast:
-	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
-.PHONY : geometry_msgs_generate_messages_lisp/fast
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make chrono_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_lisp: chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make chrono_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
@@ -377,6 +377,246 @@ chrono_ros_library/fast:
 	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/build
 .PHONY : chrono_ros_library/fast
 
+# Convenience name for target.
+chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/build.make chrono_ros/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+.PHONY : chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_nodejs: chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make chrono_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_eus: chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build.make chrono_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_eus: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_eus
+
+# fast build rule for target.
+geometry_msgs_generate_messages_eus/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+.PHONY : geometry_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_cpp: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_lisp: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_lisp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_lisp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+.PHONY : geometry_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+.PHONY : chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_py: chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_py
+
+# fast build rule for target.
+geometry_msgs_generate_messages_py/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make chrono_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+.PHONY : geometry_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
+.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
+
+# Convenience name for target.
+run_tests_chrono_ros: chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/rule
+
+.PHONY : run_tests_chrono_ros
+
+# fast build rule for target.
+run_tests_chrono_ros/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros.dir/build
+.PHONY : run_tests_chrono_ros/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
+.PHONY : chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
+
+# Convenience name for target.
+_run_tests_chrono_ros: chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/rule
+
+.PHONY : _run_tests_chrono_ros
+
+# fast build rule for target.
+_run_tests_chrono_ros/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/build.make chrono_ros/CMakeFiles/_run_tests_chrono_ros.dir/build
+.PHONY : _run_tests_chrono_ros/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
+.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
+
+# Convenience name for target.
+run_tests_chrono_ros_roslaunch-check: chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/rule
+
+.PHONY : run_tests_chrono_ros_roslaunch-check
+
+# fast build rule for target.
+run_tests_chrono_ros_roslaunch-check/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check.dir/build
+.PHONY : run_tests_chrono_ros_roslaunch-check/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
+.PHONY : chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
+
+# Convenience name for target.
+clean_test_results_chrono_ros: chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/rule
+
+.PHONY : clean_test_results_chrono_ros
+
+# fast build rule for target.
+clean_test_results_chrono_ros/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/build.make chrono_ros/CMakeFiles/clean_test_results_chrono_ros.dir/build
+.PHONY : clean_test_results_chrono_ros/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
+.PHONY : chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
+
+# Convenience name for target.
+run_tests_chrono_ros_roslaunch-check_launch: chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/rule
+
+.PHONY : run_tests_chrono_ros_roslaunch-check_launch
+
+# fast build rule for target.
+run_tests_chrono_ros_roslaunch-check_launch/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/build.make chrono_ros/CMakeFiles/run_tests_chrono_ros_roslaunch-check_launch.dir/build
+.PHONY : run_tests_chrono_ros_roslaunch-check_launch/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_lisp: chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : std_msgs_generate_messages_lisp
+
+# fast build rule for target.
+std_msgs_generate_messages_lisp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make chrono_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/chrono_ros.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/chrono_ros.dir/rule
+.PHONY : chrono_ros/CMakeFiles/chrono_ros.dir/rule
+
+# Convenience name for target.
+chrono_ros: chrono_ros/CMakeFiles/chrono_ros.dir/rule
+
+.PHONY : chrono_ros
+
+# fast build rule for target.
+chrono_ros/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros.dir/build.make chrono_ros/CMakeFiles/chrono_ros.dir/build
+.PHONY : chrono_ros/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/rule
+.PHONY : chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/rule
+
+# Convenience name for target.
+chrono_ros_path_follower: chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/rule
+
+.PHONY : chrono_ros_path_follower
+
+# fast build rule for target.
+chrono_ros_path_follower/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/build.make chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/build
+.PHONY : chrono_ros_path_follower/fast
+
+# Convenience name for target.
+chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make chrono_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
 chrono_ros_launcher.o: chrono_ros_launcher.cpp.o
 
 .PHONY : chrono_ros_launcher.o
@@ -403,6 +643,33 @@ chrono_ros_launcher.s: chrono_ros_launcher.cpp.s
 chrono_ros_launcher.cpp.s:
 	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.s
 .PHONY : chrono_ros_launcher.cpp.s
+
+chrono_ros_path_follower_launcher.o: chrono_ros_path_follower_launcher.cpp.o
+
+.PHONY : chrono_ros_path_follower_launcher.o
+
+# target to build an object file
+chrono_ros_path_follower_launcher.cpp.o:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o
+.PHONY : chrono_ros_path_follower_launcher.cpp.o
+
+chrono_ros_path_follower_launcher.i: chrono_ros_path_follower_launcher.cpp.i
+
+.PHONY : chrono_ros_path_follower_launcher.i
+
+# target to preprocess a source file
+chrono_ros_path_follower_launcher.cpp.i:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.i
+.PHONY : chrono_ros_path_follower_launcher.cpp.i
+
+chrono_ros_path_follower_launcher.s: chrono_ros_path_follower_launcher.cpp.s
+
+.PHONY : chrono_ros_path_follower_launcher.s
+
+# target to generate assembly for a file
+chrono_ros_path_follower_launcher.cpp.s:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.s
+.PHONY : chrono_ros_path_follower_launcher.cpp.s
 
 src/chrono_ros.o: src/chrono_ros.cpp.o
 
@@ -431,6 +698,33 @@ src/chrono_ros.cpp.s:
 	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros.dir/build.make chrono_ros/CMakeFiles/chrono_ros.dir/src/chrono_ros.cpp.s
 .PHONY : src/chrono_ros.cpp.s
 
+src/chrono_ros_path_follower.o: src/chrono_ros_path_follower.cpp.o
+
+.PHONY : src/chrono_ros_path_follower.o
+
+# target to build an object file
+src/chrono_ros_path_follower.cpp.o:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/build.make chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/src/chrono_ros_path_follower.cpp.o
+.PHONY : src/chrono_ros_path_follower.cpp.o
+
+src/chrono_ros_path_follower.i: src/chrono_ros_path_follower.cpp.i
+
+.PHONY : src/chrono_ros_path_follower.i
+
+# target to preprocess a source file
+src/chrono_ros_path_follower.cpp.i:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/build.make chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/src/chrono_ros_path_follower.cpp.i
+.PHONY : src/chrono_ros_path_follower.cpp.i
+
+src/chrono_ros_path_follower.s: src/chrono_ros_path_follower.cpp.s
+
+.PHONY : src/chrono_ros_path_follower.s
+
+# target to generate assembly for a file
+src/chrono_ros_path_follower.cpp.s:
+	cd /home/aaron/ROS/workspace/build && $(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/build.make chrono_ros/CMakeFiles/chrono_ros_path_follower.dir/src/chrono_ros_path_follower.cpp.s
+.PHONY : src/chrono_ros_path_follower.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -438,32 +732,54 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install"
-	@echo "... rebuild_cache"
-	@echo "... geometry_msgs_generate_messages_py"
-	@echo "... run_tests_chrono_ros"
-	@echo "... install/local"
-	@echo "... run_tests_chrono_ros_roslaunch-check"
-	@echo "... run_tests_chrono_ros_roslaunch-check_launch"
-	@echo "... chrono_ros"
-	@echo "... geometry_msgs_generate_messages_cpp"
-	@echo "... list_install_components"
-	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... _run_tests_chrono_ros"
+	@echo "... std_msgs_generate_messages_py"
 	@echo "... _run_tests_chrono_ros_roslaunch-check"
+	@echo "... std_msgs_generate_messages_nodejs"
+	@echo "... std_msgs_generate_messages_eus"
+	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... rosgraph_msgs_generate_messages_nodejs"
+	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... _run_tests_chrono_ros_roslaunch-check_launch"
-	@echo "... clean_test_results_chrono_ros"
-	@echo "... geometry_msgs_generate_messages_lisp"
-	@echo "... test"
+	@echo "... rosgraph_msgs_generate_messages_eus"
+	@echo "... install"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... chrono_ros_library"
+	@echo "... roscpp_generate_messages_py"
+	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... geometry_msgs_generate_messages_eus"
+	@echo "... list_install_components"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... test"
+	@echo "... geometry_msgs_generate_messages_py"
+	@echo "... run_tests_chrono_ros"
+	@echo "... _run_tests_chrono_ros"
+	@echo "... run_tests_chrono_ros_roslaunch-check"
+	@echo "... clean_test_results_chrono_ros"
+	@echo "... install/local"
+	@echo "... run_tests_chrono_ros_roslaunch-check_launch"
+	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... chrono_ros"
 	@echo "... edit_cache"
+	@echo "... chrono_ros_path_follower"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... rebuild_cache"
 	@echo "... chrono_ros_launcher.o"
 	@echo "... chrono_ros_launcher.i"
 	@echo "... chrono_ros_launcher.s"
+	@echo "... chrono_ros_path_follower_launcher.o"
+	@echo "... chrono_ros_path_follower_launcher.i"
+	@echo "... chrono_ros_path_follower_launcher.s"
 	@echo "... src/chrono_ros.o"
 	@echo "... src/chrono_ros.i"
 	@echo "... src/chrono_ros.s"
+	@echo "... src/chrono_ros_path_follower.o"
+	@echo "... src/chrono_ros_path_follower.i"
+	@echo "... src/chrono_ros_path_follower.s"
 .PHONY : help
 
 

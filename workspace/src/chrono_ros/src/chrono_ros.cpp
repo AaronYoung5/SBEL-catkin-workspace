@@ -1,6 +1,6 @@
 // ROS includes
-#include "geometry_msgs/Pose.h"
 #include "geometry_msgs/Point.h"
+#include "geometry_msgs/Pose.h"
 #include "geometry_msgs/Quaternion.h"
 #include "ros/ros.h"
 #include "std_msgs/Int8.h"
@@ -15,7 +15,7 @@
 #define KEYCODE_L 0x44
 #define KEYCODE_U 0x41
 #define KEYCODE_D 0x42
-#define KEYCODE_Q 0x71
+// #define KEYCODE_Q 0x71
 
 ChronoRosLauncher chrono_ros_launcher;
 ros::Publisher gps_pub;
@@ -65,6 +65,9 @@ int main(int argc, char **argv) {
 
   ros::Subscriber keyboard_sub =
       n.subscribe<std_msgs::Int8>("key_msgs", 1000, keyboardCallback);
+
+  ros::Subscriber throttle_sub =
+      n.subscribe<std_msgs::Int8>("throttle_msgs", 1000, keyboardCallback);
 
   gps_pub = n.advertise<geometry_msgs::Pose>("gps_msgs", 1000);
 

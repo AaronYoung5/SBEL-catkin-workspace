@@ -59,6 +59,7 @@ include_directories(
 ## Declare a library for Chrono implementation
 add_library(chrono_ros_library
   chrono_ros_launcher.cpp
+  chrono_ros_path_follower_launcher.cpp
 )
 ## Set target properties of Chrono library with correct data directory
 set_target_properties(chrono_ros_library
@@ -71,3 +72,6 @@ target_link_libraries(chrono_ros_library ${CHRONO_LIBRARIES})
 
 add_executable(chrono_ros src/chrono_ros.cpp)
 target_link_libraries(chrono_ros ${catkin_LIBRARIES} chrono_ros_library)
+
+add_executable(chrono_ros_path_follower src/chrono_ros_path_follower.cpp)
+target_link_libraries(chrono_ros_path_follower ${catkin_LIBRARIES} chrono_ros_library)

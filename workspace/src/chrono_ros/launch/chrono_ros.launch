@@ -5,6 +5,6 @@
 
   <node pkg="rviz_vis" type="rviz_vis" name="rviz_vis" required="true" output="screen"/>
 
-  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/aaron/.rviz/rviz_vis.rviz" required="true"/>
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d /home/aaron/.rviz/rviz_vis.rviz" required="true"/> -->
 
 </launch>

@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/workspace/devel
-
-Name: path_follower
-Description: Description of path_follower
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/workspace/devel/lib 
-Requires: rospy

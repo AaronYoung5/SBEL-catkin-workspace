@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/workspace/install
-
-Name: rviz_vis
-Description: Description of rviz_vis
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/workspace/install/lib 
-Requires: roscpp std_msgs geometry_msgs message_runtime

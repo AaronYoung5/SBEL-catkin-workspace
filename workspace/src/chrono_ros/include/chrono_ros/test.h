@@ -10,9 +10,13 @@
 #include <chrono_vehicle/ChVehicleModelData.h>
 #include <chrono_vehicle/driver/ChDataDriver.h>
 #include <chrono_vehicle/driver/ChIrrGuiDriver.h>
+// #include <chrono_vehicle/driver/ChRosPathFollowerDriver.h>
 #include <chrono_vehicle/driver/ChRosDriver.h>
+// #include <chrono/geometry/ChLineBezier.h>
 #include <chrono_vehicle/terrain/RigidTerrain.h>
 #include <chrono_vehicle/wheeled_vehicle/utils/ChWheeledVehicleIrrApp.h>
+
+// #include "chrono_ros/chrono_ros_driver.h"
 
 // Namespace declarations
 using namespace chrono;
@@ -20,7 +24,7 @@ using namespace chrono::irrlicht;
 using namespace chrono::vehicle;
 using namespace chrono::vehicle::sedan;
 
-class ChronoRosLauncher {
+class ChronoRosPathFollowerLauncher {
 private:
   // Private class variables
   double m_throttle, m_steering, m_braking;
@@ -28,13 +32,15 @@ private:
   double m_throttle_gain, m_steering_gain, m_braking_gain;
   double m_throttle_target, m_steering_target, m_braking_target;
 
+  // std::string m_path_file;
+
   ChWheeledVehicleIrrApp *m_app;
 
   Sedan m_veh;
 
   RigidTerrain *m_terrain;
 
-  // ChIrrGuiDriver *m_driver;
+  // ChRosPathFollowerDriver *m_driver;
   ChRosDriver *m_driver;
 
   // Simulation step size and end time
@@ -55,14 +61,14 @@ private:
 
 public:
   // Public methods
-  ChronoRosLauncher();
-  void ChronoLoop();
-  void ChronoRun();
+  ChronoRosPathFollowerLauncher();
+  // void ChronoLoop();
+  // void ChronoRun();
   bool ChronoIsRunning() { return m_app->GetDevice()->run(); }
 
   // Getter methods
   // Returns driver
-  // ChIrrGuiDriver GetDriver() { return *m_driver; }
+  // ChRosPathFollowerDriver GetDriver() { return *m_driver; }
   ChRosDriver GetDriver() { return *m_driver; }
   // Returns vehicle irrlicht app
   ChWheeledVehicleIrrApp GetApp() { return *m_app; }
@@ -71,20 +77,17 @@ public:
   // Returns terrain
   RigidTerrain GetTerrain() { return *m_terrain; }
 
-  void IncreaseThrottle();
-  void DecreaseThrottle();
-  void IncreaseBraking();
-  void DecreaseBraking();
-  void TurnRight();
-  void TurnLeft();
+  // void SetDesiredSpeed(double val) { m_driver->SetDesiredSpeed(val); }
+
+  // void SetThreshholdThrottle(double val) { m_driver->SetThreshholdThrottle(val); }
 
   // Advance the state of the driver system by the specified time step.
-  void Advance(double step);
+  // void Advance(double step);
 
 private:
   // Private methods
-  void InitVehicle();
-  void InitTerrain();
-  void InitIrrlicht();
-  void InitDriver();
+  // void InitVehicle();
+  // void InitTerrain();
+  // void InitIrrlicht();
+  // void InitDriver();
 };

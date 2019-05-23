@@ -3,12 +3,16 @@ project(path_follower)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  std_msgs
+  geometry_msgs
+  message_generation
+  genmsg
 )
 
 catkin_python_setup()
 
 catkin_package(
- CATKIN_DEPENDS rospy
+ CATKIN_DEPENDS rospy std_msgs geometry_msgs
 )
 
 include_directories(

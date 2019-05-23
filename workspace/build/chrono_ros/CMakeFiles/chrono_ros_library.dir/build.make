@@ -81,14 +81,40 @@ chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o.provides:
 chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o.provides.build: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o
 
 
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o: chrono_ros/CMakeFiles/chrono_ros_library.dir/flags.make
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o: /home/aaron/ROS/workspace/src/chrono_ros/chrono_ros_path_follower_launcher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/aaron/ROS/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o"
+	cd /home/aaron/ROS/workspace/build/chrono_ros && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o -c /home/aaron/ROS/workspace/src/chrono_ros/chrono_ros_path_follower_launcher.cpp
+
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.i"
+	cd /home/aaron/ROS/workspace/build/chrono_ros && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aaron/ROS/workspace/src/chrono_ros/chrono_ros_path_follower_launcher.cpp > CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.i
+
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.s"
+	cd /home/aaron/ROS/workspace/build/chrono_ros && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aaron/ROS/workspace/src/chrono_ros/chrono_ros_path_follower_launcher.cpp -o CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.s
+
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.requires:
+
+.PHONY : chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.requires
+
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.provides: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.requires
+	$(MAKE) -f chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.provides.build
+.PHONY : chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.provides
+
+chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.provides.build: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o
+
+
 # Object files for target chrono_ros_library
 chrono_ros_library_OBJECTS = \
-"CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o"
+"CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o" \
+"CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o"
 
 # External object files for target chrono_ros_library
 chrono_ros_library_EXTERNAL_OBJECTS =
 
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o
+/home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: chrono_ros/CMakeFiles/chrono_ros_library.dir/build.make
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: /usr/lib/x86_64-linux-gnu/libIrrlicht.so
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: /home/aaron/chrono/build/lib/libChronoEngine.so
@@ -96,7 +122,7 @@ chrono_ros_library_EXTERNAL_OBJECTS =
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: /home/aaron/chrono/build/lib/libChronoEngine_vehicle.so
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: /home/aaron/chrono/build/lib/libChronoModels_vehicle.so
 /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so: chrono_ros/CMakeFiles/chrono_ros_library.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/aaron/ROS/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/aaron/ROS/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library /home/aaron/ROS/workspace/devel/lib/libchrono_ros_library.so"
 	cd /home/aaron/ROS/workspace/build/chrono_ros && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chrono_ros_library.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +131,7 @@ chrono_ros/CMakeFiles/chrono_ros_library.dir/build: /home/aaron/ROS/workspace/de
 .PHONY : chrono_ros/CMakeFiles/chrono_ros_library.dir/build
 
 chrono_ros/CMakeFiles/chrono_ros_library.dir/requires: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_launcher.cpp.o.requires
+chrono_ros/CMakeFiles/chrono_ros_library.dir/requires: chrono_ros/CMakeFiles/chrono_ros_library.dir/chrono_ros_path_follower_launcher.cpp.o.requires
 
 .PHONY : chrono_ros/CMakeFiles/chrono_ros_library.dir/requires
 
