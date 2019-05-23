@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/udp_workspace/devel
+
+Name: chrono_com
+Description: Description of chrono_com
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/udp_workspace/devel/lib 
+Requires: roscpp

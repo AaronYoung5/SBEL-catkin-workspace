@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>chrono_com</name>
+  <version>0.0.0</version>
+  <description>chrono_com package </description>
+
+  <author email="todo@todo.com">TODO</author>
+  <maintainer email="todo@todo.com">TODO</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslaunch</build_depend>
+
+  <exec_depend>roscpp</exec_depend>
+
+</package>

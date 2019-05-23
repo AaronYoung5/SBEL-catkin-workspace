@@ -1,0 +1,2 @@
+chrono_com
+-DCATKIN_WHITELIST_PACKAGES=chrono_com -DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/udp_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/udp_workspace/install -G Unix Makefiles

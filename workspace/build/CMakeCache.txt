@@ -40,7 +40,7 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=chrono_ros
+CATKIN_WHITELIST_PACKAGES:STRING=keyboard_control
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
@@ -369,6 +369,12 @@ gtest_hide_internal_symbols:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//Value Computed by CMake
+keyboard_control_BINARY_DIR:STATIC=/home/aaron/ROS/workspace/build/keyboard_control
+
+//Value Computed by CMake
+keyboard_control_SOURCE_DIR:STATIC=/home/aaron/ROS/workspace/src/keyboard_control
+
 //Path to a library.
 lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
@@ -401,6 +407,12 @@ roslaunch_DIR:PATH=/opt/ros/melodic/share/roslaunch/cmake
 
 //The directory containing a CMake configuration file for rostime.
 rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
+
+//Value Computed by CMake
+rviz_vis_BINARY_DIR:STATIC=/home/aaron/ROS/workspace/build/rviz_vis
+
+//Value Computed by CMake
+rviz_vis_SOURCE_DIR:STATIC=/home/aaron/ROS/workspace/src/rviz_vis
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake

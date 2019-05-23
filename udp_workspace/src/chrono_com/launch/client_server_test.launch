@@ -1,0 +1,7 @@
+<launch>
+  
+  <node pkg="chrono_com" type="client" name="client"  output="screen"/>
+
+  <node pkg="chrono_com" type="server" name="server" output="screen"/>
+
+</launch>

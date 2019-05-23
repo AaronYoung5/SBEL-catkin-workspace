@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/workspace/install
+
+Name: keyboard_control
+Description: Description of keyboard_control
+Version: 0.0.0
+Cflags: -I/home/aaron/ROS/workspace/install/include
+Libs: -L/home/aaron/ROS/workspace/install/lib 
+Requires: roscpp std_msgs message_runtime
