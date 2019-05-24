@@ -3,10 +3,7 @@ project(chrono_com)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  roslaunch
 )
-
-roslaunch_add_file_check(launch)
 
 catkin_package(
     CATKIN_DEPENDS roscpp
@@ -14,10 +11,8 @@ catkin_package(
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
+    include
 )
 
-add_executable(server src/server.cpp)
-target_link_libraries(server ${catkin_LIBRARIES})
-
-add_executable(client src/client.cpp)
-target_link_libraries(client ${catkin_LIBRARIES})
+add_executable(chrono_com src/chrono_com.cpp)
+target_link_libraries(chrono_com ${catkin_LIBRARIES})

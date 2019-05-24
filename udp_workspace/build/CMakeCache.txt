@@ -375,6 +375,15 @@ rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
 
+//Dependencies for target
+udp_lib_LIB_DEPENDS:STATIC=
+
+//Value Computed by CMake
+udp_test_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/udp_test
+
+//Value Computed by CMake
+udp_test_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/udp_test
+
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/melodic/share/xmlrpcpp/cmake
 

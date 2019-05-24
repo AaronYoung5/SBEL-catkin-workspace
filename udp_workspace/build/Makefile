@@ -285,84 +285,6 @@ gtest/fast:
 .PHONY : gtest/fast
 
 #=============================================================================
-# Target rules for targets named client
-
-# Build rule for target.
-client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 client
-.PHONY : client
-
-# fast build rule for target.
-client/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/build
-.PHONY : client/fast
-
-#=============================================================================
-# Target rules for targets named server
-
-# Build rule for target.
-server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 server
-.PHONY : server
-
-# fast build rule for target.
-server/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/build
-.PHONY : server/fast
-
-#=============================================================================
-# Target rules for targets named run_tests_chrono_com_roslaunch-check_launch
-
-# Build rule for target.
-run_tests_chrono_com_roslaunch-check_launch: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 run_tests_chrono_com_roslaunch-check_launch
-.PHONY : run_tests_chrono_com_roslaunch-check_launch
-
-# fast build rule for target.
-run_tests_chrono_com_roslaunch-check_launch/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build
-.PHONY : run_tests_chrono_com_roslaunch-check_launch/fast
-
-#=============================================================================
-# Target rules for targets named _run_tests_chrono_com_roslaunch-check
-
-# Build rule for target.
-_run_tests_chrono_com_roslaunch-check: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_chrono_com_roslaunch-check
-.PHONY : _run_tests_chrono_com_roslaunch-check
-
-# fast build rule for target.
-_run_tests_chrono_com_roslaunch-check/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build
-.PHONY : _run_tests_chrono_com_roslaunch-check/fast
-
-#=============================================================================
-# Target rules for targets named run_tests_chrono_com_roslaunch-check
-
-# Build rule for target.
-run_tests_chrono_com_roslaunch-check: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 run_tests_chrono_com_roslaunch-check
-.PHONY : run_tests_chrono_com_roslaunch-check
-
-# fast build rule for target.
-run_tests_chrono_com_roslaunch-check/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build
-.PHONY : run_tests_chrono_com_roslaunch-check/fast
-
-#=============================================================================
-# Target rules for targets named _run_tests_chrono_com
-
-# Build rule for target.
-_run_tests_chrono_com: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_chrono_com
-.PHONY : _run_tests_chrono_com
-
-# fast build rule for target.
-_run_tests_chrono_com/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build
-.PHONY : _run_tests_chrono_com/fast
-
-#=============================================================================
 # Target rules for targets named roscpp_generate_messages_py
 
 # Build rule for target.
@@ -402,19 +324,6 @@ roscpp_generate_messages_lisp/fast:
 .PHONY : roscpp_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named _run_tests_chrono_com_roslaunch-check_launch
-
-# Build rule for target.
-_run_tests_chrono_com_roslaunch-check_launch: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_chrono_com_roslaunch-check_launch
-.PHONY : _run_tests_chrono_com_roslaunch-check_launch
-
-# fast build rule for target.
-_run_tests_chrono_com_roslaunch-check_launch/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build
-.PHONY : _run_tests_chrono_com_roslaunch-check_launch/fast
-
-#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -426,19 +335,6 @@ rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
 rosgraph_msgs_generate_messages_cpp/fast:
 	$(MAKE) -f chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named clean_test_results_chrono_com
-
-# Build rule for target.
-clean_test_results_chrono_com: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_chrono_com
-.PHONY : clean_test_results_chrono_com
-
-# fast build rule for target.
-clean_test_results_chrono_com/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build.make chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build
-.PHONY : clean_test_results_chrono_com/fast
 
 #=============================================================================
 # Target rules for targets named std_msgs_generate_messages_lisp
@@ -465,19 +361,6 @@ roscpp_generate_messages_cpp: cmake_check_build_system
 roscpp_generate_messages_cpp/fast:
 	$(MAKE) -f chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named run_tests_chrono_com
-
-# Build rule for target.
-run_tests_chrono_com: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 run_tests_chrono_com
-.PHONY : run_tests_chrono_com
-
-# fast build rule for target.
-run_tests_chrono_com/fast:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com.dir/build
-.PHONY : run_tests_chrono_com/fast
 
 #=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_eus
@@ -596,6 +479,19 @@ std_msgs_generate_messages_py/fast:
 	$(MAKE) -f chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/build.make chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
+#=============================================================================
+# Target rules for targets named chrono_com
+
+# Build rule for target.
+chrono_com: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 chrono_com
+.PHONY : chrono_com
+
+# fast build rule for target.
+chrono_com/fast:
+	$(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/build
+.PHONY : chrono_com/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -618,21 +514,12 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
-	@echo "... client"
-	@echo "... server"
-	@echo "... run_tests_chrono_com_roslaunch-check_launch"
-	@echo "... _run_tests_chrono_com_roslaunch-check"
-	@echo "... run_tests_chrono_com_roslaunch-check"
-	@echo "... _run_tests_chrono_com"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... roscpp_generate_messages_lisp"
-	@echo "... _run_tests_chrono_com_roslaunch-check_launch"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... clean_test_results_chrono_com"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_cpp"
-	@echo "... run_tests_chrono_com"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -642,6 +529,7 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... chrono_com"
 .PHONY : help
 
 

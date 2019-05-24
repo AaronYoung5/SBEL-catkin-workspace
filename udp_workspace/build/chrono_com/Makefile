@@ -168,96 +168,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-chrono_com/CMakeFiles/client.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/client.dir/rule
-.PHONY : chrono_com/CMakeFiles/client.dir/rule
-
-# Convenience name for target.
-client: chrono_com/CMakeFiles/client.dir/rule
-
-.PHONY : client
-
-# fast build rule for target.
-client/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/build
-.PHONY : client/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/server.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/server.dir/rule
-.PHONY : chrono_com/CMakeFiles/server.dir/rule
-
-# Convenience name for target.
-server: chrono_com/CMakeFiles/server.dir/rule
-
-.PHONY : server
-
-# fast build rule for target.
-server/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/build
-.PHONY : server/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com_roslaunch-check_launch: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-.PHONY : run_tests_chrono_com_roslaunch-check_launch
-
-# fast build rule for target.
-run_tests_chrono_com_roslaunch-check_launch/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build
-.PHONY : run_tests_chrono_com_roslaunch-check_launch/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com_roslaunch-check: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule
-
-.PHONY : _run_tests_chrono_com_roslaunch-check
-
-# fast build rule for target.
-_run_tests_chrono_com_roslaunch-check/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build
-.PHONY : _run_tests_chrono_com_roslaunch-check/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com_roslaunch-check: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule
-
-.PHONY : run_tests_chrono_com_roslaunch-check
-
-# fast build rule for target.
-run_tests_chrono_com_roslaunch-check/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build
-.PHONY : run_tests_chrono_com_roslaunch-check/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com: chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule
-
-.PHONY : _run_tests_chrono_com
-
-# fast build rule for target.
-_run_tests_chrono_com/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build
-.PHONY : _run_tests_chrono_com/fast
-
-# Convenience name for target.
 chrono_com/CMakeFiles/roscpp_generate_messages_py.dir/rule:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : chrono_com/CMakeFiles/roscpp_generate_messages_py.dir/rule
@@ -303,21 +213,6 @@ roscpp_generate_messages_lisp/fast:
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com_roslaunch-check_launch: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-.PHONY : _run_tests_chrono_com_roslaunch-check_launch
-
-# fast build rule for target.
-_run_tests_chrono_com_roslaunch-check_launch/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build
-.PHONY : _run_tests_chrono_com_roslaunch-check_launch/fast
-
-# Convenience name for target.
 chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
@@ -331,21 +226,6 @@ rosgraph_msgs_generate_messages_cpp: chrono_com/CMakeFiles/rosgraph_msgs_generat
 rosgraph_msgs_generate_messages_cpp/fast:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule
-.PHONY : chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule
-
-# Convenience name for target.
-clean_test_results_chrono_com: chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule
-
-.PHONY : clean_test_results_chrono_com
-
-# fast build rule for target.
-clean_test_results_chrono_com/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build.make chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build
-.PHONY : clean_test_results_chrono_com/fast
 
 # Convenience name for target.
 chrono_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
@@ -376,21 +256,6 @@ roscpp_generate_messages_cpp: chrono_com/CMakeFiles/roscpp_generate_messages_cpp
 roscpp_generate_messages_cpp/fast:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com: chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule
-
-.PHONY : run_tests_chrono_com
-
-# fast build rule for target.
-run_tests_chrono_com/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com.dir/build
-.PHONY : run_tests_chrono_com/fast
 
 # Convenience name for target.
 chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
@@ -527,59 +392,47 @@ std_msgs_generate_messages_py/fast:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/build.make chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
-src/client.o: src/client.cpp.o
+# Convenience name for target.
+chrono_com/CMakeFiles/chrono_com.dir/rule:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/chrono_com.dir/rule
+.PHONY : chrono_com/CMakeFiles/chrono_com.dir/rule
 
-.PHONY : src/client.o
+# Convenience name for target.
+chrono_com: chrono_com/CMakeFiles/chrono_com.dir/rule
 
-# target to build an object file
-src/client.cpp.o:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/src/client.cpp.o
-.PHONY : src/client.cpp.o
+.PHONY : chrono_com
 
-src/client.i: src/client.cpp.i
+# fast build rule for target.
+chrono_com/fast:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/build
+.PHONY : chrono_com/fast
 
-.PHONY : src/client.i
+src/chrono_com.o: src/chrono_com.cpp.o
 
-# target to preprocess a source file
-src/client.cpp.i:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/src/client.cpp.i
-.PHONY : src/client.cpp.i
-
-src/client.s: src/client.cpp.s
-
-.PHONY : src/client.s
-
-# target to generate assembly for a file
-src/client.cpp.s:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/src/client.cpp.s
-.PHONY : src/client.cpp.s
-
-src/server.o: src/server.cpp.o
-
-.PHONY : src/server.o
+.PHONY : src/chrono_com.o
 
 # target to build an object file
-src/server.cpp.o:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/src/server.cpp.o
-.PHONY : src/server.cpp.o
+src/chrono_com.cpp.o:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/src/chrono_com.cpp.o
+.PHONY : src/chrono_com.cpp.o
 
-src/server.i: src/server.cpp.i
+src/chrono_com.i: src/chrono_com.cpp.i
 
-.PHONY : src/server.i
+.PHONY : src/chrono_com.i
 
 # target to preprocess a source file
-src/server.cpp.i:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/src/server.cpp.i
-.PHONY : src/server.cpp.i
+src/chrono_com.cpp.i:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/src/chrono_com.cpp.i
+.PHONY : src/chrono_com.cpp.i
 
-src/server.s: src/server.cpp.s
+src/chrono_com.s: src/chrono_com.cpp.s
 
-.PHONY : src/server.s
+.PHONY : src/chrono_com.s
 
 # target to generate assembly for a file
-src/server.cpp.s:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/src/server.cpp.s
-.PHONY : src/server.cpp.s
+src/chrono_com.cpp.s:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/src/chrono_com.cpp.s
+.PHONY : src/chrono_com.cpp.s
 
 # Help Target
 help:
@@ -591,23 +444,14 @@ help:
 	@echo "... install/local"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... client"
-	@echo "... server"
-	@echo "... run_tests_chrono_com_roslaunch-check_launch"
-	@echo "... _run_tests_chrono_com_roslaunch-check"
-	@echo "... run_tests_chrono_com_roslaunch-check"
-	@echo "... _run_tests_chrono_com"
 	@echo "... list_install_components"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... edit_cache"
 	@echo "... roscpp_generate_messages_lisp"
-	@echo "... _run_tests_chrono_com_roslaunch-check_launch"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... clean_test_results_chrono_com"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_cpp"
-	@echo "... run_tests_chrono_com"
 	@echo "... install"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -618,12 +462,10 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... src/client.o"
-	@echo "... src/client.i"
-	@echo "... src/client.s"
-	@echo "... src/server.o"
-	@echo "... src/server.i"
-	@echo "... src/server.s"
+	@echo "... chrono_com"
+	@echo "... src/chrono_com.o"
+	@echo "... src/chrono_com.i"
+	@echo "... src/chrono_com.s"
 .PHONY : help
 
 

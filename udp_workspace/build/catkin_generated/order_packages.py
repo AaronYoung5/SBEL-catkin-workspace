@@ -2,4 +2,4 @@
 source_root_dir = "/home/aaron/ROS/udp_workspace/src"
 whitelisted_packages = "chrono_com".split(';') if "chrono_com" != "" else []
 blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/home/aaron/ROS/udp_workspace/devel;/home/aaron/ROS/catkin/devel;/opt/ros/melodic".split(';') if "/home/aaron/ROS/udp_workspace/devel;/home/aaron/ROS/catkin/devel;/opt/ros/melodic" != "" else []
+underlay_workspaces = "/home/aaron/ROS/catkin/devel;/opt/ros/melodic".split(';') if "/home/aaron/ROS/catkin/devel;/opt/ros/melodic" != "" else []

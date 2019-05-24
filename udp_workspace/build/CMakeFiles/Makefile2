@@ -127,7 +127,7 @@ clean: CMakeFiles/download_extra_data.dir/clean
 # Target rules for target CMakeFiles/run_tests.dir
 
 # All Build rule for target.
-CMakeFiles/run_tests.dir/all: chrono_com/CMakeFiles/_run_tests_chrono_com.dir/all
+CMakeFiles/run_tests.dir/all:
 	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target run_tests"
@@ -408,27 +408,17 @@ clean: gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
 # Directory level rules for directory chrono_com
 
 # Convenience name for "all" pass in the directory.
-chrono_com/all: chrono_com/CMakeFiles/client.dir/all
-chrono_com/all: chrono_com/CMakeFiles/server.dir/all
+chrono_com/all: chrono_com/CMakeFiles/chrono_com.dir/all
 
 .PHONY : chrono_com/all
 
 # Convenience name for "clean" pass in the directory.
-chrono_com/clean: chrono_com/CMakeFiles/client.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/server.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/_run_tests_chrono_com.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/roscpp_generate_messages_py.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/roscpp_generate_messages_eus.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
-chrono_com/clean: chrono_com/CMakeFiles/run_tests_chrono_com.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
@@ -438,6 +428,7 @@ chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean
 chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/clean
+chrono_com/clean: chrono_com/CMakeFiles/chrono_com.dir/clean
 
 .PHONY : chrono_com/clean
 
@@ -445,208 +436,6 @@ chrono_com/clean: chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 chrono_com/preinstall:
 
 .PHONY : chrono_com/preinstall
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/client.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/client.dir/all:
-	$(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=1,2 "Built target client"
-.PHONY : chrono_com/CMakeFiles/client.dir/all
-
-# Include target in all.
-all: chrono_com/CMakeFiles/client.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/client.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/client.dir/rule
-
-# Convenience name for target.
-client: chrono_com/CMakeFiles/client.dir/rule
-
-.PHONY : client
-
-# clean rule for target.
-chrono_com/CMakeFiles/client.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/client.dir/build.make chrono_com/CMakeFiles/client.dir/clean
-.PHONY : chrono_com/CMakeFiles/client.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/client.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/server.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/server.dir/all:
-	$(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=14,15 "Built target server"
-.PHONY : chrono_com/CMakeFiles/server.dir/all
-
-# Include target in all.
-all: chrono_com/CMakeFiles/server.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/server.dir/rule
-
-# Convenience name for target.
-server: chrono_com/CMakeFiles/server.dir/rule
-
-.PHONY : server
-
-# clean rule for target.
-chrono_com/CMakeFiles/server.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/server.dir/build.make chrono_com/CMakeFiles/server.dir/clean
-.PHONY : chrono_com/CMakeFiles/server.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/server.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/all:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target run_tests_chrono_com_roslaunch-check_launch"
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com_roslaunch-check_launch: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-.PHONY : run_tests_chrono_com_roslaunch-check_launch
-
-# clean rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/clean
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/all: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/all
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target _run_tests_chrono_com_roslaunch-check"
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com_roslaunch-check: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/rule
-
-.PHONY : _run_tests_chrono_com_roslaunch-check
-
-# clean rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/clean
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/all: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check_launch.dir/all
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target run_tests_chrono_com_roslaunch-check"
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com_roslaunch-check: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/rule
-
-.PHONY : run_tests_chrono_com_roslaunch-check
-
-# clean rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/clean
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/_run_tests_chrono_com.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com.dir/all: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check.dir/all
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target _run_tests_chrono_com"
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com: chrono_com/CMakeFiles/_run_tests_chrono_com.dir/rule
-
-.PHONY : _run_tests_chrono_com
-
-# clean rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com.dir/clean
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/_run_tests_chrono_com.dir/clean
-
-.PHONY : clean
 
 #=============================================================================
 # Target rules for target chrono_com/CMakeFiles/roscpp_generate_messages_py.dir
@@ -745,39 +534,6 @@ clean: chrono_com/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/all: CMakeFiles/tests.dir/all
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/all: chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/all
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target _run_tests_chrono_com_roslaunch-check_launch"
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-_run_tests_chrono_com_roslaunch-check_launch: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/rule
-
-.PHONY : _run_tests_chrono_com_roslaunch-check_launch
-
-# clean rule for target.
-chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/build.make chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/clean
-.PHONY : chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/_run_tests_chrono_com_roslaunch-check_launch.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
@@ -806,38 +562,6 @@ chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean:
 
 # clean rule for target.
 clean: chrono_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/clean_test_results_chrono_com.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/all:
-	$(MAKE) -f chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build.make chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build.make chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target clean_test_results_chrono_com"
-.PHONY : chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule
-
-# Convenience name for target.
-clean_test_results_chrono_com: chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/rule
-
-.PHONY : clean_test_results_chrono_com
-
-# clean rule for target.
-chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/build.make chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/clean
-.PHONY : chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/clean_test_results_chrono_com.dir/clean
 
 .PHONY : clean
 
@@ -902,38 +626,6 @@ chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/clean:
 
 # clean rule for target.
 clean: chrono_com/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target chrono_com/CMakeFiles/run_tests_chrono_com.dir
-
-# All Build rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com.dir/all: chrono_com/CMakeFiles/run_tests_chrono_com_roslaunch-check.dir/all
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com.dir/depend
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num= "Built target run_tests_chrono_com"
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com.dir/all
-
-# Build rule for subdir invocation for target.
-chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/run_tests_chrono_com.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule
-
-# Convenience name for target.
-run_tests_chrono_com: chrono_com/CMakeFiles/run_tests_chrono_com.dir/rule
-
-.PHONY : run_tests_chrono_com
-
-# clean rule for target.
-chrono_com/CMakeFiles/run_tests_chrono_com.dir/clean:
-	$(MAKE) -f chrono_com/CMakeFiles/run_tests_chrono_com.dir/build.make chrono_com/CMakeFiles/run_tests_chrono_com.dir/clean
-.PHONY : chrono_com/CMakeFiles/run_tests_chrono_com.dir/clean
-
-# clean rule for target.
-clean: chrono_com/CMakeFiles/run_tests_chrono_com.dir/clean
 
 .PHONY : clean
 
@@ -1222,6 +914,43 @@ chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/clean:
 
 # clean rule for target.
 clean: chrono_com/CMakeFiles/std_msgs_generate_messages_py.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target chrono_com/CMakeFiles/chrono_com.dir
+
+# All Build rule for target.
+chrono_com/CMakeFiles/chrono_com.dir/all:
+	$(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/depend
+	$(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=1,2 "Built target chrono_com"
+.PHONY : chrono_com/CMakeFiles/chrono_com.dir/all
+
+# Include target in all.
+all: chrono_com/CMakeFiles/chrono_com.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+chrono_com/CMakeFiles/chrono_com.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 chrono_com/CMakeFiles/chrono_com.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aaron/ROS/udp_workspace/build/CMakeFiles 0
+.PHONY : chrono_com/CMakeFiles/chrono_com.dir/rule
+
+# Convenience name for target.
+chrono_com: chrono_com/CMakeFiles/chrono_com.dir/rule
+
+.PHONY : chrono_com
+
+# clean rule for target.
+chrono_com/CMakeFiles/chrono_com.dir/clean:
+	$(MAKE) -f chrono_com/CMakeFiles/chrono_com.dir/build.make chrono_com/CMakeFiles/chrono_com.dir/clean
+.PHONY : chrono_com/CMakeFiles/chrono_com.dir/clean
+
+# clean rule for target.
+clean: chrono_com/CMakeFiles/chrono_com.dir/clean
 
 .PHONY : clean
 

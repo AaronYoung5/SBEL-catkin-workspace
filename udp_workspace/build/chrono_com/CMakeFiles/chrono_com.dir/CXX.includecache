@@ -9,22 +9,6 @@
 /home/aaron/ROS/udp_workspace/src/chrono_com/src/chrono_com.cpp
 ros/ros.h
 /home/aaron/ROS/udp_workspace/src/chrono_com/src/ros/ros.h
-arpa/inet.h
--
-netinet/in.h
--
-stdio.h
--
-stdlib.h
--
-string.h
--
-sys/socket.h
--
-sys/types.h
--
-unistd.h
--
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
