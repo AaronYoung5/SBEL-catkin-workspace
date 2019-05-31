@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/udp_workspace/devel
+
+Name: demo_chrono_ros
+Description: Description of demo_chrono_ros
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/udp_workspace/devel/lib 
+Requires: rospy

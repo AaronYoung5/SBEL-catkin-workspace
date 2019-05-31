@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>demo_chrono_ros</name>
+  <version>0.0.0</version>
+  <description> demo_chrono_ros package </description>
+
+  <author email="TODO@TODO.com">TODO</author>
+  <maintainer email="TODO@TODO.com">TODO</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>roslaunch</build_depend>
+
+  <exec_depend>rospy</exec_depend>
+</package>

@@ -8,4 +8,3 @@
 
 # modified environment variables
 export PWD="/home/aaron/ROS/workspace/build"
-export PYTHONPATH="/home/aaron/ROS/catkin/devel/lib/python2.7/dist-packages:/opt/ros/melodic/lib/python2.7/dist-packages"

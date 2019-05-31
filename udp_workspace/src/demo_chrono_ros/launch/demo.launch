@@ -1,0 +1,12 @@
+<launch>
+
+  <!-- <node pkg="demo_chrono_ros" type="syn_server" name="syn_server" required="true" output="screen"/> -->
+
+  <node pkg="chrono_ros_com" type="chrono_ros_com" name="chrono_ros_com" required="true" output="screen"/>
+
+  <node pkg="demo_chrono_ros" type="syn_vehicle" name="syn_vehicle" required="true" output="screen"/>
+
+  <!-- <node pkg="rviz_vis" type="rviz_vis" name="rviz_vis" required="true" output="screen"/> -->
+
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d /home/aaron/.rviz/rviz_vis.rviz" required="true"/> -->
+</launch>

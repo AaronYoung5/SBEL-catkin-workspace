@@ -40,7 +40,7 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=keyboard_control
+CATKIN_WHITELIST_PACKAGES:STRING=chrono_ros
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar

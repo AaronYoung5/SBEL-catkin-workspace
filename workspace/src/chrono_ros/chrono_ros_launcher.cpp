@@ -15,6 +15,7 @@ ChronoRosLauncher::ChronoRosLauncher()
       m_throttle_target(0), m_steering_target(0), m_braking_target(0) {
   // Set path to Chrono data directory
   SetChronoDataPath(CHRONO_DATA_DIR);
+  vehicle::SetDataPath(CHRONO_VEHICLE_DATA_DIR);
   // SetDataPath(CHRONO_VEHICLE_DATA_DIR);
 
   InitVehicle();

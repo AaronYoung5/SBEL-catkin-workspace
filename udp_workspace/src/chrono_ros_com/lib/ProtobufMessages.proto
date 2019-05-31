@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package DriverMessages;
+
+message lidar {
+  repeated Point points = 1;
+}
+
+message Point {
+    required double x = 1;
+    required double y = 2;
+    required double z = 3;
+}
+
+message gps {
+    required double longitude = 1;
+    required double latitude = 2;
+    required double altitude = 3;
+}
+
+message imu {
+    required double yaw = 1;
+    required double roll = 2;
+    required double pitch = 3;
+    required double q3 = 4;
+}
+
+message control {
+    required double throttle = 1;
+    required double steering = 2;
+    required double braking = 3;
+}
+
+message time {
+    required double t = 1;
+}
+
+message light {
+    required double xpos = 1;
+    required double ypos = 2;
+    required double xdir = 3;
+    required double ydir = 4;
+}

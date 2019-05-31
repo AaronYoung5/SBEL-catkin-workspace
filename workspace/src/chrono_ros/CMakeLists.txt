@@ -62,11 +62,20 @@ add_library(chrono_ros_library
   chrono_ros_path_follower_launcher.cpp
 )
 ## Set target properties of Chrono library with correct data directory
-set_target_properties(chrono_ros_library
-  PROPERTIES
-  COMPILE_DEFINITIONS
-  "CHRONO_DATA_DIR=\"${CHRONO_DATA_DIR}\""
+# set_target_properties(chrono_ros_library
+#   PROPERTIES
+#   COMPILE_DEFINITIONS
+# )
+
+target_compile_definitions(chrono_ros_library
+  PRIVATE "CHRONO_DATA_DIR=\"${CHRONO_DATA_DIR}\""
+  PRIVATE "CHRONO_VEHICLE_DATA_DIR=\"${CHRONO_VEHICLE_DATA_DIR}\""
 )
+
+# set_target_properties(chrono_ros_library
+#   PROPERTIES
+#   COMPILE_DEFINITIONS
+# )
 ## Link Chrono libraries to Chrono/ROS implementation
 target_link_libraries(chrono_ros_library ${CHRONO_LIBRARIES})
 

@@ -1,0 +1,6 @@
+set(demo_chrono_ros_SETUP_PY_VERSION "0.0.0")
+set(demo_chrono_ros_SETUP_PY_SCRIPTS "")
+set(demo_chrono_ros_SETUP_PY_PACKAGES "demo_chrono_ros")
+set(demo_chrono_ros_SETUP_PY_PACKAGE_DIRS "demo_chrono_ros")
+set(demo_chrono_ros_SETUP_PY_MODULES "")
+set(demo_chrono_ros_SETUP_PY_MODULE_DIRS "")
