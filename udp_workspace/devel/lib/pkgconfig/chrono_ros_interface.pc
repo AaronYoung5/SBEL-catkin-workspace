@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/udp_workspace/devel
+
+Name: chrono_ros_interface
+Description: Description of chrono_ros_interface
+Version: 0.0.0
+Cflags: -I/home/aaron/ROS/udp_workspace/devel/include -I/home/aaron/ROS/udp_workspace/src/chrono_ros_interface/include
+Libs: -L/home/aaron/ROS/udp_workspace/devel/lib 
+Requires: roscpp geometry_msgs message_runtime

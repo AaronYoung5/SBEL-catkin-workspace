@@ -36,7 +36,8 @@ void protobuf_AddDesc_ProtobufMessages_2eproto();
 void protobuf_AssignDesc_ProtobufMessages_2eproto();
 void protobuf_ShutdownFile_ProtobufMessages_2eproto();
 
-class Point;
+class Vector;
+class cones;
 class control;
 class gps;
 class imu;
@@ -45,6 +46,122 @@ class light;
 class time;
 
 // ===================================================================
+
+class Vector : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DriverMessages.Vector) */ {
+ public:
+  Vector();
+  virtual ~Vector();
+
+  Vector(const Vector& from);
+
+  inline Vector& operator=(const Vector& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Vector& default_instance();
+
+  void Swap(Vector* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Vector* New() const { return New(NULL); }
+
+  Vector* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Vector& from);
+  void MergeFrom(const Vector& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Vector* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float x = 1;
+  bool has_x() const;
+  void clear_x();
+  static const int kXFieldNumber = 1;
+  float x() const;
+  void set_x(float value);
+
+  // required float y = 2;
+  bool has_y() const;
+  void clear_y();
+  static const int kYFieldNumber = 2;
+  float y() const;
+  void set_y(float value);
+
+  // required float z = 3;
+  bool has_z() const;
+  void clear_z();
+  static const int kZFieldNumber = 3;
+  float z() const;
+  void set_z(float value);
+
+  // @@protoc_insertion_point(class_scope:DriverMessages.Vector)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  float x_;
+  float y_;
+  float z_;
+  friend void  protobuf_AddDesc_ProtobufMessages_2eproto();
+  friend void protobuf_AssignDesc_ProtobufMessages_2eproto();
+  friend void protobuf_ShutdownFile_ProtobufMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static Vector* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class lidar : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DriverMessages.lidar) */ {
  public:
@@ -114,16 +231,16 @@ class lidar : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   // accessors -------------------------------------------------------
 
-  // repeated .DriverMessages.Point points = 1;
+  // repeated .DriverMessages.Vector points = 1;
   int points_size() const;
   void clear_points();
   static const int kPointsFieldNumber = 1;
-  const ::DriverMessages::Point& points(int index) const;
-  ::DriverMessages::Point* mutable_points(int index);
-  ::DriverMessages::Point* add_points();
-  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Point >*
+  const ::DriverMessages::Vector& points(int index) const;
+  ::DriverMessages::Vector* mutable_points(int index);
+  ::DriverMessages::Vector* add_points();
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
       mutable_points();
-  const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Point >&
+  const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
       points() const;
 
   // @@protoc_insertion_point(class_scope:DriverMessages.lidar)
@@ -132,129 +249,13 @@ class lidar : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Point > points_;
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector > points_;
   friend void  protobuf_AddDesc_ProtobufMessages_2eproto();
   friend void protobuf_AssignDesc_ProtobufMessages_2eproto();
   friend void protobuf_ShutdownFile_ProtobufMessages_2eproto();
 
   void InitAsDefaultInstance();
   static lidar* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class Point : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DriverMessages.Point) */ {
- public:
-  Point();
-  virtual ~Point();
-
-  Point(const Point& from);
-
-  inline Point& operator=(const Point& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Point& default_instance();
-
-  void Swap(Point* other);
-
-  // implements Message ----------------------------------------------
-
-  inline Point* New() const { return New(NULL); }
-
-  Point* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Point& from);
-  void MergeFrom(const Point& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(Point* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required double x = 1;
-  bool has_x() const;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  double x() const;
-  void set_x(double value);
-
-  // required double y = 2;
-  bool has_y() const;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  double y() const;
-  void set_y(double value);
-
-  // required double z = 3;
-  bool has_z() const;
-  void clear_z();
-  static const int kZFieldNumber = 3;
-  double z() const;
-  void set_z(double value);
-
-  // @@protoc_insertion_point(class_scope:DriverMessages.Point)
- private:
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
-  inline void set_has_z();
-  inline void clear_has_z();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  double x_;
-  double y_;
-  double z_;
-  friend void  protobuf_AddDesc_ProtobufMessages_2eproto();
-  friend void protobuf_AssignDesc_ProtobufMessages_2eproto();
-  friend void protobuf_ShutdownFile_ProtobufMessages_2eproto();
-
-  void InitAsDefaultInstance();
-  static Point* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -442,44 +443,41 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // accessors -------------------------------------------------------
 
-  // required double yaw = 1;
-  bool has_yaw() const;
-  void clear_yaw();
-  static const int kYawFieldNumber = 1;
-  double yaw() const;
-  void set_yaw(double value);
+  // required .DriverMessages.Vector angular_velocity = 1;
+  bool has_angular_velocity() const;
+  void clear_angular_velocity();
+  static const int kAngularVelocityFieldNumber = 1;
+  const ::DriverMessages::Vector& angular_velocity() const;
+  ::DriverMessages::Vector* mutable_angular_velocity();
+  ::DriverMessages::Vector* release_angular_velocity();
+  void set_allocated_angular_velocity(::DriverMessages::Vector* angular_velocity);
 
-  // required double roll = 2;
-  bool has_roll() const;
-  void clear_roll();
-  static const int kRollFieldNumber = 2;
-  double roll() const;
-  void set_roll(double value);
+  // required .DriverMessages.Vector linear_acceleration = 2;
+  bool has_linear_acceleration() const;
+  void clear_linear_acceleration();
+  static const int kLinearAccelerationFieldNumber = 2;
+  const ::DriverMessages::Vector& linear_acceleration() const;
+  ::DriverMessages::Vector* mutable_linear_acceleration();
+  ::DriverMessages::Vector* release_linear_acceleration();
+  void set_allocated_linear_acceleration(::DriverMessages::Vector* linear_acceleration);
 
-  // required double pitch = 3;
-  bool has_pitch() const;
-  void clear_pitch();
-  static const int kPitchFieldNumber = 3;
-  double pitch() const;
-  void set_pitch(double value);
-
-  // required double q3 = 4;
-  bool has_q3() const;
-  void clear_q3();
-  static const int kQ3FieldNumber = 4;
-  double q3() const;
-  void set_q3(double value);
+  // required .DriverMessages.Vector orientation = 3;
+  bool has_orientation() const;
+  void clear_orientation();
+  static const int kOrientationFieldNumber = 3;
+  const ::DriverMessages::Vector& orientation() const;
+  ::DriverMessages::Vector* mutable_orientation();
+  ::DriverMessages::Vector* release_orientation();
+  void set_allocated_orientation(::DriverMessages::Vector* orientation);
 
   // @@protoc_insertion_point(class_scope:DriverMessages.imu)
  private:
-  inline void set_has_yaw();
-  inline void clear_has_yaw();
-  inline void set_has_roll();
-  inline void clear_has_roll();
-  inline void set_has_pitch();
-  inline void clear_has_pitch();
-  inline void set_has_q3();
-  inline void clear_has_q3();
+  inline void set_has_angular_velocity();
+  inline void clear_has_angular_velocity();
+  inline void set_has_linear_acceleration();
+  inline void clear_has_linear_acceleration();
+  inline void set_has_orientation();
+  inline void clear_has_orientation();
 
   // helper for ByteSize()
   int RequiredFieldsByteSizeFallback() const;
@@ -487,10 +485,9 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  double yaw_;
-  double roll_;
-  double pitch_;
-  double q3_;
+  ::DriverMessages::Vector* angular_velocity_;
+  ::DriverMessages::Vector* linear_acceleration_;
+  ::DriverMessages::Vector* orientation_;
   friend void  protobuf_AddDesc_ProtobufMessages_2eproto();
   friend void protobuf_AssignDesc_ProtobufMessages_2eproto();
   friend void protobuf_ShutdownFile_ProtobufMessages_2eproto();
@@ -833,118 +830,227 @@ class light : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   void InitAsDefaultInstance();
   static light* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class cones : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DriverMessages.cones) */ {
+ public:
+  cones();
+  virtual ~cones();
+
+  cones(const cones& from);
+
+  inline cones& operator=(const cones& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const cones& default_instance();
+
+  void Swap(cones* other);
+
+  // implements Message ----------------------------------------------
+
+  inline cones* New() const { return New(NULL); }
+
+  cones* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const cones& from);
+  void MergeFrom(const cones& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(cones* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .DriverMessages.Vector blue_cones = 1;
+  int blue_cones_size() const;
+  void clear_blue_cones();
+  static const int kBlueConesFieldNumber = 1;
+  const ::DriverMessages::Vector& blue_cones(int index) const;
+  ::DriverMessages::Vector* mutable_blue_cones(int index);
+  ::DriverMessages::Vector* add_blue_cones();
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
+      mutable_blue_cones();
+  const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
+      blue_cones() const;
+
+  // repeated .DriverMessages.Vector yellow_cones = 2;
+  int yellow_cones_size() const;
+  void clear_yellow_cones();
+  static const int kYellowConesFieldNumber = 2;
+  const ::DriverMessages::Vector& yellow_cones(int index) const;
+  ::DriverMessages::Vector* mutable_yellow_cones(int index);
+  ::DriverMessages::Vector* add_yellow_cones();
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
+      mutable_yellow_cones();
+  const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
+      yellow_cones() const;
+
+  // @@protoc_insertion_point(class_scope:DriverMessages.cones)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector > blue_cones_;
+  ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector > yellow_cones_;
+  friend void  protobuf_AddDesc_ProtobufMessages_2eproto();
+  friend void protobuf_AssignDesc_ProtobufMessages_2eproto();
+  friend void protobuf_ShutdownFile_ProtobufMessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static cones* default_instance_;
+};
 // ===================================================================
 
 
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
+// Vector
+
+// required float x = 1;
+inline bool Vector::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Vector::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Vector::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Vector::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float Vector::x() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.Vector.x)
+  return x_;
+}
+inline void Vector::set_x(float value) {
+  set_has_x();
+  x_ = value;
+  // @@protoc_insertion_point(field_set:DriverMessages.Vector.x)
+}
+
+// required float y = 2;
+inline bool Vector::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Vector::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Vector::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Vector::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float Vector::y() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.Vector.y)
+  return y_;
+}
+inline void Vector::set_y(float value) {
+  set_has_y();
+  y_ = value;
+  // @@protoc_insertion_point(field_set:DriverMessages.Vector.y)
+}
+
+// required float z = 3;
+inline bool Vector::has_z() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Vector::set_has_z() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Vector::clear_has_z() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Vector::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline float Vector::z() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.Vector.z)
+  return z_;
+}
+inline void Vector::set_z(float value) {
+  set_has_z();
+  z_ = value;
+  // @@protoc_insertion_point(field_set:DriverMessages.Vector.z)
+}
+
+// -------------------------------------------------------------------
+
 // lidar
 
-// repeated .DriverMessages.Point points = 1;
+// repeated .DriverMessages.Vector points = 1;
 inline int lidar::points_size() const {
   return points_.size();
 }
 inline void lidar::clear_points() {
   points_.Clear();
 }
-inline const ::DriverMessages::Point& lidar::points(int index) const {
+inline const ::DriverMessages::Vector& lidar::points(int index) const {
   // @@protoc_insertion_point(field_get:DriverMessages.lidar.points)
   return points_.Get(index);
 }
-inline ::DriverMessages::Point* lidar::mutable_points(int index) {
+inline ::DriverMessages::Vector* lidar::mutable_points(int index) {
   // @@protoc_insertion_point(field_mutable:DriverMessages.lidar.points)
   return points_.Mutable(index);
 }
-inline ::DriverMessages::Point* lidar::add_points() {
+inline ::DriverMessages::Vector* lidar::add_points() {
   // @@protoc_insertion_point(field_add:DriverMessages.lidar.points)
   return points_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::DriverMessages::Point >*
+inline ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
 lidar::mutable_points() {
   // @@protoc_insertion_point(field_mutable_list:DriverMessages.lidar.points)
   return &points_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Point >&
+inline const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
 lidar::points() const {
   // @@protoc_insertion_point(field_list:DriverMessages.lidar.points)
   return points_;
-}
-
-// -------------------------------------------------------------------
-
-// Point
-
-// required double x = 1;
-inline bool Point::has_x() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Point::set_has_x() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Point::clear_has_x() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Point::clear_x() {
-  x_ = 0;
-  clear_has_x();
-}
-inline double Point::x() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.Point.x)
-  return x_;
-}
-inline void Point::set_x(double value) {
-  set_has_x();
-  x_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.Point.x)
-}
-
-// required double y = 2;
-inline bool Point::has_y() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Point::set_has_y() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Point::clear_has_y() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Point::clear_y() {
-  y_ = 0;
-  clear_has_y();
-}
-inline double Point::y() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.Point.y)
-  return y_;
-}
-inline void Point::set_y(double value) {
-  set_has_y();
-  y_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.Point.y)
-}
-
-// required double z = 3;
-inline bool Point::has_z() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Point::set_has_z() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void Point::clear_has_z() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void Point::clear_z() {
-  z_ = 0;
-  clear_has_z();
-}
-inline double Point::z() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.Point.z)
-  return z_;
-}
-inline void Point::set_z(double value) {
-  set_has_z();
-  z_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.Point.z)
 }
 
 // -------------------------------------------------------------------
@@ -1027,100 +1133,136 @@ inline void gps::set_altitude(double value) {
 
 // imu
 
-// required double yaw = 1;
-inline bool imu::has_yaw() const {
+// required .DriverMessages.Vector angular_velocity = 1;
+inline bool imu::has_angular_velocity() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void imu::set_has_yaw() {
+inline void imu::set_has_angular_velocity() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void imu::clear_has_yaw() {
+inline void imu::clear_has_angular_velocity() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void imu::clear_yaw() {
-  yaw_ = 0;
-  clear_has_yaw();
+inline void imu::clear_angular_velocity() {
+  if (angular_velocity_ != NULL) angular_velocity_->::DriverMessages::Vector::Clear();
+  clear_has_angular_velocity();
 }
-inline double imu::yaw() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.imu.yaw)
-  return yaw_;
+inline const ::DriverMessages::Vector& imu::angular_velocity() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.imu.angular_velocity)
+  return angular_velocity_ != NULL ? *angular_velocity_ : *default_instance_->angular_velocity_;
 }
-inline void imu::set_yaw(double value) {
-  set_has_yaw();
-  yaw_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.imu.yaw)
+inline ::DriverMessages::Vector* imu::mutable_angular_velocity() {
+  set_has_angular_velocity();
+  if (angular_velocity_ == NULL) {
+    angular_velocity_ = new ::DriverMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:DriverMessages.imu.angular_velocity)
+  return angular_velocity_;
+}
+inline ::DriverMessages::Vector* imu::release_angular_velocity() {
+  // @@protoc_insertion_point(field_release:DriverMessages.imu.angular_velocity)
+  clear_has_angular_velocity();
+  ::DriverMessages::Vector* temp = angular_velocity_;
+  angular_velocity_ = NULL;
+  return temp;
+}
+inline void imu::set_allocated_angular_velocity(::DriverMessages::Vector* angular_velocity) {
+  delete angular_velocity_;
+  angular_velocity_ = angular_velocity;
+  if (angular_velocity) {
+    set_has_angular_velocity();
+  } else {
+    clear_has_angular_velocity();
+  }
+  // @@protoc_insertion_point(field_set_allocated:DriverMessages.imu.angular_velocity)
 }
 
-// required double roll = 2;
-inline bool imu::has_roll() const {
+// required .DriverMessages.Vector linear_acceleration = 2;
+inline bool imu::has_linear_acceleration() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void imu::set_has_roll() {
+inline void imu::set_has_linear_acceleration() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void imu::clear_has_roll() {
+inline void imu::clear_has_linear_acceleration() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void imu::clear_roll() {
-  roll_ = 0;
-  clear_has_roll();
+inline void imu::clear_linear_acceleration() {
+  if (linear_acceleration_ != NULL) linear_acceleration_->::DriverMessages::Vector::Clear();
+  clear_has_linear_acceleration();
 }
-inline double imu::roll() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.imu.roll)
-  return roll_;
+inline const ::DriverMessages::Vector& imu::linear_acceleration() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.imu.linear_acceleration)
+  return linear_acceleration_ != NULL ? *linear_acceleration_ : *default_instance_->linear_acceleration_;
 }
-inline void imu::set_roll(double value) {
-  set_has_roll();
-  roll_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.imu.roll)
+inline ::DriverMessages::Vector* imu::mutable_linear_acceleration() {
+  set_has_linear_acceleration();
+  if (linear_acceleration_ == NULL) {
+    linear_acceleration_ = new ::DriverMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:DriverMessages.imu.linear_acceleration)
+  return linear_acceleration_;
+}
+inline ::DriverMessages::Vector* imu::release_linear_acceleration() {
+  // @@protoc_insertion_point(field_release:DriverMessages.imu.linear_acceleration)
+  clear_has_linear_acceleration();
+  ::DriverMessages::Vector* temp = linear_acceleration_;
+  linear_acceleration_ = NULL;
+  return temp;
+}
+inline void imu::set_allocated_linear_acceleration(::DriverMessages::Vector* linear_acceleration) {
+  delete linear_acceleration_;
+  linear_acceleration_ = linear_acceleration;
+  if (linear_acceleration) {
+    set_has_linear_acceleration();
+  } else {
+    clear_has_linear_acceleration();
+  }
+  // @@protoc_insertion_point(field_set_allocated:DriverMessages.imu.linear_acceleration)
 }
 
-// required double pitch = 3;
-inline bool imu::has_pitch() const {
+// required .DriverMessages.Vector orientation = 3;
+inline bool imu::has_orientation() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void imu::set_has_pitch() {
+inline void imu::set_has_orientation() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void imu::clear_has_pitch() {
+inline void imu::clear_has_orientation() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void imu::clear_pitch() {
-  pitch_ = 0;
-  clear_has_pitch();
+inline void imu::clear_orientation() {
+  if (orientation_ != NULL) orientation_->::DriverMessages::Vector::Clear();
+  clear_has_orientation();
 }
-inline double imu::pitch() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.imu.pitch)
-  return pitch_;
+inline const ::DriverMessages::Vector& imu::orientation() const {
+  // @@protoc_insertion_point(field_get:DriverMessages.imu.orientation)
+  return orientation_ != NULL ? *orientation_ : *default_instance_->orientation_;
 }
-inline void imu::set_pitch(double value) {
-  set_has_pitch();
-  pitch_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.imu.pitch)
+inline ::DriverMessages::Vector* imu::mutable_orientation() {
+  set_has_orientation();
+  if (orientation_ == NULL) {
+    orientation_ = new ::DriverMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:DriverMessages.imu.orientation)
+  return orientation_;
 }
-
-// required double q3 = 4;
-inline bool imu::has_q3() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+inline ::DriverMessages::Vector* imu::release_orientation() {
+  // @@protoc_insertion_point(field_release:DriverMessages.imu.orientation)
+  clear_has_orientation();
+  ::DriverMessages::Vector* temp = orientation_;
+  orientation_ = NULL;
+  return temp;
 }
-inline void imu::set_has_q3() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void imu::clear_has_q3() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void imu::clear_q3() {
-  q3_ = 0;
-  clear_has_q3();
-}
-inline double imu::q3() const {
-  // @@protoc_insertion_point(field_get:DriverMessages.imu.q3)
-  return q3_;
-}
-inline void imu::set_q3(double value) {
-  set_has_q3();
-  q3_ = value;
-  // @@protoc_insertion_point(field_set:DriverMessages.imu.q3)
+inline void imu::set_allocated_orientation(::DriverMessages::Vector* orientation) {
+  delete orientation_;
+  orientation_ = orientation;
+  if (orientation) {
+    set_has_orientation();
+  } else {
+    clear_has_orientation();
+  }
+  // @@protoc_insertion_point(field_set_allocated:DriverMessages.imu.orientation)
 }
 
 // -------------------------------------------------------------------
@@ -1327,7 +1469,73 @@ inline void light::set_ydir(double value) {
   // @@protoc_insertion_point(field_set:DriverMessages.light.ydir)
 }
 
+// -------------------------------------------------------------------
+
+// cones
+
+// repeated .DriverMessages.Vector blue_cones = 1;
+inline int cones::blue_cones_size() const {
+  return blue_cones_.size();
+}
+inline void cones::clear_blue_cones() {
+  blue_cones_.Clear();
+}
+inline const ::DriverMessages::Vector& cones::blue_cones(int index) const {
+  // @@protoc_insertion_point(field_get:DriverMessages.cones.blue_cones)
+  return blue_cones_.Get(index);
+}
+inline ::DriverMessages::Vector* cones::mutable_blue_cones(int index) {
+  // @@protoc_insertion_point(field_mutable:DriverMessages.cones.blue_cones)
+  return blue_cones_.Mutable(index);
+}
+inline ::DriverMessages::Vector* cones::add_blue_cones() {
+  // @@protoc_insertion_point(field_add:DriverMessages.cones.blue_cones)
+  return blue_cones_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
+cones::mutable_blue_cones() {
+  // @@protoc_insertion_point(field_mutable_list:DriverMessages.cones.blue_cones)
+  return &blue_cones_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
+cones::blue_cones() const {
+  // @@protoc_insertion_point(field_list:DriverMessages.cones.blue_cones)
+  return blue_cones_;
+}
+
+// repeated .DriverMessages.Vector yellow_cones = 2;
+inline int cones::yellow_cones_size() const {
+  return yellow_cones_.size();
+}
+inline void cones::clear_yellow_cones() {
+  yellow_cones_.Clear();
+}
+inline const ::DriverMessages::Vector& cones::yellow_cones(int index) const {
+  // @@protoc_insertion_point(field_get:DriverMessages.cones.yellow_cones)
+  return yellow_cones_.Get(index);
+}
+inline ::DriverMessages::Vector* cones::mutable_yellow_cones(int index) {
+  // @@protoc_insertion_point(field_mutable:DriverMessages.cones.yellow_cones)
+  return yellow_cones_.Mutable(index);
+}
+inline ::DriverMessages::Vector* cones::add_yellow_cones() {
+  // @@protoc_insertion_point(field_add:DriverMessages.cones.yellow_cones)
+  return yellow_cones_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >*
+cones::mutable_yellow_cones() {
+  // @@protoc_insertion_point(field_mutable_list:DriverMessages.cones.yellow_cones)
+  return &yellow_cones_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::DriverMessages::Vector >&
+cones::yellow_cones() const {
+  // @@protoc_insertion_point(field_list:DriverMessages.cones.yellow_cones)
+  return yellow_cones_;
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

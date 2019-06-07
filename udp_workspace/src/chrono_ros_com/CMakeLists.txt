@@ -3,7 +3,6 @@ project(chrono_ros_com)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  geometry_msgs
   message_generation
   genmsg
 )
@@ -31,6 +30,9 @@ add_library(LIBRARIES
   lib/MessageHandler.cpp
   lib/ProtobufMessages.pb.cc
   lib/LidarPublisher.cpp
+  lib/GPSPublisher.cpp
+  lib/IMUPublisher.cpp
+  lib/ConePublisher.cpp
 )
 
 add_executable(chrono_ros_com src/chrono_ros_com.cpp)

@@ -1,2 +1,2 @@
-auto_custom_driver:chrono_com:chrono_ros_com:demo_chrono_ros:rviz_vis:udp_test
--DCATKIN_WHITELIST_PACKAGES=chrono_ros_com -DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/udp_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/udp_workspace/install -G Unix Makefiles
+chrono_com:chrono_ros_com:chrono_ros_interface:demo_chrono_ros:msg_converter:path_follower:rviz_vis
+-DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/udp_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/udp_workspace/install -G Unix Makefiles

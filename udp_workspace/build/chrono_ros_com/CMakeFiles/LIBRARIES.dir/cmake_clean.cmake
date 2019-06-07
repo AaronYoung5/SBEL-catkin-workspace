@@ -2,6 +2,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/LIBRARIES.dir/lib/MessageHandler.cpp.o"
   "CMakeFiles/LIBRARIES.dir/lib/ProtobufMessages.pb.cc.o"
   "CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o"
+  "CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o"
+  "CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o"
+  "CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o"
   "/home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.pdb"
   "/home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so"
 )

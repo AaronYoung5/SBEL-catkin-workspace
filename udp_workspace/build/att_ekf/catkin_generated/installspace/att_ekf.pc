@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/udp_workspace/install
+
+Name: att_ekf
+Description: Description of att_ekf
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/udp_workspace/install/lib 
+Requires: geometry_msgs nav_msgs roscpp rospy std_msgs

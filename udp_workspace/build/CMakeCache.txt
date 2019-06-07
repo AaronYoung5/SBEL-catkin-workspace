@@ -26,6 +26,9 @@ BUILD_SHARED_LIBS:BOOL=ON
 //List of ';' separated packages to exclude
 CATKIN_BLACKLIST_PACKAGES:STRING=
 
+//No help, variable specified on the command line.
+CATKIN_BUILD_TYPE:UNINITIALIZED=Release
+
 //catkin devel space
 CATKIN_DEVEL_PREFIX:PATH=/home/aaron/ROS/udp_workspace/devel
 
@@ -40,7 +43,7 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=chrono_ros_com
+CATKIN_WHITELIST_PACKAGES:STRING=
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
@@ -218,6 +221,9 @@ EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
 //Empy script
 EMPY_SCRIPT:STRING=/usr/bin/empy
 
+//The directory containing a CMake configuration file for Eigen3.
+Eigen3_DIR:PATH=/usr/lib/cmake/eigen3
+
 //The directory containing a CMake configuration file for GMock.
 GMock_DIR:PATH=GMock_DIR-NOTFOUND
 
@@ -238,6 +244,9 @@ GTEST_MAIN_LIBRARY_DEBUG:FILEPATH=GTEST_MAIN_LIBRARY_DEBUG-NOTFOUND
 
 //Dependencies for target
 LIBRARIES_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
+LIBS_LIB_DEPENDS:STATIC=
 
 //lsb_release executable was found
 LSB_FOUND:BOOL=TRUE
@@ -293,9 +302,6 @@ SETUPTOOLS_DEB_LAYOUT:BOOL=ON
 //Name of the computer/site where compile is being run
 SITE:STRING=teddy
 
-//The directory containing a CMake configuration file for SynChrono.
-SynChrono_DIR:PATH=SynChrono_DIR-NOTFOUND
-
 //LSB Distrib tag
 UBUNTU:BOOL=TRUE
 
@@ -314,26 +320,41 @@ _gtest_INCLUDES:FILEPATH=/usr/include/gtest/gtest.h
 //Path to a file.
 _gtest_SOURCES:FILEPATH=/usr/src/gtest/src/gtest.cc
 
-//Value Computed by CMake
-auto_custom_driver_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/auto_custom_driver
+//The directory containing a CMake configuration file for actionlib.
+actionlib_DIR:PATH=/opt/ros/melodic/share/actionlib/cmake
+
+//The directory containing a CMake configuration file for actionlib_msgs.
+actionlib_msgs_DIR:PATH=/opt/ros/melodic/share/actionlib_msgs/cmake
 
 //Value Computed by CMake
-auto_custom_driver_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/auto_custom_driver
+att_ekf_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/att_ekf
+
+//Value Computed by CMake
+att_ekf_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/att_ekf
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake
 
 //Value Computed by CMake
-chrono_com_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/chrono_ros_com
+chrono_com_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/chrono_com
 
 //Value Computed by CMake
-chrono_com_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/chrono_ros_com
+chrono_com_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/chrono_com
 
 //Value Computed by CMake
 chrono_ros_com_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/chrono_ros_com
 
 //Value Computed by CMake
 chrono_ros_com_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/chrono_ros_com
+
+//Value Computed by CMake
+chrono_ros_interface_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/chrono_ros_interface
+
+//The directory containing a CMake configuration file for chrono_ros_interface.
+chrono_ros_interface_DIR:PATH=/home/aaron/ROS/udp_workspace/devel/share/chrono_ros_interface/cmake
+
+//Value Computed by CMake
+chrono_ros_interface_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/chrono_ros_interface
 
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
@@ -343,6 +364,15 @@ demo_chrono_ros_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/demo_chron
 
 //Value Computed by CMake
 demo_chrono_ros_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/demo_chrono_ros
+
+//The directory containing a CMake configuration file for diagnostic_msgs.
+diagnostic_msgs_DIR:PATH=/opt/ros/melodic/share/diagnostic_msgs/cmake
+
+//The directory containing a CMake configuration file for diagnostic_updater.
+diagnostic_updater_DIR:PATH=/opt/ros/melodic/share/diagnostic_updater/cmake
+
+//The directory containing a CMake configuration file for eigen_conversions.
+eigen_conversions_DIR:PATH=/opt/ros/melodic/share/eigen_conversions/cmake
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/melodic/share/gencpp/cmake
@@ -361,6 +391,9 @@ gennodejs_DIR:PATH=/opt/ros/melodic/share/gennodejs/cmake
 
 //The directory containing a CMake configuration file for genpy.
 genpy_DIR:PATH=/opt/ros/melodic/share/genpy/cmake
+
+//The directory containing a CMake configuration file for geographic_msgs.
+geographic_msgs_DIR:PATH=geographic_msgs_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for geometry_msgs.
 geometry_msgs_DIR:PATH=/opt/ros/melodic/share/geometry_msgs/cmake
@@ -417,8 +450,8 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 //Path to a library.
 lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
-//Dependencies for the target
-lib_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/libprotobuf.so;
+//The directory containing a CMake configuration file for message_filters.
+message_filters_DIR:PATH=/opt/ros/melodic/share/message_filters/cmake
 
 //The directory containing a CMake configuration file for message_generation.
 message_generation_DIR:PATH=/opt/ros/melodic/share/message_generation/cmake
@@ -426,8 +459,26 @@ message_generation_DIR:PATH=/opt/ros/melodic/share/message_generation/cmake
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
 
-//Path to a library.
-onelib:FILEPATH=/home/aaron/synchrono/build/lib/libChronoModels_vehicle.so
+//Value Computed by CMake
+msg_converter_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/msg_converter
+
+//Value Computed by CMake
+msg_converter_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/msg_converter
+
+//The directory containing a CMake configuration file for nav_msgs.
+nav_msgs_DIR:PATH=/opt/ros/melodic/share/nav_msgs/cmake
+
+//Value Computed by CMake
+path_follower_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/path_follower
+
+//Value Computed by CMake
+path_follower_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/path_follower
+
+//Value Computed by CMake
+robot_localization_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/robot_localization
+
+//Value Computed by CMake
+robot_localization_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/robot_localization
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
@@ -441,11 +492,17 @@ roscpp_serialization_DIR:PATH=/opt/ros/melodic/share/roscpp_serialization/cmake
 //The directory containing a CMake configuration file for roscpp_traits.
 roscpp_traits_DIR:PATH=/opt/ros/melodic/share/roscpp_traits/cmake
 
+//The directory containing a CMake configuration file for rosgraph.
+rosgraph_DIR:PATH=/opt/ros/melodic/share/rosgraph/cmake
+
 //The directory containing a CMake configuration file for rosgraph_msgs.
 rosgraph_msgs_DIR:PATH=/opt/ros/melodic/share/rosgraph_msgs/cmake
 
 //The directory containing a CMake configuration file for roslaunch.
 roslaunch_DIR:PATH=/opt/ros/melodic/share/roslaunch/cmake
+
+//The directory containing a CMake configuration file for rospy.
+rospy_DIR:PATH=/opt/ros/melodic/share/rospy/cmake
 
 //The directory containing a CMake configuration file for rostime.
 rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
@@ -456,8 +513,26 @@ rviz_vis_BINARY_DIR:STATIC=/home/aaron/ROS/udp_workspace/build/rviz_vis
 //Value Computed by CMake
 rviz_vis_SOURCE_DIR:STATIC=/home/aaron/ROS/udp_workspace/src/rviz_vis
 
+//The directory containing a CMake configuration file for sensor_msgs.
+sensor_msgs_DIR:PATH=/opt/ros/melodic/share/sensor_msgs/cmake
+
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
+
+//The directory containing a CMake configuration file for tf2.
+tf2_DIR:PATH=/opt/ros/melodic/share/tf2/cmake
+
+//The directory containing a CMake configuration file for tf2_msgs.
+tf2_msgs_DIR:PATH=/opt/ros/melodic/share/tf2_msgs/cmake
+
+//The directory containing a CMake configuration file for tf2_py.
+tf2_py_DIR:PATH=/opt/ros/melodic/share/tf2_py/cmake
+
+//The directory containing a CMake configuration file for tf2_ros.
+tf2_ros_DIR:PATH=/opt/ros/melodic/share/tf2_ros/cmake
+
+//The directory containing a CMake configuration file for tf.
+tf_DIR:PATH=/opt/ros/melodic/share/tf/cmake
 
 //Dependencies for target
 udp_lib_LIB_DEPENDS:STATIC=
@@ -583,7 +658,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -672,6 +747,4 @@ Protobuf_PROTOC_EXECUTABLE-ADVANCED:INTERNAL=1
 Protobuf_PROTOC_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Protobuf_PROTOC_LIBRARY_RELEASE
 Protobuf_PROTOC_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: onelib
-onelib-ADVANCED:INTERNAL=1
 

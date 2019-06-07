@@ -1,25 +1,28 @@
 #pragma once
 
-#include "ros/ros.h"
 #include "MessageHandler.h"
+#include "ros/ros.h"
 
-#include "sensor_msgs/PointCloud2.h"
 #include "sensor_msgs/PointCloud.h"
+#include "sensor_msgs/PointCloud2.h"
+#include "sensor_msgs/point_cloud_conversion.h"
 
 class LidarPublisher {
 private:
   MessageHandler &m_handler;
 
-  ros::NodeHandle n;
+  ros::NodeHandle m_n;
 
   ros::Publisher m_pub;
-  ros::Publisher m_pub_cloud;
+  ros::Publisher m_pub2;
 
-  sensor_msgs::PointCloud2 m_cloud;
-  sensor_msgs::PointCloud cloud;
+  sensor_msgs::PointCloud m_cloud;
+  sensor_msgs::PointCloud2 m_cloud2;
+
 public:
-  LidarPublisher(int argc, char **argv, MessageHandler& handler);
+  LidarPublisher(ros::NodeHandle n, MessageHandler &handler);
 
-  void Publish(std::vector<Position> data);
-  void PublishPointCloud(std::vector<Position> data);
+  void PublishPointCloud2();
+  void PublishPointCloud();
+  void PublishConvertedPCToPC2();
 };

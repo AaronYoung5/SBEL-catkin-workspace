@@ -129,11 +129,86 @@ chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o.provides: chron
 chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o.provides.build: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o
 
 
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o: chrono_ros_com/CMakeFiles/LIBRARIES.dir/flags.make
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o: /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/GPSPublisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o -c /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/GPSPublisher.cpp
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.i"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/GPSPublisher.cpp > CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.i
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.s"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/GPSPublisher.cpp -o CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.s
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.requires:
+
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.requires
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.provides: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.requires
+	$(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.provides.build
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.provides
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.provides.build: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o
+
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o: chrono_ros_com/CMakeFiles/LIBRARIES.dir/flags.make
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o: /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/IMUPublisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o -c /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/IMUPublisher.cpp
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.i"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/IMUPublisher.cpp > CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.i
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.s"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/IMUPublisher.cpp -o CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.s
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.requires:
+
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.requires
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.provides: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.requires
+	$(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.provides.build
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.provides
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.provides.build: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o
+
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o: chrono_ros_com/CMakeFiles/LIBRARIES.dir/flags.make
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o: /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/ConePublisher.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o -c /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/ConePublisher.cpp
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.i"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/ConePublisher.cpp > CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.i
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.s"
+	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aaron/ROS/udp_workspace/src/chrono_ros_com/lib/ConePublisher.cpp -o CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.s
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.requires:
+
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.requires
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.provides: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.requires
+	$(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.provides.build
+.PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.provides
+
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.provides.build: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o
+
+
 # Object files for target LIBRARIES
 LIBRARIES_OBJECTS = \
 "CMakeFiles/LIBRARIES.dir/lib/MessageHandler.cpp.o" \
 "CMakeFiles/LIBRARIES.dir/lib/ProtobufMessages.pb.cc.o" \
-"CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o"
+"CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o" \
+"CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o" \
+"CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o" \
+"CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o"
 
 # External object files for target LIBRARIES
 LIBRARIES_EXTERNAL_OBJECTS =
@@ -141,9 +216,12 @@ LIBRARIES_EXTERNAL_OBJECTS =
 /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/MessageHandler.cpp.o
 /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ProtobufMessages.pb.cc.o
 /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o
+/home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o
+/home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o
+/home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o
 /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make
 /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so: chrono_ros_com/CMakeFiles/LIBRARIES.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/aaron/ROS/udp_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library /home/aaron/ROS/udp_workspace/devel/lib/libLIBRARIES.so"
 	cd /home/aaron/ROS/udp_workspace/build/chrono_ros_com && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LIBRARIES.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -154,6 +232,9 @@ chrono_ros_com/CMakeFiles/LIBRARIES.dir/build: /home/aaron/ROS/udp_workspace/dev
 chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/MessageHandler.cpp.o.requires
 chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ProtobufMessages.pb.cc.o.requires
 chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/LidarPublisher.cpp.o.requires
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o.requires
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o.requires
+chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires: chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o.requires
 
 .PHONY : chrono_ros_com/CMakeFiles/LIBRARIES.dir/requires
 

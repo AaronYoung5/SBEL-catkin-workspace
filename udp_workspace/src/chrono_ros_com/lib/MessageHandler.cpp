@@ -53,7 +53,8 @@ void MessageHandler::Handle(std::vector<uint8_t> buffer, int received) {
     for (int i = 0; i < lidarMessage.points_size(); i++) {
       Position p(lidarMessage.points(i).x(), lidarMessage.points(i).y(),
                  lidarMessage.points(i).z());
-      // std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl;
+      // std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" <<
+      // std::endl;
       m_lidarData.push_back(p);
     }
     break;
@@ -62,6 +63,9 @@ void MessageHandler::Handle(std::vector<uint8_t> buffer, int received) {
     // Parse from what we ended up receiving
     DriverMessages::gps message;
     message.ParseFromArray(buffer.data() + 1, received - 1);
+    m_gpsPose.lat = message.latitude();
+    m_gpsPose.lon = message.longitude();
+    m_gpsPose.alt = message.altitude();
     m_position = ToRelativePosition(message);
     // std::cout << "GPS data [Longitude, Latitude, Altitude]: [" << m_lon << ",
     // "
@@ -72,7 +76,15 @@ void MessageHandler::Handle(std::vector<uint8_t> buffer, int received) {
     // Parse from what we ended up receiving
     DriverMessages::imu message;
     message.ParseFromArray(buffer.data() + 1, received - 1);
-    m_orientation = ToQuaternion(message);
+    m_imu.linear_acceleration.x = message.linear_acceleration().x();
+    m_imu.linear_acceleration.y = message.linear_acceleration().y();
+    m_imu.linear_acceleration.z = message.linear_acceleration().z();
+
+    m_imu.angular_velocity.x = message.angular_velocity().x();
+    m_imu.angular_velocity.y = message.angular_velocity().y();
+    m_imu.angular_velocity.z = message.angular_velocity().z();
+
+    // m_orientation = ToQuaternion(message);
     // std::cout << "IMU data [e0,e1,e2,e3]: [" << m_e0 << ", " << m_e1 <<
     // ", "
     //           << m_e2 << ", " << m_e3 << "]" << std::endl;
@@ -101,6 +113,22 @@ void MessageHandler::Handle(std::vector<uint8_t> buffer, int received) {
     // std::cout << "Light data [XPose, YPose, XDir, YDir]: [" << m_lightXPos
     //           << ", " << m_lightYPos << ", " << m_lightXDir << ", "
     //           << m_lightYDir << "]" << std::endl;
+    break;
+  }
+  case CONE_MESSAGE: {
+    DriverMessages::cones coneMessage;
+    coneMessage.ParseFromArray(buffer.data() + 1, received - 1);
+    m_blue_cones = m_yellow_cones = {};
+    for (int i = 0; i < coneMessage.blue_cones_size(); i++) {
+      Position bp(coneMessage.blue_cones(i).x(), coneMessage.blue_cones(i).y(),
+                  coneMessage.blue_cones(i).z());
+      Position yp(coneMessage.yellow_cones(i).x(), coneMessage.yellow_cones(i).y(),
+                  coneMessage.yellow_cones(i).z());
+      // std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" <<
+      // std::endl;
+      m_blue_cones.push_back(bp);
+      m_yellow_cones.push_back(yp);
+    }
     break;
   }
   }
@@ -141,22 +169,22 @@ Position MessageHandler::ToRelativePosition(DriverMessages::gps message) {
 }
 
 Quaternion MessageHandler::ToQuaternion(DriverMessages::imu message) {
-  double yaw = message.yaw();
-  double roll = message.roll();
-  double pitch = message.pitch();
-
-  // Abbreviations for the various angular functions
-  double cy = cos(yaw * 0.5);
-  double sy = sin(yaw * 0.5);
-  double cp = cos(pitch * 0.5);
-  double sp = sin(pitch * 0.5);
-  double cr = cos(roll * 0.5);
-  double sr = sin(roll * 0.5);
-
-  Quaternion q;
-  q.w = cy * cp * cr + sy * sp * sr;
-  q.x = cy * cp * sr - sy * sp * cr;
-  q.y = sy * cp * sr + cy * sp * cr;
-  q.z = sy * cp * cr - cy * sp * sr;
-  return q;
+  // double yaw = message.yaw();
+  // double roll = message.roll();
+  // double pitch = message.pitch();
+  //
+  // // Abbreviations for the various angular functions
+  // double cy = cos(yaw * 0.5);
+  // double sy = sin(yaw * 0.5);
+  // double cp = cos(pitch * 0.5);
+  // double sp = sin(pitch * 0.5);
+  // double cr = cos(roll * 0.5);
+  // double sr = sin(roll * 0.5);
+  //
+  // Quaternion q;
+  // q.w = cy * cp * cr + sy * sp * sr;
+  // q.x = cy * cp * sr - sy * sp * cr;
+  // q.y = sy * cp * sr + cy * sp * cr;
+  // q.z = sy * cp * cr - cy * sp * sr;
+  // return q;
 }

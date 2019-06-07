@@ -26,5 +26,6 @@
 #define CONTROL_MESSAGE 4
 #define TIME_MESSAGE 5
 #define LIGHT_MESSAGE 6
+#define CONE_MESSAGE 7
 
 #endif

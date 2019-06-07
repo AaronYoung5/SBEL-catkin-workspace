@@ -56,29 +56,6 @@ CMAKE_BINARY_DIR = /home/aaron/ROS/udp_workspace/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -90,6 +67,41 @@ install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
 
 # Special rule for the target test
 test:
@@ -112,28 +124,16 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-.PHONY : edit_cache/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -197,305 +197,86 @@ LIBRARIES/fast:
 	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/build
 .PHONY : LIBRARIES/fast
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+lib/ConePublisher.o: lib/ConePublisher.cpp.o
 
-# Convenience name for target.
-geometry_msgs_generate_messages_py: chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+.PHONY : lib/ConePublisher.o
 
-.PHONY : geometry_msgs_generate_messages_py
+# target to build an object file
+lib/ConePublisher.cpp.o:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.o
+.PHONY : lib/ConePublisher.cpp.o
 
-# fast build rule for target.
-geometry_msgs_generate_messages_py/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
-.PHONY : geometry_msgs_generate_messages_py/fast
+lib/ConePublisher.i: lib/ConePublisher.cpp.i
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : lib/ConePublisher.i
 
-# Convenience name for target.
-geometry_msgs_generate_messages_lisp: chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+# target to preprocess a source file
+lib/ConePublisher.cpp.i:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.i
+.PHONY : lib/ConePublisher.cpp.i
 
-.PHONY : geometry_msgs_generate_messages_lisp
+lib/ConePublisher.s: lib/ConePublisher.cpp.s
 
-# fast build rule for target.
-geometry_msgs_generate_messages_lisp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
-.PHONY : geometry_msgs_generate_messages_lisp/fast
+.PHONY : lib/ConePublisher.s
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+# target to generate assembly for a file
+lib/ConePublisher.cpp.s:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/ConePublisher.cpp.s
+.PHONY : lib/ConePublisher.cpp.s
 
-# Convenience name for target.
-geometry_msgs_generate_messages_eus: chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+lib/GPSPublisher.o: lib/GPSPublisher.cpp.o
 
-.PHONY : geometry_msgs_generate_messages_eus
+.PHONY : lib/GPSPublisher.o
 
-# fast build rule for target.
-geometry_msgs_generate_messages_eus/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
-.PHONY : geometry_msgs_generate_messages_eus/fast
+# target to build an object file
+lib/GPSPublisher.cpp.o:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.o
+.PHONY : lib/GPSPublisher.cpp.o
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/rule
+lib/GPSPublisher.i: lib/GPSPublisher.cpp.i
 
-# Convenience name for target.
-roscpp_generate_messages_py: chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : lib/GPSPublisher.i
 
-.PHONY : roscpp_generate_messages_py
+# target to preprocess a source file
+lib/GPSPublisher.cpp.i:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.i
+.PHONY : lib/GPSPublisher.cpp.i
 
-# fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/build.make chrono_ros_com/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
+lib/GPSPublisher.s: lib/GPSPublisher.cpp.s
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : lib/GPSPublisher.s
 
-# Convenience name for target.
-roscpp_generate_messages_eus: chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+# target to generate assembly for a file
+lib/GPSPublisher.cpp.s:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/GPSPublisher.cpp.s
+.PHONY : lib/GPSPublisher.cpp.s
 
-.PHONY : roscpp_generate_messages_eus
+lib/IMUPublisher.o: lib/IMUPublisher.cpp.o
 
-# fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/build.make chrono_ros_com/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
+.PHONY : lib/IMUPublisher.o
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+# target to build an object file
+lib/IMUPublisher.cpp.o:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.o
+.PHONY : lib/IMUPublisher.cpp.o
 
-# Convenience name for target.
-geometry_msgs_generate_messages_nodejs: chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+lib/IMUPublisher.i: lib/IMUPublisher.cpp.i
 
-.PHONY : geometry_msgs_generate_messages_nodejs
+.PHONY : lib/IMUPublisher.i
 
-# fast build rule for target.
-geometry_msgs_generate_messages_nodejs/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
-.PHONY : geometry_msgs_generate_messages_nodejs/fast
+# target to preprocess a source file
+lib/IMUPublisher.cpp.i:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.i
+.PHONY : lib/IMUPublisher.cpp.i
 
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+lib/IMUPublisher.s: lib/IMUPublisher.cpp.s
 
-# Convenience name for target.
-roscpp_generate_messages_lisp: chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : lib/IMUPublisher.s
 
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make chrono_ros_com/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_lisp: chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make chrono_ros_com/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make chrono_ros_com/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_cpp: chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make chrono_ros_com/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_lisp: chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make chrono_ros_com/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_nodejs: chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_py: chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_py
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make chrono_ros_com/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make chrono_ros_com/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_nodejs: chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make chrono_ros_com/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_nodejs: chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make chrono_ros_com/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f CMakeFiles/Makefile2 chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/build.make chrono_ros_com/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
+# target to generate assembly for a file
+lib/IMUPublisher.cpp.s:
+	cd /home/aaron/ROS/udp_workspace/build && $(MAKE) -f chrono_ros_com/CMakeFiles/LIBRARIES.dir/build.make chrono_ros_com/CMakeFiles/LIBRARIES.dir/lib/IMUPublisher.cpp.s
+.PHONY : lib/IMUPublisher.cpp.s
 
 lib/LidarPublisher.o: lib/LidarPublisher.cpp.o
 
@@ -611,35 +392,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/local"
-	@echo "... rebuild_cache"
 	@echo "... install/strip"
+	@echo "... install"
 	@echo "... chrono_ros_com"
 	@echo "... LIBRARIES"
-	@echo "... geometry_msgs_generate_messages_py"
-	@echo "... test"
-	@echo "... geometry_msgs_generate_messages_lisp"
-	@echo "... list_install_components"
-	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... roscpp_generate_messages_eus"
 	@echo "... edit_cache"
-	@echo "... geometry_msgs_generate_messages_nodejs"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... geometry_msgs_generate_messages_cpp"
-	@echo "... install"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... std_msgs_generate_messages_cpp"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
-	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... std_msgs_generate_messages_nodejs"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... std_msgs_generate_messages_py"
+	@echo "... install/local"
+	@echo "... test"
+	@echo "... list_install_components"
+	@echo "... rebuild_cache"
+	@echo "... lib/ConePublisher.o"
+	@echo "... lib/ConePublisher.i"
+	@echo "... lib/ConePublisher.s"
+	@echo "... lib/GPSPublisher.o"
+	@echo "... lib/GPSPublisher.i"
+	@echo "... lib/GPSPublisher.s"
+	@echo "... lib/IMUPublisher.o"
+	@echo "... lib/IMUPublisher.i"
+	@echo "... lib/IMUPublisher.s"
 	@echo "... lib/LidarPublisher.o"
 	@echo "... lib/LidarPublisher.i"
 	@echo "... lib/LidarPublisher.s"

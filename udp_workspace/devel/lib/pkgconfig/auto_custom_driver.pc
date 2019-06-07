@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/udp_workspace/devel
-
-Name: auto_custom_driver
-Description: Description of auto_custom_driver
-Version: 0.0.0
-Cflags: -I/home/aaron/ROS/udp_workspace/src/auto_custom_driver/include
-Libs: -L/home/aaron/ROS/udp_workspace/devel/lib 
-Requires: 

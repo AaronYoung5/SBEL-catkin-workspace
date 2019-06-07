@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/udp_workspace/install
+
+Name: msg_converter
+Description: Description of msg_converter
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/udp_workspace/install/lib 
+Requires: 

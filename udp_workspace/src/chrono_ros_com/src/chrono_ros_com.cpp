@@ -7,6 +7,9 @@
 
 #include "chrono_ros_com/MessageHandler.h"
 #include "chrono_ros_com/LidarPublisher.h"
+#include "chrono_ros_com/GPSPublisher.h"
+#include "chrono_ros_com/IMUPublisher.h"
+#include "chrono_ros_com/ConePublisher.h"
 
 #define KEYCODE_R 0x43
 #define KEYCODE_L 0x44
@@ -74,18 +77,26 @@ int main(int argc, char **argv) {
   key_sub = n.subscribe<std_msgs::Int8>("key_msgs", 1000, keyboardCallback);
 
 
-  LidarPublisher lidar_pub(argc, argv, handler);
+  LidarPublisher lidar_pub(n, handler);
+  GPSPublisher gps_pub(n, handler);
+  IMUPublisher imu_pub(n, handler);
+  ConePublisher cone_pub(n, handler);
 
   try {
     while (ros::ok()) {
       handler.ReceiveAndHandle();
 
-      publishPose();
+      // publishPose();
 
       publishTime();
 
-      // lidar_pub.Publish(handler.LidarData());
-      lidar_pub.PublishPointCloud(handler.LidarData());
+      // lidar_pub.PublishConvertedPCToPC2();
+      // lidar_pub.PublishPointCloud2();
+      // lidar_pub.PublishPointCloud();
+
+      // gps_pub.PublishGPS();
+      // imu_pub.PublishIMU();
+      cone_pub.PublishCones();
 
       ros::spinOnce();
     }

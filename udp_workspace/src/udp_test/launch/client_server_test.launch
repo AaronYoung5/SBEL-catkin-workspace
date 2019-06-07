@@ -1,7 +1,0 @@
-<launch>
-
-  <node pkg="udp_test" type="server" name="udp_server" output="screen"/>
-
-  <node pkg="udp_test" type="client" name="udp_client"  output="screen"/>
-
-</launch>

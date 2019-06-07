@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/catkin/devel
-
-Name: rviz_visualizer
-Description: Description of rviz_visualizer
-Version: 0.0.0
-Cflags: -I/home/aaron/ROS/catkin/devel/include
-Libs: -L/home/aaron/ROS/catkin/devel/lib 
-Requires: roscpp std_msgs geometry_msgs message_runtime
