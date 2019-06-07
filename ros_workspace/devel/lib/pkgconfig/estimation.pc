@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/ros_workspace/devel
+
+Name: estimation
+Description: Description of estimation
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/ros_workspace/devel/lib 
+Requires: 

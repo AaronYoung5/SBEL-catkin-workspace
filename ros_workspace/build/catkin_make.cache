@@ -1,0 +1,2 @@
+ch_ros:common/common_msgs:common/common_utilities:control/keyboard_control:control/pure_pursuit_control:estimation:perception
+-DCATKIN_DEVEL_PREFIX=/home/aaron/ROS/ros_workspace/devel -DCMAKE_INSTALL_PREFIX=/home/aaron/ROS/ros_workspace/install -G Unix Makefiles

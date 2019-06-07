@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen"/>
+
+  <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
+</launch>

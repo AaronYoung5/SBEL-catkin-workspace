@@ -1,0 +1,6 @@
+set(ch_ros_SETUP_PY_VERSION "0.0.0")
+set(ch_ros_SETUP_PY_SCRIPTS "")
+set(ch_ros_SETUP_PY_PACKAGES "ch_ros")
+set(ch_ros_SETUP_PY_PACKAGE_DIRS "ch_ros")
+set(ch_ros_SETUP_PY_MODULES "")
+set(ch_ros_SETUP_PY_MODULE_DIRS "")

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>pure_pursuit_control</name>
+  <version>0.0.0</version>
+  <description> pure_pursuit_control package </description>
+
+  <license>TODO</license>
+  <author>TODO</author>
+  <maintainer email="TODO@TODO.com">TODO</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>
