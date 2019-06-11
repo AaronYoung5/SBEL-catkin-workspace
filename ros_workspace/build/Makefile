@@ -480,6 +480,19 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named _common_msgs_generate_messages_check_deps_VehState
+
+# Build rule for target.
+_common_msgs_generate_messages_check_deps_VehState: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _common_msgs_generate_messages_check_deps_VehState
+.PHONY : _common_msgs_generate_messages_check_deps_VehState
+
+# fast build rule for target.
+_common_msgs_generate_messages_check_deps_VehState/fast:
+	$(MAKE) -f common/common_msgs/CMakeFiles/_common_msgs_generate_messages_check_deps_VehState.dir/build.make common/common_msgs/CMakeFiles/_common_msgs_generate_messages_check_deps_VehState.dir/build
+.PHONY : _common_msgs_generate_messages_check_deps_VehState/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_py
 
 # Build rule for target.
@@ -569,6 +582,19 @@ geometry_msgs_generate_messages_py: cmake_check_build_system
 geometry_msgs_generate_messages_py/fast:
 	$(MAKE) -f common/common_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make common/common_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 .PHONY : geometry_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named _common_msgs_generate_messages_check_deps_Control
+
+# Build rule for target.
+_common_msgs_generate_messages_check_deps_Control: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _common_msgs_generate_messages_check_deps_Control
+.PHONY : _common_msgs_generate_messages_check_deps_Control
+
+# fast build rule for target.
+_common_msgs_generate_messages_check_deps_Control/fast:
+	$(MAKE) -f common/common_msgs/CMakeFiles/_common_msgs_generate_messages_check_deps_Control.dir/build.make common/common_msgs/CMakeFiles/_common_msgs_generate_messages_check_deps_Control.dir/build
+.PHONY : _common_msgs_generate_messages_check_deps_Control/fast
 
 #=============================================================================
 # Target rules for targets named common_msgs_generate_messages
@@ -830,6 +856,32 @@ run_tests_ch_ros_roslaunch-check_launch/fast:
 	$(MAKE) -f ch_ros/CMakeFiles/run_tests_ch_ros_roslaunch-check_launch.dir/build.make ch_ros/CMakeFiles/run_tests_ch_ros_roslaunch-check_launch.dir/build
 .PHONY : run_tests_ch_ros_roslaunch-check_launch/fast
 
+#=============================================================================
+# Target rules for targets named keyboard_control
+
+# Build rule for target.
+keyboard_control: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 keyboard_control
+.PHONY : keyboard_control
+
+# fast build rule for target.
+keyboard_control/fast:
+	$(MAKE) -f control/keyboard_control/CMakeFiles/keyboard_control.dir/build.make control/keyboard_control/CMakeFiles/keyboard_control.dir/build
+.PHONY : keyboard_control/fast
+
+#=============================================================================
+# Target rules for targets named pure_pursuit_control
+
+# Build rule for target.
+pure_pursuit_control: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pure_pursuit_control
+.PHONY : pure_pursuit_control
+
+# fast build rule for target.
+pure_pursuit_control/fast:
+	$(MAKE) -f control/pure_pursuit_control/CMakeFiles/pure_pursuit_control.dir/build.make control/pure_pursuit_control/CMakeFiles/pure_pursuit_control.dir/build
+.PHONY : pure_pursuit_control/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -867,6 +919,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_nodejs"
+	@echo "... _common_msgs_generate_messages_check_deps_VehState"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
@@ -874,6 +927,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_py"
+	@echo "... _common_msgs_generate_messages_check_deps_Control"
 	@echo "... common_msgs_generate_messages"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... _common_msgs_generate_messages_check_deps_Cone"
@@ -894,6 +948,8 @@ help:
 	@echo "... run_tests_ch_ros_roslaunch-check"
 	@echo "... _run_tests_ch_ros_roslaunch-check"
 	@echo "... run_tests_ch_ros_roslaunch-check_launch"
+	@echo "... keyboard_control"
+	@echo "... pure_pursuit_control"
 .PHONY : help
 
 

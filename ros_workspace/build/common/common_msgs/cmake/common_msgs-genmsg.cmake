@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "common_msgs: 2 messages, 0 services")
+message(STATUS "common_msgs: 4 messages, 0 services")
 
 set(MSG_I_FLAGS "-Icommon_msgs:/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg")
 
@@ -17,6 +17,11 @@ add_custom_target(common_msgs_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_custom_target(_common_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "common_msgs" "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" "geometry_msgs/Pose:geometry_msgs/Point:geometry_msgs/Quaternion:std_msgs/Header"
+)
+
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_custom_target(_common_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "common_msgs" "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" "common_msgs/Cone:geometry_msgs/Point:std_msgs/Header"
@@ -27,12 +32,23 @@ add_custom_target(_common_msgs_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "common_msgs" "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" "geometry_msgs/Point"
 )
 
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
+add_custom_target(_common_msgs_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "common_msgs" "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" "std_msgs/Float32"
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
 
 ### Section generating for lang: gencpp
 ### Generating Messages
+_generate_msg_cpp(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Pose.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Quaternion.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/common_msgs
+)
 _generate_msg_cpp(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
   "${MSG_I_FLAGS}"
@@ -43,6 +59,12 @@ _generate_msg_cpp(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/common_msgs
+)
+_generate_msg_cpp(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/common_msgs
 )
 
@@ -60,9 +82,13 @@ add_custom_target(common_msgs_generate_messages_cpp
 add_dependencies(common_msgs_generate_messages common_msgs_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_cpp _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_cpp _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_cpp _common_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_cpp _common_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -75,6 +101,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS common_msgs_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Pose.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Quaternion.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/common_msgs
+)
+_generate_msg_eus(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
   "${MSG_I_FLAGS}"
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -84,6 +116,12 @@ _generate_msg_eus(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/common_msgs
+)
+_generate_msg_eus(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/common_msgs
 )
 
@@ -101,9 +139,13 @@ add_custom_target(common_msgs_generate_messages_eus
 add_dependencies(common_msgs_generate_messages common_msgs_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_eus _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_eus _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_eus _common_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_eus _common_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -116,6 +158,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS common_msgs_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Pose.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Quaternion.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/common_msgs
+)
+_generate_msg_lisp(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
   "${MSG_I_FLAGS}"
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -125,6 +173,12 @@ _generate_msg_lisp(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/common_msgs
+)
+_generate_msg_lisp(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/common_msgs
 )
 
@@ -142,9 +196,13 @@ add_custom_target(common_msgs_generate_messages_lisp
 add_dependencies(common_msgs_generate_messages common_msgs_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_lisp _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_lisp _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_lisp _common_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_lisp _common_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -157,6 +215,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS common_msgs_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Pose.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Quaternion.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/common_msgs
+)
+_generate_msg_nodejs(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
   "${MSG_I_FLAGS}"
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -166,6 +230,12 @@ _generate_msg_nodejs(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/common_msgs
+)
+_generate_msg_nodejs(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/common_msgs
 )
 
@@ -183,9 +253,13 @@ add_custom_target(common_msgs_generate_messages_nodejs
 add_dependencies(common_msgs_generate_messages common_msgs_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_nodejs _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_nodejs _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_nodejs _common_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_nodejs _common_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -198,6 +272,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS common_msgs_generate_messages_nodej
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Pose.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Quaternion.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/common_msgs
+)
+_generate_msg_py(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
   "${MSG_I_FLAGS}"
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/melodic/share/std_msgs/cmake/../msg/Header.msg"
@@ -207,6 +287,12 @@ _generate_msg_py(common_msgs
   "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/melodic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/common_msgs
+)
+_generate_msg_py(common_msgs
+  "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/melodic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/common_msgs
 )
 
@@ -224,9 +310,13 @@ add_custom_target(common_msgs_generate_messages_py
 add_dependencies(common_msgs_generate_messages common_msgs_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_py _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_py _common_msgs_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg" NAME_WE)
+add_dependencies(common_msgs_generate_messages_py _common_msgs_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg" NAME_WE)
 add_dependencies(common_msgs_generate_messages_py _common_msgs_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

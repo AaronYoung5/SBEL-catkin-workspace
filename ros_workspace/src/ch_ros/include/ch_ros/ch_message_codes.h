@@ -5,7 +5,6 @@ namespace ChMessageCodes {
     LIDAR,
     GPS,
     IMU,
-    VEHICLE,
     CONTROL,
     TIME,
     LIGHT,

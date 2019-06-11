@@ -14,6 +14,8 @@ add_message_files(
   FILES
   Cone.msg
   ConeMap.msg
+  Control.msg
+  VehState.msg
 )
 
 generate_messages(

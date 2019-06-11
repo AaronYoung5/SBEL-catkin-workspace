@@ -1,12 +1,12 @@
 #pragma once
 
 // Ros includes
+#include "common_msgs/ConeMap.h"
 #include "ros/ros.h"
+#include "rosgraph_msgs/Clock.h"
 #include "sensor_msgs/Imu.h"
 #include "sensor_msgs/NavSatFix.h"
 #include "sensor_msgs/PointCloud2.h"
-#include "rosgraph_msgs/Clock.h"
-#include "common_msgs/ConeMap.h"
 
 // External package includes
 // #include <common_utilities/Vector.h>

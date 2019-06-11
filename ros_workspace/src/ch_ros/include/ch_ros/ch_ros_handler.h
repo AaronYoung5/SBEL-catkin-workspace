@@ -1,6 +1,7 @@
 #pragma once
 
 // ROS includes
+#include "common_msgs/Control.h"
 #include "ros/ros.h"
 #include "sensor_msgs/PointCloud2.h"
 
@@ -21,7 +22,7 @@ private:
   // Private variables
 
   // Message passing protocol
-  const char* port_num_;
+  const char *port_num_;
   udp::socket socket_;
   boost::asio::ip::udp::endpoint endpoint_;
 
@@ -32,8 +33,14 @@ private:
   Time time_;
   Cones cones_;
 
+  // Control subscriber
+  ros::Subscriber control_;
+
   // Boolean denoting if Chrono is running
   bool ok_;
+
+  // Controls
+  float throttle_, steering_, braking_;
 
 public:
   // Public functions
@@ -45,7 +52,8 @@ public:
   // Closes socket
   ~ChRosHandler() { socket_.close(); }
 
-  // Looks for and receives info over the socket and calls necessary handling methods
+  // Looks for and receives info over the socket and calls necessary handling
+  // methods
   void receiveAndHandle();
 
   // Is Chrono running?
@@ -57,6 +65,9 @@ private:
   // Allocates message reading to helper methods
   void handle(std::vector<uint8_t> buffer, int received);
 
+  // Sets target controls to send
+  void setTargetControls(const common_msgs::Control::ConstPtr &msg);
+  
   // Sends control message to Chrono
   void sendControls();
 };

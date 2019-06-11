@@ -3,6 +3,7 @@
 
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/Cone.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/ConeMap.h
+ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/Control.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/ch_message_codes.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/ch_ros_handler.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/protobuf_messages.pb.h
@@ -73,12 +74,14 @@ ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/sensor_m
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/sensor_msgs/NavSatStatus.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/sensor_msgs/PointCloud2.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/sensor_msgs/PointField.h
+ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/std_msgs/Float32.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/std_msgs/Header.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h
 
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/Cone.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/ConeMap.h
+ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/devel/include/common_msgs/Control.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/ch_message_codes.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/ch_ros_handler.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /home/aaron/ROS/ros_workspace/src/ch_ros/include/ch_ros/protobuf_messages.pb.h
@@ -149,6 +152,7 @@ ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/sensor_msgs/NavSatStatus.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/sensor_msgs/PointCloud2.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/sensor_msgs/PointField.h
+ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/std_msgs/Float32.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/std_msgs/Header.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 ch_ros/CMakeFiles/ch_ros.dir/src/ch_ros_handler.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h

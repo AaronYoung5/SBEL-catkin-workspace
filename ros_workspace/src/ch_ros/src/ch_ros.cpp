@@ -18,6 +18,8 @@ int main(int argc, char **argv) {
 
   while(ros::ok() && handler.ok()) {
     handler.receiveAndHandle();
+
+    ros::spinOnce();
   }
 
   ros::shutdown();

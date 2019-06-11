@@ -1,0 +1,8 @@
+prefix=/home/aaron/ROS/ros_workspace/devel
+
+Name: ros_localization
+Description: Description of ros_localization
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aaron/ROS/ros_workspace/devel/lib 
+Requires: 

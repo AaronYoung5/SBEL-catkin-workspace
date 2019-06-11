@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
+messages_str = "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg;/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg;/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg;/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
 services_str = ""
 pkg_name = "common_msgs"
 dependencies_str = "std_msgs;geometry_msgs"

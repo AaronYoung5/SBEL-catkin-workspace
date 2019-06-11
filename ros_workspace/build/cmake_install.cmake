@@ -132,12 +132,14 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/aaron/ROS/ros_workspace/build/gtest/cmake_install.cmake")
   include("/home/aaron/ROS/ros_workspace/build/common/common_utilities/cmake_install.cmake")
-  include("/home/aaron/ROS/ros_workspace/build/estimation/cmake_install.cmake")
-  include("/home/aaron/ROS/ros_workspace/build/control/keyboard_control/cmake_install.cmake")
+  include("/home/aaron/ROS/ros_workspace/build/estimation/custom/cmake_install.cmake")
   include("/home/aaron/ROS/ros_workspace/build/perception/cmake_install.cmake")
-  include("/home/aaron/ROS/ros_workspace/build/control/pure_pursuit_control/cmake_install.cmake")
+  include("/home/aaron/ROS/ros_workspace/build/estimation/ros_localization/cmake_install.cmake")
   include("/home/aaron/ROS/ros_workspace/build/common/common_msgs/cmake_install.cmake")
   include("/home/aaron/ROS/ros_workspace/build/ch_ros/cmake_install.cmake")
+  include("/home/aaron/ROS/ros_workspace/build/common/common_srvs/cmake_install.cmake")
+  include("/home/aaron/ROS/ros_workspace/build/control/keyboard_control/cmake_install.cmake")
+  include("/home/aaron/ROS/ros_workspace/build/control/pure_pursuit_control/cmake_install.cmake")
 
 endif()
 

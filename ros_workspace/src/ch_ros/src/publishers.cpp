@@ -10,7 +10,7 @@ void Lidar::publish(std::vector<uint8_t> buffer, int received) {
   message.ParseFromArray(buffer.data() + 2, received - 2);
 
   data_.header.stamp = ros::Time::now();
-  data_.header.frame_id = "lidar";
+  data_.header.frame_id = "base_link";
 
   data_.width = message.points_size();
   data_.height = 1;
@@ -62,7 +62,7 @@ void IMU::publish(std::vector<uint8_t> buffer, int received) {
 
   // Convert to Imu
   data_.header.stamp = ros::Time::now();
-  data_.header.frame_id = "imu";
+  data_.header.frame_id = "base_link";
 
   data_.linear_acceleration.x = message.linear_acceleration().x();
   data_.linear_acceleration.y = message.linear_acceleration().y();
@@ -86,7 +86,7 @@ void GPS::publish(std::vector<uint8_t> buffer, int received) {
 
   // Convert to NavSatFix
   data_.header.stamp = ros::Time::now();
-  data_.header.frame_id = "gps";
+  data_.header.frame_id = "map";
 
   data_.latitude = message.latitude();
   data_.longitude = message.longitude();

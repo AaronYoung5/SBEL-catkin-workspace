@@ -41,6 +41,8 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common_msgs/msg" TYPE FILE FILES
     "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Cone.msg"
     "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/ConeMap.msg"
+    "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/Control.msg"
+    "/home/aaron/ROS/ros_workspace/src/common/common_msgs/msg/VehState.msg"
     )
 endif()
 

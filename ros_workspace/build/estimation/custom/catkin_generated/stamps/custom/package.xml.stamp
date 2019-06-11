@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>custom</name>
+  <version>0.0.0</version>
+  <description> custom package </description>
+
+  <license>TODO</license>
+  <author>TODO</author>
+  <maintainer email="TODO@TODO.com">TODO</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

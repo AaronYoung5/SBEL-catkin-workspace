@@ -7,7 +7,10 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num)
               boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
                                              std::atoi(port_num))),
       lidar_(n, "lidar", 10), imu_(n, "imu", 10), gps_(n, "gps", 10),
-      time_(n, "clock", 10), cones_(n, "cones", 10), ok_(true) {}
+      time_(n, "clock", 10), cones_(n, "cones", 10), ok_(true), throttle_(0),
+      steering_(0), braking_(0),
+      control_(
+          n.subscribe("control", 10, &ChRosHandler::setTargetControls, this)) {}
 
 void ChRosHandler::receiveAndHandle() {
   // Let the UDP stack fill up
@@ -50,15 +53,21 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
 }
 
 void ChRosHandler::sendControls() {
-  // package and send the control message
   ChronoMessages::control message;
-  message.set_throttle(0);
-  message.set_steering(0);
-  message.set_braking(1);
+  message.set_throttle(throttle_);
+  message.set_steering(steering_);
+  message.set_braking(braking_);
 
   int32_t size = message.ByteSize();
   std::vector<uint8_t> buf(size + 1);
   buf.data()[0] = ChMessageCode::CONTROL;
   message.SerializeToArray(buf.data() + 1, size);
   socket_.send_to(boost::asio::buffer(buf.data(), size + 1), endpoint_);
+}
+
+void ChRosHandler::setTargetControls(
+    const common_msgs::Control::ConstPtr &msg) {
+  throttle_ = msg->throttle.data;
+  steering_ = msg->steering.data;
+  braking_ = msg->braking.data;
 }

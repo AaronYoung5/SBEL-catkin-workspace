@@ -5,5 +5,9 @@
    "CONE"
    "<CONEMAP>"
    "CONEMAP"
+   "<CONTROL>"
+   "CONTROL"
+   "<VEHSTATE>"
+   "VEHSTATE"
   ))
 
