@@ -137,6 +137,8 @@ ch_ros/ch_ros_handler.h
 /home/aaron/ROS/ros_workspace/src/ch_ros/src/ch_ros/ch_ros_handler.h
 chrono
 -
+thread
+-
 
 /home/aaron/ROS/ros_workspace/src/ch_ros/src/protobuf_messages.pb.cc
 ch_ros/protobuf_messages.pb.h

@@ -57,7 +57,7 @@ public:
   // methods
   void receiveAndHandle();
   void tcpReceiveAndHandle();
-  void do_accept(boost::asio::ip::tcp::acceptor &acceptor);
+  void tcpSendControls();
 
   // Is Chrono running?
   bool ok() { return ok_; }
