@@ -1,58 +1,53 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package ChronoMessages;
 
 message Vector {
-  required float x = 1;
-  required float y = 2;
-  required float z = 3;
+  float x = 1;
+  float y = 2;
+  float z = 3;
 }
 
 message lidar {
   repeated Vector points = 1;
+  int32 num = 2;        // Number of packet sent (first packet has id of 0)
+  int32 expected = 3;  // Number of expected lidar packets
+  int32 id = 4; // Id of packet
 }
 
 message gps {
-    required double longitude = 1;
-    required double latitude = 2;
-    required double altitude = 3;
+    double longitude = 1;
+    double latitude = 2;
+    double altitude = 3;
 }
 
 message imu {
-  required Vector angular_velocity = 1;
-  required Vector linear_acceleration = 2;
-  required Vector orientation = 3;
+  Vector angular_velocity = 1;
+  Vector linear_acceleration = 2;
+  Vector orientation = 3;
 }
 
 message vehicle {
-  required double x = 1;
-  required double y = 2;
-  required double z = 3;
+  double x = 1;
+  double y = 2;
+  double z = 3;
 }
 
 message control {
-    required double throttle = 1;
-    required double steering = 2;
-    required double braking = 3;
+    double throttle = 1;
+    double steering = 2;
+    double braking = 3;
 }
 
 message time {
-    required double t = 1;
-}
-
-message light {
-    required double xpos = 1;
-    required double ypos = 2;
-    required double xdir = 3;
-    required double ydir = 4;
+    double t = 1;
 }
 
 message cones {
   repeated Vector blue_cones = 1;
   repeated Vector yellow_cones = 2;
-  repeated Vector orange_cones = 3;
 }
 
 message exit {
-  required string code = 1;
+  string code = 1;
 }

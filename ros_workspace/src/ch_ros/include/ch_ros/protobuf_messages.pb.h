@@ -43,7 +43,6 @@ class exit;
 class gps;
 class imu;
 class lidar;
-class light;
 class time;
 class vehicle;
 
@@ -59,14 +58,6 @@ class Vector : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   inline Vector& operator=(const Vector& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -117,22 +108,19 @@ class Vector : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // accessors -------------------------------------------------------
 
-  // required float x = 1;
-  bool has_x() const;
+  // optional float x = 1;
   void clear_x();
   static const int kXFieldNumber = 1;
   float x() const;
   void set_x(float value);
 
-  // required float y = 2;
-  bool has_y() const;
+  // optional float y = 2;
   void clear_y();
   static const int kYFieldNumber = 2;
   float y() const;
   void set_y(float value);
 
-  // required float z = 3;
-  bool has_z() const;
+  // optional float z = 3;
   void clear_z();
   static const int kZFieldNumber = 3;
   float z() const;
@@ -140,22 +128,13 @@ class Vector : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.Vector)
  private:
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
-  inline void set_has_z();
-  inline void clear_has_z();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   float x_;
   float y_;
   float z_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -175,14 +154,6 @@ class lidar : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   inline lidar& operator=(const lidar& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -245,13 +216,34 @@ class lidar : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
       points() const;
 
+  // optional int32 num = 2;
+  void clear_num();
+  static const int kNumFieldNumber = 2;
+  ::google::protobuf::int32 num() const;
+  void set_num(::google::protobuf::int32 value);
+
+  // optional int32 expected = 3;
+  void clear_expected();
+  static const int kExpectedFieldNumber = 3;
+  ::google::protobuf::int32 expected() const;
+  void set_expected(::google::protobuf::int32 value);
+
+  // optional int32 id = 4;
+  void clear_id();
+  static const int kIdFieldNumber = 4;
+  ::google::protobuf::int32 id() const;
+  void set_id(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:ChronoMessages.lidar)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector > points_;
+  ::google::protobuf::int32 num_;
+  ::google::protobuf::int32 expected_;
+  ::google::protobuf::int32 id_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -271,14 +263,6 @@ class gps : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   inline gps& operator=(const gps& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -329,22 +313,19 @@ class gps : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // accessors -------------------------------------------------------
 
-  // required double longitude = 1;
-  bool has_longitude() const;
+  // optional double longitude = 1;
   void clear_longitude();
   static const int kLongitudeFieldNumber = 1;
   double longitude() const;
   void set_longitude(double value);
 
-  // required double latitude = 2;
-  bool has_latitude() const;
+  // optional double latitude = 2;
   void clear_latitude();
   static const int kLatitudeFieldNumber = 2;
   double latitude() const;
   void set_latitude(double value);
 
-  // required double altitude = 3;
-  bool has_altitude() const;
+  // optional double altitude = 3;
   void clear_altitude();
   static const int kAltitudeFieldNumber = 3;
   double altitude() const;
@@ -352,22 +333,13 @@ class gps : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.gps)
  private:
-  inline void set_has_longitude();
-  inline void clear_has_longitude();
-  inline void set_has_latitude();
-  inline void clear_has_latitude();
-  inline void set_has_altitude();
-  inline void clear_has_altitude();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   double longitude_;
   double latitude_;
   double altitude_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -387,14 +359,6 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   inline imu& operator=(const imu& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -445,7 +409,7 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // accessors -------------------------------------------------------
 
-  // required .ChronoMessages.Vector angular_velocity = 1;
+  // optional .ChronoMessages.Vector angular_velocity = 1;
   bool has_angular_velocity() const;
   void clear_angular_velocity();
   static const int kAngularVelocityFieldNumber = 1;
@@ -454,7 +418,7 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::ChronoMessages::Vector* release_angular_velocity();
   void set_allocated_angular_velocity(::ChronoMessages::Vector* angular_velocity);
 
-  // required .ChronoMessages.Vector linear_acceleration = 2;
+  // optional .ChronoMessages.Vector linear_acceleration = 2;
   bool has_linear_acceleration() const;
   void clear_linear_acceleration();
   static const int kLinearAccelerationFieldNumber = 2;
@@ -463,7 +427,7 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::ChronoMessages::Vector* release_linear_acceleration();
   void set_allocated_linear_acceleration(::ChronoMessages::Vector* linear_acceleration);
 
-  // required .ChronoMessages.Vector orientation = 3;
+  // optional .ChronoMessages.Vector orientation = 3;
   bool has_orientation() const;
   void clear_orientation();
   static const int kOrientationFieldNumber = 3;
@@ -474,22 +438,13 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.imu)
  private:
-  inline void set_has_angular_velocity();
-  inline void clear_has_angular_velocity();
-  inline void set_has_linear_acceleration();
-  inline void clear_has_linear_acceleration();
-  inline void set_has_orientation();
-  inline void clear_has_orientation();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::ChronoMessages::Vector* angular_velocity_;
   ::ChronoMessages::Vector* linear_acceleration_;
   ::ChronoMessages::Vector* orientation_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -509,14 +464,6 @@ class vehicle : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   inline vehicle& operator=(const vehicle& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -567,22 +514,19 @@ class vehicle : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // required double x = 1;
-  bool has_x() const;
+  // optional double x = 1;
   void clear_x();
   static const int kXFieldNumber = 1;
   double x() const;
   void set_x(double value);
 
-  // required double y = 2;
-  bool has_y() const;
+  // optional double y = 2;
   void clear_y();
   static const int kYFieldNumber = 2;
   double y() const;
   void set_y(double value);
 
-  // required double z = 3;
-  bool has_z() const;
+  // optional double z = 3;
   void clear_z();
   static const int kZFieldNumber = 3;
   double z() const;
@@ -590,22 +534,13 @@ class vehicle : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.vehicle)
  private:
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
-  inline void set_has_z();
-  inline void clear_has_z();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   double x_;
   double y_;
   double z_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -625,14 +560,6 @@ class control : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   inline control& operator=(const control& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -683,22 +610,19 @@ class control : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // required double throttle = 1;
-  bool has_throttle() const;
+  // optional double throttle = 1;
   void clear_throttle();
   static const int kThrottleFieldNumber = 1;
   double throttle() const;
   void set_throttle(double value);
 
-  // required double steering = 2;
-  bool has_steering() const;
+  // optional double steering = 2;
   void clear_steering();
   static const int kSteeringFieldNumber = 2;
   double steering() const;
   void set_steering(double value);
 
-  // required double braking = 3;
-  bool has_braking() const;
+  // optional double braking = 3;
   void clear_braking();
   static const int kBrakingFieldNumber = 3;
   double braking() const;
@@ -706,22 +630,13 @@ class control : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.control)
  private:
-  inline void set_has_throttle();
-  inline void clear_has_throttle();
-  inline void set_has_steering();
-  inline void clear_has_steering();
-  inline void set_has_braking();
-  inline void clear_has_braking();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   double throttle_;
   double steering_;
   double braking_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -741,14 +656,6 @@ class time : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   inline time& operator=(const time& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -799,8 +706,7 @@ class time : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // required double t = 1;
-  bool has_t() const;
+  // optional double t = 1;
   void clear_t();
   static const int kTFieldNumber = 1;
   double t() const;
@@ -808,145 +714,17 @@ class time : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.time)
  private:
-  inline void set_has_t();
-  inline void clear_has_t();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   double t_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
 
   void InitAsDefaultInstance();
   static time* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class light : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ChronoMessages.light) */ {
- public:
-  light();
-  virtual ~light();
-
-  light(const light& from);
-
-  inline light& operator=(const light& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const light& default_instance();
-
-  void Swap(light* other);
-
-  // implements Message ----------------------------------------------
-
-  inline light* New() const { return New(NULL); }
-
-  light* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const light& from);
-  void MergeFrom(const light& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(light* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required double xpos = 1;
-  bool has_xpos() const;
-  void clear_xpos();
-  static const int kXposFieldNumber = 1;
-  double xpos() const;
-  void set_xpos(double value);
-
-  // required double ypos = 2;
-  bool has_ypos() const;
-  void clear_ypos();
-  static const int kYposFieldNumber = 2;
-  double ypos() const;
-  void set_ypos(double value);
-
-  // required double xdir = 3;
-  bool has_xdir() const;
-  void clear_xdir();
-  static const int kXdirFieldNumber = 3;
-  double xdir() const;
-  void set_xdir(double value);
-
-  // required double ydir = 4;
-  bool has_ydir() const;
-  void clear_ydir();
-  static const int kYdirFieldNumber = 4;
-  double ydir() const;
-  void set_ydir(double value);
-
-  // @@protoc_insertion_point(class_scope:ChronoMessages.light)
- private:
-  inline void set_has_xpos();
-  inline void clear_has_xpos();
-  inline void set_has_ypos();
-  inline void clear_has_ypos();
-  inline void set_has_xdir();
-  inline void clear_has_xdir();
-  inline void set_has_ydir();
-  inline void clear_has_ydir();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  double xpos_;
-  double ypos_;
-  double xdir_;
-  double ydir_;
-  friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
-  friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
-  friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
-
-  void InitAsDefaultInstance();
-  static light* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -960,14 +738,6 @@ class cones : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   inline cones& operator=(const cones& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1042,27 +812,14 @@ class cones : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
       yellow_cones() const;
 
-  // repeated .ChronoMessages.Vector orange_cones = 3;
-  int orange_cones_size() const;
-  void clear_orange_cones();
-  static const int kOrangeConesFieldNumber = 3;
-  const ::ChronoMessages::Vector& orange_cones(int index) const;
-  ::ChronoMessages::Vector* mutable_orange_cones(int index);
-  ::ChronoMessages::Vector* add_orange_cones();
-  ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >*
-      mutable_orange_cones();
-  const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
-      orange_cones() const;
-
   // @@protoc_insertion_point(class_scope:ChronoMessages.cones)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector > blue_cones_;
   ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector > yellow_cones_;
-  ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector > orange_cones_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -1082,14 +839,6 @@ class exit : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   inline exit& operator=(const exit& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1140,8 +889,7 @@ class exit : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // required string code = 1;
-  bool has_code() const;
+  // optional string code = 1;
   void clear_code();
   static const int kCodeFieldNumber = 1;
   const ::std::string& code() const;
@@ -1154,13 +902,11 @@ class exit : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // @@protoc_insertion_point(class_scope:ChronoMessages.exit)
  private:
-  inline void set_has_code();
-  inline void clear_has_code();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr code_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
@@ -1176,74 +922,44 @@ class exit : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // Vector
 
-// required float x = 1;
-inline bool Vector::has_x() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Vector::set_has_x() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Vector::clear_has_x() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional float x = 1;
 inline void Vector::clear_x() {
   x_ = 0;
-  clear_has_x();
 }
 inline float Vector::x() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.x)
   return x_;
 }
 inline void Vector::set_x(float value) {
-  set_has_x();
+  
   x_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.x)
 }
 
-// required float y = 2;
-inline bool Vector::has_y() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Vector::set_has_y() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Vector::clear_has_y() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional float y = 2;
 inline void Vector::clear_y() {
   y_ = 0;
-  clear_has_y();
 }
 inline float Vector::y() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.y)
   return y_;
 }
 inline void Vector::set_y(float value) {
-  set_has_y();
+  
   y_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.y)
 }
 
-// required float z = 3;
-inline bool Vector::has_z() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Vector::set_has_z() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void Vector::clear_has_z() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional float z = 3;
 inline void Vector::clear_z() {
   z_ = 0;
-  clear_has_z();
 }
 inline float Vector::z() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.z)
   return z_;
 }
 inline void Vector::set_z(float value) {
-  set_has_z();
+  
   z_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.z)
 }
@@ -1282,78 +998,90 @@ lidar::points() const {
   return points_;
 }
 
+// optional int32 num = 2;
+inline void lidar::clear_num() {
+  num_ = 0;
+}
+inline ::google::protobuf::int32 lidar::num() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.num)
+  return num_;
+}
+inline void lidar::set_num(::google::protobuf::int32 value) {
+  
+  num_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.num)
+}
+
+// optional int32 expected = 3;
+inline void lidar::clear_expected() {
+  expected_ = 0;
+}
+inline ::google::protobuf::int32 lidar::expected() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.expected)
+  return expected_;
+}
+inline void lidar::set_expected(::google::protobuf::int32 value) {
+  
+  expected_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.expected)
+}
+
+// optional int32 id = 4;
+inline void lidar::clear_id() {
+  id_ = 0;
+}
+inline ::google::protobuf::int32 lidar::id() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.id)
+  return id_;
+}
+inline void lidar::set_id(::google::protobuf::int32 value) {
+  
+  id_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.id)
+}
+
 // -------------------------------------------------------------------
 
 // gps
 
-// required double longitude = 1;
-inline bool gps::has_longitude() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void gps::set_has_longitude() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void gps::clear_has_longitude() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double longitude = 1;
 inline void gps::clear_longitude() {
   longitude_ = 0;
-  clear_has_longitude();
 }
 inline double gps::longitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.longitude)
   return longitude_;
 }
 inline void gps::set_longitude(double value) {
-  set_has_longitude();
+  
   longitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.longitude)
 }
 
-// required double latitude = 2;
-inline bool gps::has_latitude() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void gps::set_has_latitude() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void gps::clear_has_latitude() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double latitude = 2;
 inline void gps::clear_latitude() {
   latitude_ = 0;
-  clear_has_latitude();
 }
 inline double gps::latitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.latitude)
   return latitude_;
 }
 inline void gps::set_latitude(double value) {
-  set_has_latitude();
+  
   latitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.latitude)
 }
 
-// required double altitude = 3;
-inline bool gps::has_altitude() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void gps::set_has_altitude() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void gps::clear_has_altitude() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double altitude = 3;
 inline void gps::clear_altitude() {
   altitude_ = 0;
-  clear_has_altitude();
 }
 inline double gps::altitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.altitude)
   return altitude_;
 }
 inline void gps::set_altitude(double value) {
-  set_has_altitude();
+  
   altitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.altitude)
 }
@@ -1362,26 +1090,20 @@ inline void gps::set_altitude(double value) {
 
 // imu
 
-// required .ChronoMessages.Vector angular_velocity = 1;
+// optional .ChronoMessages.Vector angular_velocity = 1;
 inline bool imu::has_angular_velocity() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void imu::set_has_angular_velocity() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void imu::clear_has_angular_velocity() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && angular_velocity_ != NULL;
 }
 inline void imu::clear_angular_velocity() {
-  if (angular_velocity_ != NULL) angular_velocity_->::ChronoMessages::Vector::Clear();
-  clear_has_angular_velocity();
+  if (GetArenaNoVirtual() == NULL && angular_velocity_ != NULL) delete angular_velocity_;
+  angular_velocity_ = NULL;
 }
 inline const ::ChronoMessages::Vector& imu::angular_velocity() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.angular_velocity)
   return angular_velocity_ != NULL ? *angular_velocity_ : *default_instance_->angular_velocity_;
 }
 inline ::ChronoMessages::Vector* imu::mutable_angular_velocity() {
-  set_has_angular_velocity();
+  
   if (angular_velocity_ == NULL) {
     angular_velocity_ = new ::ChronoMessages::Vector;
   }
@@ -1390,7 +1112,7 @@ inline ::ChronoMessages::Vector* imu::mutable_angular_velocity() {
 }
 inline ::ChronoMessages::Vector* imu::release_angular_velocity() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.angular_velocity)
-  clear_has_angular_velocity();
+  
   ::ChronoMessages::Vector* temp = angular_velocity_;
   angular_velocity_ = NULL;
   return temp;
@@ -1399,33 +1121,27 @@ inline void imu::set_allocated_angular_velocity(::ChronoMessages::Vector* angula
   delete angular_velocity_;
   angular_velocity_ = angular_velocity;
   if (angular_velocity) {
-    set_has_angular_velocity();
+    
   } else {
-    clear_has_angular_velocity();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.angular_velocity)
 }
 
-// required .ChronoMessages.Vector linear_acceleration = 2;
+// optional .ChronoMessages.Vector linear_acceleration = 2;
 inline bool imu::has_linear_acceleration() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void imu::set_has_linear_acceleration() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void imu::clear_has_linear_acceleration() {
-  _has_bits_[0] &= ~0x00000002u;
+  return !_is_default_instance_ && linear_acceleration_ != NULL;
 }
 inline void imu::clear_linear_acceleration() {
-  if (linear_acceleration_ != NULL) linear_acceleration_->::ChronoMessages::Vector::Clear();
-  clear_has_linear_acceleration();
+  if (GetArenaNoVirtual() == NULL && linear_acceleration_ != NULL) delete linear_acceleration_;
+  linear_acceleration_ = NULL;
 }
 inline const ::ChronoMessages::Vector& imu::linear_acceleration() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.linear_acceleration)
   return linear_acceleration_ != NULL ? *linear_acceleration_ : *default_instance_->linear_acceleration_;
 }
 inline ::ChronoMessages::Vector* imu::mutable_linear_acceleration() {
-  set_has_linear_acceleration();
+  
   if (linear_acceleration_ == NULL) {
     linear_acceleration_ = new ::ChronoMessages::Vector;
   }
@@ -1434,7 +1150,7 @@ inline ::ChronoMessages::Vector* imu::mutable_linear_acceleration() {
 }
 inline ::ChronoMessages::Vector* imu::release_linear_acceleration() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.linear_acceleration)
-  clear_has_linear_acceleration();
+  
   ::ChronoMessages::Vector* temp = linear_acceleration_;
   linear_acceleration_ = NULL;
   return temp;
@@ -1443,33 +1159,27 @@ inline void imu::set_allocated_linear_acceleration(::ChronoMessages::Vector* lin
   delete linear_acceleration_;
   linear_acceleration_ = linear_acceleration;
   if (linear_acceleration) {
-    set_has_linear_acceleration();
+    
   } else {
-    clear_has_linear_acceleration();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.linear_acceleration)
 }
 
-// required .ChronoMessages.Vector orientation = 3;
+// optional .ChronoMessages.Vector orientation = 3;
 inline bool imu::has_orientation() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void imu::set_has_orientation() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void imu::clear_has_orientation() {
-  _has_bits_[0] &= ~0x00000004u;
+  return !_is_default_instance_ && orientation_ != NULL;
 }
 inline void imu::clear_orientation() {
-  if (orientation_ != NULL) orientation_->::ChronoMessages::Vector::Clear();
-  clear_has_orientation();
+  if (GetArenaNoVirtual() == NULL && orientation_ != NULL) delete orientation_;
+  orientation_ = NULL;
 }
 inline const ::ChronoMessages::Vector& imu::orientation() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.orientation)
   return orientation_ != NULL ? *orientation_ : *default_instance_->orientation_;
 }
 inline ::ChronoMessages::Vector* imu::mutable_orientation() {
-  set_has_orientation();
+  
   if (orientation_ == NULL) {
     orientation_ = new ::ChronoMessages::Vector;
   }
@@ -1478,7 +1188,7 @@ inline ::ChronoMessages::Vector* imu::mutable_orientation() {
 }
 inline ::ChronoMessages::Vector* imu::release_orientation() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.orientation)
-  clear_has_orientation();
+  
   ::ChronoMessages::Vector* temp = orientation_;
   orientation_ = NULL;
   return temp;
@@ -1487,9 +1197,9 @@ inline void imu::set_allocated_orientation(::ChronoMessages::Vector* orientation
   delete orientation_;
   orientation_ = orientation;
   if (orientation) {
-    set_has_orientation();
+    
   } else {
-    clear_has_orientation();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.orientation)
 }
@@ -1498,74 +1208,44 @@ inline void imu::set_allocated_orientation(::ChronoMessages::Vector* orientation
 
 // vehicle
 
-// required double x = 1;
-inline bool vehicle::has_x() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void vehicle::set_has_x() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void vehicle::clear_has_x() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double x = 1;
 inline void vehicle::clear_x() {
   x_ = 0;
-  clear_has_x();
 }
 inline double vehicle::x() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.x)
   return x_;
 }
 inline void vehicle::set_x(double value) {
-  set_has_x();
+  
   x_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.x)
 }
 
-// required double y = 2;
-inline bool vehicle::has_y() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void vehicle::set_has_y() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void vehicle::clear_has_y() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double y = 2;
 inline void vehicle::clear_y() {
   y_ = 0;
-  clear_has_y();
 }
 inline double vehicle::y() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.y)
   return y_;
 }
 inline void vehicle::set_y(double value) {
-  set_has_y();
+  
   y_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.y)
 }
 
-// required double z = 3;
-inline bool vehicle::has_z() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void vehicle::set_has_z() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void vehicle::clear_has_z() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double z = 3;
 inline void vehicle::clear_z() {
   z_ = 0;
-  clear_has_z();
 }
 inline double vehicle::z() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.z)
   return z_;
 }
 inline void vehicle::set_z(double value) {
-  set_has_z();
+  
   z_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.z)
 }
@@ -1574,74 +1254,44 @@ inline void vehicle::set_z(double value) {
 
 // control
 
-// required double throttle = 1;
-inline bool control::has_throttle() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void control::set_has_throttle() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void control::clear_has_throttle() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double throttle = 1;
 inline void control::clear_throttle() {
   throttle_ = 0;
-  clear_has_throttle();
 }
 inline double control::throttle() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.throttle)
   return throttle_;
 }
 inline void control::set_throttle(double value) {
-  set_has_throttle();
+  
   throttle_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.throttle)
 }
 
-// required double steering = 2;
-inline bool control::has_steering() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void control::set_has_steering() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void control::clear_has_steering() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double steering = 2;
 inline void control::clear_steering() {
   steering_ = 0;
-  clear_has_steering();
 }
 inline double control::steering() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.steering)
   return steering_;
 }
 inline void control::set_steering(double value) {
-  set_has_steering();
+  
   steering_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.steering)
 }
 
-// required double braking = 3;
-inline bool control::has_braking() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void control::set_has_braking() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void control::clear_has_braking() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double braking = 3;
 inline void control::clear_braking() {
   braking_ = 0;
-  clear_has_braking();
 }
 inline double control::braking() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.braking)
   return braking_;
 }
 inline void control::set_braking(double value) {
-  set_has_braking();
+  
   braking_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.braking)
 }
@@ -1650,128 +1300,18 @@ inline void control::set_braking(double value) {
 
 // time
 
-// required double t = 1;
-inline bool time::has_t() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void time::set_has_t() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void time::clear_has_t() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double t = 1;
 inline void time::clear_t() {
   t_ = 0;
-  clear_has_t();
 }
 inline double time::t() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.time.t)
   return t_;
 }
 inline void time::set_t(double value) {
-  set_has_t();
+  
   t_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.time.t)
-}
-
-// -------------------------------------------------------------------
-
-// light
-
-// required double xpos = 1;
-inline bool light::has_xpos() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void light::set_has_xpos() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void light::clear_has_xpos() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void light::clear_xpos() {
-  xpos_ = 0;
-  clear_has_xpos();
-}
-inline double light::xpos() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.xpos)
-  return xpos_;
-}
-inline void light::set_xpos(double value) {
-  set_has_xpos();
-  xpos_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.xpos)
-}
-
-// required double ypos = 2;
-inline bool light::has_ypos() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void light::set_has_ypos() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void light::clear_has_ypos() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void light::clear_ypos() {
-  ypos_ = 0;
-  clear_has_ypos();
-}
-inline double light::ypos() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.ypos)
-  return ypos_;
-}
-inline void light::set_ypos(double value) {
-  set_has_ypos();
-  ypos_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.ypos)
-}
-
-// required double xdir = 3;
-inline bool light::has_xdir() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void light::set_has_xdir() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void light::clear_has_xdir() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void light::clear_xdir() {
-  xdir_ = 0;
-  clear_has_xdir();
-}
-inline double light::xdir() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.xdir)
-  return xdir_;
-}
-inline void light::set_xdir(double value) {
-  set_has_xdir();
-  xdir_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.xdir)
-}
-
-// required double ydir = 4;
-inline bool light::has_ydir() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void light::set_has_ydir() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void light::clear_has_ydir() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void light::clear_ydir() {
-  ydir_ = 0;
-  clear_has_ydir();
-}
-inline double light::ydir() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.ydir)
-  return ydir_;
-}
-inline void light::set_ydir(double value) {
-  set_has_ydir();
-  ydir_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.ydir)
 }
 
 // -------------------------------------------------------------------
@@ -1838,97 +1378,55 @@ cones::yellow_cones() const {
   return yellow_cones_;
 }
 
-// repeated .ChronoMessages.Vector orange_cones = 3;
-inline int cones::orange_cones_size() const {
-  return orange_cones_.size();
-}
-inline void cones::clear_orange_cones() {
-  orange_cones_.Clear();
-}
-inline const ::ChronoMessages::Vector& cones::orange_cones(int index) const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Get(index);
-}
-inline ::ChronoMessages::Vector* cones::mutable_orange_cones(int index) {
-  // @@protoc_insertion_point(field_mutable:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Mutable(index);
-}
-inline ::ChronoMessages::Vector* cones::add_orange_cones() {
-  // @@protoc_insertion_point(field_add:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >*
-cones::mutable_orange_cones() {
-  // @@protoc_insertion_point(field_mutable_list:ChronoMessages.cones.orange_cones)
-  return &orange_cones_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
-cones::orange_cones() const {
-  // @@protoc_insertion_point(field_list:ChronoMessages.cones.orange_cones)
-  return orange_cones_;
-}
-
 // -------------------------------------------------------------------
 
 // exit
 
-// required string code = 1;
-inline bool exit::has_code() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void exit::set_has_code() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void exit::clear_has_code() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional string code = 1;
 inline void exit::clear_code() {
   code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_code();
 }
 inline const ::std::string& exit::code() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.exit.code)
   return code_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void exit::set_code(const ::std::string& value) {
-  set_has_code();
+  
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:ChronoMessages.exit.code)
 }
 inline void exit::set_code(const char* value) {
-  set_has_code();
+  
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:ChronoMessages.exit.code)
 }
 inline void exit::set_code(const char* value, size_t size) {
-  set_has_code();
+  
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:ChronoMessages.exit.code)
 }
 inline ::std::string* exit::mutable_code() {
-  set_has_code();
+  
   // @@protoc_insertion_point(field_mutable:ChronoMessages.exit.code)
   return code_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* exit::release_code() {
   // @@protoc_insertion_point(field_release:ChronoMessages.exit.code)
-  clear_has_code();
+  
   return code_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void exit::set_allocated_code(::std::string* code) {
   if (code != NULL) {
-    set_has_code();
+    
   } else {
-    clear_has_code();
+    
   }
   code_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), code);
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.exit.code)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

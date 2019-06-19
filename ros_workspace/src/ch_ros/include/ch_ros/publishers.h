@@ -29,6 +29,9 @@ public:
 
 // --------------------------------- Lidar ---------------------------------- //
 class Lidar : Publisher<sensor_msgs::PointCloud2> {
+private:
+  int expected_, last_id_ = 0;
+  bool is_complete_;
 public:
   Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);

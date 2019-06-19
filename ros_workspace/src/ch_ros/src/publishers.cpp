@@ -7,38 +7,58 @@ Lidar::Lidar(ros::NodeHandle n, std::string node_name, int queue_size)
 void Lidar::publish(std::vector<uint8_t> buffer, int received) {
   // Parse buffer
   ChronoMessages::lidar message;
-  message.ParseFromArray(buffer.data() + 2, received - 2);
+  message.ParseFromArray(buffer.data() + 1, received - 1);
 
-  data_.header.stamp = ros::Time::now();
-  data_.header.frame_id = "base_link";
+  int id = message.id();
+  // std::cout << id << std::endl;
+  if (id != (last_id_ + 1)) {
+    std::cout << "Packet Lost :: "
+              << "id(" << id << "), last_id(" << last_id_ << ")" << std::endl;
+  }
+  last_id_ = id;
 
-  data_.width = message.points_size();
-  data_.height = 1;
+  if (message.expected()) {
+    expected_ = message.expected();
 
-  // Convert x/y/z to fields
-  data_.fields.resize(3);
-  data_.fields[0].name = "x";
-  data_.fields[1].name = "y";
-  data_.fields[2].name = "z";
+    data_.width = 0;
+    data_.data.clear();
+    data_.row_step = 0;
 
-  int offset = 0;
-  for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
-    data_.fields[d].offset = offset;
-    data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
-    data_.fields[d].count = 1;
+    data_.header.stamp = ros::Time::now();
+    data_.header.frame_id = "base_link";
+
+    data_.height = 1;
+
+    // Convert x/y/z to fields
+    data_.fields.resize(3);
+    data_.fields[0].name = "x";
+    data_.fields[1].name = "y";
+    data_.fields[2].name = "z";
+
+    int offset = 0;
+    for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
+      data_.fields[d].offset = offset;
+      data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
+      data_.fields[d].count = 1;
+    }
+
+    data_.point_step = offset;
+
+    data_.is_bigendian = false;
+    data_.is_dense = false;
   }
 
-  data_.point_step = offset;
-  data_.row_step = data_.point_step * data_.width;
+  int old_size = data_.width;
 
-  data_.data.resize(data_.row_step);
-  data_.is_bigendian = false;
-  data_.is_dense = false;
+  data_.width = data_.width + message.points_size();
+  data_.row_step = data_.point_step * message.points_size();
 
-  for (size_t cp = 0; cp < data_.width; cp++) {
-    float x = message.points(cp).x();
-    float y = message.points(cp).y();
-    float z = message.points(cp).z();
+  data_.data.resize(data_.data.size() + data_.row_step);
+
+  for (size_t cp = old_size; cp < data_.width; cp++) {
+    float x = message.points(cp - old_size).x();
+    float y = message.points(cp - old_size).y();
+    float z = message.points(cp - old_size).z();
 
     memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
            sizeof(float));
@@ -48,7 +68,12 @@ void Lidar::publish(std::vector<uint8_t> buffer, int received) {
            sizeof(float));
   }
 
-  pub_.publish(data_);
+  // std::cout << expected_ << std::endl;
+  if (expected_ == message.num()) {
+    expected_ = 0;
+    pub_.publish(data_);
+  }
+  // cur_id_ = message.id();
 }
 
 // --------------------------------- IMU ---------------------------------- //
@@ -135,11 +160,11 @@ void Cones::publish(std::vector<uint8_t> buffer, int received) {
     data_.yellow_cones[i].position.z = message.yellow_cones(i).z();
     data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
 
-    if (i < 2) {
-      data_.orange_cones[i].position.x = message.orange_cones(i).x();
-      data_.orange_cones[i].position.y = message.orange_cones(i).y();
-      data_.orange_cones[i].position.z = message.orange_cones(i).z();
-      data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
-    }
+    // if (i < 2) {
+    //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
+    //   data_.orange_cones[i].position.y = message.orange_cones(i).y();
+    //   data_.orange_cones[i].position.z = message.orange_cones(i).z();
+    //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
+    // }
   }
 }

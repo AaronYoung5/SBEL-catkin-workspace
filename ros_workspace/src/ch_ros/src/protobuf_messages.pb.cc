@@ -42,9 +42,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* time_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   time_reflection_ = NULL;
-const ::google::protobuf::Descriptor* light_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  light_reflection_ = NULL;
 const ::google::protobuf::Descriptor* cones_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   cones_reflection_ = NULL;
@@ -73,27 +70,30 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       Vector_descriptor_,
       Vector::default_instance_,
       Vector_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(Vector),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector, _is_default_instance_));
   lidar_descriptor_ = file->message_type(1);
-  static const int lidar_offsets_[1] = {
+  static const int lidar_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, points_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, num_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, expected_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, id_),
   };
   lidar_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       lidar_descriptor_,
       lidar::default_instance_,
       lidar_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(lidar),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(lidar, _is_default_instance_));
   gps_descriptor_ = file->message_type(2);
   static const int gps_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, longitude_),
@@ -105,12 +105,12 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       gps_descriptor_,
       gps::default_instance_,
       gps_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(gps),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, _is_default_instance_));
   imu_descriptor_ = file->message_type(3);
   static const int imu_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, angular_velocity_),
@@ -122,12 +122,12 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       imu_descriptor_,
       imu::default_instance_,
       imu_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(imu),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, _is_default_instance_));
   vehicle_descriptor_ = file->message_type(4);
   static const int vehicle_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, x_),
@@ -139,12 +139,12 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       vehicle_descriptor_,
       vehicle::default_instance_,
       vehicle_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(vehicle),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _is_default_instance_));
   control_descriptor_ = file->message_type(5);
   static const int control_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, throttle_),
@@ -156,12 +156,12 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       control_descriptor_,
       control::default_instance_,
       control_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(control),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, _is_default_instance_));
   time_descriptor_ = file->message_type(6);
   static const int time_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, t_),
@@ -171,48 +171,29 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       time_descriptor_,
       time::default_instance_,
       time_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(time),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, _internal_metadata_),
-      -1);
-  light_descriptor_ = file->message_type(7);
-  static const int light_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, xpos_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, ypos_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, xdir_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, ydir_),
-  };
-  light_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      light_descriptor_,
-      light::default_instance_,
-      light_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, _has_bits_[0]),
-      -1,
-      -1,
-      sizeof(light),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(light, _internal_metadata_),
-      -1);
-  cones_descriptor_ = file->message_type(8);
-  static const int cones_offsets_[3] = {
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, _is_default_instance_));
+  cones_descriptor_ = file->message_type(7);
+  static const int cones_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, blue_cones_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, yellow_cones_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, orange_cones_),
   };
   cones_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       cones_descriptor_,
       cones::default_instance_,
       cones_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(cones),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, _internal_metadata_),
-      -1);
-  exit_descriptor_ = file->message_type(9);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, _is_default_instance_));
+  exit_descriptor_ = file->message_type(8);
   static const int exit_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, code_),
   };
@@ -221,12 +202,12 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       exit_descriptor_,
       exit::default_instance_,
       exit_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(exit),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, _is_default_instance_));
 }
 
 namespace {
@@ -255,8 +236,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       time_descriptor_, &time::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      light_descriptor_, &light::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       cones_descriptor_, &cones::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       exit_descriptor_, &exit::default_instance());
@@ -279,8 +258,6 @@ void protobuf_ShutdownFile_protobuf_5fmessages_2eproto() {
   delete control_reflection_;
   delete time::default_instance_;
   delete time_reflection_;
-  delete light::default_instance_;
-  delete light_reflection_;
   delete cones::default_instance_;
   delete cones_reflection_;
   delete exit::default_instance_;
@@ -296,23 +273,22 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\027protobuf_messages.proto\022\016ChronoMessage"
-    "s\")\n\006Vector\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003"
-    " \002(\002\"/\n\005lidar\022&\n\006points\030\001 \003(\0132\026.ChronoMe"
-    "ssages.Vector\"<\n\003gps\022\021\n\tlongitude\030\001 \002(\001\022"
-    "\020\n\010latitude\030\002 \002(\001\022\020\n\010altitude\030\003 \002(\001\"\231\001\n\003"
-    "imu\0220\n\020angular_velocity\030\001 \002(\0132\026.ChronoMe"
-    "ssages.Vector\0223\n\023linear_acceleration\030\002 \002"
-    "(\0132\026.ChronoMessages.Vector\022+\n\013orientatio"
-    "n\030\003 \002(\0132\026.ChronoMessages.Vector\"*\n\007vehic"
-    "le\022\t\n\001x\030\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\001\">\n\007c"
-    "ontrol\022\020\n\010throttle\030\001 \002(\001\022\020\n\010steering\030\002 \002"
-    "(\001\022\017\n\007braking\030\003 \002(\001\"\021\n\004time\022\t\n\001t\030\001 \002(\001\"\?"
-    "\n\005light\022\014\n\004xpos\030\001 \002(\001\022\014\n\004ypos\030\002 \002(\001\022\014\n\004x"
-    "dir\030\003 \002(\001\022\014\n\004ydir\030\004 \002(\001\"\217\001\n\005cones\022*\n\nblu"
-    "e_cones\030\001 \003(\0132\026.ChronoMessages.Vector\022,\n"
-    "\014yellow_cones\030\002 \003(\0132\026.ChronoMessages.Vec"
-    "tor\022,\n\014orange_cones\030\003 \003(\0132\026.ChronoMessag"
-    "es.Vector\"\024\n\004exit\022\014\n\004code\030\001 \002(\t", 711);
+    "s\")\n\006Vector\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003"
+    " \001(\002\"Z\n\005lidar\022&\n\006points\030\001 \003(\0132\026.ChronoMe"
+    "ssages.Vector\022\013\n\003num\030\002 \001(\005\022\020\n\010expected\030\003"
+    " \001(\005\022\n\n\002id\030\004 \001(\005\"<\n\003gps\022\021\n\tlongitude\030\001 \001"
+    "(\001\022\020\n\010latitude\030\002 \001(\001\022\020\n\010altitude\030\003 \001(\001\"\231"
+    "\001\n\003imu\0220\n\020angular_velocity\030\001 \001(\0132\026.Chron"
+    "oMessages.Vector\0223\n\023linear_acceleration\030"
+    "\002 \001(\0132\026.ChronoMessages.Vector\022+\n\013orienta"
+    "tion\030\003 \001(\0132\026.ChronoMessages.Vector\"*\n\007ve"
+    "hicle\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\022\t\n\001z\030\003 \001(\001\">"
+    "\n\007control\022\020\n\010throttle\030\001 \001(\001\022\020\n\010steering\030"
+    "\002 \001(\001\022\017\n\007braking\030\003 \001(\001\"\021\n\004time\022\t\n\001t\030\001 \001("
+    "\001\"a\n\005cones\022*\n\nblue_cones\030\001 \003(\0132\026.ChronoM"
+    "essages.Vector\022,\n\014yellow_cones\030\002 \003(\0132\026.C"
+    "hronoMessages.Vector\"\024\n\004exit\022\014\n\004code\030\001 \001"
+    "(\tb\006proto3", 650);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobuf_messages.proto", &protobuf_RegisterTypes);
   Vector::default_instance_ = new Vector();
@@ -322,7 +298,6 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
   vehicle::default_instance_ = new vehicle();
   control::default_instance_ = new control();
   time::default_instance_ = new time();
-  light::default_instance_ = new light();
   cones::default_instance_ = new cones();
   exit::default_instance_ = new exit();
   Vector::default_instance_->InitAsDefaultInstance();
@@ -332,7 +307,6 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
   vehicle::default_instance_->InitAsDefaultInstance();
   control::default_instance_->InitAsDefaultInstance();
   time::default_instance_->InitAsDefaultInstance();
-  light::default_instance_->InitAsDefaultInstance();
   cones::default_instance_->InitAsDefaultInstance();
   exit::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protobuf_5fmessages_2eproto);
@@ -360,6 +334,7 @@ Vector::Vector()
 }
 
 void Vector::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 Vector::Vector(const Vector& from)
@@ -371,11 +346,11 @@ Vector::Vector(const Vector& from)
 }
 
 void Vector::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   x_ = 0;
   y_ = 0;
   z_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Vector::~Vector() {
@@ -436,10 +411,6 @@ void Vector::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool Vector::MergePartialFromCodedStream(
@@ -452,13 +423,13 @@ bool Vector::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required float x = 1;
+      // optional float x = 1;
       case 1: {
         if (tag == 13) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
-          set_has_x();
+
         } else {
           goto handle_unusual;
         }
@@ -466,14 +437,14 @@ bool Vector::MergePartialFromCodedStream(
         break;
       }
 
-      // required float y = 2;
+      // optional float y = 2;
       case 2: {
         if (tag == 21) {
          parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
-          set_has_y();
+
         } else {
           goto handle_unusual;
         }
@@ -481,14 +452,14 @@ bool Vector::MergePartialFromCodedStream(
         break;
       }
 
-      // required float z = 3;
+      // optional float z = 3;
       case 3: {
         if (tag == 29) {
          parse_z:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &z_)));
-          set_has_z();
+
         } else {
           goto handle_unusual;
         }
@@ -503,8 +474,7 @@ bool Vector::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -521,97 +491,65 @@ failure:
 void Vector::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.Vector)
-  // required float x = 1;
-  if (has_x()) {
+  // optional float x = 1;
+  if (this->x() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
-  // required float y = 2;
-  if (has_y()) {
+  // optional float y = 2;
+  if (this->y() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
-  // required float z = 3;
-  if (has_z()) {
+  // optional float z = 3;
+  if (this->z() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.Vector)
 }
 
 ::google::protobuf::uint8* Vector::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.Vector)
-  // required float x = 1;
-  if (has_x()) {
+  // optional float x = 1;
+  if (this->x() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
-  // required float y = 2;
-  if (has_y()) {
+  // optional float y = 2;
+  if (this->y() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
-  // required float z = 3;
-  if (has_z()) {
+  // optional float z = 3;
+  if (this->z() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.Vector)
   return target;
 }
 
-int Vector::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.Vector)
-  int total_size = 0;
-
-  if (has_x()) {
-    // required float x = 1;
-    total_size += 1 + 4;
-  }
-
-  if (has_y()) {
-    // required float y = 2;
-    total_size += 1 + 4;
-  }
-
-  if (has_z()) {
-    // required float z = 3;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
 int Vector::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.Vector)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required float x = 1;
+  // optional float x = 1;
+  if (this->x() != 0) {
     total_size += 1 + 4;
-
-    // required float y = 2;
-    total_size += 1 + 4;
-
-    // required float z = 3;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional float y = 2;
+  if (this->y() != 0) {
+    total_size += 1 + 4;
   }
+
+  // optional float z = 3;
+  if (this->z() != 0) {
+    total_size += 1 + 4;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -640,19 +578,14 @@ void Vector::MergeFrom(const Vector& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_x()) {
-      set_x(from.x());
-    }
-    if (from.has_y()) {
-      set_y(from.y());
-    }
-    if (from.has_z()) {
-      set_z(from.z());
-    }
+  if (from.x() != 0) {
+    set_x(from.x());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.y() != 0) {
+    set_y(from.y());
+  }
+  if (from.z() != 0) {
+    set_z(from.z());
   }
 }
 
@@ -671,7 +604,6 @@ void Vector::CopyFrom(const Vector& from) {
 }
 
 bool Vector::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -684,7 +616,6 @@ void Vector::InternalSwap(Vector* other) {
   std::swap(x_, other->x_);
   std::swap(y_, other->y_);
   std::swap(z_, other->z_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -700,74 +631,44 @@ void Vector::InternalSwap(Vector* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // Vector
 
-// required float x = 1;
-bool Vector::has_x() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void Vector::set_has_x() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void Vector::clear_has_x() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional float x = 1;
 void Vector::clear_x() {
   x_ = 0;
-  clear_has_x();
 }
  float Vector::x() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.x)
   return x_;
 }
  void Vector::set_x(float value) {
-  set_has_x();
+
   x_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.x)
 }
 
-// required float y = 2;
-bool Vector::has_y() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void Vector::set_has_y() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void Vector::clear_has_y() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional float y = 2;
 void Vector::clear_y() {
   y_ = 0;
-  clear_has_y();
 }
  float Vector::y() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.y)
   return y_;
 }
  void Vector::set_y(float value) {
-  set_has_y();
+
   y_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.y)
 }
 
-// required float z = 3;
-bool Vector::has_z() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void Vector::set_has_z() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void Vector::clear_has_z() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional float z = 3;
 void Vector::clear_z() {
   z_ = 0;
-  clear_has_z();
 }
  float Vector::z() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.Vector.z)
   return z_;
 }
  void Vector::set_z(float value) {
-  set_has_z();
+
   z_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.Vector.z)
 }
@@ -778,6 +679,9 @@ void Vector::clear_z() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int lidar::kPointsFieldNumber;
+const int lidar::kNumFieldNumber;
+const int lidar::kExpectedFieldNumber;
+const int lidar::kIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 lidar::lidar()
@@ -787,6 +691,7 @@ lidar::lidar()
 }
 
 void lidar::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 lidar::lidar(const lidar& from)
@@ -798,8 +703,11 @@ lidar::lidar(const lidar& from)
 }
 
 void lidar::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  num_ = 0;
+  expected_ = 0;
+  id_ = 0;
 }
 
 lidar::~lidar() {
@@ -839,11 +747,28 @@ lidar* lidar::New(::google::protobuf::Arena* arena) const {
 
 void lidar::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.lidar)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(lidar, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<lidar*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(num_, id_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
   points_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool lidar::MergePartialFromCodedStream(
@@ -868,6 +793,51 @@ bool lidar::MergePartialFromCodedStream(
         }
         if (input->ExpectTag(10)) goto parse_loop_points;
         input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectTag(16)) goto parse_num;
+        break;
+      }
+
+      // optional int32 num = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_num:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &num_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_expected;
+        break;
+      }
+
+      // optional int32 expected = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_expected:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &expected_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_id;
+        break;
+      }
+
+      // optional int32 id = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &id_)));
+
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -879,8 +849,7 @@ bool lidar::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -903,10 +872,21 @@ void lidar::SerializeWithCachedSizes(
       1, this->points(i), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+  // optional int32 num = 2;
+  if (this->num() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->num(), output);
   }
+
+  // optional int32 expected = 3;
+  if (this->expected() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->expected(), output);
+  }
+
+  // optional int32 id = 4;
+  if (this->id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->id(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:ChronoMessages.lidar)
 }
 
@@ -920,10 +900,21 @@ void lidar::SerializeWithCachedSizes(
         1, this->points(i), false, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+  // optional int32 num = 2;
+  if (this->num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->num(), target);
   }
+
+  // optional int32 expected = 3;
+  if (this->expected() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->expected(), target);
+  }
+
+  // optional int32 id = 4;
+  if (this->id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->id(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.lidar)
   return target;
 }
@@ -931,6 +922,27 @@ void lidar::SerializeWithCachedSizes(
 int lidar::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.lidar)
   int total_size = 0;
+
+  // optional int32 num = 2;
+  if (this->num() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->num());
+  }
+
+  // optional int32 expected = 3;
+  if (this->expected() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->expected());
+  }
+
+  // optional int32 id = 4;
+  if (this->id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->id());
+  }
 
   // repeated .ChronoMessages.Vector points = 1;
   total_size += 1 * this->points_size();
@@ -940,11 +952,6 @@ int lidar::ByteSize() const {
         this->points(i));
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -974,8 +981,14 @@ void lidar::MergeFrom(const lidar& from) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
   points_.MergeFrom(from.points_);
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.num() != 0) {
+    set_num(from.num());
+  }
+  if (from.expected() != 0) {
+    set_expected(from.expected());
+  }
+  if (from.id() != 0) {
+    set_id(from.id());
   }
 }
 
@@ -995,7 +1008,6 @@ void lidar::CopyFrom(const lidar& from) {
 
 bool lidar::IsInitialized() const {
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->points())) return false;
   return true;
 }
 
@@ -1005,7 +1017,9 @@ void lidar::Swap(lidar* other) {
 }
 void lidar::InternalSwap(lidar* other) {
   points_.UnsafeArenaSwap(&other->points_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  std::swap(num_, other->num_);
+  std::swap(expected_, other->expected_);
+  std::swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1051,6 +1065,48 @@ lidar::points() const {
   return points_;
 }
 
+// optional int32 num = 2;
+void lidar::clear_num() {
+  num_ = 0;
+}
+ ::google::protobuf::int32 lidar::num() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.num)
+  return num_;
+}
+ void lidar::set_num(::google::protobuf::int32 value) {
+
+  num_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.num)
+}
+
+// optional int32 expected = 3;
+void lidar::clear_expected() {
+  expected_ = 0;
+}
+ ::google::protobuf::int32 lidar::expected() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.expected)
+  return expected_;
+}
+ void lidar::set_expected(::google::protobuf::int32 value) {
+
+  expected_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.expected)
+}
+
+// optional int32 id = 4;
+void lidar::clear_id() {
+  id_ = 0;
+}
+ ::google::protobuf::int32 lidar::id() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.lidar.id)
+  return id_;
+}
+ void lidar::set_id(::google::protobuf::int32 value) {
+
+  id_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.lidar.id)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -1068,6 +1124,7 @@ gps::gps()
 }
 
 void gps::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 gps::gps(const gps& from)
@@ -1079,11 +1136,11 @@ gps::gps(const gps& from)
 }
 
 void gps::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   longitude_ = 0;
   latitude_ = 0;
   altitude_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 gps::~gps() {
@@ -1144,10 +1201,6 @@ void gps::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool gps::MergePartialFromCodedStream(
@@ -1160,13 +1213,13 @@ bool gps::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double longitude = 1;
+      // optional double longitude = 1;
       case 1: {
         if (tag == 9) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &longitude_)));
-          set_has_longitude();
+
         } else {
           goto handle_unusual;
         }
@@ -1174,14 +1227,14 @@ bool gps::MergePartialFromCodedStream(
         break;
       }
 
-      // required double latitude = 2;
+      // optional double latitude = 2;
       case 2: {
         if (tag == 17) {
          parse_latitude:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &latitude_)));
-          set_has_latitude();
+
         } else {
           goto handle_unusual;
         }
@@ -1189,14 +1242,14 @@ bool gps::MergePartialFromCodedStream(
         break;
       }
 
-      // required double altitude = 3;
+      // optional double altitude = 3;
       case 3: {
         if (tag == 25) {
          parse_altitude:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &altitude_)));
-          set_has_altitude();
+
         } else {
           goto handle_unusual;
         }
@@ -1211,8 +1264,7 @@ bool gps::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -1229,97 +1281,65 @@ failure:
 void gps::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.gps)
-  // required double longitude = 1;
-  if (has_longitude()) {
+  // optional double longitude = 1;
+  if (this->longitude() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->longitude(), output);
   }
 
-  // required double latitude = 2;
-  if (has_latitude()) {
+  // optional double latitude = 2;
+  if (this->latitude() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->latitude(), output);
   }
 
-  // required double altitude = 3;
-  if (has_altitude()) {
+  // optional double altitude = 3;
+  if (this->altitude() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->altitude(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.gps)
 }
 
 ::google::protobuf::uint8* gps::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.gps)
-  // required double longitude = 1;
-  if (has_longitude()) {
+  // optional double longitude = 1;
+  if (this->longitude() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->longitude(), target);
   }
 
-  // required double latitude = 2;
-  if (has_latitude()) {
+  // optional double latitude = 2;
+  if (this->latitude() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->latitude(), target);
   }
 
-  // required double altitude = 3;
-  if (has_altitude()) {
+  // optional double altitude = 3;
+  if (this->altitude() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->altitude(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.gps)
   return target;
 }
 
-int gps::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.gps)
-  int total_size = 0;
-
-  if (has_longitude()) {
-    // required double longitude = 1;
-    total_size += 1 + 8;
-  }
-
-  if (has_latitude()) {
-    // required double latitude = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_altitude()) {
-    // required double altitude = 3;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int gps::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.gps)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required double longitude = 1;
+  // optional double longitude = 1;
+  if (this->longitude() != 0) {
     total_size += 1 + 8;
-
-    // required double latitude = 2;
-    total_size += 1 + 8;
-
-    // required double altitude = 3;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional double latitude = 2;
+  if (this->latitude() != 0) {
+    total_size += 1 + 8;
   }
+
+  // optional double altitude = 3;
+  if (this->altitude() != 0) {
+    total_size += 1 + 8;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1348,19 +1368,14 @@ void gps::MergeFrom(const gps& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_longitude()) {
-      set_longitude(from.longitude());
-    }
-    if (from.has_latitude()) {
-      set_latitude(from.latitude());
-    }
-    if (from.has_altitude()) {
-      set_altitude(from.altitude());
-    }
+  if (from.longitude() != 0) {
+    set_longitude(from.longitude());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.latitude() != 0) {
+    set_latitude(from.latitude());
+  }
+  if (from.altitude() != 0) {
+    set_altitude(from.altitude());
   }
 }
 
@@ -1379,7 +1394,6 @@ void gps::CopyFrom(const gps& from) {
 }
 
 bool gps::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -1392,7 +1406,6 @@ void gps::InternalSwap(gps* other) {
   std::swap(longitude_, other->longitude_);
   std::swap(latitude_, other->latitude_);
   std::swap(altitude_, other->altitude_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1408,74 +1421,44 @@ void gps::InternalSwap(gps* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // gps
 
-// required double longitude = 1;
-bool gps::has_longitude() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void gps::set_has_longitude() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void gps::clear_has_longitude() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double longitude = 1;
 void gps::clear_longitude() {
   longitude_ = 0;
-  clear_has_longitude();
 }
  double gps::longitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.longitude)
   return longitude_;
 }
  void gps::set_longitude(double value) {
-  set_has_longitude();
+
   longitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.longitude)
 }
 
-// required double latitude = 2;
-bool gps::has_latitude() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void gps::set_has_latitude() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void gps::clear_has_latitude() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double latitude = 2;
 void gps::clear_latitude() {
   latitude_ = 0;
-  clear_has_latitude();
 }
  double gps::latitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.latitude)
   return latitude_;
 }
  void gps::set_latitude(double value) {
-  set_has_latitude();
+
   latitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.latitude)
 }
 
-// required double altitude = 3;
-bool gps::has_altitude() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void gps::set_has_altitude() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void gps::clear_has_altitude() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double altitude = 3;
 void gps::clear_altitude() {
   altitude_ = 0;
-  clear_has_altitude();
 }
  double gps::altitude() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.gps.altitude)
   return altitude_;
 }
  void gps::set_altitude(double value) {
-  set_has_altitude();
+
   altitude_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.gps.altitude)
 }
@@ -1497,6 +1480,7 @@ imu::imu()
 }
 
 void imu::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   angular_velocity_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
   linear_acceleration_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
   orientation_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
@@ -1511,11 +1495,11 @@ imu::imu(const imu& from)
 }
 
 void imu::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   angular_velocity_ = NULL;
   linear_acceleration_ = NULL;
   orientation_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 imu::~imu() {
@@ -1558,21 +1542,12 @@ imu* imu::New(::google::protobuf::Arena* arena) const {
 
 void imu::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.imu)
-  if (_has_bits_[0 / 32] & 7u) {
-    if (has_angular_velocity()) {
-      if (angular_velocity_ != NULL) angular_velocity_->::ChronoMessages::Vector::Clear();
-    }
-    if (has_linear_acceleration()) {
-      if (linear_acceleration_ != NULL) linear_acceleration_->::ChronoMessages::Vector::Clear();
-    }
-    if (has_orientation()) {
-      if (orientation_ != NULL) orientation_->::ChronoMessages::Vector::Clear();
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  if (GetArenaNoVirtual() == NULL && angular_velocity_ != NULL) delete angular_velocity_;
+  angular_velocity_ = NULL;
+  if (GetArenaNoVirtual() == NULL && linear_acceleration_ != NULL) delete linear_acceleration_;
+  linear_acceleration_ = NULL;
+  if (GetArenaNoVirtual() == NULL && orientation_ != NULL) delete orientation_;
+  orientation_ = NULL;
 }
 
 bool imu::MergePartialFromCodedStream(
@@ -1585,7 +1560,7 @@ bool imu::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .ChronoMessages.Vector angular_velocity = 1;
+      // optional .ChronoMessages.Vector angular_velocity = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -1597,7 +1572,7 @@ bool imu::MergePartialFromCodedStream(
         break;
       }
 
-      // required .ChronoMessages.Vector linear_acceleration = 2;
+      // optional .ChronoMessages.Vector linear_acceleration = 2;
       case 2: {
         if (tag == 18) {
          parse_linear_acceleration:
@@ -1610,7 +1585,7 @@ bool imu::MergePartialFromCodedStream(
         break;
       }
 
-      // required .ChronoMessages.Vector orientation = 3;
+      // optional .ChronoMessages.Vector orientation = 3;
       case 3: {
         if (tag == 26) {
          parse_orientation:
@@ -1630,8 +1605,7 @@ bool imu::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -1648,118 +1622,80 @@ failure:
 void imu::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.imu)
-  // required .ChronoMessages.Vector angular_velocity = 1;
-  if (has_angular_velocity()) {
+  // optional .ChronoMessages.Vector angular_velocity = 1;
+  if (this->has_angular_velocity()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->angular_velocity_, output);
   }
 
-  // required .ChronoMessages.Vector linear_acceleration = 2;
-  if (has_linear_acceleration()) {
+  // optional .ChronoMessages.Vector linear_acceleration = 2;
+  if (this->has_linear_acceleration()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->linear_acceleration_, output);
   }
 
-  // required .ChronoMessages.Vector orientation = 3;
-  if (has_orientation()) {
+  // optional .ChronoMessages.Vector orientation = 3;
+  if (this->has_orientation()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->orientation_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.imu)
 }
 
 ::google::protobuf::uint8* imu::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.imu)
-  // required .ChronoMessages.Vector angular_velocity = 1;
-  if (has_angular_velocity()) {
+  // optional .ChronoMessages.Vector angular_velocity = 1;
+  if (this->has_angular_velocity()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         1, *this->angular_velocity_, false, target);
   }
 
-  // required .ChronoMessages.Vector linear_acceleration = 2;
-  if (has_linear_acceleration()) {
+  // optional .ChronoMessages.Vector linear_acceleration = 2;
+  if (this->has_linear_acceleration()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         2, *this->linear_acceleration_, false, target);
   }
 
-  // required .ChronoMessages.Vector orientation = 3;
-  if (has_orientation()) {
+  // optional .ChronoMessages.Vector orientation = 3;
+  if (this->has_orientation()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         3, *this->orientation_, false, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.imu)
   return target;
 }
 
-int imu::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.imu)
-  int total_size = 0;
-
-  if (has_angular_velocity()) {
-    // required .ChronoMessages.Vector angular_velocity = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->angular_velocity_);
-  }
-
-  if (has_linear_acceleration()) {
-    // required .ChronoMessages.Vector linear_acceleration = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->linear_acceleration_);
-  }
-
-  if (has_orientation()) {
-    // required .ChronoMessages.Vector orientation = 3;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->orientation_);
-  }
-
-  return total_size;
-}
 int imu::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.imu)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required .ChronoMessages.Vector angular_velocity = 1;
+  // optional .ChronoMessages.Vector angular_velocity = 1;
+  if (this->has_angular_velocity()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->angular_velocity_);
+  }
 
-    // required .ChronoMessages.Vector linear_acceleration = 2;
+  // optional .ChronoMessages.Vector linear_acceleration = 2;
+  if (this->has_linear_acceleration()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->linear_acceleration_);
+  }
 
-    // required .ChronoMessages.Vector orientation = 3;
+  // optional .ChronoMessages.Vector orientation = 3;
+  if (this->has_orientation()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->orientation_);
+  }
 
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1788,19 +1724,14 @@ void imu::MergeFrom(const imu& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_angular_velocity()) {
-      mutable_angular_velocity()->::ChronoMessages::Vector::MergeFrom(from.angular_velocity());
-    }
-    if (from.has_linear_acceleration()) {
-      mutable_linear_acceleration()->::ChronoMessages::Vector::MergeFrom(from.linear_acceleration());
-    }
-    if (from.has_orientation()) {
-      mutable_orientation()->::ChronoMessages::Vector::MergeFrom(from.orientation());
-    }
+  if (from.has_angular_velocity()) {
+    mutable_angular_velocity()->::ChronoMessages::Vector::MergeFrom(from.angular_velocity());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.has_linear_acceleration()) {
+    mutable_linear_acceleration()->::ChronoMessages::Vector::MergeFrom(from.linear_acceleration());
+  }
+  if (from.has_orientation()) {
+    mutable_orientation()->::ChronoMessages::Vector::MergeFrom(from.orientation());
   }
 }
 
@@ -1819,17 +1750,7 @@ void imu::CopyFrom(const imu& from) {
 }
 
 bool imu::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
-  if (has_angular_velocity()) {
-    if (!this->angular_velocity_->IsInitialized()) return false;
-  }
-  if (has_linear_acceleration()) {
-    if (!this->linear_acceleration_->IsInitialized()) return false;
-  }
-  if (has_orientation()) {
-    if (!this->orientation_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -1841,7 +1762,6 @@ void imu::InternalSwap(imu* other) {
   std::swap(angular_velocity_, other->angular_velocity_);
   std::swap(linear_acceleration_, other->linear_acceleration_);
   std::swap(orientation_, other->orientation_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1857,26 +1777,20 @@ void imu::InternalSwap(imu* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // imu
 
-// required .ChronoMessages.Vector angular_velocity = 1;
+// optional .ChronoMessages.Vector angular_velocity = 1;
 bool imu::has_angular_velocity() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void imu::set_has_angular_velocity() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void imu::clear_has_angular_velocity() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && angular_velocity_ != NULL;
 }
 void imu::clear_angular_velocity() {
-  if (angular_velocity_ != NULL) angular_velocity_->::ChronoMessages::Vector::Clear();
-  clear_has_angular_velocity();
+  if (GetArenaNoVirtual() == NULL && angular_velocity_ != NULL) delete angular_velocity_;
+  angular_velocity_ = NULL;
 }
 const ::ChronoMessages::Vector& imu::angular_velocity() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.angular_velocity)
   return angular_velocity_ != NULL ? *angular_velocity_ : *default_instance_->angular_velocity_;
 }
 ::ChronoMessages::Vector* imu::mutable_angular_velocity() {
-  set_has_angular_velocity();
+
   if (angular_velocity_ == NULL) {
     angular_velocity_ = new ::ChronoMessages::Vector;
   }
@@ -1885,7 +1799,7 @@ const ::ChronoMessages::Vector& imu::angular_velocity() const {
 }
 ::ChronoMessages::Vector* imu::release_angular_velocity() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.angular_velocity)
-  clear_has_angular_velocity();
+
   ::ChronoMessages::Vector* temp = angular_velocity_;
   angular_velocity_ = NULL;
   return temp;
@@ -1894,33 +1808,27 @@ void imu::set_allocated_angular_velocity(::ChronoMessages::Vector* angular_veloc
   delete angular_velocity_;
   angular_velocity_ = angular_velocity;
   if (angular_velocity) {
-    set_has_angular_velocity();
+
   } else {
-    clear_has_angular_velocity();
+
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.angular_velocity)
 }
 
-// required .ChronoMessages.Vector linear_acceleration = 2;
+// optional .ChronoMessages.Vector linear_acceleration = 2;
 bool imu::has_linear_acceleration() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void imu::set_has_linear_acceleration() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void imu::clear_has_linear_acceleration() {
-  _has_bits_[0] &= ~0x00000002u;
+  return !_is_default_instance_ && linear_acceleration_ != NULL;
 }
 void imu::clear_linear_acceleration() {
-  if (linear_acceleration_ != NULL) linear_acceleration_->::ChronoMessages::Vector::Clear();
-  clear_has_linear_acceleration();
+  if (GetArenaNoVirtual() == NULL && linear_acceleration_ != NULL) delete linear_acceleration_;
+  linear_acceleration_ = NULL;
 }
 const ::ChronoMessages::Vector& imu::linear_acceleration() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.linear_acceleration)
   return linear_acceleration_ != NULL ? *linear_acceleration_ : *default_instance_->linear_acceleration_;
 }
 ::ChronoMessages::Vector* imu::mutable_linear_acceleration() {
-  set_has_linear_acceleration();
+
   if (linear_acceleration_ == NULL) {
     linear_acceleration_ = new ::ChronoMessages::Vector;
   }
@@ -1929,7 +1837,7 @@ const ::ChronoMessages::Vector& imu::linear_acceleration() const {
 }
 ::ChronoMessages::Vector* imu::release_linear_acceleration() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.linear_acceleration)
-  clear_has_linear_acceleration();
+
   ::ChronoMessages::Vector* temp = linear_acceleration_;
   linear_acceleration_ = NULL;
   return temp;
@@ -1938,33 +1846,27 @@ void imu::set_allocated_linear_acceleration(::ChronoMessages::Vector* linear_acc
   delete linear_acceleration_;
   linear_acceleration_ = linear_acceleration;
   if (linear_acceleration) {
-    set_has_linear_acceleration();
+
   } else {
-    clear_has_linear_acceleration();
+
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.linear_acceleration)
 }
 
-// required .ChronoMessages.Vector orientation = 3;
+// optional .ChronoMessages.Vector orientation = 3;
 bool imu::has_orientation() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void imu::set_has_orientation() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void imu::clear_has_orientation() {
-  _has_bits_[0] &= ~0x00000004u;
+  return !_is_default_instance_ && orientation_ != NULL;
 }
 void imu::clear_orientation() {
-  if (orientation_ != NULL) orientation_->::ChronoMessages::Vector::Clear();
-  clear_has_orientation();
+  if (GetArenaNoVirtual() == NULL && orientation_ != NULL) delete orientation_;
+  orientation_ = NULL;
 }
 const ::ChronoMessages::Vector& imu::orientation() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.imu.orientation)
   return orientation_ != NULL ? *orientation_ : *default_instance_->orientation_;
 }
 ::ChronoMessages::Vector* imu::mutable_orientation() {
-  set_has_orientation();
+
   if (orientation_ == NULL) {
     orientation_ = new ::ChronoMessages::Vector;
   }
@@ -1973,7 +1875,7 @@ const ::ChronoMessages::Vector& imu::orientation() const {
 }
 ::ChronoMessages::Vector* imu::release_orientation() {
   // @@protoc_insertion_point(field_release:ChronoMessages.imu.orientation)
-  clear_has_orientation();
+
   ::ChronoMessages::Vector* temp = orientation_;
   orientation_ = NULL;
   return temp;
@@ -1982,9 +1884,9 @@ void imu::set_allocated_orientation(::ChronoMessages::Vector* orientation) {
   delete orientation_;
   orientation_ = orientation;
   if (orientation) {
-    set_has_orientation();
+
   } else {
-    clear_has_orientation();
+
   }
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.imu.orientation)
 }
@@ -2006,6 +1908,7 @@ vehicle::vehicle()
 }
 
 void vehicle::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 vehicle::vehicle(const vehicle& from)
@@ -2017,11 +1920,11 @@ vehicle::vehicle(const vehicle& from)
 }
 
 void vehicle::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   x_ = 0;
   y_ = 0;
   z_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 vehicle::~vehicle() {
@@ -2082,10 +1985,6 @@ void vehicle::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool vehicle::MergePartialFromCodedStream(
@@ -2098,13 +1997,13 @@ bool vehicle::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double x = 1;
+      // optional double x = 1;
       case 1: {
         if (tag == 9) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &x_)));
-          set_has_x();
+
         } else {
           goto handle_unusual;
         }
@@ -2112,14 +2011,14 @@ bool vehicle::MergePartialFromCodedStream(
         break;
       }
 
-      // required double y = 2;
+      // optional double y = 2;
       case 2: {
         if (tag == 17) {
          parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &y_)));
-          set_has_y();
+
         } else {
           goto handle_unusual;
         }
@@ -2127,14 +2026,14 @@ bool vehicle::MergePartialFromCodedStream(
         break;
       }
 
-      // required double z = 3;
+      // optional double z = 3;
       case 3: {
         if (tag == 25) {
          parse_z:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &z_)));
-          set_has_z();
+
         } else {
           goto handle_unusual;
         }
@@ -2149,8 +2048,7 @@ bool vehicle::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -2167,97 +2065,65 @@ failure:
 void vehicle::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.vehicle)
-  // required double x = 1;
-  if (has_x()) {
+  // optional double x = 1;
+  if (this->x() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
   }
 
-  // required double y = 2;
-  if (has_y()) {
+  // optional double y = 2;
+  if (this->y() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
   }
 
-  // required double z = 3;
-  if (has_z()) {
+  // optional double z = 3;
+  if (this->z() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->z(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.vehicle)
 }
 
 ::google::protobuf::uint8* vehicle::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.vehicle)
-  // required double x = 1;
-  if (has_x()) {
+  // optional double x = 1;
+  if (this->x() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
   }
 
-  // required double y = 2;
-  if (has_y()) {
+  // optional double y = 2;
+  if (this->y() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
   }
 
-  // required double z = 3;
-  if (has_z()) {
+  // optional double z = 3;
+  if (this->z() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->z(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.vehicle)
   return target;
 }
 
-int vehicle::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.vehicle)
-  int total_size = 0;
-
-  if (has_x()) {
-    // required double x = 1;
-    total_size += 1 + 8;
-  }
-
-  if (has_y()) {
-    // required double y = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_z()) {
-    // required double z = 3;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int vehicle::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.vehicle)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required double x = 1;
+  // optional double x = 1;
+  if (this->x() != 0) {
     total_size += 1 + 8;
-
-    // required double y = 2;
-    total_size += 1 + 8;
-
-    // required double z = 3;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional double y = 2;
+  if (this->y() != 0) {
+    total_size += 1 + 8;
   }
+
+  // optional double z = 3;
+  if (this->z() != 0) {
+    total_size += 1 + 8;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -2286,19 +2152,14 @@ void vehicle::MergeFrom(const vehicle& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_x()) {
-      set_x(from.x());
-    }
-    if (from.has_y()) {
-      set_y(from.y());
-    }
-    if (from.has_z()) {
-      set_z(from.z());
-    }
+  if (from.x() != 0) {
+    set_x(from.x());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.y() != 0) {
+    set_y(from.y());
+  }
+  if (from.z() != 0) {
+    set_z(from.z());
   }
 }
 
@@ -2317,7 +2178,6 @@ void vehicle::CopyFrom(const vehicle& from) {
 }
 
 bool vehicle::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -2330,7 +2190,6 @@ void vehicle::InternalSwap(vehicle* other) {
   std::swap(x_, other->x_);
   std::swap(y_, other->y_);
   std::swap(z_, other->z_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -2346,74 +2205,44 @@ void vehicle::InternalSwap(vehicle* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // vehicle
 
-// required double x = 1;
-bool vehicle::has_x() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void vehicle::set_has_x() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void vehicle::clear_has_x() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double x = 1;
 void vehicle::clear_x() {
   x_ = 0;
-  clear_has_x();
 }
  double vehicle::x() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.x)
   return x_;
 }
  void vehicle::set_x(double value) {
-  set_has_x();
+
   x_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.x)
 }
 
-// required double y = 2;
-bool vehicle::has_y() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void vehicle::set_has_y() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void vehicle::clear_has_y() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double y = 2;
 void vehicle::clear_y() {
   y_ = 0;
-  clear_has_y();
 }
  double vehicle::y() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.y)
   return y_;
 }
  void vehicle::set_y(double value) {
-  set_has_y();
+
   y_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.y)
 }
 
-// required double z = 3;
-bool vehicle::has_z() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void vehicle::set_has_z() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void vehicle::clear_has_z() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double z = 3;
 void vehicle::clear_z() {
   z_ = 0;
-  clear_has_z();
 }
  double vehicle::z() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.z)
   return z_;
 }
  void vehicle::set_z(double value) {
-  set_has_z();
+
   z_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.z)
 }
@@ -2435,6 +2264,7 @@ control::control()
 }
 
 void control::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 control::control(const control& from)
@@ -2446,11 +2276,11 @@ control::control(const control& from)
 }
 
 void control::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   throttle_ = 0;
   steering_ = 0;
   braking_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 control::~control() {
@@ -2511,10 +2341,6 @@ void control::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool control::MergePartialFromCodedStream(
@@ -2527,13 +2353,13 @@ bool control::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double throttle = 1;
+      // optional double throttle = 1;
       case 1: {
         if (tag == 9) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &throttle_)));
-          set_has_throttle();
+
         } else {
           goto handle_unusual;
         }
@@ -2541,14 +2367,14 @@ bool control::MergePartialFromCodedStream(
         break;
       }
 
-      // required double steering = 2;
+      // optional double steering = 2;
       case 2: {
         if (tag == 17) {
          parse_steering:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &steering_)));
-          set_has_steering();
+
         } else {
           goto handle_unusual;
         }
@@ -2556,14 +2382,14 @@ bool control::MergePartialFromCodedStream(
         break;
       }
 
-      // required double braking = 3;
+      // optional double braking = 3;
       case 3: {
         if (tag == 25) {
          parse_braking:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &braking_)));
-          set_has_braking();
+
         } else {
           goto handle_unusual;
         }
@@ -2578,8 +2404,7 @@ bool control::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -2596,97 +2421,65 @@ failure:
 void control::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.control)
-  // required double throttle = 1;
-  if (has_throttle()) {
+  // optional double throttle = 1;
+  if (this->throttle() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->throttle(), output);
   }
 
-  // required double steering = 2;
-  if (has_steering()) {
+  // optional double steering = 2;
+  if (this->steering() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->steering(), output);
   }
 
-  // required double braking = 3;
-  if (has_braking()) {
+  // optional double braking = 3;
+  if (this->braking() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->braking(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.control)
 }
 
 ::google::protobuf::uint8* control::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.control)
-  // required double throttle = 1;
-  if (has_throttle()) {
+  // optional double throttle = 1;
+  if (this->throttle() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->throttle(), target);
   }
 
-  // required double steering = 2;
-  if (has_steering()) {
+  // optional double steering = 2;
+  if (this->steering() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->steering(), target);
   }
 
-  // required double braking = 3;
-  if (has_braking()) {
+  // optional double braking = 3;
+  if (this->braking() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->braking(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.control)
   return target;
 }
 
-int control::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.control)
-  int total_size = 0;
-
-  if (has_throttle()) {
-    // required double throttle = 1;
-    total_size += 1 + 8;
-  }
-
-  if (has_steering()) {
-    // required double steering = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_braking()) {
-    // required double braking = 3;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int control::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.control)
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required double throttle = 1;
+  // optional double throttle = 1;
+  if (this->throttle() != 0) {
     total_size += 1 + 8;
-
-    // required double steering = 2;
-    total_size += 1 + 8;
-
-    // required double braking = 3;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional double steering = 2;
+  if (this->steering() != 0) {
+    total_size += 1 + 8;
   }
+
+  // optional double braking = 3;
+  if (this->braking() != 0) {
+    total_size += 1 + 8;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -2715,19 +2508,14 @@ void control::MergeFrom(const control& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_throttle()) {
-      set_throttle(from.throttle());
-    }
-    if (from.has_steering()) {
-      set_steering(from.steering());
-    }
-    if (from.has_braking()) {
-      set_braking(from.braking());
-    }
+  if (from.throttle() != 0) {
+    set_throttle(from.throttle());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.steering() != 0) {
+    set_steering(from.steering());
+  }
+  if (from.braking() != 0) {
+    set_braking(from.braking());
   }
 }
 
@@ -2746,7 +2534,6 @@ void control::CopyFrom(const control& from) {
 }
 
 bool control::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -2759,7 +2546,6 @@ void control::InternalSwap(control* other) {
   std::swap(throttle_, other->throttle_);
   std::swap(steering_, other->steering_);
   std::swap(braking_, other->braking_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -2775,74 +2561,44 @@ void control::InternalSwap(control* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // control
 
-// required double throttle = 1;
-bool control::has_throttle() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void control::set_has_throttle() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void control::clear_has_throttle() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double throttle = 1;
 void control::clear_throttle() {
   throttle_ = 0;
-  clear_has_throttle();
 }
  double control::throttle() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.throttle)
   return throttle_;
 }
  void control::set_throttle(double value) {
-  set_has_throttle();
+
   throttle_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.throttle)
 }
 
-// required double steering = 2;
-bool control::has_steering() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void control::set_has_steering() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void control::clear_has_steering() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double steering = 2;
 void control::clear_steering() {
   steering_ = 0;
-  clear_has_steering();
 }
  double control::steering() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.steering)
   return steering_;
 }
  void control::set_steering(double value) {
-  set_has_steering();
+
   steering_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.steering)
 }
 
-// required double braking = 3;
-bool control::has_braking() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void control::set_has_braking() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void control::clear_has_braking() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double braking = 3;
 void control::clear_braking() {
   braking_ = 0;
-  clear_has_braking();
 }
  double control::braking() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.control.braking)
   return braking_;
 }
  void control::set_braking(double value) {
-  set_has_braking();
+
   braking_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.control.braking)
 }
@@ -2862,6 +2618,7 @@ time::time()
 }
 
 void time::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 time::time(const time& from)
@@ -2873,9 +2630,9 @@ time::time(const time& from)
 }
 
 void time::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   t_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 time::~time() {
@@ -2916,10 +2673,6 @@ time* time::New(::google::protobuf::Arena* arena) const {
 void time::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.time)
   t_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool time::MergePartialFromCodedStream(
@@ -2932,13 +2685,13 @@ bool time::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double t = 1;
+      // optional double t = 1;
       case 1: {
         if (tag == 9) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &t_)));
-          set_has_t();
+
         } else {
           goto handle_unusual;
         }
@@ -2953,8 +2706,7 @@ bool time::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -2971,30 +2723,22 @@ failure:
 void time::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.time)
-  // required double t = 1;
-  if (has_t()) {
+  // optional double t = 1;
+  if (this->t() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->t(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.time)
 }
 
 ::google::protobuf::uint8* time::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.time)
-  // required double t = 1;
-  if (has_t()) {
+  // optional double t = 1;
+  if (this->t() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->t(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.time)
   return target;
 }
@@ -3003,15 +2747,11 @@ int time::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.time)
   int total_size = 0;
 
-  // required double t = 1;
-  if (has_t()) {
+  // optional double t = 1;
+  if (this->t() != 0) {
     total_size += 1 + 8;
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -3040,13 +2780,8 @@ void time::MergeFrom(const time& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_t()) {
-      set_t(from.t());
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.t() != 0) {
+    set_t(from.t());
   }
 }
 
@@ -3065,7 +2800,6 @@ void time::CopyFrom(const time& from) {
 }
 
 bool time::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
@@ -3076,7 +2810,6 @@ void time::Swap(time* other) {
 }
 void time::InternalSwap(time* other) {
   std::swap(t_, other->t_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -3092,26 +2825,16 @@ void time::InternalSwap(time* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // time
 
-// required double t = 1;
-bool time::has_t() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void time::set_has_t() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void time::clear_has_t() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double t = 1;
 void time::clear_t() {
   t_ = 0;
-  clear_has_t();
 }
  double time::t() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.time.t)
   return t_;
 }
  void time::set_t(double value) {
-  set_has_t();
+
   t_ = value;
   // @@protoc_insertion_point(field_set:ChronoMessages.time.t)
 }
@@ -3121,501 +2844,8 @@ void time::clear_t() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int light::kXposFieldNumber;
-const int light::kYposFieldNumber;
-const int light::kXdirFieldNumber;
-const int light::kYdirFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-light::light()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ChronoMessages.light)
-}
-
-void light::InitAsDefaultInstance() {
-}
-
-light::light(const light& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ChronoMessages.light)
-}
-
-void light::SharedCtor() {
-  _cached_size_ = 0;
-  xpos_ = 0;
-  ypos_ = 0;
-  xdir_ = 0;
-  ydir_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-light::~light() {
-  // @@protoc_insertion_point(destructor:ChronoMessages.light)
-  SharedDtor();
-}
-
-void light::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void light::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* light::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return light_descriptor_;
-}
-
-const light& light::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_protobuf_5fmessages_2eproto();
-  return *default_instance_;
-}
-
-light* light::default_instance_ = NULL;
-
-light* light::New(::google::protobuf::Arena* arena) const {
-  light* n = new light;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void light::Clear() {
-// @@protoc_insertion_point(message_clear_start:ChronoMessages.light)
-#if defined(__clang__)
-#define ZR_HELPER_(f) \
-  _Pragma("clang diagnostic push") \
-  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
-  __builtin_offsetof(light, f) \
-  _Pragma("clang diagnostic pop")
-#else
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<light*>(16)->f)
-#endif
-
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
-
-  ZR_(xpos_, ydir_);
-
-#undef ZR_HELPER_
-#undef ZR_
-
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
-}
-
-bool light::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ChronoMessages.light)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double xpos = 1;
-      case 1: {
-        if (tag == 9) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &xpos_)));
-          set_has_xpos();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(17)) goto parse_ypos;
-        break;
-      }
-
-      // required double ypos = 2;
-      case 2: {
-        if (tag == 17) {
-         parse_ypos:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ypos_)));
-          set_has_ypos();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(25)) goto parse_xdir;
-        break;
-      }
-
-      // required double xdir = 3;
-      case 3: {
-        if (tag == 25) {
-         parse_xdir:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &xdir_)));
-          set_has_xdir();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(33)) goto parse_ydir;
-        break;
-      }
-
-      // required double ydir = 4;
-      case 4: {
-        if (tag == 33) {
-         parse_ydir:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ydir_)));
-          set_has_ydir();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:ChronoMessages.light)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ChronoMessages.light)
-  return false;
-#undef DO_
-}
-
-void light::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ChronoMessages.light)
-  // required double xpos = 1;
-  if (has_xpos()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->xpos(), output);
-  }
-
-  // required double ypos = 2;
-  if (has_ypos()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->ypos(), output);
-  }
-
-  // required double xdir = 3;
-  if (has_xdir()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->xdir(), output);
-  }
-
-  // required double ydir = 4;
-  if (has_ydir()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->ydir(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ChronoMessages.light)
-}
-
-::google::protobuf::uint8* light::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.light)
-  // required double xpos = 1;
-  if (has_xpos()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->xpos(), target);
-  }
-
-  // required double ypos = 2;
-  if (has_ypos()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->ypos(), target);
-  }
-
-  // required double xdir = 3;
-  if (has_xdir()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->xdir(), target);
-  }
-
-  // required double ydir = 4;
-  if (has_ydir()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->ydir(), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.light)
-  return target;
-}
-
-int light::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:ChronoMessages.light)
-  int total_size = 0;
-
-  if (has_xpos()) {
-    // required double xpos = 1;
-    total_size += 1 + 8;
-  }
-
-  if (has_ypos()) {
-    // required double ypos = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_xdir()) {
-    // required double xdir = 3;
-    total_size += 1 + 8;
-  }
-
-  if (has_ydir()) {
-    // required double ydir = 4;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
-int light::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:ChronoMessages.light)
-  int total_size = 0;
-
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required double xpos = 1;
-    total_size += 1 + 8;
-
-    // required double ypos = 2;
-    total_size += 1 + 8;
-
-    // required double xdir = 3;
-    total_size += 1 + 8;
-
-    // required double ydir = 4;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void light::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:ChronoMessages.light)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const light* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const light>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ChronoMessages.light)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:ChronoMessages.light)
-    MergeFrom(*source);
-  }
-}
-
-void light::MergeFrom(const light& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ChronoMessages.light)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_xpos()) {
-      set_xpos(from.xpos());
-    }
-    if (from.has_ypos()) {
-      set_ypos(from.ypos());
-    }
-    if (from.has_xdir()) {
-      set_xdir(from.xdir());
-    }
-    if (from.has_ydir()) {
-      set_ydir(from.ydir());
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-  }
-}
-
-void light::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:ChronoMessages.light)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void light::CopyFrom(const light& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ChronoMessages.light)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool light::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
-
-  return true;
-}
-
-void light::Swap(light* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void light::InternalSwap(light* other) {
-  std::swap(xpos_, other->xpos_);
-  std::swap(ypos_, other->ypos_);
-  std::swap(xdir_, other->xdir_);
-  std::swap(ydir_, other->ydir_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata light::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = light_descriptor_;
-  metadata.reflection = light_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// light
-
-// required double xpos = 1;
-bool light::has_xpos() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void light::set_has_xpos() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void light::clear_has_xpos() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-void light::clear_xpos() {
-  xpos_ = 0;
-  clear_has_xpos();
-}
- double light::xpos() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.xpos)
-  return xpos_;
-}
- void light::set_xpos(double value) {
-  set_has_xpos();
-  xpos_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.xpos)
-}
-
-// required double ypos = 2;
-bool light::has_ypos() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void light::set_has_ypos() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void light::clear_has_ypos() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-void light::clear_ypos() {
-  ypos_ = 0;
-  clear_has_ypos();
-}
- double light::ypos() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.ypos)
-  return ypos_;
-}
- void light::set_ypos(double value) {
-  set_has_ypos();
-  ypos_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.ypos)
-}
-
-// required double xdir = 3;
-bool light::has_xdir() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void light::set_has_xdir() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void light::clear_has_xdir() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-void light::clear_xdir() {
-  xdir_ = 0;
-  clear_has_xdir();
-}
- double light::xdir() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.xdir)
-  return xdir_;
-}
- void light::set_xdir(double value) {
-  set_has_xdir();
-  xdir_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.xdir)
-}
-
-// required double ydir = 4;
-bool light::has_ydir() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-void light::set_has_ydir() {
-  _has_bits_[0] |= 0x00000008u;
-}
-void light::clear_has_ydir() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-void light::clear_ydir() {
-  ydir_ = 0;
-  clear_has_ydir();
-}
- double light::ydir() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.light.ydir)
-  return ydir_;
-}
- void light::set_ydir(double value) {
-  set_has_ydir();
-  ydir_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.light.ydir)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int cones::kBlueConesFieldNumber;
 const int cones::kYellowConesFieldNumber;
-const int cones::kOrangeConesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 cones::cones()
@@ -3625,6 +2855,7 @@ cones::cones()
 }
 
 void cones::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 cones::cones(const cones& from)
@@ -3636,8 +2867,8 @@ cones::cones(const cones& from)
 }
 
 void cones::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 cones::~cones() {
@@ -3679,11 +2910,6 @@ void cones::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.cones)
   blue_cones_.Clear();
   yellow_cones_.Clear();
-  orange_cones_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool cones::MergePartialFromCodedStream(
@@ -3723,22 +2949,6 @@ bool cones::MergePartialFromCodedStream(
           goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_loop_yellow_cones;
-        if (input->ExpectTag(26)) goto parse_loop_orange_cones;
-        input->UnsafeDecrementRecursionDepth();
-        break;
-      }
-
-      // repeated .ChronoMessages.Vector orange_cones = 3;
-      case 3: {
-        if (tag == 26) {
-          DO_(input->IncrementRecursionDepth());
-         parse_loop_orange_cones:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
-                input, add_orange_cones()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_loop_orange_cones;
         input->UnsafeDecrementRecursionDepth();
         if (input->ExpectAtEnd()) goto success;
         break;
@@ -3751,8 +2961,7 @@ bool cones::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -3781,16 +2990,6 @@ void cones::SerializeWithCachedSizes(
       2, this->yellow_cones(i), output);
   }
 
-  // repeated .ChronoMessages.Vector orange_cones = 3;
-  for (unsigned int i = 0, n = this->orange_cones_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->orange_cones(i), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.cones)
 }
 
@@ -3811,17 +3010,6 @@ void cones::SerializeWithCachedSizes(
         2, this->yellow_cones(i), false, target);
   }
 
-  // repeated .ChronoMessages.Vector orange_cones = 3;
-  for (unsigned int i = 0, n = this->orange_cones_size(); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        3, this->orange_cones(i), false, target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.cones)
   return target;
 }
@@ -3846,19 +3034,6 @@ int cones::ByteSize() const {
         this->yellow_cones(i));
   }
 
-  // repeated .ChronoMessages.Vector orange_cones = 3;
-  total_size += 1 * this->orange_cones_size();
-  for (int i = 0; i < this->orange_cones_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->orange_cones(i));
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -3889,10 +3064,6 @@ void cones::MergeFrom(const cones& from) {
   }
   blue_cones_.MergeFrom(from.blue_cones_);
   yellow_cones_.MergeFrom(from.yellow_cones_);
-  orange_cones_.MergeFrom(from.orange_cones_);
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-  }
 }
 
 void cones::CopyFrom(const ::google::protobuf::Message& from) {
@@ -3911,9 +3082,6 @@ void cones::CopyFrom(const cones& from) {
 
 bool cones::IsInitialized() const {
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->blue_cones())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->yellow_cones())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->orange_cones())) return false;
   return true;
 }
 
@@ -3924,8 +3092,6 @@ void cones::Swap(cones* other) {
 void cones::InternalSwap(cones* other) {
   blue_cones_.UnsafeArenaSwap(&other->blue_cones_);
   yellow_cones_.UnsafeArenaSwap(&other->yellow_cones_);
-  orange_cones_.UnsafeArenaSwap(&other->orange_cones_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -4001,36 +3167,6 @@ cones::yellow_cones() const {
   return yellow_cones_;
 }
 
-// repeated .ChronoMessages.Vector orange_cones = 3;
-int cones::orange_cones_size() const {
-  return orange_cones_.size();
-}
-void cones::clear_orange_cones() {
-  orange_cones_.Clear();
-}
-const ::ChronoMessages::Vector& cones::orange_cones(int index) const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Get(index);
-}
-::ChronoMessages::Vector* cones::mutable_orange_cones(int index) {
-  // @@protoc_insertion_point(field_mutable:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Mutable(index);
-}
-::ChronoMessages::Vector* cones::add_orange_cones() {
-  // @@protoc_insertion_point(field_add:ChronoMessages.cones.orange_cones)
-  return orange_cones_.Add();
-}
-::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >*
-cones::mutable_orange_cones() {
-  // @@protoc_insertion_point(field_mutable_list:ChronoMessages.cones.orange_cones)
-  return &orange_cones_;
-}
-const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
-cones::orange_cones() const {
-  // @@protoc_insertion_point(field_list:ChronoMessages.cones.orange_cones)
-  return orange_cones_;
-}
-
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -4046,6 +3182,7 @@ exit::exit()
 }
 
 void exit::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 exit::exit(const exit& from)
@@ -4057,10 +3194,10 @@ exit::exit(const exit& from)
 }
 
 void exit::SharedCtor() {
+    _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   code_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 exit::~exit() {
@@ -4101,13 +3238,7 @@ exit* exit::New(::google::protobuf::Arena* arena) const {
 
 void exit::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.exit)
-  if (has_code()) {
-    code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 bool exit::MergePartialFromCodedStream(
@@ -4120,15 +3251,15 @@ bool exit::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string code = 1;
+      // optional string code = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_code()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->code().data(), this->code().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "ChronoMessages.exit.code");
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "ChronoMessages.exit.code"));
         } else {
           goto handle_unusual;
         }
@@ -4143,8 +3274,7 @@ bool exit::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -4161,41 +3291,33 @@ failure:
 void exit::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:ChronoMessages.exit)
-  // required string code = 1;
-  if (has_code()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+  // optional string code = 1;
+  if (this->code().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->code().data(), this->code().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "ChronoMessages.exit.code");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->code(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:ChronoMessages.exit)
 }
 
 ::google::protobuf::uint8* exit::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.exit)
-  // required string code = 1;
-  if (has_code()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+  // optional string code = 1;
+  if (this->code().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->code().data(), this->code().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "ChronoMessages.exit.code");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->code(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.exit)
   return target;
 }
@@ -4204,17 +3326,13 @@ int exit::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.exit)
   int total_size = 0;
 
-  // required string code = 1;
-  if (has_code()) {
+  // optional string code = 1;
+  if (this->code().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->code());
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -4243,14 +3361,9 @@ void exit::MergeFrom(const exit& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_code()) {
-      set_has_code();
-      code_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.code_);
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.code().size() > 0) {
+
+    code_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.code_);
   }
 }
 
@@ -4269,7 +3382,6 @@ void exit::CopyFrom(const exit& from) {
 }
 
 bool exit::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
@@ -4280,7 +3392,6 @@ void exit::Swap(exit* other) {
 }
 void exit::InternalSwap(exit* other) {
   code_.Swap(&other->code_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -4296,55 +3407,45 @@ void exit::InternalSwap(exit* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // exit
 
-// required string code = 1;
-bool exit::has_code() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void exit::set_has_code() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void exit::clear_has_code() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional string code = 1;
 void exit::clear_code() {
   code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_code();
 }
  const ::std::string& exit::code() const {
   // @@protoc_insertion_point(field_get:ChronoMessages.exit.code)
   return code_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void exit::set_code(const ::std::string& value) {
-  set_has_code();
+
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:ChronoMessages.exit.code)
 }
  void exit::set_code(const char* value) {
-  set_has_code();
+
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:ChronoMessages.exit.code)
 }
  void exit::set_code(const char* value, size_t size) {
-  set_has_code();
+
   code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:ChronoMessages.exit.code)
 }
  ::std::string* exit::mutable_code() {
-  set_has_code();
+
   // @@protoc_insertion_point(field_mutable:ChronoMessages.exit.code)
   return code_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* exit::release_code() {
   // @@protoc_insertion_point(field_release:ChronoMessages.exit.code)
-  clear_has_code();
+
   return code_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void exit::set_allocated_code(::std::string* code) {
   if (code != NULL) {
-    set_has_code();
+
   } else {
-    clear_has_code();
+
   }
   code_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), code);
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.exit.code)

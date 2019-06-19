@@ -15,16 +15,17 @@
 #include "ch_message_codes.h"
 #include "publishers.h"
 
-using boost::asio::ip::udp;
-
 class ChRosHandler {
 private:
   // Private variables
 
   // Message passing protocol
   const char *port_num_;
-  udp::socket socket_;
+  boost::asio::ip::udp::socket socket_;
   boost::asio::ip::udp::endpoint endpoint_;
+
+  boost::asio::ip::tcp::socket tcpsocket_;
+  boost::asio::ip::tcp::endpoint tcpendpoint_;
 
   // Sensors
   Lidar lidar_;
@@ -55,6 +56,8 @@ public:
   // Looks for and receives info over the socket and calls necessary handling
   // methods
   void receiveAndHandle();
+  void tcpReceiveAndHandle();
+  void do_accept(boost::asio::ip::tcp::acceptor &acceptor);
 
   // Is Chrono running?
   bool ok() { return ok_; }
@@ -67,7 +70,7 @@ private:
 
   // Sets target controls to send
   void setTargetControls(const common_msgs::Control::ConstPtr &msg);
-  
+
   // Sends control message to Chrono
   void sendControls();
 };

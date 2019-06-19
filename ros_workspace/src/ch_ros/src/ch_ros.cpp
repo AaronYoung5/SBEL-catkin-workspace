@@ -17,7 +17,8 @@ int main(int argc, char **argv) {
   signal(SIGINT, exit);
 
   while(ros::ok() && handler.ok()) {
-    handler.receiveAndHandle();
+    // handler.receiveAndHandle();
+    handler.tcpReceiveAndHandle();
 
     ros::spinOnce();
   }
