@@ -35,6 +35,7 @@ private:
 public:
   Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
+  void tcppublish(std::vector<uint8_t> buffer, int received);
 };
 
 // --------------------------------- IMU ---------------------------------- //

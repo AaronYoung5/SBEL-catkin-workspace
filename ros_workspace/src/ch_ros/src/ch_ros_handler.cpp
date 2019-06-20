@@ -4,32 +4,24 @@
 #include <chrono>
 #include <thread>
 
+#define TCP
+
 ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num)
     : port_num_(port_num),
       socket_(*(new boost::asio::io_service),
               boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
-                                             std::atoi("port_num"))),
+                                             std::atoi(port_num))),
       tcpsocket_(*(new boost::asio::io_service)), lidar_(n, "lidar", 10),
       imu_(n, "imu", 10), gps_(n, "gps", 10), time_(n, "clock", 10),
       cones_(n, "cones", 10), ok_(true), throttle_(0), steering_(0),
       braking_(0), control_(n.subscribe(
                        "control", 10, &ChRosHandler::setTargetControls, this)) {
-  // boost::asio::ip::tcp::resolver resolver(tcpsocket_.get_io_service());
-  // boost::asio::ip::tcp::resolver::query query("localhost", "test");
-  // boost::asio::ip::tcp::resolver::iterator endpoint_iterator =
-  // resolver.resolve(query);
+#ifdef TCP
   std::chrono::milliseconds dura(1000);
   std::this_thread::sleep_for(dura);
   tcpsocket_.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),
                                                     std::atoi(port_num)));
-  const std::string msg = "Hello from Client!";
-  boost::system::error_code error;
-  tcpsocket_.send(boost::asio::buffer(msg), 0, error);
-  if (!error) {
-    std::cout << "Successfully sent message to Chrono" << std::endl;
-  } else {
-    std::cout << "Failed to send message to Chrono" << std::endl;
-  }
+#endif
 }
 
 void ChRosHandler::receiveAndHandle() {
@@ -71,14 +63,24 @@ void ChRosHandler::tcpReceiveAndHandle() {
   // Receieve and record size of packet
   int received =
       tcpsocket_.receive(boost::asio::buffer(buffer.data(), available), 0);
+  // std::cout << "Bytes Received :: " << received << std::endl;
   handle(buffer, received);
 }
 
 void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
+#ifdef TCP
+  tcpSendControls();
+#else
+  sendControls();
+#endif
   // Determine message type
   switch ((unsigned)buffer.data()[0]) {
   case ChMessageCode::LIDAR:
-    // lidar_.publish(buffer, received);
+#ifdef TCP
+    lidar_.tcppublish(buffer, received);
+#else
+    lidar_.publish(buffer, received);
+#endif
     break;
   case ChMessageCode::GPS:
     gps_.publish(buffer, received);
@@ -97,10 +99,9 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
     break;
   }
 
-  // if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
-  // sendControls();
-  // }
-  tcpSendControls();
+// if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
+// sendControls();
+// }
 }
 
 void ChRosHandler::sendControls() {

@@ -76,6 +76,53 @@ void Lidar::publish(std::vector<uint8_t> buffer, int received) {
   // cur_id_ = message.id();
 }
 
+void Lidar::tcppublish(std::vector<uint8_t> buffer, int received) {
+  // Parse buffer
+  ChronoMessages::lidar message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
+
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
+
+  data_.width = message.points_size();
+  data_.height = 1;
+
+  // Convert x/y/z to fields
+  data_.fields.resize(3);
+  data_.fields[0].name = "x";
+  data_.fields[1].name = "y";
+  data_.fields[2].name = "z";
+
+  int offset = 0;
+  for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
+    data_.fields[d].offset = offset;
+    data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
+    data_.fields[d].count = 1;
+  }
+
+  data_.point_step = offset;
+  data_.row_step = data_.point_step * data_.width;
+
+  data_.data.resize(data_.row_step);
+  data_.is_bigendian = false;
+  data_.is_dense = false;
+
+  for (size_t cp = 0; cp < data_.width; cp++) {
+    float x = message.points(cp).x();
+    float y = message.points(cp).y();
+    float z = message.points(cp).z();
+
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[1].offset], &y,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[2].offset], &z,
+           sizeof(float));
+  }
+
+  pub_.publish(data_);
+}
+
 // --------------------------------- IMU ---------------------------------- //
 IMU::IMU(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
