@@ -6,7 +6,8 @@
 
 #define TCP
 
-ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num)
+ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num,
+                           std::string host_name)
     : port_num_(port_num),
       socket_(*(new boost::asio::io_service),
               boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
@@ -15,12 +16,14 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num)
       imu_(n, "imu", 10), gps_(n, "gps", 10), time_(n, "clock", 10),
       cones_(n, "cones", 10), ok_(true), throttle_(0), steering_(0),
       braking_(0), control_(n.subscribe(
-                       "control", 10, &ChRosHandler::setTargetControls, this)) {
+                       "control", 10, &ChRosHandler::setTargetControls, this)),
+      host_name_(host_name) {
 #ifdef TCP
   std::chrono::milliseconds dura(1000);
   std::this_thread::sleep_for(dura);
-  tcpsocket_.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),
-                                                    std::atoi(port_num)));
+  tcpsocket_.connect(boost::asio::ip::tcp::endpoint(
+      boost::asio::ip::address::from_string(host_name), std::atoi(port_num)));
+  std::cout << "Connection Established" << std::endl;
 #endif
 }
 
@@ -99,9 +102,9 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
     break;
   }
 
-// if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
-// sendControls();
-// }
+  // if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
+  // sendControls();
+  // }
 }
 
 void ChRosHandler::sendControls() {

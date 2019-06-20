@@ -21,6 +21,7 @@ private:
 
   // Message passing protocol
   const char *port_num_;
+  std::string host_name_;
   boost::asio::ip::udp::socket socket_;
   boost::asio::ip::udp::endpoint endpoint_;
 
@@ -47,7 +48,8 @@ public:
   // Public functions
 
   // Constructor
-  ChRosHandler(ros::NodeHandle n, const char *port_num = "8080");
+  ChRosHandler(ros::NodeHandle n, const char *port_num = "8080",
+               std::string host_name = "127.0.0.1");
 
   // Destructor
   // Closes socket
