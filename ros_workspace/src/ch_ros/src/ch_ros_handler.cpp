@@ -1,8 +1,8 @@
 #include "ch_ros/ch_message_codes.h"
 #include "ch_ros/ch_ros_handler.h"
 
-#include <chrono>
-#include <thread>
+// #include <chrono>
+// #include <thread>
 
 #define TCP
 
@@ -18,38 +18,37 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
       braking_(0), control_(n.subscribe(
                        "control", 10, &ChRosHandler::setTargetControls, this)),
       host_name_(host_name) {
-#ifdef TCP
-  std::chrono::milliseconds dura(1000);
-  std::this_thread::sleep_for(dura);
+        #ifdef TCP
+  initializeSocket();
+  #endif
+}
+
+void ChRosHandler::initializeSocket() {
+  // std::chrono::milliseconds dura(1000);
+  // std::this_thread::sleep_for(dura);
+  sleep(1);
 
   boost::asio::ip::tcp::resolver resolver(tcpsocket_.get_io_service());
-  boost::asio::ip::tcp::resolver::query query(host_name, port);
+  boost::asio::ip::tcp::resolver::query query(host_name_, port_);
   boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
   boost::asio::ip::tcp::resolver::iterator end;
 
   boost::system::error_code error = boost::asio::error::host_not_found;
   while (error && iter != end) {
-    std::cout << "Trying " << iter->endpoint() << "..." << std::endl;
+    std::cout << "Trying to connect to " << iter->endpoint() << "..."
+              << std::endl;
 
     tcpsocket_.close();
     // Start the synchronous connect operation.
     tcpsocket_.connect(*iter++, error);
   }
 
-  std::cout << "Connection Established" << std::endl;
-#endif
+  std::cout << "Connection Established." << std::endl;
 }
 
 void ChRosHandler::receiveAndHandle() {
-  // auto start = std::chrono::high_resolution_clock::now();
-
   // Let the UDP stack fill up
   socket_.receive(boost::asio::null_buffers(), 0);
-
-  // auto end = std::chrono::high_resolution_clock::now();
-
-  // auto duration =
-  // std::chrono::duration_cast<std::chrono::microseconds>(end - start);
   // Check the size of the buffer
   int available = socket_.available();
   // Allocate space for the message
@@ -59,14 +58,6 @@ void ChRosHandler::receiveAndHandle() {
       boost::asio::buffer(buffer.data(), available), endpoint_);
   // Handle received message
   handle(buffer, received);
-
-  // if (duration.count() > 0) {
-  // std::cout << "Time taken by received: " << duration.count()
-  //           << " microseconds" << std::endl;
-  // std::cout << "Time taken by received: " << (duration.count() * 1e-6)
-  //           << " seconds" << std::endl;
-  // std::cout << "Message Code: " << (unsigned)buffer.data()[0] << std::endl;
-  // }
 }
 
 void ChRosHandler::tcpReceiveAndHandle() {

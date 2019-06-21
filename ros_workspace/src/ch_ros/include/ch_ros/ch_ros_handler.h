@@ -75,4 +75,7 @@ private:
 
   // Sends control message to Chrono
   void sendControls();
+
+  // Initalizes and connects to tcp socket
+  void initializeSocket();
 };

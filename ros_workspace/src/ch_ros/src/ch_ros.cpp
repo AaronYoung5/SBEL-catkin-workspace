@@ -59,11 +59,11 @@ int main(int argc, char **argv) {
     signal(SIGINT, exit);
 
     while (ros::ok() && handler.ok()) {
-#ifdef TCP
+// #ifdef TCP
       handler.tcpReceiveAndHandle();
-#else
-      handler.receiveAndHandle();
-#endif
+// #else
+      // handler.receiveAndHandle();
+// #endif
 
       ros::spinOnce();
     }
