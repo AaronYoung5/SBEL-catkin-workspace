@@ -20,7 +20,7 @@ private:
   // Private variables
 
   // Message passing protocol
-  const char *port_num_;
+  std::string port_;
   std::string host_name_;
   boost::asio::ip::udp::socket socket_;
   boost::asio::ip::udp::endpoint endpoint_;
@@ -48,12 +48,12 @@ public:
   // Public functions
 
   // Constructor
-  ChRosHandler(ros::NodeHandle n, const char *port_num = "8080",
-               std::string host_name = "127.0.0.1");
+  ChRosHandler(ros::NodeHandle n, std::string host_name = "localhost",
+               std::string port_num = "8080");
 
   // Destructor
   // Closes socket
-  ~ChRosHandler() { socket_.close(); }
+  ~ChRosHandler() { socket_.close(); tcpsocket_.close(); }
 
   // Looks for and receives info over the socket and calls necessary handling
   // methods

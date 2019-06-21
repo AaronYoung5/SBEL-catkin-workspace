@@ -6,12 +6,12 @@
 
 #define TCP
 
-ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num,
-                           std::string host_name)
-    : port_num_(port_num),
+ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
+                           std::string port)
+    : port_(port),
       socket_(*(new boost::asio::io_service),
               boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
-                                             std::atoi(port_num))),
+                                             std::atoi(port.c_str()))),
       tcpsocket_(*(new boost::asio::io_service)), lidar_(n, "lidar", 10),
       imu_(n, "imu", 10), gps_(n, "gps", 10), time_(n, "clock", 10),
       cones_(n, "cones", 10), ok_(true), throttle_(0), steering_(0),
@@ -21,8 +21,21 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, const char *port_num,
 #ifdef TCP
   std::chrono::milliseconds dura(1000);
   std::this_thread::sleep_for(dura);
-  tcpsocket_.connect(boost::asio::ip::tcp::endpoint(
-      boost::asio::ip::address::from_string(host_name), std::atoi(port_num)));
+
+  boost::asio::ip::tcp::resolver resolver(tcpsocket_.get_io_service());
+  boost::asio::ip::tcp::resolver::query query(host_name, port);
+  boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+  boost::asio::ip::tcp::resolver::iterator end;
+
+  boost::system::error_code error = boost::asio::error::host_not_found;
+  while (error && iter != end) {
+    std::cout << "Trying " << iter->endpoint() << "..." << std::endl;
+
+    tcpsocket_.close();
+    // Start the synchronous connect operation.
+    tcpsocket_.connect(*iter++, error);
+  }
+
   std::cout << "Connection Established" << std::endl;
 #endif
 }

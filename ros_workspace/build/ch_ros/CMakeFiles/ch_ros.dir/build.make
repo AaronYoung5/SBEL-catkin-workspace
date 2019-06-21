@@ -188,6 +188,7 @@ ch_ros_EXTERNAL_OBJECTS =
 /home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 /home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
 /home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros: ch_ros/CMakeFiles/ch_ros.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/aaron/ROS/ros_workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable /home/aaron/ROS/ros_workspace/devel/lib/ch_ros/ch_ros"
 	cd /home/aaron/ROS/ros_workspace/build/ch_ros && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ch_ros.dir/link.txt --verbose=$(VERBOSE)
