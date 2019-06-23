@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/ros_workspace/install
-
-Name: robot_localization
-Description: Description of robot_localization
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/ros_workspace/install/lib 
-Requires: 

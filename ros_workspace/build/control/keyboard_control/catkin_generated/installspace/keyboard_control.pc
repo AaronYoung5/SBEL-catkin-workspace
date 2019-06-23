@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/ros_workspace/install
-
-Name: keyboard_control
-Description: Description of keyboard_control
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/ros_workspace/install/lib 
-Requires: 

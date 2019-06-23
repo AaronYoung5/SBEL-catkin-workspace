@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/ros_workspace/devel
-
-Name: common_srvs
-Description: Description of common_srvs
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/ros_workspace/devel/lib 
-Requires: message_runtime std_msgs geometry_msgs

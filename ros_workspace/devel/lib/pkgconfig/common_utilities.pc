@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/ros_workspace/devel
-
-Name: common_utilities
-Description: Description of common_utilities
-Version: 0.0.0
-Cflags: -I/home/aaron/ROS/ros_workspace/src/common/common_utilities/include
-Libs: -L/home/aaron/ROS/ros_workspace/devel/lib 
-Requires: 

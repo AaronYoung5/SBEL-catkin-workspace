@@ -1,8 +1,0 @@
-prefix=/home/aaron/ROS/udp_workspace/install
-
-Name: chrono_ros_com
-Description: Description of chrono_ros_com
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/aaron/ROS/udp_workspace/install/lib 
-Requires: roscpp
