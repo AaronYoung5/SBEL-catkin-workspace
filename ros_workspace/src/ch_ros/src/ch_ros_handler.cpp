@@ -5,6 +5,7 @@
 // #include <thread>
 
 #define TCP
+#define MSG_HEADER_SIZE 5
 
 ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
                            std::string port)
@@ -18,9 +19,9 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
       braking_(0), control_(n.subscribe(
                        "control", 10, &ChRosHandler::setTargetControls, this)),
       host_name_(host_name) {
-        #ifdef TCP
+#ifdef TCP
   initializeSocket();
-  #endif
+#endif
 }
 
 void ChRosHandler::initializeSocket() {
@@ -47,6 +48,8 @@ void ChRosHandler::initializeSocket() {
 }
 
 void ChRosHandler::receiveAndHandle() {
+  // This lets us receive packets of any size and then read through the data
+
   // Let the UDP stack fill up
   socket_.receive(boost::asio::null_buffers(), 0);
   // Check the size of the buffer
@@ -62,21 +65,45 @@ void ChRosHandler::receiveAndHandle() {
 
 void ChRosHandler::tcpReceiveAndHandle() {
   // Let the TCP stack fill up
-  tcpsocket_.receive(boost::asio::null_buffers(), 0);
+  // tcpsocket_.receive(boost::asio::null_buffers(), 0);
+
+  std::vector<uint8_t> buffer(MSG_HEADER_SIZE);
+  tcpsocket_.receive(boost::asio::buffer(buffer.data(), MSG_HEADER_SIZE-1), 0);
+  // boost::asio::read(tcpsocket_, boost::asio::buffer(buffer.data(), MSG_HEADER_SIZE-1));
+  int available = ((int*)buffer.data())[0]+1;
+
+  // std::cout << "CODE" << (unsigned)buffer.data()[1] << std::endl;
+  // return;
+
+  // Let the TCP stack fill up
+  // tcpsocket_.receive(boost::asio::null_buffers(), 0);
   // Check the size of the buffer
-  int available = tcpsocket_.available();
+  // int available = 371850;//socket_.available();
   // Allocate space for the message
-  std::vector<uint8_t> buffer(available);
+  // std::vector<uint8_t> buffer(available);
+  buffer.resize(available);
   // Receieve and record size of packet
   int received =
       tcpsocket_.receive(boost::asio::buffer(buffer.data(), available), 0);
-  // std::cout << "Bytes Received :: " << received << std::endl;
+  // int received = boost::asio::read(
+  //     tcpsocket_, boost::asio::buffer(buffer.data(), available),
+  //     boost::asio::transfer_all());
+  // boost::system::error_code error_code;
+  // size_t received = tcpsocket_.read_some(boost::asio::buffer(buffer.data(),
+  // available), error_code); if ((unsigned)buffer.data()[0] == 0) {
+  std::cout << "LiDAR Bytes Received :: \t" << received << std::endl;
+  std::cout << std::endl;
+  // }
   handle(buffer, received);
+}
+
+void ChRosHandler::tcpAsyncReceiveAndHandle() {
+  // tcpsocket_.async_read_some(boost:);asio::buffer()
 }
 
 void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
 #ifdef TCP
-  tcpSendControls();
+  // tcpSendControls();
 #else
   sendControls();
 #endif

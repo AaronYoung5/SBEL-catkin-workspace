@@ -60,6 +60,7 @@ public:
   void receiveAndHandle();
   void tcpReceiveAndHandle();
   void tcpSendControls();
+  void tcpAsyncReceiveAndHandle();
 
   // Is Chrono running?
   bool ok() { return ok_; }

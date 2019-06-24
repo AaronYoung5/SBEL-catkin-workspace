@@ -22,6 +22,7 @@ message gps {
 }
 
 message imu {
+  int32 size = 5;
   Vector angular_velocity = 1;
   Vector linear_acceleration = 2;
   Vector orientation = 3;
