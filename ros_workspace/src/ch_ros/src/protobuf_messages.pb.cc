@@ -112,8 +112,7 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(gps, _is_default_instance_));
   imu_descriptor_ = file->message_type(3);
-  static const int imu_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, size_),
+  static const int imu_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, angular_velocity_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, linear_acceleration_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, orientation_),
@@ -278,18 +277,18 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
     " \001(\002\"Z\n\005lidar\022&\n\006points\030\001 \003(\0132\026.ChronoMe"
     "ssages.Vector\022\013\n\003num\030\002 \001(\005\022\020\n\010expected\030\003"
     " \001(\005\022\n\n\002id\030\004 \001(\005\"<\n\003gps\022\021\n\tlongitude\030\001 \001"
-    "(\001\022\020\n\010latitude\030\002 \001(\001\022\020\n\010altitude\030\003 \001(\001\"\247"
-    "\001\n\003imu\022\014\n\004size\030\005 \001(\005\0220\n\020angular_velocity"
-    "\030\001 \001(\0132\026.ChronoMessages.Vector\0223\n\023linear"
-    "_acceleration\030\002 \001(\0132\026.ChronoMessages.Vec"
-    "tor\022+\n\013orientation\030\003 \001(\0132\026.ChronoMessage"
-    "s.Vector\"*\n\007vehicle\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001("
-    "\001\022\t\n\001z\030\003 \001(\001\">\n\007control\022\020\n\010throttle\030\001 \001("
-    "\001\022\020\n\010steering\030\002 \001(\001\022\017\n\007braking\030\003 \001(\001\"\021\n\004"
-    "time\022\t\n\001t\030\001 \001(\001\"a\n\005cones\022*\n\nblue_cones\030\001"
-    " \003(\0132\026.ChronoMessages.Vector\022,\n\014yellow_c"
-    "ones\030\002 \003(\0132\026.ChronoMessages.Vector\"\024\n\004ex"
-    "it\022\014\n\004code\030\001 \001(\tb\006proto3", 664);
+    "(\001\022\020\n\010latitude\030\002 \001(\001\022\020\n\010altitude\030\003 \001(\001\"\231"
+    "\001\n\003imu\0220\n\020angular_velocity\030\001 \001(\0132\026.Chron"
+    "oMessages.Vector\0223\n\023linear_acceleration\030"
+    "\002 \001(\0132\026.ChronoMessages.Vector\022+\n\013orienta"
+    "tion\030\003 \001(\0132\026.ChronoMessages.Vector\"*\n\007ve"
+    "hicle\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\022\t\n\001z\030\003 \001(\001\">"
+    "\n\007control\022\020\n\010throttle\030\001 \001(\001\022\020\n\010steering\030"
+    "\002 \001(\001\022\017\n\007braking\030\003 \001(\001\"\021\n\004time\022\t\n\001t\030\001 \001("
+    "\001\"a\n\005cones\022*\n\nblue_cones\030\001 \003(\0132\026.ChronoM"
+    "essages.Vector\022,\n\014yellow_cones\030\002 \003(\0132\026.C"
+    "hronoMessages.Vector\"\024\n\004exit\022\014\n\004code\030\001 \001"
+    "(\tb\006proto3", 650);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobuf_messages.proto", &protobuf_RegisterTypes);
   Vector::default_instance_ = new Vector();
@@ -1469,7 +1468,6 @@ void gps::clear_altitude() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int imu::kSizeFieldNumber;
 const int imu::kAngularVelocityFieldNumber;
 const int imu::kLinearAccelerationFieldNumber;
 const int imu::kOrientationFieldNumber;
@@ -1499,7 +1497,6 @@ imu::imu(const imu& from)
 void imu::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
-  size_ = 0;
   angular_velocity_ = NULL;
   linear_acceleration_ = NULL;
   orientation_ = NULL;
@@ -1545,7 +1542,6 @@ imu* imu::New(::google::protobuf::Arena* arena) const {
 
 void imu::Clear() {
 // @@protoc_insertion_point(message_clear_start:ChronoMessages.imu)
-  size_ = 0;
   if (GetArenaNoVirtual() == NULL && angular_velocity_ != NULL) delete angular_velocity_;
   angular_velocity_ = NULL;
   if (GetArenaNoVirtual() == NULL && linear_acceleration_ != NULL) delete linear_acceleration_;
@@ -1598,21 +1594,6 @@ bool imu::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(40)) goto parse_size;
-        break;
-      }
-
-      // optional int32 size = 5;
-      case 5: {
-        if (tag == 40) {
-         parse_size:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &size_)));
-
-        } else {
-          goto handle_unusual;
-        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1659,11 +1640,6 @@ void imu::SerializeWithCachedSizes(
       3, *this->orientation_, output);
   }
 
-  // optional int32 size = 5;
-  if (this->size() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->size(), output);
-  }
-
   // @@protoc_insertion_point(serialize_end:ChronoMessages.imu)
 }
 
@@ -1691,11 +1667,6 @@ void imu::SerializeWithCachedSizes(
         3, *this->orientation_, false, target);
   }
 
-  // optional int32 size = 5;
-  if (this->size() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->size(), target);
-  }
-
   // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.imu)
   return target;
 }
@@ -1703,13 +1674,6 @@ void imu::SerializeWithCachedSizes(
 int imu::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:ChronoMessages.imu)
   int total_size = 0;
-
-  // optional int32 size = 5;
-  if (this->size() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->size());
-  }
 
   // optional .ChronoMessages.Vector angular_velocity = 1;
   if (this->has_angular_velocity()) {
@@ -1760,9 +1724,6 @@ void imu::MergeFrom(const imu& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  if (from.size() != 0) {
-    set_size(from.size());
-  }
   if (from.has_angular_velocity()) {
     mutable_angular_velocity()->::ChronoMessages::Vector::MergeFrom(from.angular_velocity());
   }
@@ -1798,7 +1759,6 @@ void imu::Swap(imu* other) {
   InternalSwap(other);
 }
 void imu::InternalSwap(imu* other) {
-  std::swap(size_, other->size_);
   std::swap(angular_velocity_, other->angular_velocity_);
   std::swap(linear_acceleration_, other->linear_acceleration_);
   std::swap(orientation_, other->orientation_);
@@ -1816,20 +1776,6 @@ void imu::InternalSwap(imu* other) {
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // imu
-
-// optional int32 size = 5;
-void imu::clear_size() {
-  size_ = 0;
-}
- ::google::protobuf::int32 imu::size() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.imu.size)
-  return size_;
-}
- void imu::set_size(::google::protobuf::int32 value) {
-
-  size_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.imu.size)
-}
 
 // optional .ChronoMessages.Vector angular_velocity = 1;
 bool imu::has_angular_velocity() const {

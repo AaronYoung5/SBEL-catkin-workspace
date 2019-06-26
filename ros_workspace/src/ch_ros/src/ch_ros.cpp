@@ -48,7 +48,7 @@ std::vector<std::string> parse_command_line(int argc, char **argv) {
 }
 
 int main(int argc, char **argv) {
-  try {
+  // try {
     std::vector<std::string> opts = parse_command_line(argc, argv);
 
     ros::init(argc, argv, "ch_ros");
@@ -60,17 +60,17 @@ int main(int argc, char **argv) {
 
     while (ros::ok() && handler.ok()) {
 // #ifdef TCP
+//      std::cout << "Looping" << std::endl;
       handler.tcpReceiveAndHandle();
-      // handler.tcpAsyncReceiveAndHandle();
 // #else
       // handler.receiveAndHandle();
 // #endif
 
       ros::spinOnce();
     }
-  } catch (std::exception &e) {
-    std::cerr << "Error :: " << e.what() << std::endl;
-  }
+  // } catch (std::exception &e) {
+  //   std::cerr << "Error :: " << e.what() << std::endl;
+  // }
 
   ros::shutdown();
 }

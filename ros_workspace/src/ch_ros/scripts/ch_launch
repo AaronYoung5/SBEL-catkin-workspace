@@ -5,7 +5,7 @@ import os
 def main():
     rospy.init_node("chrono_launch")
 
-    os.system("/home/aaron/synchrono/build/bin/demo_ROS 8080 ")
+    os.system("/home/aaron/chrono/build/bin/demo_ROS 8080 ")
 
 if __name__ == "__main__":
     try:

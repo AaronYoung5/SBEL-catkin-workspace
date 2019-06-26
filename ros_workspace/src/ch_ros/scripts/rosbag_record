@@ -3,9 +3,9 @@ import rospy
 import os
 
 def main():
-    rospy.init_node("chrono_test")
+    rospy.init_node("rosbag_record")
 
-    os.system("/home/aaron/chrono/build/bin/demo_ROS_tests 8080 ")
+    os.system("rosbag record -a -O euler_test")
 
 if __name__ == "__main__":
     try:

@@ -409,12 +409,6 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 
   // accessors -------------------------------------------------------
 
-  // optional int32 size = 5;
-  void clear_size();
-  static const int kSizeFieldNumber = 5;
-  ::google::protobuf::int32 size() const;
-  void set_size(::google::protobuf::int32 value);
-
   // optional .ChronoMessages.Vector angular_velocity = 1;
   bool has_angular_velocity() const;
   void clear_angular_velocity();
@@ -450,7 +444,6 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::ChronoMessages::Vector* angular_velocity_;
   ::ChronoMessages::Vector* linear_acceleration_;
   ::ChronoMessages::Vector* orientation_;
-  ::google::protobuf::int32 size_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
   friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
@@ -1096,20 +1089,6 @@ inline void gps::set_altitude(double value) {
 // -------------------------------------------------------------------
 
 // imu
-
-// optional int32 size = 5;
-inline void imu::clear_size() {
-  size_ = 0;
-}
-inline ::google::protobuf::int32 imu::size() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.imu.size)
-  return size_;
-}
-inline void imu::set_size(::google::protobuf::int32 value) {
-  
-  size_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.imu.size)
-}
 
 // optional .ChronoMessages.Vector angular_velocity = 1;
 inline bool imu::has_angular_velocity() const {
