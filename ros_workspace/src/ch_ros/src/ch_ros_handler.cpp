@@ -65,19 +65,20 @@ void ChRosHandler::tcpReceiveAndHandle() {
   tcpsocket_.receive(boost::asio::buffer(buffer.data(), 4), 0);
   // Check the size of the message to read
   int available = ((int *)buffer.data())[0] + 1;
+  // std::cout << "Available :: " << available << std::endl;
   // Allocate space for the message
   buffer.resize(available);
   // Receive and record size of received packet
   // Read allows us to read tcp buffer until all (int)available are received
   int received = boost::asio::read(
       tcpsocket_, boost::asio::buffer(buffer.data(), available));
-  std::cout << "Bytes Received :: " << received << std::endl;
+  // std::cout << "Bytes Received :: " << received << std::endl;
   handle(buffer, received);
 }
 
 void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
 #ifdef TCP
-  // tcpSendControls();
+  tcpSendControls();
 #else
   sendControls();
 #endif
@@ -139,8 +140,9 @@ void ChRosHandler::tcpSendControls() {
   message.set_braking(braking_);
 
   int32_t size = message.ByteSize();
-  std::vector<uint8_t> buf(size + 1);
-  buf.data()[0] = ChMessageCode::CONTROL;
-  message.SerializeToArray(buf.data() + 1, size);
-  tcpsocket_.send(boost::asio::buffer(buf.data(), size + 1));
+  std::vector<uint8_t> buffer(size + 5);
+  ((int *)buffer.data())[0] = size;
+  buffer.data()[4] = ChMessageCode::CONTROL;
+  message.SerializeToArray(buffer.data() + 5, size);
+  tcpsocket_.send(boost::asio::buffer(buffer.data(), size + 5));
 }

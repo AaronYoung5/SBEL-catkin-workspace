@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
     while (ros::ok() && handler.ok()) {
 // #ifdef TCP
-//      std::cout << "Looping" << std::endl;
+     // std::cout << "Looping" << std::endl;
       handler.tcpReceiveAndHandle();
 // #else
       // handler.receiveAndHandle();
