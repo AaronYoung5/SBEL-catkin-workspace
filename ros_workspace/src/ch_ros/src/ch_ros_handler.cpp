@@ -144,5 +144,7 @@ void ChRosHandler::tcpSendControls() {
   ((int *)buffer.data())[0] = size;
   buffer.data()[4] = ChMessageCode::CONTROL;
   message.SerializeToArray(buffer.data() + 5, size);
-  tcpsocket_.send(boost::asio::buffer(buffer.data(), size + 5));
+  tcpsocket_.async_send(
+      boost::asio::buffer(buffer.data(), size + 5),
+      [&](const boost::system::error_code &ec, size_t size) {});
 }
