@@ -1,5 +1,5 @@
 #pragma once
-
+#define FLATBUFFERS_DEBUG_VERIFICATION_FAILURE
 // Ros includes
 #include "common_msgs/ConeMap.h"
 #include "ros/ros.h"
@@ -13,11 +13,13 @@
 
 // Internal package includes
 #include "protobuf_messages.pb.h"
+#include "ch_ros/RosMessages_generated.h"
 
 template <typename msgtype> class Publisher {
 protected:
   msgtype data_;
   ros::Publisher pub_;
+  bool use_protobuf = false;
 
 public:
   Publisher(ros::NodeHandle n, std::string node_name, int queue_size) {

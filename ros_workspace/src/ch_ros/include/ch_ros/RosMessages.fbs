@@ -1,0 +1,46 @@
+namespace RosMessage;
+
+struct Vector {
+  x:float;
+  y:float;
+  z:float;
+}
+
+table lidar {
+  points:[Vector];
+}
+
+table gps {
+  longitude:float;
+  latitude:float;
+  altitude:float;
+}
+
+table imu {
+  angular_velocity:Vector;
+  linear_acceleration:Vector;
+  orientation:Vector;
+}
+
+table vehicle {
+  position:Vector;
+}
+
+table control {
+  throttle:float;
+  steering:float;
+  braking:float;
+}
+
+table time {
+  t:float;
+}
+
+table cones {
+  blue_cones:[Vector];
+  yellow_cones:[Vector];
+}
+
+table exit {
+  code:byte;
+}

@@ -64,15 +64,20 @@ void ChRosHandler::tcpReceiveAndHandle() {
   // Receive just the "header"
   tcpsocket_.receive(boost::asio::buffer(buffer.data(), 4), 0);
   // Check the size of the message to read
-  int available = ((int *)buffer.data())[0] + 1;
-  // std::cout << "Available :: " << available << std::endl;
+  int available = ((int*)buffer.data())[0] + 1;
+  std::cout << "Available :: " << available << std::endl;
+  // tcpsocket_.receive(boost::asio::null_buffers(), 0);
+  // Check the size of the buffer
+  // int available = tcpsocket_.available();
   // Allocate space for the message
   buffer.resize(available);
+  // std::vector<uint8_t> buffer(available);
+  std::cout << ((int*)buffer.data())[0] << std::endl;
   // Receive and record size of received packet
   // Read allows us to read tcp buffer until all (int)available are received
   int received = boost::asio::read(
       tcpsocket_, boost::asio::buffer(buffer.data(), available));
-  // std::cout << "Bytes Received :: " << received << std::endl;
+  std::cout << "Bytes Received :: " << received << std::endl;
   handle(buffer, received);
 }
 
