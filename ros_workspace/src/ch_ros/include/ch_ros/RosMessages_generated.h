@@ -10,6 +10,10 @@ namespace RosMessage {
 
 struct Vector;
 
+struct Header;
+
+struct message;
+
 struct lidar;
 
 struct gps;
@@ -25,6 +29,96 @@ struct time;
 struct cones;
 
 struct exit;
+
+enum Type {
+  Type_NONE = 0,
+  Type_lidar = 1,
+  Type_gps = 2,
+  Type_imu = 3,
+  Type_vehicle = 4,
+  Type_control = 5,
+  Type_time = 6,
+  Type_cones = 7,
+  Type_exit = 8,
+  Type_MIN = Type_NONE,
+  Type_MAX = Type_exit
+};
+
+inline const Type (&EnumValuesType())[9] {
+  static const Type values[] = {
+    Type_NONE,
+    Type_lidar,
+    Type_gps,
+    Type_imu,
+    Type_vehicle,
+    Type_control,
+    Type_time,
+    Type_cones,
+    Type_exit
+  };
+  return values;
+}
+
+inline const char * const *EnumNamesType() {
+  static const char * const names[10] = {
+    "NONE",
+    "lidar",
+    "gps",
+    "imu",
+    "vehicle",
+    "control",
+    "time",
+    "cones",
+    "exit",
+    nullptr
+  };
+  return names;
+}
+
+inline const char *EnumNameType(Type e) {
+  if (e < Type_NONE || e > Type_exit) return "";
+  const size_t index = static_cast<size_t>(e);
+  return EnumNamesType()[index];
+}
+
+template<typename T> struct TypeTraits {
+  static const Type enum_value = Type_NONE;
+};
+
+template<> struct TypeTraits<RosMessage::lidar> {
+  static const Type enum_value = Type_lidar;
+};
+
+template<> struct TypeTraits<RosMessage::gps> {
+  static const Type enum_value = Type_gps;
+};
+
+template<> struct TypeTraits<RosMessage::imu> {
+  static const Type enum_value = Type_imu;
+};
+
+template<> struct TypeTraits<RosMessage::vehicle> {
+  static const Type enum_value = Type_vehicle;
+};
+
+template<> struct TypeTraits<RosMessage::control> {
+  static const Type enum_value = Type_control;
+};
+
+template<> struct TypeTraits<RosMessage::time> {
+  static const Type enum_value = Type_time;
+};
+
+template<> struct TypeTraits<RosMessage::cones> {
+  static const Type enum_value = Type_cones;
+};
+
+template<> struct TypeTraits<RosMessage::exit> {
+  static const Type enum_value = Type_exit;
+};
+
+bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type);
+bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types);
 
 FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) Vector FLATBUFFERS_FINAL_CLASS {
  private:
@@ -52,6 +146,131 @@ FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) Vector FLATBUFFERS_FINAL_CLASS {
   }
 };
 FLATBUFFERS_STRUCT_END(Vector, 12);
+
+FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) Header FLATBUFFERS_FINAL_CLASS {
+ private:
+  int32_t size_;
+
+ public:
+  Header() {
+    memset(static_cast<void *>(this), 0, sizeof(Header));
+  }
+  Header(int32_t _size)
+      : size_(flatbuffers::EndianScalar(_size)) {
+  }
+  int32_t size() const {
+    return flatbuffers::EndianScalar(size_);
+  }
+};
+FLATBUFFERS_STRUCT_END(Header, 4);
+
+struct message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_TYPE_TYPE = 4,
+    VT_TYPE = 6
+  };
+  RosMessage::Type type_type() const {
+    return static_cast<RosMessage::Type>(GetField<uint8_t>(VT_TYPE_TYPE, 0));
+  }
+  const void *type() const {
+    return GetPointer<const void *>(VT_TYPE);
+  }
+  template<typename T> const T *type_as() const;
+  const RosMessage::lidar *type_as_lidar() const {
+    return type_type() == RosMessage::Type_lidar ? static_cast<const RosMessage::lidar *>(type()) : nullptr;
+  }
+  const RosMessage::gps *type_as_gps() const {
+    return type_type() == RosMessage::Type_gps ? static_cast<const RosMessage::gps *>(type()) : nullptr;
+  }
+  const RosMessage::imu *type_as_imu() const {
+    return type_type() == RosMessage::Type_imu ? static_cast<const RosMessage::imu *>(type()) : nullptr;
+  }
+  const RosMessage::vehicle *type_as_vehicle() const {
+    return type_type() == RosMessage::Type_vehicle ? static_cast<const RosMessage::vehicle *>(type()) : nullptr;
+  }
+  const RosMessage::control *type_as_control() const {
+    return type_type() == RosMessage::Type_control ? static_cast<const RosMessage::control *>(type()) : nullptr;
+  }
+  const RosMessage::time *type_as_time() const {
+    return type_type() == RosMessage::Type_time ? static_cast<const RosMessage::time *>(type()) : nullptr;
+  }
+  const RosMessage::cones *type_as_cones() const {
+    return type_type() == RosMessage::Type_cones ? static_cast<const RosMessage::cones *>(type()) : nullptr;
+  }
+  const RosMessage::exit *type_as_exit() const {
+    return type_type() == RosMessage::Type_exit ? static_cast<const RosMessage::exit *>(type()) : nullptr;
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<uint8_t>(verifier, VT_TYPE_TYPE) &&
+           VerifyOffset(verifier, VT_TYPE) &&
+           VerifyType(verifier, type(), type_type()) &&
+           verifier.EndTable();
+  }
+};
+
+template<> inline const RosMessage::lidar *message::type_as<RosMessage::lidar>() const {
+  return type_as_lidar();
+}
+
+template<> inline const RosMessage::gps *message::type_as<RosMessage::gps>() const {
+  return type_as_gps();
+}
+
+template<> inline const RosMessage::imu *message::type_as<RosMessage::imu>() const {
+  return type_as_imu();
+}
+
+template<> inline const RosMessage::vehicle *message::type_as<RosMessage::vehicle>() const {
+  return type_as_vehicle();
+}
+
+template<> inline const RosMessage::control *message::type_as<RosMessage::control>() const {
+  return type_as_control();
+}
+
+template<> inline const RosMessage::time *message::type_as<RosMessage::time>() const {
+  return type_as_time();
+}
+
+template<> inline const RosMessage::cones *message::type_as<RosMessage::cones>() const {
+  return type_as_cones();
+}
+
+template<> inline const RosMessage::exit *message::type_as<RosMessage::exit>() const {
+  return type_as_exit();
+}
+
+struct messageBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_type_type(RosMessage::Type type_type) {
+    fbb_.AddElement<uint8_t>(message::VT_TYPE_TYPE, static_cast<uint8_t>(type_type), 0);
+  }
+  void add_type(flatbuffers::Offset<void> type) {
+    fbb_.AddOffset(message::VT_TYPE, type);
+  }
+  explicit messageBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  messageBuilder &operator=(const messageBuilder &);
+  flatbuffers::Offset<message> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<message>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<message> Createmessage(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    RosMessage::Type type_type = RosMessage::Type_NONE,
+    flatbuffers::Offset<void> type = 0) {
+  messageBuilder builder_(_fbb);
+  builder_.add_type(type);
+  builder_.add_type_type(type_type);
+  return builder_.Finish();
+}
 
 struct lidar FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -465,6 +684,59 @@ inline flatbuffers::Offset<exit> Createexit(
   exitBuilder builder_(_fbb);
   builder_.add_code(code);
   return builder_.Finish();
+}
+
+inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type) {
+  switch (type) {
+    case Type_NONE: {
+      return true;
+    }
+    case Type_lidar: {
+      auto ptr = reinterpret_cast<const RosMessage::lidar *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_gps: {
+      auto ptr = reinterpret_cast<const RosMessage::gps *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_imu: {
+      auto ptr = reinterpret_cast<const RosMessage::imu *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_vehicle: {
+      auto ptr = reinterpret_cast<const RosMessage::vehicle *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_control: {
+      auto ptr = reinterpret_cast<const RosMessage::control *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_time: {
+      auto ptr = reinterpret_cast<const RosMessage::time *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_cones: {
+      auto ptr = reinterpret_cast<const RosMessage::cones *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_exit: {
+      auto ptr = reinterpret_cast<const RosMessage::exit *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    default: return false;
+  }
+}
+
+inline bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types) {
+  if (!values || !types) return !values && !types;
+  if (values->size() != types->size()) return false;
+  for (flatbuffers::uoffset_t i = 0; i < values->size(); ++i) {
+    if (!VerifyType(
+        verifier,  values->Get(i), types->GetEnum<Type>(i))) {
+      return false;
+    }
+  }
+  return true;
 }
 
 }  // namespace RosMessage

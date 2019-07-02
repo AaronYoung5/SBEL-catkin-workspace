@@ -77,100 +77,96 @@ void Lidar::publish(std::vector<uint8_t> buffer, int received) {
 }
 
 void Lidar::tcppublish(std::vector<uint8_t> buffer, int received) {
-  if (use_protobuf) {
-    // Parse buffer
-    ChronoMessages::lidar message;
-    message.ParseFromArray(buffer.data() + 1, received - 1);
+  ChronoMessages::lidar message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
 
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "base_link";
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
 
-    data_.width = message.points_size();
-    data_.height = 1;
+  data_.width = message.points_size();
+  data_.height = 1;
 
-    // Convert x/y/z to fields
-    data_.fields.resize(3);
-    data_.fields[0].name = "x";
-    data_.fields[1].name = "y";
-    data_.fields[2].name = "z";
+  // Convert x/y/z to fields
+  data_.fields.resize(3);
+  data_.fields[0].name = "x";
+  data_.fields[1].name = "y";
+  data_.fields[2].name = "z";
 
-    int offset = 0;
-    for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
-      data_.fields[d].offset = offset;
-      data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
-      data_.fields[d].count = 1;
-    }
-
-    data_.point_step = offset;
-    data_.row_step = data_.point_step * data_.width;
-
-    data_.data.resize(data_.row_step);
-    data_.is_bigendian = false;
-    data_.is_dense = false;
-
-    for (size_t cp = 0; cp < data_.width; cp++) {
-      float x = message.points(cp).x();
-      float y = message.points(cp).y();
-      float z = message.points(cp).z();
-
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
-             sizeof(float));
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[1].offset], &y,
-             sizeof(float));
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[2].offset], &z,
-             sizeof(float));
-    }
-
-    pub_.publish(data_);
-  } else {
-    // Parse buffer
-    const RosMessage::lidar *message =
-        flatbuffers::GetRoot<RosMessage::lidar>(buffer.data());
-    flatbuffers::Verifier verifier(
-        reinterpret_cast<unsigned char *>(buffer.data()), received);
-    std::cout << message->Verify(verifier) << std::endl;
-
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "base_link";
-
-    data_.width = message->points()->Length();
-    data_.height = 1;
-
-    // Convert x/y/z to fields
-    data_.fields.resize(3);
-    data_.fields[0].name = "x";
-    data_.fields[1].name = "y";
-    data_.fields[2].name = "z";
-
-    int offset = 0;
-    for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
-      data_.fields[d].offset = offset;
-      data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
-      data_.fields[d].count = 1;
-    }
-
-    data_.point_step = offset;
-    data_.row_step = data_.point_step * data_.width;
-
-    data_.data.resize(data_.row_step);
-    data_.is_bigendian = false;
-    data_.is_dense = false;
-
-    for (size_t cp = 0; cp < data_.width; cp++) {
-      float x = message->points()->Get(cp)->x();
-      float y = message->points()->Get(cp)->y();
-      float z = message->points()->Get(cp)->z();
-
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
-             sizeof(float));
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[1].offset], &y,
-             sizeof(float));
-      memcpy(&data_.data[cp * data_.point_step + data_.fields[2].offset], &z,
-             sizeof(float));
-    }
-
-    pub_.publish(data_);
+  int offset = 0;
+  for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
+    data_.fields[d].offset = offset;
+    data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
+    data_.fields[d].count = 1;
   }
+
+  data_.point_step = offset;
+  data_.row_step = data_.point_step * data_.width;
+
+  data_.data.resize(data_.row_step);
+  data_.is_bigendian = false;
+  data_.is_dense = false;
+
+  for (size_t cp = 0; cp < data_.width; cp++) {
+    float x = message.points(cp).x();
+    float y = message.points(cp).y();
+    float z = message.points(cp).z();
+
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[1].offset], &y,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[2].offset], &z,
+           sizeof(float));
+  }
+
+  pub_.publish(data_);
+}
+
+void Lidar::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::lidar *lidar =
+      static_cast<const RosMessage::lidar *>(message->type());
+
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
+
+  data_.width = lidar->points()->Length();
+  data_.height = 1;
+
+  // Convert x/y/z to fields
+  data_.fields.resize(3);
+  data_.fields[0].name = "x";
+  data_.fields[1].name = "y";
+  data_.fields[2].name = "z";
+
+  int offset = 0;
+  for (size_t d = 0; d < data_.fields.size(); d++, offset += 4) {
+    data_.fields[d].offset = offset;
+    data_.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
+    data_.fields[d].count = 1;
+  }
+
+  data_.point_step = offset;
+  data_.row_step = data_.point_step * data_.width;
+
+  data_.data.resize(data_.row_step);
+  data_.is_bigendian = false;
+  data_.is_dense = false;
+
+  for (size_t cp = 0; cp < data_.width; cp++) {
+    float x = lidar->points()->Get(cp)->x();
+    float y = lidar->points()->Get(cp)->y();
+    float z = lidar->points()->Get(cp)->z();
+
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[0].offset], &x,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[1].offset], &y,
+           sizeof(float));
+    memcpy(&data_.data[cp * data_.point_step + data_.fields[2].offset], &z,
+           sizeof(float));
+  }
+
+  pub_.publish(data_);
 }
 
 // --------------------------------- IMU ---------------------------------- //
@@ -178,41 +174,41 @@ IMU::IMU(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
 void IMU::publish(std::vector<uint8_t> buffer, int received) {
-  if (use_protobuf) {
-    // Parse buffer
-    ChronoMessages::imu message;
-    message.ParseFromArray(buffer.data() + 1, received - 1);
+  // Parse buffer
+  ChronoMessages::imu message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
 
-    // Convert to Imu
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "base_link";
+  // Convert to Imu
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
 
-    data_.linear_acceleration.x = message.linear_acceleration().x();
-    data_.linear_acceleration.y = message.linear_acceleration().y();
-    data_.linear_acceleration.z = message.linear_acceleration().z();
+  data_.linear_acceleration.x = message.linear_acceleration().x();
+  data_.linear_acceleration.y = message.linear_acceleration().y();
+  data_.linear_acceleration.z = message.linear_acceleration().z();
 
-    data_.angular_velocity.x = message.angular_velocity().x();
-    data_.angular_velocity.y = message.angular_velocity().y();
-    data_.angular_velocity.z = message.angular_velocity().z();
+  data_.angular_velocity.x = message.angular_velocity().x();
+  data_.angular_velocity.y = message.angular_velocity().y();
+  data_.angular_velocity.z = message.angular_velocity().z();
 
-    pub_.publish(data_);
-  } else {
-    // Parse buffer
-    const RosMessage::imu *message =
-        flatbuffers::GetRoot<RosMessage::imu>(buffer.data());
+  pub_.publish(data_);
+}
 
-    // Convert to Imu
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "base_link";
+void IMU::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::imu *imu =
+      static_cast<const RosMessage::imu *>(message->type());
 
-    data_.linear_acceleration.x = message->linear_acceleration()->x();
-    data_.linear_acceleration.y = message->linear_acceleration()->y();
-    data_.linear_acceleration.z = message->linear_acceleration()->z();
+  // Convert to Imu
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
 
-    data_.angular_velocity.x = message->angular_velocity()->x();
-    data_.angular_velocity.y = message->angular_velocity()->y();
-    data_.angular_velocity.z = message->angular_velocity()->z();
-  }
+  data_.linear_acceleration.x = imu->linear_acceleration()->x();
+  data_.linear_acceleration.y = imu->linear_acceleration()->y();
+  data_.linear_acceleration.z = imu->linear_acceleration()->z();
+
+  data_.angular_velocity.x = imu->angular_velocity()->x();
+  data_.angular_velocity.y = imu->angular_velocity()->y();
+  data_.angular_velocity.z = imu->angular_velocity()->z();
 }
 
 // --------------------------------- GPS ---------------------------------- //
@@ -220,46 +216,43 @@ GPS::GPS(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
 void GPS::publish(std::vector<uint8_t> buffer, int received) {
-  if (use_protobuf) {
-    // Parse buffer
-    ChronoMessages::gps message;
-    message.ParseFromArray(buffer.data() + 1, received - 1);
+  // Parse buffer
+  ChronoMessages::gps message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
 
-    // Convert to NavSatFix
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "map";
+  // Convert to NavSatFix
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "map";
 
-    data_.latitude = message.latitude();
-    data_.longitude = message.longitude();
-    data_.altitude = message.altitude();
+  data_.latitude = message.latitude();
+  data_.longitude = message.longitude();
+  data_.altitude = message.altitude();
 
-    data_.position_covariance[0] = 0.0;
-    data_.position_covariance[4] = 0.0;
-    data_.position_covariance[8] = 0.0;
+  data_.position_covariance[0] = 0.0;
+  data_.position_covariance[4] = 0.0;
+  data_.position_covariance[8] = 0.0;
 
-    pub_.publish(data_);
-  } else {
-    // Parse buffer
-    std::cout << "Test 1" << std::endl;
-    const RosMessage::gps *message =
-        flatbuffers::GetRoot<RosMessage::gps>(buffer.data());
-    std::cout << "Test 2" << std::endl;
+  pub_.publish(data_);
+}
 
-    // Convert to NavSatFix
-    data_.header.stamp = ros::Time::now();
-    data_.header.frame_id = "map";
+void GPS::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::gps *gps =
+      static_cast<const RosMessage::gps *>(message->type());
 
-    data_.latitude = message->latitude();
-    std::cout << "Test 3" << std::endl;
-    data_.longitude = message->longitude();
-    data_.altitude = message->altitude();
+  // Convert to NavSatFix
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "map";
 
-    data_.position_covariance[0] = 0.0;
-    data_.position_covariance[4] = 0.0;
-    data_.position_covariance[8] = 0.0;
+  data_.latitude = gps->latitude();
+  data_.longitude = gps->longitude();
+  data_.altitude = gps->altitude();
 
-    pub_.publish(data_);
-  }
+  data_.position_covariance[0] = 0.0;
+  data_.position_covariance[4] = 0.0;
+  data_.position_covariance[8] = 0.0;
+
+  pub_.publish(data_);
 }
 
 // --------------------------------- TIME ---------------------------------- //
@@ -267,22 +260,22 @@ Time::Time(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
 void Time::publish(std::vector<uint8_t> buffer, int received) {
-  if (use_protobuf) {
-    // Parse buffer
-    ChronoMessages::time message;
-    message.ParseFromArray(buffer.data() + 1, received - 1);
-    data_.clock = ros::Time(message.t());
+  // Parse buffer
+  ChronoMessages::time message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
+  data_.clock = ros::Time(message.t());
 
-    pub_.publish(data_);
-  } else {
-    // Parse buffer
-    const RosMessage::time *message =
-        flatbuffers::GetRoot<RosMessage::time>(buffer.data());
+  pub_.publish(data_);
+}
 
-    data_.clock = ros::Time(message->t());
+void Time::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::time *time =
+      static_cast<const RosMessage::time *>(message->type());
 
-    pub_.publish(data_);
-  }
+  data_.clock = ros::Time(time->t());
+
+  pub_.publish(data_);
 }
 
 // --------------------------------- CONES ---------------------------------- //
@@ -290,56 +283,57 @@ Cones::Cones(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
 void Cones::publish(std::vector<uint8_t> buffer, int received) {
-  if (use_protobuf) {
-    // Parse buffer
-    ChronoMessages::cones message;
-    message.ParseFromArray(buffer.data() + 1, received - 1);
+  // Parse buffer
+  ChronoMessages::cones message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
 
-    data_.blue_cones.resize(message.blue_cones_size());
-    data_.yellow_cones.resize(message.yellow_cones_size());
-    data_.orange_cones.resize(2);
-    for (int i = 0; i < message.blue_cones_size(); i++) {
-      data_.blue_cones[i].position.x = message.blue_cones(i).x();
-      data_.blue_cones[i].position.y = message.blue_cones(i).y();
-      data_.blue_cones[i].position.z = message.blue_cones(i).z();
-      data_.blue_cones[i].color = common_msgs::Cone::BLUE;
+  data_.blue_cones.resize(message.blue_cones_size());
+  data_.yellow_cones.resize(message.yellow_cones_size());
+  data_.orange_cones.resize(2);
+  for (int i = 0; i < message.blue_cones_size(); i++) {
+    data_.blue_cones[i].position.x = message.blue_cones(i).x();
+    data_.blue_cones[i].position.y = message.blue_cones(i).y();
+    data_.blue_cones[i].position.z = message.blue_cones(i).z();
+    data_.blue_cones[i].color = common_msgs::Cone::BLUE;
 
-      data_.yellow_cones[i].position.x = message.yellow_cones(i).x();
-      data_.yellow_cones[i].position.y = message.yellow_cones(i).y();
-      data_.yellow_cones[i].position.z = message.yellow_cones(i).z();
-      data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
+    data_.yellow_cones[i].position.x = message.yellow_cones(i).x();
+    data_.yellow_cones[i].position.y = message.yellow_cones(i).y();
+    data_.yellow_cones[i].position.z = message.yellow_cones(i).z();
+    data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
 
-      // if (i < 2) {
-      //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
-      //   data_.orange_cones[i].position.y = message.orange_cones(i).y();
-      //   data_.orange_cones[i].position.z = message.orange_cones(i).z();
-      //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
-      // }
-    }
-  } else {
-    const RosMessage::cones *message =
-        flatbuffers::GetRoot<RosMessage::cones>(buffer.data());
+    // if (i < 2) {
+    //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
+    //   data_.orange_cones[i].position.y = message.orange_cones(i).y();
+    //   data_.orange_cones[i].position.z = message.orange_cones(i).z();
+    //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
+    // }
+  }
+}
 
-    data_.blue_cones.resize(message->blue_cones()->Length());
-    data_.yellow_cones.resize(message->yellow_cones()->Length());
-    data_.orange_cones.resize(2);
-    for (int i = 0; i < message->blue_cones()->Length(); i++) {
-      data_.blue_cones[i].position.x = message->blue_cones()->Get(i)->x();
-      data_.blue_cones[i].position.y = message->blue_cones()->Get(i)->y();
-      data_.blue_cones[i].position.z = message->blue_cones()->Get(i)->z();
-      data_.blue_cones[i].color = common_msgs::Cone::BLUE;
+void Cones::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::cones *cones =
+      static_cast<const RosMessage::cones *>(message->type());
 
-      data_.yellow_cones[i].position.x = message->yellow_cones()->Get(i)->x();
-      data_.yellow_cones[i].position.y = message->yellow_cones()->Get(i)->y();
-      data_.yellow_cones[i].position.z = message->yellow_cones()->Get(i)->z();
-      data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
+  data_.blue_cones.resize(cones->blue_cones()->Length());
+  data_.yellow_cones.resize(cones->yellow_cones()->Length());
+  data_.orange_cones.resize(2);
+  for (int i = 0; i < cones->blue_cones()->Length(); i++) {
+    data_.blue_cones[i].position.x = cones->blue_cones()->Get(i)->x();
+    data_.blue_cones[i].position.y = cones->blue_cones()->Get(i)->y();
+    data_.blue_cones[i].position.z = cones->blue_cones()->Get(i)->z();
+    data_.blue_cones[i].color = common_msgs::Cone::BLUE;
 
-      // if (i < 2) {
-      //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
-      //   data_.orange_cones[i].position.y = message.orange_cones(i).y();
-      //   data_.orange_cones[i].position.z = message.orange_cones(i).z();
-      //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
-      // }
-    }
+    data_.yellow_cones[i].position.x = cones->yellow_cones()->Get(i)->x();
+    data_.yellow_cones[i].position.y = cones->yellow_cones()->Get(i)->y();
+    data_.yellow_cones[i].position.z = cones->yellow_cones()->Get(i)->z();
+    data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
+
+    // if (i < 2) {
+    //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
+    //   data_.orange_cones[i].position.y = message.orange_cones(i).y();
+    //   data_.orange_cones[i].position.z = message.orange_cones(i).z();
+    //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
+    // }
   }
 }

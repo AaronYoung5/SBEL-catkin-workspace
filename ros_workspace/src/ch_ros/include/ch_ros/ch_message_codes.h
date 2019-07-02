@@ -7,7 +7,7 @@ namespace ChMessageCodes {
     IMU,
     CONTROL,
     TIME,
-    LIGHT,
+    VEHICLE,
     CONE,
     EXIT
   };

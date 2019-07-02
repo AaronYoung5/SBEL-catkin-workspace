@@ -49,25 +49,30 @@ std::vector<std::string> parse_command_line(int argc, char **argv) {
 
 int main(int argc, char **argv) {
   // try {
-    std::vector<std::string> opts = parse_command_line(argc, argv);
+  std::vector<std::string> opts = parse_command_line(argc, argv);
 
-    ros::init(argc, argv, "ch_ros");
-    ros::NodeHandle n;
+  ros::init(argc, argv, "ch_ros");
+  ros::NodeHandle n;
 
-    ChRosHandler handler(n, opts[0], opts[1]);
+  ChRosHandler handler(n, opts[0], opts[1]);
 
-    signal(SIGINT, exit);
+  signal(SIGINT, exit);
+  bool use_protobuf = false;
 
-    while (ros::ok() && handler.ok()) {
-// #ifdef TCP
-     // std::cout << "Looping" << std::endl;
-      handler.tcpReceiveAndHandle();
-// #else
-      // handler.receiveAndHandle();
-// #endif
-
-      ros::spinOnce();
+  while (ros::ok() && handler.ok()) {
+    // #ifdef TCP
+    // std::cout << "Looping" << std::endl;
+    if (use_protobuf) {
+      handler.protobufReceiveAndHandle();
+    } else {
+      handler.flatbufferReceiveAndHandle();
     }
+    // #else
+    // handler.receiveAndHandle();
+    // #endif
+
+    ros::spinOnce();
+  }
   // } catch (std::exception &e) {
   //   std::cerr << "Error :: " << e.what() << std::endl;
   // }

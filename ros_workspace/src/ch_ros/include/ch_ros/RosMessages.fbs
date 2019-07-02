@@ -6,6 +6,16 @@ struct Vector {
   z:float;
 }
 
+struct Header {
+  size:int;
+}
+
+union Type { lidar, gps, imu, control, time, vehicle, cones, exit  }
+
+table message {
+  type:Type;
+}
+
 table lidar {
   points:[Vector];
 }

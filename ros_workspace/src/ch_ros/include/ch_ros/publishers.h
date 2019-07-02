@@ -1,5 +1,6 @@
 #pragma once
 #define FLATBUFFERS_DEBUG_VERIFICATION_FAILURE
+#define FLATBUFFERS_ASSERT
 // Ros includes
 #include "common_msgs/ConeMap.h"
 #include "ros/ros.h"
@@ -12,14 +13,13 @@
 // #include <common_utilities/Vector.h>
 
 // Internal package includes
-#include "protobuf_messages.pb.h"
 #include "ch_ros/RosMessages_generated.h"
+#include "protobuf_messages.pb.h"
 
 template <typename msgtype> class Publisher {
 protected:
   msgtype data_;
   ros::Publisher pub_;
-  bool use_protobuf = false;
 
 public:
   Publisher(ros::NodeHandle n, std::string node_name, int queue_size) {
@@ -27,6 +27,7 @@ public:
   }
 
   virtual void publish(std::vector<uint8_t> buffer, int received) = 0;
+  virtual void publish(const RosMessage::message *message, int received) = 0;
 };
 
 // --------------------------------- Lidar ---------------------------------- //
@@ -34,10 +35,12 @@ class Lidar : Publisher<sensor_msgs::PointCloud2> {
 private:
   int expected_, last_id_ = 0;
   bool is_complete_;
+
 public:
   Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
   void tcppublish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
 };
 
 // --------------------------------- IMU ---------------------------------- //
@@ -45,6 +48,7 @@ class IMU : Publisher<sensor_msgs::Imu> {
 public:
   IMU(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
 };
 
 // --------------------------------- GPS ---------------------------------- //
@@ -52,6 +56,7 @@ class GPS : Publisher<sensor_msgs::NavSatFix> {
 public:
   GPS(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
 };
 
 // --------------------------------- TIME ---------------------------------- //
@@ -59,6 +64,7 @@ class Time : Publisher<rosgraph_msgs::Clock> {
 public:
   Time(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
 };
 
 // --------------------------------- Cones ---------------------------------- //
@@ -66,4 +72,5 @@ class Cones : Publisher<common_msgs::ConeMap> {
 public:
   Cones(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
 };

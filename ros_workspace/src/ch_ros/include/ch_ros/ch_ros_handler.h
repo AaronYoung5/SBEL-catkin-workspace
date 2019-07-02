@@ -53,12 +53,16 @@ public:
 
   // Destructor
   // Closes socket
-  ~ChRosHandler() { socket_.close(); tcpsocket_.close(); }
+  ~ChRosHandler() {
+    socket_.close();
+    tcpsocket_.close();
+  }
 
   // Looks for and receives info over the socket and calls necessary handling
   // methods
   void receiveAndHandle();
-  void tcpReceiveAndHandle();
+  void protobufReceiveAndHandle();
+  void flatbufferReceiveAndHandle();
   void tcpSendControls();
 
   // Is Chrono running?
@@ -69,6 +73,8 @@ private:
 
   // Allocates message reading to helper methods
   void handle(std::vector<uint8_t> buffer, int received);
+  // Allocates message reading to helper methods
+  void handle(const RosMessage::message* message, int received);
 
   // Sets target controls to send
   void setTargetControls(const common_msgs::Control::ConstPtr &msg);

@@ -54,36 +54,49 @@ void ChRosHandler::receiveAndHandle() {
   // Receieve and record size of packet
   int received = socket_.receive_from(
       boost::asio::buffer(buffer.data(), available), endpoint_);
+  // int code = buffer.data()[0];
   // Handle received message
   handle(buffer, received);
 }
 
-void ChRosHandler::tcpReceiveAndHandle() {
+void ChRosHandler::protobufReceiveAndHandle() {
   // Allocate space for message "header"
   std::vector<uint8_t> buffer(4);
   // Receive just the "header"
   tcpsocket_.receive(boost::asio::buffer(buffer.data(), 4), 0);
   // Check the size of the message to read
-  int available = ((int*)buffer.data())[0] + 1;
-  std::cout << "Available :: " << available << std::endl;
-  // tcpsocket_.receive(boost::asio::null_buffers(), 0);
-  // Check the size of the buffer
-  // int available = tcpsocket_.available();
+  int available = ((int *)buffer.data())[0] + 1;
+  // std::cout << "Available :: " << available << std::endl;
   // Allocate space for the message
   buffer.resize(available);
-  // std::vector<uint8_t> buffer(available);
-  std::cout << ((int*)buffer.data())[0] << std::endl;
   // Receive and record size of received packet
   // Read allows us to read tcp buffer until all (int)available are received
   int received = boost::asio::read(
       tcpsocket_, boost::asio::buffer(buffer.data(), available));
-  std::cout << "Bytes Received :: " << received << std::endl;
+  // std::cout << "Bytes Received :: " << received << std::endl;
   handle(buffer, received);
+}
+
+void ChRosHandler::flatbufferReceiveAndHandle() {
+  // Wait for tcp stream to fill
+  tcpsocket_.receive(boost::asio::null_buffers(), 0);
+  // Check the size of the buffer
+  int available = tcpsocket_.available();
+  // Allocate space for the message
+  std::vector<uint8_t> buffer(available);
+  // Receive and record size of received packet
+  // Read allows us to read tcp buffer until all (int)available are received
+  int received = boost::asio::read(
+      tcpsocket_, boost::asio::buffer(buffer.data(), available));
+  // std::cout << "Bytes Received :: " << received << std::endl;
+  const RosMessage::message *message =
+      flatbuffers::GetRoot<RosMessage::message>(buffer.data());
+  handle(message, received);
 }
 
 void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
 #ifdef TCP
-  tcpSendControls();
+  // tcpSendControls();
 #else
   sendControls();
 #endif
@@ -109,6 +122,40 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
     cones_.publish(buffer, received);
     break;
   case ChMessageCode::EXIT:
+    ok_ = false;
+    break;
+  }
+
+  // if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
+  // sendControls();
+  // }
+}
+
+void ChRosHandler::handle(const RosMessage::message *message, int received) {
+#ifdef TCP
+  tcpSendControls();
+#else
+  sendControls();
+#endif
+
+  // Determine message type
+  switch (message->type_type()) {
+  case RosMessage::Type_lidar:
+    lidar_.publish(message, received);
+    break;
+  case RosMessage::Type_gps:
+    gps_.publish(message, received);
+    break;
+  case RosMessage::Type_imu:
+    imu_.publish(message, received);
+    break;
+  case RosMessage::Type_time:
+    time_.publish(message, received);
+    break;
+  case RosMessage::Type_cones:
+    cones_.publish(message, received);
+    break;
+  case RosMessage::Type_exit:
     ok_ = false;
     break;
   }
