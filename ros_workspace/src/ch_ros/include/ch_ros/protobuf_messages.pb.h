@@ -454,102 +454,6 @@ class imu : public ::google::protobuf::Message /* @@protoc_insertion_point(class
 };
 // -------------------------------------------------------------------
 
-class vehicle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ChronoMessages.vehicle) */ {
- public:
-  vehicle();
-  virtual ~vehicle();
-
-  vehicle(const vehicle& from);
-
-  inline vehicle& operator=(const vehicle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const vehicle& default_instance();
-
-  void Swap(vehicle* other);
-
-  // implements Message ----------------------------------------------
-
-  inline vehicle* New() const { return New(NULL); }
-
-  vehicle* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const vehicle& from);
-  void MergeFrom(const vehicle& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(vehicle* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional double x = 1;
-  void clear_x();
-  static const int kXFieldNumber = 1;
-  double x() const;
-  void set_x(double value);
-
-  // optional double y = 2;
-  void clear_y();
-  static const int kYFieldNumber = 2;
-  double y() const;
-  void set_y(double value);
-
-  // optional double z = 3;
-  void clear_z();
-  static const int kZFieldNumber = 3;
-  double z() const;
-  void set_z(double value);
-
-  // @@protoc_insertion_point(class_scope:ChronoMessages.vehicle)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  double x_;
-  double y_;
-  double z_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
-  friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
-  friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
-
-  void InitAsDefaultInstance();
-  static vehicle* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class control : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ChronoMessages.control) */ {
  public:
   control();
@@ -826,6 +730,111 @@ class cones : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   void InitAsDefaultInstance();
   static cones* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class vehicle : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ChronoMessages.vehicle) */ {
+ public:
+  vehicle();
+  virtual ~vehicle();
+
+  vehicle(const vehicle& from);
+
+  inline vehicle& operator=(const vehicle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const vehicle& default_instance();
+
+  void Swap(vehicle* other);
+
+  // implements Message ----------------------------------------------
+
+  inline vehicle* New() const { return New(NULL); }
+
+  vehicle* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const vehicle& from);
+  void MergeFrom(const vehicle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(vehicle* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .ChronoMessages.Vector position = 1;
+  bool has_position() const;
+  void clear_position();
+  static const int kPositionFieldNumber = 1;
+  const ::ChronoMessages::Vector& position() const;
+  ::ChronoMessages::Vector* mutable_position();
+  ::ChronoMessages::Vector* release_position();
+  void set_allocated_position(::ChronoMessages::Vector* position);
+
+  // optional .ChronoMessages.Vector velocity = 2;
+  bool has_velocity() const;
+  void clear_velocity();
+  static const int kVelocityFieldNumber = 2;
+  const ::ChronoMessages::Vector& velocity() const;
+  ::ChronoMessages::Vector* mutable_velocity();
+  ::ChronoMessages::Vector* release_velocity();
+  void set_allocated_velocity(::ChronoMessages::Vector* velocity);
+
+  // optional .ChronoMessages.Vector acceleration = 3;
+  bool has_acceleration() const;
+  void clear_acceleration();
+  static const int kAccelerationFieldNumber = 3;
+  const ::ChronoMessages::Vector& acceleration() const;
+  ::ChronoMessages::Vector* mutable_acceleration();
+  ::ChronoMessages::Vector* release_acceleration();
+  void set_allocated_acceleration(::ChronoMessages::Vector* acceleration);
+
+  // @@protoc_insertion_point(class_scope:ChronoMessages.vehicle)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::ChronoMessages::Vector* position_;
+  ::ChronoMessages::Vector* velocity_;
+  ::ChronoMessages::Vector* acceleration_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
+  friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
+  friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static vehicle* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1206,52 +1215,6 @@ inline void imu::set_allocated_orientation(::ChronoMessages::Vector* orientation
 
 // -------------------------------------------------------------------
 
-// vehicle
-
-// optional double x = 1;
-inline void vehicle::clear_x() {
-  x_ = 0;
-}
-inline double vehicle::x() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.x)
-  return x_;
-}
-inline void vehicle::set_x(double value) {
-  
-  x_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.x)
-}
-
-// optional double y = 2;
-inline void vehicle::clear_y() {
-  y_ = 0;
-}
-inline double vehicle::y() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.y)
-  return y_;
-}
-inline void vehicle::set_y(double value) {
-  
-  y_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.y)
-}
-
-// optional double z = 3;
-inline void vehicle::clear_z() {
-  z_ = 0;
-}
-inline double vehicle::z() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.z)
-  return z_;
-}
-inline void vehicle::set_z(double value) {
-  
-  z_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.z)
-}
-
-// -------------------------------------------------------------------
-
 // control
 
 // optional double throttle = 1;
@@ -1376,6 +1339,124 @@ inline const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
 cones::yellow_cones() const {
   // @@protoc_insertion_point(field_list:ChronoMessages.cones.yellow_cones)
   return yellow_cones_;
+}
+
+// -------------------------------------------------------------------
+
+// vehicle
+
+// optional .ChronoMessages.Vector position = 1;
+inline bool vehicle::has_position() const {
+  return !_is_default_instance_ && position_ != NULL;
+}
+inline void vehicle::clear_position() {
+  if (GetArenaNoVirtual() == NULL && position_ != NULL) delete position_;
+  position_ = NULL;
+}
+inline const ::ChronoMessages::Vector& vehicle::position() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.position)
+  return position_ != NULL ? *position_ : *default_instance_->position_;
+}
+inline ::ChronoMessages::Vector* vehicle::mutable_position() {
+  
+  if (position_ == NULL) {
+    position_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.position)
+  return position_;
+}
+inline ::ChronoMessages::Vector* vehicle::release_position() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.position)
+  
+  ::ChronoMessages::Vector* temp = position_;
+  position_ = NULL;
+  return temp;
+}
+inline void vehicle::set_allocated_position(::ChronoMessages::Vector* position) {
+  delete position_;
+  position_ = position;
+  if (position) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.position)
+}
+
+// optional .ChronoMessages.Vector velocity = 2;
+inline bool vehicle::has_velocity() const {
+  return !_is_default_instance_ && velocity_ != NULL;
+}
+inline void vehicle::clear_velocity() {
+  if (GetArenaNoVirtual() == NULL && velocity_ != NULL) delete velocity_;
+  velocity_ = NULL;
+}
+inline const ::ChronoMessages::Vector& vehicle::velocity() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.velocity)
+  return velocity_ != NULL ? *velocity_ : *default_instance_->velocity_;
+}
+inline ::ChronoMessages::Vector* vehicle::mutable_velocity() {
+  
+  if (velocity_ == NULL) {
+    velocity_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.velocity)
+  return velocity_;
+}
+inline ::ChronoMessages::Vector* vehicle::release_velocity() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.velocity)
+  
+  ::ChronoMessages::Vector* temp = velocity_;
+  velocity_ = NULL;
+  return temp;
+}
+inline void vehicle::set_allocated_velocity(::ChronoMessages::Vector* velocity) {
+  delete velocity_;
+  velocity_ = velocity;
+  if (velocity) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.velocity)
+}
+
+// optional .ChronoMessages.Vector acceleration = 3;
+inline bool vehicle::has_acceleration() const {
+  return !_is_default_instance_ && acceleration_ != NULL;
+}
+inline void vehicle::clear_acceleration() {
+  if (GetArenaNoVirtual() == NULL && acceleration_ != NULL) delete acceleration_;
+  acceleration_ = NULL;
+}
+inline const ::ChronoMessages::Vector& vehicle::acceleration() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.acceleration)
+  return acceleration_ != NULL ? *acceleration_ : *default_instance_->acceleration_;
+}
+inline ::ChronoMessages::Vector* vehicle::mutable_acceleration() {
+  
+  if (acceleration_ == NULL) {
+    acceleration_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.acceleration)
+  return acceleration_;
+}
+inline ::ChronoMessages::Vector* vehicle::release_acceleration() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.acceleration)
+  
+  ::ChronoMessages::Vector* temp = acceleration_;
+  acceleration_ = NULL;
+  return temp;
+}
+inline void vehicle::set_allocated_acceleration(::ChronoMessages::Vector* acceleration) {
+  delete acceleration_;
+  acceleration_ = acceleration;
+  if (acceleration) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.acceleration)
 }
 
 // -------------------------------------------------------------------

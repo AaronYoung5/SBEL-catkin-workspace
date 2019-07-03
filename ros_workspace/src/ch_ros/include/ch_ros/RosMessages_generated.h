@@ -35,9 +35,9 @@ enum Type {
   Type_lidar = 1,
   Type_gps = 2,
   Type_imu = 3,
-  Type_vehicle = 4,
-  Type_control = 5,
-  Type_time = 6,
+  Type_control = 4,
+  Type_time = 5,
+  Type_vehicle = 6,
   Type_cones = 7,
   Type_exit = 8,
   Type_MIN = Type_NONE,
@@ -50,9 +50,9 @@ inline const Type (&EnumValuesType())[9] {
     Type_lidar,
     Type_gps,
     Type_imu,
-    Type_vehicle,
     Type_control,
     Type_time,
+    Type_vehicle,
     Type_cones,
     Type_exit
   };
@@ -65,9 +65,9 @@ inline const char * const *EnumNamesType() {
     "lidar",
     "gps",
     "imu",
-    "vehicle",
     "control",
     "time",
+    "vehicle",
     "cones",
     "exit",
     nullptr
@@ -97,16 +97,16 @@ template<> struct TypeTraits<RosMessage::imu> {
   static const Type enum_value = Type_imu;
 };
 
-template<> struct TypeTraits<RosMessage::vehicle> {
-  static const Type enum_value = Type_vehicle;
-};
-
 template<> struct TypeTraits<RosMessage::control> {
   static const Type enum_value = Type_control;
 };
 
 template<> struct TypeTraits<RosMessage::time> {
   static const Type enum_value = Type_time;
+};
+
+template<> struct TypeTraits<RosMessage::vehicle> {
+  static const Type enum_value = Type_vehicle;
 };
 
 template<> struct TypeTraits<RosMessage::cones> {
@@ -185,14 +185,14 @@ struct message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const RosMessage::imu *type_as_imu() const {
     return type_type() == RosMessage::Type_imu ? static_cast<const RosMessage::imu *>(type()) : nullptr;
   }
-  const RosMessage::vehicle *type_as_vehicle() const {
-    return type_type() == RosMessage::Type_vehicle ? static_cast<const RosMessage::vehicle *>(type()) : nullptr;
-  }
   const RosMessage::control *type_as_control() const {
     return type_type() == RosMessage::Type_control ? static_cast<const RosMessage::control *>(type()) : nullptr;
   }
   const RosMessage::time *type_as_time() const {
     return type_type() == RosMessage::Type_time ? static_cast<const RosMessage::time *>(type()) : nullptr;
+  }
+  const RosMessage::vehicle *type_as_vehicle() const {
+    return type_type() == RosMessage::Type_vehicle ? static_cast<const RosMessage::vehicle *>(type()) : nullptr;
   }
   const RosMessage::cones *type_as_cones() const {
     return type_type() == RosMessage::Type_cones ? static_cast<const RosMessage::cones *>(type()) : nullptr;
@@ -221,16 +221,16 @@ template<> inline const RosMessage::imu *message::type_as<RosMessage::imu>() con
   return type_as_imu();
 }
 
-template<> inline const RosMessage::vehicle *message::type_as<RosMessage::vehicle>() const {
-  return type_as_vehicle();
-}
-
 template<> inline const RosMessage::control *message::type_as<RosMessage::control>() const {
   return type_as_control();
 }
 
 template<> inline const RosMessage::time *message::type_as<RosMessage::time>() const {
   return type_as_time();
+}
+
+template<> inline const RosMessage::vehicle *message::type_as<RosMessage::vehicle>() const {
+  return type_as_vehicle();
 }
 
 template<> inline const RosMessage::cones *message::type_as<RosMessage::cones>() const {
@@ -444,14 +444,24 @@ inline flatbuffers::Offset<imu> Createimu(
 
 struct vehicle FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_POSITION = 4
+    VT_POSITION = 4,
+    VT_VELOCITY = 6,
+    VT_ACCELERATION = 8
   };
   const RosMessage::Vector *position() const {
     return GetStruct<const RosMessage::Vector *>(VT_POSITION);
   }
+  const RosMessage::Vector *velocity() const {
+    return GetStruct<const RosMessage::Vector *>(VT_VELOCITY);
+  }
+  const RosMessage::Vector *acceleration() const {
+    return GetStruct<const RosMessage::Vector *>(VT_ACCELERATION);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<RosMessage::Vector>(verifier, VT_POSITION) &&
+           VerifyField<RosMessage::Vector>(verifier, VT_VELOCITY) &&
+           VerifyField<RosMessage::Vector>(verifier, VT_ACCELERATION) &&
            verifier.EndTable();
   }
 };
@@ -461,6 +471,12 @@ struct vehicleBuilder {
   flatbuffers::uoffset_t start_;
   void add_position(const RosMessage::Vector *position) {
     fbb_.AddStruct(vehicle::VT_POSITION, position);
+  }
+  void add_velocity(const RosMessage::Vector *velocity) {
+    fbb_.AddStruct(vehicle::VT_VELOCITY, velocity);
+  }
+  void add_acceleration(const RosMessage::Vector *acceleration) {
+    fbb_.AddStruct(vehicle::VT_ACCELERATION, acceleration);
   }
   explicit vehicleBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -476,8 +492,12 @@ struct vehicleBuilder {
 
 inline flatbuffers::Offset<vehicle> Createvehicle(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const RosMessage::Vector *position = 0) {
+    const RosMessage::Vector *position = 0,
+    const RosMessage::Vector *velocity = 0,
+    const RosMessage::Vector *acceleration = 0) {
   vehicleBuilder builder_(_fbb);
+  builder_.add_acceleration(acceleration);
+  builder_.add_velocity(velocity);
   builder_.add_position(position);
   return builder_.Finish();
 }
@@ -703,16 +723,16 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
       auto ptr = reinterpret_cast<const RosMessage::imu *>(obj);
       return verifier.VerifyTable(ptr);
     }
-    case Type_vehicle: {
-      auto ptr = reinterpret_cast<const RosMessage::vehicle *>(obj);
-      return verifier.VerifyTable(ptr);
-    }
     case Type_control: {
       auto ptr = reinterpret_cast<const RosMessage::control *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_time: {
       auto ptr = reinterpret_cast<const RosMessage::time *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_vehicle: {
+      auto ptr = reinterpret_cast<const RosMessage::vehicle *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_cones: {

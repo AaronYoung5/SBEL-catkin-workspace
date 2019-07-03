@@ -3,6 +3,7 @@
 #define FLATBUFFERS_ASSERT
 // Ros includes
 #include "common_msgs/ConeMap.h"
+#include "common_msgs/VehState.h"
 #include "ros/ros.h"
 #include "rosgraph_msgs/Clock.h"
 #include "sensor_msgs/Imu.h"
@@ -61,16 +62,28 @@ public:
 
 // --------------------------------- TIME ---------------------------------- //
 class Time : Publisher<rosgraph_msgs::Clock> {
+private:
+  float time_;
 public:
   Time(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
   void publish(const RosMessage::message *message, int received);
+
+  float GetTime() { return time_; }
 };
 
-// --------------------------------- Cones ---------------------------------- //
+// --------------------------------- CONES ---------------------------------- //
 class Cones : Publisher<common_msgs::ConeMap> {
 public:
   Cones(ros::NodeHandle n, std::string node_name, int queue_size);
+  void publish(std::vector<uint8_t> buffer, int received);
+  void publish(const RosMessage::message *message, int received);
+};
+
+// --------------------------------- VEHICLE ---------------------------------- //
+class Vehicle : Publisher<common_msgs::VehState> {
+public:
+  Vehicle(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(std::vector<uint8_t> buffer, int received);
   void publish(const RosMessage::message *message, int received);
 };

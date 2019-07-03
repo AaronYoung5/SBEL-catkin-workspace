@@ -27,12 +27,6 @@ message imu {
   Vector orientation = 3;
 }
 
-message vehicle {
-  double x = 1;
-  double y = 2;
-  double z = 3;
-}
-
 message control {
     double throttle = 1;
     double steering = 2;
@@ -46,6 +40,12 @@ message time {
 message cones {
   repeated Vector blue_cones = 1;
   repeated Vector yellow_cones = 2;
+}
+
+message vehicle {
+  Vector position = 1;
+  Vector velocity = 2;
+  Vector acceleration = 3;
 }
 
 message exit {

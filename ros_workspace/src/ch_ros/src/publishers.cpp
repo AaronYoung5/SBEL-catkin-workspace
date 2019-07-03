@@ -209,6 +209,8 @@ void IMU::publish(const RosMessage::message *message, int received) {
   data_.angular_velocity.x = imu->angular_velocity()->x();
   data_.angular_velocity.y = imu->angular_velocity()->y();
   data_.angular_velocity.z = imu->angular_velocity()->z();
+
+  pub_.publish(data_);
 }
 
 // --------------------------------- GPS ---------------------------------- //
@@ -257,13 +259,14 @@ void GPS::publish(const RosMessage::message *message, int received) {
 
 // --------------------------------- TIME ---------------------------------- //
 Time::Time(ros::NodeHandle n, std::string node_name, int queue_size)
-    : Publisher(n, node_name, queue_size) {}
+    : Publisher(n, node_name, queue_size), time_(0) {}
 
 void Time::publish(std::vector<uint8_t> buffer, int received) {
   // Parse buffer
   ChronoMessages::time message;
   message.ParseFromArray(buffer.data() + 1, received - 1);
-  data_.clock = ros::Time(message.t());
+  time_ += message.t();
+  data_.clock = ros::Time(time_);
 
   pub_.publish(data_);
 }
@@ -273,7 +276,8 @@ void Time::publish(const RosMessage::message *message, int received) {
   const RosMessage::time *time =
       static_cast<const RosMessage::time *>(message->type());
 
-  data_.clock = ros::Time(time->t());
+  time_ = time->t();
+  data_.clock = ros::Time(time_);
 
   pub_.publish(data_);
 }
@@ -308,6 +312,8 @@ void Cones::publish(std::vector<uint8_t> buffer, int received) {
     //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
     // }
   }
+
+  pub_.publish(data_);
 }
 
 void Cones::publish(const RosMessage::message *message, int received) {
@@ -336,4 +342,41 @@ void Cones::publish(const RosMessage::message *message, int received) {
     //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
     // }
   }
+
+  pub_.publish(data_);
+}
+
+// --------------------------------- VEHICLE ----------------------------------
+// //
+Vehicle::Vehicle(ros::NodeHandle n, std::string node_name, int queue_size)
+    : Publisher(n, node_name, queue_size) {}
+
+void Vehicle::publish(std::vector<uint8_t> buffer, int received) {
+  // Parse buffer
+  ChronoMessages::vehicle message;
+  message.ParseFromArray(buffer.data() + 1, received - 1);
+
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "map";
+
+  data_.state.position.x = message.position().x();
+  data_.state.position.y = message.position().y();
+  data_.state.position.z = message.position().z();
+
+  pub_.publish(data_);
+}
+
+void Vehicle::publish(const RosMessage::message *message, int received) {
+  // Parse buffer
+  const RosMessage::vehicle *vehicle =
+      static_cast<const RosMessage::vehicle *>(message->type());
+
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "map";
+
+  data_.state.position.x = vehicle->position()->x();
+  data_.state.position.y = vehicle->position()->y();
+  data_.state.position.z = vehicle->position()->z();
+
+  pub_.publish(data_);
 }

@@ -34,6 +34,7 @@ private:
   GPS gps_;
   Time time_;
   Cones cones_;
+  Vehicle vehicle_;
 
   // Control subscriber
   ros::Subscriber control_;
@@ -43,6 +44,12 @@ private:
 
   // Controls
   float throttle_, steering_, braking_;
+
+  // Controls send rate
+  float send_rate_;
+
+  // Boolean describing if controls have been updated
+  bool controls_updated_;
 
 public:
   // Public functions
@@ -63,7 +70,9 @@ public:
   void receiveAndHandle();
   void protobufReceiveAndHandle();
   void flatbufferReceiveAndHandle();
-  void tcpSendControls();
+  void protobufSendControls();
+  void flatbuffersSendControls();
+  bool shouldSend();
 
   // Is Chrono running?
   bool ok() { return ok_; }

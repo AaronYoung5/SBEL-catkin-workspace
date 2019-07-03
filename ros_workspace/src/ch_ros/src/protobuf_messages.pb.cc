@@ -33,9 +33,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* imu_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   imu_reflection_ = NULL;
-const ::google::protobuf::Descriptor* vehicle_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  vehicle_reflection_ = NULL;
 const ::google::protobuf::Descriptor* control_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   control_reflection_ = NULL;
@@ -45,6 +42,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* cones_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   cones_reflection_ = NULL;
+const ::google::protobuf::Descriptor* vehicle_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  vehicle_reflection_ = NULL;
 const ::google::protobuf::Descriptor* exit_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   exit_reflection_ = NULL;
@@ -128,24 +128,7 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       sizeof(imu),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(imu, _is_default_instance_));
-  vehicle_descriptor_ = file->message_type(4);
-  static const int vehicle_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, z_),
-  };
-  vehicle_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      vehicle_descriptor_,
-      vehicle::default_instance_,
-      vehicle_offsets_,
-      -1,
-      -1,
-      -1,
-      sizeof(vehicle),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _is_default_instance_));
-  control_descriptor_ = file->message_type(5);
+  control_descriptor_ = file->message_type(4);
   static const int control_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, throttle_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, steering_),
@@ -162,7 +145,7 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       sizeof(control),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(control, _is_default_instance_));
-  time_descriptor_ = file->message_type(6);
+  time_descriptor_ = file->message_type(5);
   static const int time_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, t_),
   };
@@ -177,7 +160,7 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       sizeof(time),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(time, _is_default_instance_));
-  cones_descriptor_ = file->message_type(7);
+  cones_descriptor_ = file->message_type(6);
   static const int cones_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, blue_cones_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, yellow_cones_),
@@ -193,6 +176,23 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       sizeof(cones),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(cones, _is_default_instance_));
+  vehicle_descriptor_ = file->message_type(7);
+  static const int vehicle_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, position_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, velocity_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, acceleration_),
+  };
+  vehicle_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      vehicle_descriptor_,
+      vehicle::default_instance_,
+      vehicle_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(vehicle),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(vehicle, _is_default_instance_));
   exit_descriptor_ = file->message_type(8);
   static const int exit_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, code_),
@@ -230,13 +230,13 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       imu_descriptor_, &imu::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      vehicle_descriptor_, &vehicle::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       control_descriptor_, &control::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       time_descriptor_, &time::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       cones_descriptor_, &cones::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      vehicle_descriptor_, &vehicle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       exit_descriptor_, &exit::default_instance());
 }
@@ -252,14 +252,14 @@ void protobuf_ShutdownFile_protobuf_5fmessages_2eproto() {
   delete gps_reflection_;
   delete imu::default_instance_;
   delete imu_reflection_;
-  delete vehicle::default_instance_;
-  delete vehicle_reflection_;
   delete control::default_instance_;
   delete control_reflection_;
   delete time::default_instance_;
   delete time_reflection_;
   delete cones::default_instance_;
   delete cones_reflection_;
+  delete vehicle::default_instance_;
+  delete vehicle_reflection_;
   delete exit::default_instance_;
   delete exit_reflection_;
 }
@@ -281,33 +281,35 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
     "\001\n\003imu\0220\n\020angular_velocity\030\001 \001(\0132\026.Chron"
     "oMessages.Vector\0223\n\023linear_acceleration\030"
     "\002 \001(\0132\026.ChronoMessages.Vector\022+\n\013orienta"
-    "tion\030\003 \001(\0132\026.ChronoMessages.Vector\"*\n\007ve"
-    "hicle\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\022\t\n\001z\030\003 \001(\001\">"
-    "\n\007control\022\020\n\010throttle\030\001 \001(\001\022\020\n\010steering\030"
-    "\002 \001(\001\022\017\n\007braking\030\003 \001(\001\"\021\n\004time\022\t\n\001t\030\001 \001("
-    "\001\"a\n\005cones\022*\n\nblue_cones\030\001 \003(\0132\026.ChronoM"
-    "essages.Vector\022,\n\014yellow_cones\030\002 \003(\0132\026.C"
-    "hronoMessages.Vector\"\024\n\004exit\022\014\n\004code\030\001 \001"
-    "(\tb\006proto3", 650);
+    "tion\030\003 \001(\0132\026.ChronoMessages.Vector\">\n\007co"
+    "ntrol\022\020\n\010throttle\030\001 \001(\001\022\020\n\010steering\030\002 \001("
+    "\001\022\017\n\007braking\030\003 \001(\001\"\021\n\004time\022\t\n\001t\030\001 \001(\001\"a\n"
+    "\005cones\022*\n\nblue_cones\030\001 \003(\0132\026.ChronoMessa"
+    "ges.Vector\022,\n\014yellow_cones\030\002 \003(\0132\026.Chron"
+    "oMessages.Vector\"\213\001\n\007vehicle\022(\n\010position"
+    "\030\001 \001(\0132\026.ChronoMessages.Vector\022(\n\010veloci"
+    "ty\030\002 \001(\0132\026.ChronoMessages.Vector\022,\n\014acce"
+    "leration\030\003 \001(\0132\026.ChronoMessages.Vector\"\024"
+    "\n\004exit\022\014\n\004code\030\001 \001(\tb\006proto3", 748);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobuf_messages.proto", &protobuf_RegisterTypes);
   Vector::default_instance_ = new Vector();
   lidar::default_instance_ = new lidar();
   gps::default_instance_ = new gps();
   imu::default_instance_ = new imu();
-  vehicle::default_instance_ = new vehicle();
   control::default_instance_ = new control();
   time::default_instance_ = new time();
   cones::default_instance_ = new cones();
+  vehicle::default_instance_ = new vehicle();
   exit::default_instance_ = new exit();
   Vector::default_instance_->InitAsDefaultInstance();
   lidar::default_instance_->InitAsDefaultInstance();
   gps::default_instance_->InitAsDefaultInstance();
   imu::default_instance_->InitAsDefaultInstance();
-  vehicle::default_instance_->InitAsDefaultInstance();
   control::default_instance_->InitAsDefaultInstance();
   time::default_instance_->InitAsDefaultInstance();
   cones::default_instance_->InitAsDefaultInstance();
+  vehicle::default_instance_->InitAsDefaultInstance();
   exit::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protobuf_5fmessages_2eproto);
 }
@@ -1896,362 +1898,6 @@ void imu::set_allocated_orientation(::ChronoMessages::Vector* orientation) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int vehicle::kXFieldNumber;
-const int vehicle::kYFieldNumber;
-const int vehicle::kZFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-vehicle::vehicle()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ChronoMessages.vehicle)
-}
-
-void vehicle::InitAsDefaultInstance() {
-  _is_default_instance_ = true;
-}
-
-vehicle::vehicle(const vehicle& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:ChronoMessages.vehicle)
-}
-
-void vehicle::SharedCtor() {
-    _is_default_instance_ = false;
-  _cached_size_ = 0;
-  x_ = 0;
-  y_ = 0;
-  z_ = 0;
-}
-
-vehicle::~vehicle() {
-  // @@protoc_insertion_point(destructor:ChronoMessages.vehicle)
-  SharedDtor();
-}
-
-void vehicle::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void vehicle::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* vehicle::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return vehicle_descriptor_;
-}
-
-const vehicle& vehicle::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_protobuf_5fmessages_2eproto();
-  return *default_instance_;
-}
-
-vehicle* vehicle::default_instance_ = NULL;
-
-vehicle* vehicle::New(::google::protobuf::Arena* arena) const {
-  vehicle* n = new vehicle;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void vehicle::Clear() {
-// @@protoc_insertion_point(message_clear_start:ChronoMessages.vehicle)
-#if defined(__clang__)
-#define ZR_HELPER_(f) \
-  _Pragma("clang diagnostic push") \
-  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
-  __builtin_offsetof(vehicle, f) \
-  _Pragma("clang diagnostic pop")
-#else
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<vehicle*>(16)->f)
-#endif
-
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
-
-  ZR_(x_, z_);
-
-#undef ZR_HELPER_
-#undef ZR_
-
-}
-
-bool vehicle::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ChronoMessages.vehicle)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional double x = 1;
-      case 1: {
-        if (tag == 9) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &x_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(17)) goto parse_y;
-        break;
-      }
-
-      // optional double y = 2;
-      case 2: {
-        if (tag == 17) {
-         parse_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &y_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(25)) goto parse_z;
-        break;
-      }
-
-      // optional double z = 3;
-      case 3: {
-        if (tag == 25) {
-         parse_z:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &z_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:ChronoMessages.vehicle)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ChronoMessages.vehicle)
-  return false;
-#undef DO_
-}
-
-void vehicle::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ChronoMessages.vehicle)
-  // optional double x = 1;
-  if (this->x() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
-  }
-
-  // optional double y = 2;
-  if (this->y() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
-  }
-
-  // optional double z = 3;
-  if (this->z() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->z(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:ChronoMessages.vehicle)
-}
-
-::google::protobuf::uint8* vehicle::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.vehicle)
-  // optional double x = 1;
-  if (this->x() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
-  }
-
-  // optional double y = 2;
-  if (this->y() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
-  }
-
-  // optional double z = 3;
-  if (this->z() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->z(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.vehicle)
-  return target;
-}
-
-int vehicle::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:ChronoMessages.vehicle)
-  int total_size = 0;
-
-  // optional double x = 1;
-  if (this->x() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // optional double y = 2;
-  if (this->y() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // optional double z = 3;
-  if (this->z() != 0) {
-    total_size += 1 + 8;
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void vehicle::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:ChronoMessages.vehicle)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const vehicle* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const vehicle>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ChronoMessages.vehicle)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:ChronoMessages.vehicle)
-    MergeFrom(*source);
-  }
-}
-
-void vehicle::MergeFrom(const vehicle& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ChronoMessages.vehicle)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  if (from.x() != 0) {
-    set_x(from.x());
-  }
-  if (from.y() != 0) {
-    set_y(from.y());
-  }
-  if (from.z() != 0) {
-    set_z(from.z());
-  }
-}
-
-void vehicle::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:ChronoMessages.vehicle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void vehicle::CopyFrom(const vehicle& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ChronoMessages.vehicle)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool vehicle::IsInitialized() const {
-
-  return true;
-}
-
-void vehicle::Swap(vehicle* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void vehicle::InternalSwap(vehicle* other) {
-  std::swap(x_, other->x_);
-  std::swap(y_, other->y_);
-  std::swap(z_, other->z_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata vehicle::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = vehicle_descriptor_;
-  metadata.reflection = vehicle_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// vehicle
-
-// optional double x = 1;
-void vehicle::clear_x() {
-  x_ = 0;
-}
- double vehicle::x() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.x)
-  return x_;
-}
- void vehicle::set_x(double value) {
-
-  x_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.x)
-}
-
-// optional double y = 2;
-void vehicle::clear_y() {
-  y_ = 0;
-}
- double vehicle::y() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.y)
-  return y_;
-}
- void vehicle::set_y(double value) {
-
-  y_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.y)
-}
-
-// optional double z = 3;
-void vehicle::clear_z() {
-  z_ = 0;
-}
- double vehicle::z() const {
-  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.z)
-  return z_;
-}
- void vehicle::set_z(double value) {
-
-  z_ = value;
-  // @@protoc_insertion_point(field_set:ChronoMessages.vehicle.z)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int control::kThrottleFieldNumber;
 const int control::kSteeringFieldNumber;
 const int control::kBrakingFieldNumber;
@@ -3165,6 +2811,434 @@ const ::google::protobuf::RepeatedPtrField< ::ChronoMessages::Vector >&
 cones::yellow_cones() const {
   // @@protoc_insertion_point(field_list:ChronoMessages.cones.yellow_cones)
   return yellow_cones_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int vehicle::kPositionFieldNumber;
+const int vehicle::kVelocityFieldNumber;
+const int vehicle::kAccelerationFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+vehicle::vehicle()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ChronoMessages.vehicle)
+}
+
+void vehicle::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  position_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
+  velocity_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
+  acceleration_ = const_cast< ::ChronoMessages::Vector*>(&::ChronoMessages::Vector::default_instance());
+}
+
+vehicle::vehicle(const vehicle& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ChronoMessages.vehicle)
+}
+
+void vehicle::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  position_ = NULL;
+  velocity_ = NULL;
+  acceleration_ = NULL;
+}
+
+vehicle::~vehicle() {
+  // @@protoc_insertion_point(destructor:ChronoMessages.vehicle)
+  SharedDtor();
+}
+
+void vehicle::SharedDtor() {
+  if (this != default_instance_) {
+    delete position_;
+    delete velocity_;
+    delete acceleration_;
+  }
+}
+
+void vehicle::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* vehicle::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return vehicle_descriptor_;
+}
+
+const vehicle& vehicle::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protobuf_5fmessages_2eproto();
+  return *default_instance_;
+}
+
+vehicle* vehicle::default_instance_ = NULL;
+
+vehicle* vehicle::New(::google::protobuf::Arena* arena) const {
+  vehicle* n = new vehicle;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void vehicle::Clear() {
+// @@protoc_insertion_point(message_clear_start:ChronoMessages.vehicle)
+  if (GetArenaNoVirtual() == NULL && position_ != NULL) delete position_;
+  position_ = NULL;
+  if (GetArenaNoVirtual() == NULL && velocity_ != NULL) delete velocity_;
+  velocity_ = NULL;
+  if (GetArenaNoVirtual() == NULL && acceleration_ != NULL) delete acceleration_;
+  acceleration_ = NULL;
+}
+
+bool vehicle::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ChronoMessages.vehicle)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .ChronoMessages.Vector position = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_position()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_velocity;
+        break;
+      }
+
+      // optional .ChronoMessages.Vector velocity = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_velocity:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_velocity()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_acceleration;
+        break;
+      }
+
+      // optional .ChronoMessages.Vector acceleration = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_acceleration:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_acceleration()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ChronoMessages.vehicle)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ChronoMessages.vehicle)
+  return false;
+#undef DO_
+}
+
+void vehicle::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ChronoMessages.vehicle)
+  // optional .ChronoMessages.Vector position = 1;
+  if (this->has_position()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->position_, output);
+  }
+
+  // optional .ChronoMessages.Vector velocity = 2;
+  if (this->has_velocity()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *this->velocity_, output);
+  }
+
+  // optional .ChronoMessages.Vector acceleration = 3;
+  if (this->has_acceleration()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *this->acceleration_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:ChronoMessages.vehicle)
+}
+
+::google::protobuf::uint8* vehicle::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.vehicle)
+  // optional .ChronoMessages.Vector position = 1;
+  if (this->has_position()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1, *this->position_, false, target);
+  }
+
+  // optional .ChronoMessages.Vector velocity = 2;
+  if (this->has_velocity()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, *this->velocity_, false, target);
+  }
+
+  // optional .ChronoMessages.Vector acceleration = 3;
+  if (this->has_acceleration()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3, *this->acceleration_, false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.vehicle)
+  return target;
+}
+
+int vehicle::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:ChronoMessages.vehicle)
+  int total_size = 0;
+
+  // optional .ChronoMessages.Vector position = 1;
+  if (this->has_position()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->position_);
+  }
+
+  // optional .ChronoMessages.Vector velocity = 2;
+  if (this->has_velocity()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->velocity_);
+  }
+
+  // optional .ChronoMessages.Vector acceleration = 3;
+  if (this->has_acceleration()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->acceleration_);
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void vehicle::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ChronoMessages.vehicle)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const vehicle* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const vehicle>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ChronoMessages.vehicle)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ChronoMessages.vehicle)
+    MergeFrom(*source);
+  }
+}
+
+void vehicle::MergeFrom(const vehicle& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ChronoMessages.vehicle)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.has_position()) {
+    mutable_position()->::ChronoMessages::Vector::MergeFrom(from.position());
+  }
+  if (from.has_velocity()) {
+    mutable_velocity()->::ChronoMessages::Vector::MergeFrom(from.velocity());
+  }
+  if (from.has_acceleration()) {
+    mutable_acceleration()->::ChronoMessages::Vector::MergeFrom(from.acceleration());
+  }
+}
+
+void vehicle::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ChronoMessages.vehicle)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void vehicle::CopyFrom(const vehicle& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ChronoMessages.vehicle)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool vehicle::IsInitialized() const {
+
+  return true;
+}
+
+void vehicle::Swap(vehicle* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void vehicle::InternalSwap(vehicle* other) {
+  std::swap(position_, other->position_);
+  std::swap(velocity_, other->velocity_);
+  std::swap(acceleration_, other->acceleration_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata vehicle::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = vehicle_descriptor_;
+  metadata.reflection = vehicle_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// vehicle
+
+// optional .ChronoMessages.Vector position = 1;
+bool vehicle::has_position() const {
+  return !_is_default_instance_ && position_ != NULL;
+}
+void vehicle::clear_position() {
+  if (GetArenaNoVirtual() == NULL && position_ != NULL) delete position_;
+  position_ = NULL;
+}
+const ::ChronoMessages::Vector& vehicle::position() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.position)
+  return position_ != NULL ? *position_ : *default_instance_->position_;
+}
+::ChronoMessages::Vector* vehicle::mutable_position() {
+
+  if (position_ == NULL) {
+    position_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.position)
+  return position_;
+}
+::ChronoMessages::Vector* vehicle::release_position() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.position)
+
+  ::ChronoMessages::Vector* temp = position_;
+  position_ = NULL;
+  return temp;
+}
+void vehicle::set_allocated_position(::ChronoMessages::Vector* position) {
+  delete position_;
+  position_ = position;
+  if (position) {
+
+  } else {
+
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.position)
+}
+
+// optional .ChronoMessages.Vector velocity = 2;
+bool vehicle::has_velocity() const {
+  return !_is_default_instance_ && velocity_ != NULL;
+}
+void vehicle::clear_velocity() {
+  if (GetArenaNoVirtual() == NULL && velocity_ != NULL) delete velocity_;
+  velocity_ = NULL;
+}
+const ::ChronoMessages::Vector& vehicle::velocity() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.velocity)
+  return velocity_ != NULL ? *velocity_ : *default_instance_->velocity_;
+}
+::ChronoMessages::Vector* vehicle::mutable_velocity() {
+
+  if (velocity_ == NULL) {
+    velocity_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.velocity)
+  return velocity_;
+}
+::ChronoMessages::Vector* vehicle::release_velocity() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.velocity)
+
+  ::ChronoMessages::Vector* temp = velocity_;
+  velocity_ = NULL;
+  return temp;
+}
+void vehicle::set_allocated_velocity(::ChronoMessages::Vector* velocity) {
+  delete velocity_;
+  velocity_ = velocity;
+  if (velocity) {
+
+  } else {
+
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.velocity)
+}
+
+// optional .ChronoMessages.Vector acceleration = 3;
+bool vehicle::has_acceleration() const {
+  return !_is_default_instance_ && acceleration_ != NULL;
+}
+void vehicle::clear_acceleration() {
+  if (GetArenaNoVirtual() == NULL && acceleration_ != NULL) delete acceleration_;
+  acceleration_ = NULL;
+}
+const ::ChronoMessages::Vector& vehicle::acceleration() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.vehicle.acceleration)
+  return acceleration_ != NULL ? *acceleration_ : *default_instance_->acceleration_;
+}
+::ChronoMessages::Vector* vehicle::mutable_acceleration() {
+
+  if (acceleration_ == NULL) {
+    acceleration_ = new ::ChronoMessages::Vector;
+  }
+  // @@protoc_insertion_point(field_mutable:ChronoMessages.vehicle.acceleration)
+  return acceleration_;
+}
+::ChronoMessages::Vector* vehicle::release_acceleration() {
+  // @@protoc_insertion_point(field_release:ChronoMessages.vehicle.acceleration)
+
+  ::ChronoMessages::Vector* temp = acceleration_;
+  acceleration_ = NULL;
+  return temp;
+}
+void vehicle::set_allocated_acceleration(::ChronoMessages::Vector* acceleration) {
+  delete acceleration_;
+  acceleration_ = acceleration;
+  if (acceleration) {
+
+  } else {
+
+  }
+  // @@protoc_insertion_point(field_set_allocated:ChronoMessages.vehicle.acceleration)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

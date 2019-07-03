@@ -1,5 +1,6 @@
 #include "ch_ros/ch_message_codes.h"
 #include "ch_ros/ch_ros_handler.h"
+#include <chrono>
 
 // #include <chrono>
 // #include <thread>
@@ -14,10 +15,11 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
                                              std::atoi(port.c_str()))),
       tcpsocket_(*(new boost::asio::io_service)), lidar_(n, "lidar", 10),
       imu_(n, "imu", 10), gps_(n, "gps", 10), time_(n, "clock", 10),
-      cones_(n, "cones", 10), ok_(true), throttle_(0), steering_(0),
-      braking_(0), control_(n.subscribe(
-                       "control", 10, &ChRosHandler::setTargetControls, this)),
-      host_name_(host_name) {
+      cones_(n, "cones", 10), vehicle_(n, "vehicle", 10), ok_(true),
+      throttle_(0), steering_(0), braking_(0),
+      control_(
+          n.subscribe("control", 10, &ChRosHandler::setTargetControls, this)),
+      send_rate_(.01), controls_updated_(false), host_name_(host_name) {
 #ifdef TCP
   initializeSocket();
 #endif
@@ -74,32 +76,51 @@ void ChRosHandler::protobufReceiveAndHandle() {
   int received = boost::asio::read(
       tcpsocket_, boost::asio::buffer(buffer.data(), available));
   // std::cout << "Bytes Received :: " << received << std::endl;
+  // auto start = std::chrono::high_resolution_clock::now();
   handle(buffer, received);
+  // auto end = std::chrono::high_resolution_clock::now();
+  //
+  // auto duration =
+  //     std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+  // std::cout << "Time taken by handle: " << duration.count() << "
+  // microseconds"
+  //           << std::endl;
 }
 
 void ChRosHandler::flatbufferReceiveAndHandle() {
-  // Wait for tcp stream to fill
-  tcpsocket_.receive(boost::asio::null_buffers(), 0);
-  // Check the size of the buffer
-  int available = tcpsocket_.available();
+  // Allocate space for message "header"
+  std::vector<uint8_t> buffer(4);
+  // Receive just the "header"
+  tcpsocket_.receive(boost::asio::buffer(buffer.data(), 4), 0);
+  // Check the size of the message to read
+  int available = ((int *)buffer.data())[0];
+  // std::cout << "Available :: " << available << std::endl;
   // Allocate space for the message
-  std::vector<uint8_t> buffer(available);
+  buffer.resize(available);
   // Receive and record size of received packet
   // Read allows us to read tcp buffer until all (int)available are received
   int received = boost::asio::read(
       tcpsocket_, boost::asio::buffer(buffer.data(), available));
   // std::cout << "Bytes Received :: " << received << std::endl;
+
+  // auto start = std::chrono::high_resolution_clock::now();
   const RosMessage::message *message =
       flatbuffers::GetRoot<RosMessage::message>(buffer.data());
   handle(message, received);
+  // auto end = std::chrono::high_resolution_clock::now();
+
+  // auto duration =
+  // std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+  // std::cout << "Time taken by handle: " << duration.count() << "
+  // microseconds"
+  // << std::endl;
 }
 
 void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
-#ifdef TCP
-  // tcpSendControls();
-#else
-  sendControls();
-#endif
+  protobufSendControls();
+
   // Determine message type
   switch ((unsigned)buffer.data()[0]) {
   case ChMessageCode::LIDAR:
@@ -121,6 +142,9 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
   case ChMessageCode::CONE:
     cones_.publish(buffer, received);
     break;
+  case ChMessageCode::VEHICLE:
+    vehicle_.publish(buffer, received);
+    break;
   case ChMessageCode::EXIT:
     ok_ = false;
     break;
@@ -132,30 +156,35 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
 }
 
 void ChRosHandler::handle(const RosMessage::message *message, int received) {
-#ifdef TCP
-  tcpSendControls();
-#else
-  sendControls();
-#endif
+  flatbuffersSendControls();
 
   // Determine message type
   switch (message->type_type()) {
   case RosMessage::Type_lidar:
+    // std::cout << "Received Lidar Data" << std::endl;
     lidar_.publish(message, received);
     break;
   case RosMessage::Type_gps:
+    // std::cout << "Received GPS Data" << std::endl;
     gps_.publish(message, received);
     break;
   case RosMessage::Type_imu:
+    // std::cout << "Received IMU Data" << std::endl;
     imu_.publish(message, received);
     break;
   case RosMessage::Type_time:
+    // std::cout << "Received Time Data" << std::endl;
     time_.publish(message, received);
     break;
   case RosMessage::Type_cones:
+    // std::cout << "Received Cones Data" << std::endl;
     cones_.publish(message, received);
     break;
+  case RosMessage::Type_vehicle:
+    vehicle_.publish(message, received);
+    break;
   case RosMessage::Type_exit:
+    // std::cout << "Received Exit Data" << std::endl;
     ok_ = false;
     break;
   }
@@ -163,6 +192,10 @@ void ChRosHandler::handle(const RosMessage::message *message, int received) {
   // if (fmod(ros::Time::now().toSec(), .05) <= 1e-3) {
   // sendControls();
   // }
+}
+
+bool ChRosHandler::shouldSend() {
+  return fmod(time_.GetTime(), send_rate_) <= 1e-3 && controls_updated_;
 }
 
 void ChRosHandler::sendControls() {
@@ -183,9 +216,13 @@ void ChRosHandler::setTargetControls(
   throttle_ = msg->throttle.data;
   steering_ = msg->steering.data;
   braking_ = msg->braking.data;
+  controls_updated_ = true;
 }
 
-void ChRosHandler::tcpSendControls() {
+void ChRosHandler::protobufSendControls() {
+  if (!shouldSend())
+    return;
+
   ChronoMessages::control message;
   message.set_throttle(throttle_);
   message.set_steering(steering_);
@@ -199,4 +236,29 @@ void ChRosHandler::tcpSendControls() {
   tcpsocket_.async_send(
       boost::asio::buffer(buffer.data(), size + 5),
       [&](const boost::system::error_code &ec, size_t size) {});
+  controls_updated_ = false;
+}
+
+void ChRosHandler::flatbuffersSendControls() {
+  if (!shouldSend())
+    return;
+
+  flatbuffers::FlatBufferBuilder builder;
+
+  flatbuffers::Offset<RosMessage::control> control =
+      RosMessage::Createcontrol(builder, throttle_, steering_, braking_);
+  flatbuffers::Offset<RosMessage::message> message = RosMessage::Createmessage(
+      builder, RosMessage::Type_control, control.Union());
+
+  builder.FinishSizePrefixed(message);
+
+  // Get size of FlatBuffer message in bytes
+  int32_t size = builder.GetSize();
+  // Get buffer pointer from message object
+  uint8_t *buffer = builder.GetBufferPointer();
+  // Send the message
+  tcpsocket_.async_send(
+      boost::asio::buffer(buffer, size),
+      [&](const boost::system::error_code &ec, size_t size) {});
+  controls_updated_ = false;
 }

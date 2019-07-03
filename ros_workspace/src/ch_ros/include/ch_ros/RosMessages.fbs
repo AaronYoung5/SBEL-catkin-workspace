@@ -16,6 +16,8 @@ table message {
   type:Type;
 }
 
+// table config
+
 table lidar {
   points:[Vector];
 }
@@ -34,6 +36,8 @@ table imu {
 
 table vehicle {
   position:Vector;
+  velocity:Vector;
+  acceleration:Vector;
 }
 
 table control {
