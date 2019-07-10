@@ -5,5 +5,5 @@
 
   <node pkg="keyboard_control" type="keyboard_control" name="keyboard_control" required="true" output="screen"/>
 
-  <node pkg="rosbag" type="record" name="rosbag" args="-a -O euler_test"/>
+  <!-- <node pkg="rosbag" type="record" name="rosbag" args="-a -O euler_test"/> -->
 </launch>

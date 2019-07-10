@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   common_utilities
   common_msgs
+  common_srvs
   roslaunch
 )
 

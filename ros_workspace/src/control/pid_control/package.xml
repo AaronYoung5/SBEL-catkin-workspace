@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package format="2">
-  <name>ch_ros</name>
+  <name>pid_control</name>
   <version>0.0.0</version>
   <description>
-    ch_ros package
+    pid_control package
   </description>
 
   <license>TODO</license>
@@ -11,7 +11,7 @@
   <maintainer email="TODO@TODO.com">TODO</maintainer>
 
   <depend>common_msgs</depend>
-  <depend>common_srvs</depend>
+  <depend>common_utilities</depend>
 
   <buildtool_depend>catkin</buildtool_depend>
 </package>

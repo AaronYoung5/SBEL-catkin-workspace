@@ -8,18 +8,20 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
-# add_service_files(
-#   DIRECTORY
-#   srv
-#   FILES
-#   Control.srv
-# )
-#
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-#   geometry_msgs
-# )
+add_service_files(
+  DIRECTORY
+  srv
+  FILES
+  ConeMap.srv
+  Path.srv
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  geometry_msgs
+  common_msgs
+)
 
 include_directories(
   ${catkin_INCLUDE_DIRS}

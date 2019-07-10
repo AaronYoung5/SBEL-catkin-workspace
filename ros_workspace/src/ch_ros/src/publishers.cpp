@@ -284,7 +284,8 @@ void Time::publish(const RosMessage::message *message, int received) {
 
 // --------------------------------- CONES ---------------------------------- //
 Cones::Cones(ros::NodeHandle n, std::string node_name, int queue_size)
-    : Publisher(n, node_name, queue_size) {}
+    : Publisher(n, node_name, queue_size),
+      srv_(n.advertiseService("cone_map", &Cones::send_cones, this)) {}
 
 void Cones::publish(std::vector<uint8_t> buffer, int received) {
   // Parse buffer
@@ -312,6 +313,7 @@ void Cones::publish(std::vector<uint8_t> buffer, int received) {
     //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
     // }
   }
+  data_received_ = true;
 
   pub_.publish(data_);
 }
@@ -333,7 +335,6 @@ void Cones::publish(const RosMessage::message *message, int received) {
     data_.yellow_cones[i].position.x = cones->yellow_cones()->Get(i)->x();
     data_.yellow_cones[i].position.y = cones->yellow_cones()->Get(i)->y();
     data_.yellow_cones[i].position.z = cones->yellow_cones()->Get(i)->z();
-    data_.yellow_cones[i].color = common_msgs::Cone::YELLOW;
 
     // if (i < 2) {
     //   data_.orange_cones[i].position.x = message.orange_cones(i).x();
@@ -342,8 +343,19 @@ void Cones::publish(const RosMessage::message *message, int received) {
     //   data_.orange_cones[i].color = common_msgs::Cone::ORANGE;
     // }
   }
+  data_received_ = true;
 
   pub_.publish(data_);
+}
+
+bool Cones::send_cones(common_srvs::ConeMap::Request &req,
+                       common_srvs::ConeMap::Response &res) {
+  if (!data_received_)
+    return false;
+  res.blue_cones = data_.blue_cones;
+  res.yellow_cones = data_.yellow_cones;
+  res.orange_cones = data_.orange_cones;
+  return true;
 }
 
 // --------------------------------- VEHICLE ----------------------------------
