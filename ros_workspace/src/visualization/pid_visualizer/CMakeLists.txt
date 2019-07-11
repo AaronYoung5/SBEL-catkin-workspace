@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(pid_control)
+project(pid_visualizer)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -8,7 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 include_directories(
-  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -16,5 +15,5 @@ catkin_package(
 
 )
 
-add_executable(pid_control src/main.cpp src/pid_control.cpp)
-target_link_libraries(pid_control ${catkin_LIBRARIES})
+add_executable(pid_visualizer src/main.cpp)
+target_link_libraries(pid_visualizer ${catkin_LIBRARIES})

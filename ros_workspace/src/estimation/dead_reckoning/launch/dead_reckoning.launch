@@ -4,7 +4,9 @@
 
   <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
 
-  <node pkg="pid_control" type="pid_control" name="pid_control" output="screen" respawn="false"/>
+  <node pkg="keyboard_control" type="keyboard_control" name="keyboard_control" output="screen" respawn="false"/>
+
+  <node pkg="dead_reckoning" type="dead_reckoning" name="dead_reckoning" output="screen"/>
 
   <node type="rviz" name="rviz" pkg="rviz" args="-d /home/aaron/.rviz/chrono_rviz.rviz "/>
 

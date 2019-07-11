@@ -1,22 +1,6 @@
 // ROS include
 #include "ros/ros.h"
 
-// Message type includes
-#include "common_msgs/ConeMap.h"
-#include "common_msgs/Control.h"
-#include "common_msgs/VehState.h"
-#include "geometry_msgs/Point.h"
-
-// Service type includes
-#include "common_srvs/ConeMap.h"
-#include "common_srvs/Path.h"
-
-// Utilities
-#include "common_utilities/Vector.h"
-
-// Namespace declarations
-using namespace common_utilities;
-
 class PID {
 private:
   // Private variables
@@ -28,15 +12,45 @@ private:
 public:
   // Public methods
 
-  // Constructor
-  PID(float kp, float ki, float kd);
+  // Constructors
+  PID() : kp_(1), ki_(0), kd_(0), p_error_(0), d_error_(0), i_error_(0) {}
+  PID(float kp, float ki, float kd)
+      : kp_(kp), ki_(ki), kd_(kd), p_error_(0), d_error_(0), i_error_(0) {}
 
-private:
-  // Private methods
+  // Public setters
+  void setConstants(float kp, float ki, float kd) {
+    kp_ = kp;
+    ki_ = ki;
+    kd_ = kd;
+  }
+  void setKp(float kp) { kp_ = kp; }
+  void setKi(float ki) { ki_ = ki; }
+  void setKd(float kd) { kd_ = kd; }
 
   // PID computation methods
   // Computes and returns the total error
-  float totalError();
+  float totalError() {
+    // Debug
+    // std::cout << "-" << kp_ << " * " << p_error_ << " - " << kd_ << " * "
+    //           << d_error_ << " - " << ki_ << " * " << i_error_ << " = "
+    //           << -kp_ * p_error_ - kd_ * d_error_ - ki_ * i_error_ <<
+    //           std::endl;
+    // std::cout << "Total Error :: "
+    //           << -kp_ * p_error_ - kd_ * d_error_ - ki_ * i_error_ <<
+    //           std::endl;
+
+    return -kp_ * p_error_ - kd_ * d_error_ - ki_ * i_error_;
+  }
   // Updates the error using the cross track error (cte)
-  void updateError(float cte);
+  void updateError(float cte) {
+    d_error_ = cte - p_error_;
+    p_error_ = cte;
+    i_error_ += cte;
+
+    // Debug
+    // std::cout << "Cross Track Error :: " << cte << std::endl;
+    // std::cout << "Proportional error :: " << p_error_ << std::endl;
+    // std::cout << "Integral error :: " << i_error_ << std::endl;
+    // std::cout << "Derivative error :: " << d_error_ << std::endl;
+  }
 };

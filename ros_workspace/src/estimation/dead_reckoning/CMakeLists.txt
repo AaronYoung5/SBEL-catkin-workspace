@@ -1,14 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(pid_control)
+project(dead_reckoning)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   common_msgs
-  common_utilities
 )
 
 include_directories(
-  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -16,5 +14,5 @@ catkin_package(
 
 )
 
-add_executable(pid_control src/main.cpp src/pid_control.cpp)
-target_link_libraries(pid_control ${catkin_LIBRARIES})
+add_executable(dead_reckoning src/main.cpp)
+target_link_libraries(dead_reckoning ${catkin_LIBRARIES})

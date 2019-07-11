@@ -33,6 +33,7 @@ public:
   }
 
   T length() { return sqrt(pow(x_, 2) + pow(y_, 2)); }
+  T lengthSquared() { return pow(x_, 2) + pow(y_, 2); }
 
   Vector3D<T> operator*(T n) { return Vector3D<T>(x_ * n, y_ * n, z_ * n); }
 

@@ -1,3 +1,3 @@
-std_msgs/Float32 throttle
-std_msgs/Float32 braking
-std_msgs/Float32 steering
+float32 throttle
+float32 braking
+float32 steering

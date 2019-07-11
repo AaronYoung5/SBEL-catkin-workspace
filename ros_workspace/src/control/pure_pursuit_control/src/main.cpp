@@ -33,9 +33,9 @@ void PurePursuit::stateCallback(const common_msgs::VehState::ConstPtr &msg) {
 
 void PurePursuit::spin() {
   common_msgs::Control control;
-  control.throttle.data = 0;
-  control.braking.data = .1;
-  control.steering.data = 0;
+  control.throttle = 0;
+  control.braking = .1;
+  control.steering = 0;
 
   pub_.publish(control);
 }

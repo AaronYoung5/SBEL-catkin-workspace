@@ -213,9 +213,9 @@ void ChRosHandler::sendControls() {
 
 void ChRosHandler::setTargetControls(
     const common_msgs::Control::ConstPtr &msg) {
-  throttle_ = msg->throttle.data;
-  steering_ = msg->steering.data;
-  braking_ = msg->braking.data;
+  throttle_ = msg->throttle;
+  steering_ = msg->steering;
+  braking_ = msg->braking;
   controls_updated_ = true;
 }
 

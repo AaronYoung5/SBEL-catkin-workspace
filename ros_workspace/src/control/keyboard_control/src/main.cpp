@@ -82,9 +82,9 @@ void Teleop::keyLoop() {
 
     if (dirty == true) {
       common_msgs::Control msg;
-      msg.throttle.data = throttle_;
-      msg.steering.data = steering_;
-      msg.braking.data = braking_;
+      msg.throttle = throttle_;
+      msg.steering = steering_;
+      msg.braking = braking_;
       pub.publish(msg);
       dirty = false;
     }

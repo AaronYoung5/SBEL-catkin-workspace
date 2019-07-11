@@ -16,6 +16,7 @@ add_message_files(
   ConeMap.msg
   Control.msg
   VehState.msg
+  PIDDebug.msg
 )
 
 generate_messages(

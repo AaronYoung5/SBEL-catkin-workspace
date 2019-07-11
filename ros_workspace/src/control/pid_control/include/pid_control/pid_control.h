@@ -4,6 +4,22 @@
 // Package includes
 #include "pid_control/PID.h"
 
+// Message type includes
+#include "common_msgs/ConeMap.h"
+#include "common_msgs/Control.h"
+#include "common_msgs/VehState.h"
+#include "common_msgs/PIDDebug.h"
+
+// Service type includes
+#include "common_srvs/ConeMap.h"
+#include "common_srvs/Path.h"
+
+// Utilities
+#include "common_utilities/Vector.h"
+
+// Namespace declarations
+using namespace common_utilities;
+
 class PIDControl {
 private:
   // Private Variables
@@ -15,8 +31,8 @@ private:
 
   // Controls publisher
   ros::Publisher controls_pub_;
-  // Point vehicle is following publisher for debugging purposes
-  ros::Publisher point_following_pub_;
+  // Publisher for debugging purposes
+  ros::Publisher debug_pub_;
 
   // Cone map subscriber
   // ros::Subscriber cone_sub_;
@@ -29,11 +45,6 @@ private:
   // Cone service client
   ros::ServiceClient cone_client_;
 
-  // ConeMap message
-  common_msgs::ConeMap cones_;
-  // Control message
-  common_msgs::Control control_;
-
   // Controls values
   float throttle_, braking_, steering_;
 
@@ -42,7 +53,7 @@ private:
 
 public:
   // Public Methods
-  PIDControl(NodeHandle n);
+  PIDControl(ros::NodeHandle n);
 
 private:
   // Private Methods
@@ -53,11 +64,8 @@ private:
   // Publish controls message
   void publishControls();
 
-  // Clamping function for the control values
-  void clampControls();
-
-  // Publish point following message
-  void pointFollowingPublish(Vector3D<> pos);
+  // Publish debug message
+  void publishDebug(Vector3D<> pos, Vector3D<> begin, Vector3D<> end);
 
   // Cone map subscriber callback
   void coneCallback(const common_msgs::ConeMap::ConstPtr &msg);
@@ -68,7 +76,9 @@ private:
   bool pathCallback(common_srvs::Path::Request &req,
                     common_srvs::Path::Response &res);
 
+  // Clamping function for the control values
+  void clampControls();
+
   // Computes the minimum distance from a point to a line segment
-  float minimumDistance(Vector3D<> pos, Vector3D<> begin, Vector3D<> end,
-                        bool publish);
+  float minimumDistance(Vector3D<> pos, Vector3D<> begin, Vector3D<> end);
 };
