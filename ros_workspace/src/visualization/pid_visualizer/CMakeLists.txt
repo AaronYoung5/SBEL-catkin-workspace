@@ -17,3 +17,5 @@ catkin_package(
 
 add_executable(pid_visualizer src/main.cpp)
 target_link_libraries(pid_visualizer ${catkin_LIBRARIES})
+
+add_dependencies(pid_visualizer ${catkin_EXPORTED_TARGETS})

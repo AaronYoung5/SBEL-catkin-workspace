@@ -17,3 +17,5 @@ catkin_package(
 
 add_executable(car_visualizer src/main.cpp)
 target_link_libraries(car_visualizer ${catkin_LIBRARIES})
+
+add_dependencies(car_visualizer ${catkin_EXPORTED_TARGETS})

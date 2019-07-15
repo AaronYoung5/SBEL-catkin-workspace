@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(orientation)
+project(ekf)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -13,5 +13,7 @@ catkin_package(
 
 )
 
-add_executable(orientation src/main.cpp)
-target_link_libraries(orientation ${catkin_LIBRARIES})
+add_executable(ekf src/main.cpp)
+target_link_libraries(ekf ${catkin_LIBRARIES})
+
+add_dependencies(ekf ${catkin_EXPORTED_TARGETS})

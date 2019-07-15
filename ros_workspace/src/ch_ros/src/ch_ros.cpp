@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   signal(SIGINT, exit);
   bool use_protobuf = false;
 
-  while (ros::ok() && handler.ok()) {
+  while (ros::ok() && handler.chrono_ok()) {
     // #ifdef TCP
     // std::cout << "Looping" << std::endl;
     if (use_protobuf) {

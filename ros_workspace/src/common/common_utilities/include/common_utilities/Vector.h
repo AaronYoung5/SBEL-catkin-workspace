@@ -21,6 +21,10 @@ public:
   T y() { return y_; }
   T z() { return z_; }
 
+  void setX(T x) { x_ = x; }
+  void setY(T y) { y_ = y; }
+  void setZ(T z) { z_ = z; }
+
   Vector3D<T> getUnit() {
     return Vector3D<T>(x_ / length(), y_ / length(), z_ / length());
   }

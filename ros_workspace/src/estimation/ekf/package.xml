@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package format="2">
-  <name>ros_localization</name>
+  <name>ekf</name>
   <version>0.0.0</version>
-  <description> ros_localization package </description>
+  <description>
+    ekf package
+  </description>
 
   <license>TODO</license>
   <author>TODO</author>

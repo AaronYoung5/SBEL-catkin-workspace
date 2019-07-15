@@ -16,3 +16,5 @@ catkin_package(
 
 add_executable(keyboard_control src/main.cpp)
 target_link_libraries(keyboard_control ${catkin_LIBRARIES})
+
+add_dependencies(keyboard_control ${catkin_EXPORTED_TARGETS})

@@ -39,3 +39,5 @@ install(PROGRAMS
   scripts/ch_launch
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+add_dependencies(ch_ros ${catkin_EXPORTED_TARGETS})

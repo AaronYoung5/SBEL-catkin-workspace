@@ -1,13 +1,7 @@
 #include "ch_ros/ch_message_codes.h"
 #include "ch_ros/ch_ros_handler.h"
-#include <chrono>
 
-// #include <chrono>
-// #include <thread>
-
-#define TCP
-
-ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
+ChRosHandler::ChRosHandler(ros::NodeHandle &n, std::string host_name,
                            std::string port)
     : port_(port),
       socket_(*(new boost::asio::io_service),
@@ -15,14 +9,25 @@ ChRosHandler::ChRosHandler(ros::NodeHandle n, std::string host_name,
                                              std::atoi(port.c_str()))),
       tcpsocket_(*(new boost::asio::io_service)), lidar_(n, "lidar", 10),
       imu_(n, "imu", 10), gps_(n, "gps", 10), time_(n, "clock", 10),
-      cones_(n, "cones", 10), vehicle_(n, "vehicle", 10), ok_(true),
+      cones_(n, "cones", 10), vehicle_(n, "vehicle", 10), chrono_ok_(true),
       throttle_(0), steering_(0), braking_(0),
-      control_(
+      control_sub_(
           n.subscribe("control", 10, &ChRosHandler::setTargetControls, this)),
       send_rate_(.01), controls_updated_(false), host_name_(host_name) {
-#ifdef TCP
-  initializeSocket();
-#endif
+  initializeROSParameters(n);
+  if (use_tcp_) {
+    initializeSocket();
+  }
+}
+
+ChRosHandler::~ChRosHandler() {
+  socket_.close();
+  tcpsocket_.close();
+}
+
+void ChRosHandler::initializeROSParameters(ros::NodeHandle &n) {
+  n.param("use_tcp", use_tcp_, true);
+  n.param("use_protobuf", use_protobuf_, false);
 }
 
 void ChRosHandler::initializeSocket() {
@@ -124,11 +129,7 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
   // Determine message type
   switch ((unsigned)buffer.data()[0]) {
   case ChMessageCode::LIDAR:
-#ifdef TCP
     lidar_.tcppublish(buffer, received);
-#else
-    lidar_.publish(buffer, received);
-#endif
     break;
   case ChMessageCode::GPS:
     gps_.publish(buffer, received);
@@ -146,7 +147,7 @@ void ChRosHandler::handle(std::vector<uint8_t> buffer, int received) {
     vehicle_.publish(buffer, received);
     break;
   case ChMessageCode::EXIT:
-    ok_ = false;
+    chrono_ok_ = false;
     break;
   }
 
@@ -185,7 +186,7 @@ void ChRosHandler::handle(const RosMessage::message *message, int received) {
     break;
   case RosMessage::Type_exit:
     // std::cout << "Received Exit Data" << std::endl;
-    ok_ = false;
+    chrono_ok_ = false;
     break;
   }
 

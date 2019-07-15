@@ -9,9 +9,9 @@
 #include "sensor_msgs/Imu.h"
 
 // Include utilities
-// #include "common_utilities/Vector.h"
+#include "common_utilities/Vector.h"
 
-// using namespace common_utilities;
+using namespace common_utilities;
 
 class Orientation {
 private:
@@ -22,6 +22,10 @@ private:
 
   float time_, dt_;
 
+  common_msgs::VehState state_;
+
+  Vector3D<> velocity_;
+
 public:
   Orientation(ros::NodeHandle &n)
       : pub_(n.advertise<common_msgs::VehState>("vehicle", 10)),
@@ -29,23 +33,39 @@ public:
             "imu", 10, &Orientation::imuCallback, this)),
         clock_sub_(n.subscribe<rosgraph_msgs::Clock>(
             "clock", 10, &Orientation::clockCallback, this)),
-        time_(0), dt_(0) {}
+        time_(0), dt_(0), velocity_(0, 0, 0) {}
 
   void imuCallback(const sensor_msgs::Imu::ConstPtr &msg) {
-    common_msgs::VehState state;
+    // std::cout << "Delta T :: " << dt_ << std::endl;
 
-    state.state.position.x = msg->linear_acceleration.x * dt_ * dt_;
-    state.state.position.y = msg->linear_acceleration.y * dt_ * dt_;
-    state.state.position.z = msg->linear_acceleration.z * dt_ * dt_;
+    velocity_ = velocity_ + Vector3D<>(msg->linear_acceleration.x,
+                                       msg->linear_acceleration.y,
+                                       msg->linear_acceleration.z);
 
-    pub_.publish(state);
+    // velocity_.x += msg->linear_acceleration.x;
+    // velocity_.y += msg->linear_acceleration.y;
+    // velocity_.z += msg->linear_acceleration.z;
+
+    state_.state.position.x += velocity_.x();
+    state_.state.position.y += velocity_.y();
+    state_.state.position.z += velocity_.z();
+
+    std::cout << "Position :: "
+              << "(" << state_.state.position.x << ", "
+              << state_.state.position.y << ", " << state_.state.position.z
+              << ")" << std::endl;
+
+    pub_.publish(state_);
 
     dt_ = 0;
   }
 
   void clockCallback(const rosgraph_msgs::Clock::ConstPtr &msg) {
-    float temp = msg->clock.sec + msg->clock.nsec / 10;
-    dt_ += temp;
+    float temp = msg->clock.sec + msg->clock.nsec / 1e9;
+
+    // std::cout << "Time :: " << temp << std::endl;
+
+    dt_ += temp - time_;
     time_ = temp;
   }
 };

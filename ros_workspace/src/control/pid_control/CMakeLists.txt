@@ -18,3 +18,5 @@ catkin_package(
 
 add_executable(pid_control src/main.cpp src/pid_control.cpp)
 target_link_libraries(pid_control ${catkin_LIBRARIES})
+
+add_dependencies(pid_control ${catkin_EXPORTED_TARGETS})
