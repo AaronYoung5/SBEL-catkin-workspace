@@ -1,4 +1,4 @@
-namespace RosMessage;
+namespace ChROSMessage;
 
 struct Vector {
   x:float;
@@ -10,51 +10,53 @@ struct Header {
   size:int;
 }
 
-union Type { lidar, gps, imu, control, time, vehicle, cones, exit  }
+union Type { Lidar, GPS, IMU, Control, Time, Vehicle, Cones, Exit, Config  }
 
-table message {
-  type:Type;
+table Message {
+  message:Type;
 }
 
-// table config
+table Config {
+  visualize:bool = false;
+}
 
-table lidar {
+table Lidar {
   points:[Vector];
 }
 
-table gps {
+table GPS {
   longitude:float;
   latitude:float;
   altitude:float;
 }
 
-table imu {
+table IMU {
   angular_velocity:Vector;
   linear_acceleration:Vector;
   orientation:Vector;
 }
 
-table vehicle {
+table Vehicle {
   position:Vector;
   velocity:Vector;
   acceleration:Vector;
 }
 
-table control {
+table Control {
   throttle:float;
   steering:float;
   braking:float;
 }
 
-table time {
+table Time {
   t:float;
 }
 
-table cones {
+table Cones {
   blue_cones:[Vector];
   yellow_cones:[Vector];
 }
 
-table exit {
+table Exit {
   code:byte;
 }

@@ -48,6 +48,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* exit_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   exit_reflection_ = NULL;
+const ::google::protobuf::Descriptor* config_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  config_reflection_ = NULL;
 
 }  // namespace
 
@@ -208,6 +211,21 @@ void protobuf_AssignDesc_protobuf_5fmessages_2eproto() {
       sizeof(exit),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(exit, _is_default_instance_));
+  config_descriptor_ = file->message_type(9);
+  static const int config_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(config, visualize_),
+  };
+  config_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      config_descriptor_,
+      config::default_instance_,
+      config_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(config),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(config, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(config, _is_default_instance_));
 }
 
 namespace {
@@ -239,6 +257,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
       vehicle_descriptor_, &vehicle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       exit_descriptor_, &exit::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      config_descriptor_, &config::default_instance());
 }
 
 }  // namespace
@@ -262,6 +282,8 @@ void protobuf_ShutdownFile_protobuf_5fmessages_2eproto() {
   delete vehicle_reflection_;
   delete exit::default_instance_;
   delete exit_reflection_;
+  delete config::default_instance_;
+  delete config_reflection_;
 }
 
 void protobuf_AddDesc_protobuf_5fmessages_2eproto() GOOGLE_ATTRIBUTE_COLD;
@@ -290,7 +312,8 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
     "\030\001 \001(\0132\026.ChronoMessages.Vector\022(\n\010veloci"
     "ty\030\002 \001(\0132\026.ChronoMessages.Vector\022,\n\014acce"
     "leration\030\003 \001(\0132\026.ChronoMessages.Vector\"\024"
-    "\n\004exit\022\014\n\004code\030\001 \001(\tb\006proto3", 748);
+    "\n\004exit\022\014\n\004code\030\001 \001(\t\"\033\n\006config\022\021\n\tvisual"
+    "ize\030\001 \001(\010b\006proto3", 777);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobuf_messages.proto", &protobuf_RegisterTypes);
   Vector::default_instance_ = new Vector();
@@ -302,6 +325,7 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
   cones::default_instance_ = new cones();
   vehicle::default_instance_ = new vehicle();
   exit::default_instance_ = new exit();
+  config::default_instance_ = new config();
   Vector::default_instance_->InitAsDefaultInstance();
   lidar::default_instance_->InitAsDefaultInstance();
   gps::default_instance_->InitAsDefaultInstance();
@@ -311,6 +335,7 @@ void protobuf_AddDesc_protobuf_5fmessages_2eproto() {
   cones::default_instance_->InitAsDefaultInstance();
   vehicle::default_instance_->InitAsDefaultInstance();
   exit::default_instance_->InitAsDefaultInstance();
+  config::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protobuf_5fmessages_2eproto);
 }
 
@@ -3523,6 +3548,242 @@ void exit::clear_code() {
   }
   code_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), code);
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.exit.code)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int config::kVisualizeFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+config::config()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ChronoMessages.config)
+}
+
+void config::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+config::config(const config& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ChronoMessages.config)
+}
+
+void config::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  visualize_ = false;
+}
+
+config::~config() {
+  // @@protoc_insertion_point(destructor:ChronoMessages.config)
+  SharedDtor();
+}
+
+void config::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void config::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* config::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return config_descriptor_;
+}
+
+const config& config::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_protobuf_5fmessages_2eproto();
+  return *default_instance_;
+}
+
+config* config::default_instance_ = NULL;
+
+config* config::New(::google::protobuf::Arena* arena) const {
+  config* n = new config;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void config::Clear() {
+// @@protoc_insertion_point(message_clear_start:ChronoMessages.config)
+  visualize_ = false;
+}
+
+bool config::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ChronoMessages.config)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional bool visualize = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &visualize_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ChronoMessages.config)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ChronoMessages.config)
+  return false;
+#undef DO_
+}
+
+void config::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ChronoMessages.config)
+  // optional bool visualize = 1;
+  if (this->visualize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->visualize(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:ChronoMessages.config)
+}
+
+::google::protobuf::uint8* config::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ChronoMessages.config)
+  // optional bool visualize = 1;
+  if (this->visualize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->visualize(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:ChronoMessages.config)
+  return target;
+}
+
+int config::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:ChronoMessages.config)
+  int total_size = 0;
+
+  // optional bool visualize = 1;
+  if (this->visualize() != 0) {
+    total_size += 1 + 1;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void config::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ChronoMessages.config)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const config* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const config>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ChronoMessages.config)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ChronoMessages.config)
+    MergeFrom(*source);
+  }
+}
+
+void config::MergeFrom(const config& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ChronoMessages.config)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.visualize() != 0) {
+    set_visualize(from.visualize());
+  }
+}
+
+void config::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ChronoMessages.config)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void config::CopyFrom(const config& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ChronoMessages.config)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool config::IsInitialized() const {
+
+  return true;
+}
+
+void config::Swap(config* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void config::InternalSwap(config* other) {
+  std::swap(visualize_, other->visualize_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata config::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = config_descriptor_;
+  metadata.reflection = config_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// config
+
+// optional bool visualize = 1;
+void config::clear_visualize() {
+  visualize_ = false;
+}
+ bool config::visualize() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.config.visualize)
+  return visualize_;
+}
+ void config::set_visualize(bool value) {
+
+  visualize_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.config.visualize)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

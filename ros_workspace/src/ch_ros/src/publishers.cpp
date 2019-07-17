@@ -122,10 +122,10 @@ void Lidar::tcppublish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void Lidar::publish(const RosMessage::message *message, int received) {
+void Lidar::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::lidar *lidar =
-      static_cast<const RosMessage::lidar *>(message->type());
+  const ChROSMessage::Lidar *lidar =
+      static_cast<const ChROSMessage::Lidar *>(message->message());
 
   data_.header.stamp = ros::Time::now();
   data_.header.frame_id = "base_link";
@@ -193,10 +193,10 @@ void IMU::publish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void IMU::publish(const RosMessage::message *message, int received) {
+void IMU::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::imu *imu =
-      static_cast<const RosMessage::imu *>(message->type());
+  const ChROSMessage::IMU *imu =
+      static_cast<const ChROSMessage::IMU *>(message->message());
 
   // Convert to Imu
   data_.header.stamp = ros::Time::now();
@@ -237,10 +237,10 @@ void GPS::publish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void GPS::publish(const RosMessage::message *message, int received) {
+void GPS::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::gps *gps =
-      static_cast<const RosMessage::gps *>(message->type());
+  const ChROSMessage::GPS *gps =
+      static_cast<const ChROSMessage::GPS *>(message->message());
 
   // Convert to NavSatFix
   data_.header.stamp = ros::Time::now();
@@ -271,10 +271,10 @@ void Time::publish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void Time::publish(const RosMessage::message *message, int received) {
+void Time::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::time *time =
-      static_cast<const RosMessage::time *>(message->type());
+  const ChROSMessage::Time *time =
+      static_cast<const ChROSMessage::Time *>(message->message());
 
   time_ = time->t();
   data_.clock = ros::Time(time_);
@@ -318,10 +318,10 @@ void Cones::publish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void Cones::publish(const RosMessage::message *message, int received) {
+void Cones::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::cones *cones =
-      static_cast<const RosMessage::cones *>(message->type());
+  const ChROSMessage::Cones *cones =
+      static_cast<const ChROSMessage::Cones *>(message->message());
 
   data_.blue_cones.resize(cones->blue_cones()->Length());
   data_.yellow_cones.resize(cones->yellow_cones()->Length());
@@ -378,10 +378,10 @@ void Vehicle::publish(std::vector<uint8_t> buffer, int received) {
   pub_.publish(data_);
 }
 
-void Vehicle::publish(const RosMessage::message *message, int received) {
+void Vehicle::publish(const ChROSMessage::Message *message, int received) {
   // Parse buffer
-  const RosMessage::vehicle *vehicle =
-      static_cast<const RosMessage::vehicle *>(message->type());
+  const ChROSMessage::Vehicle *vehicle =
+      static_cast<const ChROSMessage::Vehicle *>(message->message());
 
   data_.header.stamp = ros::Time::now();
   data_.header.frame_id = "map";

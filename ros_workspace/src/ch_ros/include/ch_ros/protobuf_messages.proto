@@ -51,3 +51,7 @@ message vehicle {
 message exit {
   string code = 1;
 }
+
+message config {
+  bool visualize = 1; 
+}

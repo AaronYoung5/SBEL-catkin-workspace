@@ -1,8 +1,10 @@
 #pragma once
 
-// ROS includes
-#include "common_msgs/Control.h"
+// ROS include
 #include "ros/ros.h"
+
+// ROS message includes
+#include "common_msgs/Control.h"
 #include "sensor_msgs/PointCloud2.h"
 
 // External library includes
@@ -17,20 +19,16 @@ private:
   // Private variables
 
   // -- ROS Parameters --- //
-  // UDP if false
-  bool use_tcp_;
   // Flatbuffers if false
   bool use_protobuf_;
+  // Don't visualize if false
+  bool use_irrlicht_;
+  // Socket host name and port number
+  std::string host_name_;
+  std::string port_num_;
 
   // --- Message passing protocol ---//
-  std::string port_;
-  std::string host_name_;
-  // TCP
-  boost::asio::ip::tcp::socket tcpsocket_;
-  boost::asio::ip::tcp::endpoint tcpendpoint_;
-  // UDP
-  boost::asio::ip::udp::socket socket_;
-  boost::asio::ip::udp::endpoint endpoint_;
+  boost::asio::ip::tcp::socket socket_;
 
   // --- Sensor communication handlers --- //
   Lidar lidar_;
@@ -57,21 +55,14 @@ public:
   // Public functions
 
   // --- Constructor --- //
-  ChRosHandler(ros::NodeHandle& n, std::string host_name = "localhost",
-               std::string port_num = "8080");
+  ChRosHandler(ros::NodeHandle &n);
 
   // --- Destructor --- //
   ~ChRosHandler();
 
   // --- Synchronous receiving functions --- //
-  // Receives info over socket and calls necessary handling functions
-  void receiveAndHandle();
-  void protobufReceiveAndHandle();
-  void flatbufferReceiveAndHandle();
-
-  // --- Asynchronous sending functions --- //
-  void protobufSendControls();
-  void flatbuffersSendControls();
+  // Uses ros param to specify determine correct receive/handle function
+  void receive();
 
   // Determines if conrtols should update depending on time elapsed
   bool shouldSend();
@@ -87,16 +78,25 @@ private:
   // Protobuf
   void handle(std::vector<uint8_t> buffer, int received);
   // Flatbuffers
-  void handle(const RosMessage::message *message, int received);
+  void handle(const ChROSMessage::Message *message, int received);
 
   // Sets target controls to send
   void setTargetControls(const common_msgs::Control::ConstPtr &msg);
 
+  // --- Receiving functions --- //
+  void protobufReceiveAndHandle();
+  void flatbufferReceiveAndHandle();
+
+  // --- Sending functions --- //
+  // Sends configuration message to Chrono
+  void protobufSendConfig();
+  void flatbuffersSendConfig();
   // Sends control message to Chrono
-  void sendControls();
+  void protobufSendControls();
+  void flatbuffersSendControls();
 
   // Initializes the parameters from ROS
-  void initializeROSParameters(ros::NodeHandle& n);
+  void initializeROSParameters(ros::NodeHandle &n);
 
   // Initializes and connects to tcp socket
   void initializeSocket();

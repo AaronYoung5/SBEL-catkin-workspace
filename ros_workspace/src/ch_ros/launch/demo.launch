@@ -1,5 +1,8 @@
 <launch>
   <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen"/>
+  <group ns="ch_ros">
+    <rosparam file="$(find ch_ros)/config/demo.yaml"/>
+  </group>
 
   <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
 

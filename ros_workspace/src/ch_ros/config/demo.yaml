@@ -1,0 +1,4 @@
+use_protobuf: false
+use_irrlicht: true
+host_name: "localhost"
+port_num: "8080"

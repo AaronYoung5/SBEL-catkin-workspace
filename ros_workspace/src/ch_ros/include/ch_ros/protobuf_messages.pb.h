@@ -38,6 +38,7 @@ void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
 
 class Vector;
 class cones;
+class config;
 class control;
 class exit;
 class gps;
@@ -923,6 +924,88 @@ class exit : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   void InitAsDefaultInstance();
   static exit* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class config : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ChronoMessages.config) */ {
+ public:
+  config();
+  virtual ~config();
+
+  config(const config& from);
+
+  inline config& operator=(const config& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const config& default_instance();
+
+  void Swap(config* other);
+
+  // implements Message ----------------------------------------------
+
+  inline config* New() const { return New(NULL); }
+
+  config* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const config& from);
+  void MergeFrom(const config& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(config* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bool visualize = 1;
+  void clear_visualize();
+  static const int kVisualizeFieldNumber = 1;
+  bool visualize() const;
+  void set_visualize(bool value);
+
+  // @@protoc_insertion_point(class_scope:ChronoMessages.config)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  bool visualize_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_protobuf_5fmessages_2eproto();
+  friend void protobuf_AssignDesc_protobuf_5fmessages_2eproto();
+  friend void protobuf_ShutdownFile_protobuf_5fmessages_2eproto();
+
+  void InitAsDefaultInstance();
+  static config* default_instance_;
+};
 // ===================================================================
 
 
@@ -1507,7 +1590,27 @@ inline void exit::set_allocated_code(::std::string* code) {
   // @@protoc_insertion_point(field_set_allocated:ChronoMessages.exit.code)
 }
 
+// -------------------------------------------------------------------
+
+// config
+
+// optional bool visualize = 1;
+inline void config::clear_visualize() {
+  visualize_ = false;
+}
+inline bool config::visualize() const {
+  // @@protoc_insertion_point(field_get:ChronoMessages.config.visualize)
+  return visualize_;
+}
+inline void config::set_visualize(bool value) {
+  
+  visualize_ = value;
+  // @@protoc_insertion_point(field_set:ChronoMessages.config.visualize)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

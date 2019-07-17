@@ -9,7 +9,8 @@ namespace ChMessageCodes {
     TIME,
     VEHICLE,
     CONE,
-    EXIT
+    EXIT,
+    CONFIG
   };
 }
 typedef ChMessageCodes::ChMessageCode ChMessageCode;
