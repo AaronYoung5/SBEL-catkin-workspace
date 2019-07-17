@@ -11,7 +11,6 @@
 #include <boost/asio.hpp>
 
 // Internal package includes
-#include "ch_message_codes.h"
 #include "publishers.h"
 
 class ChRosHandler {
@@ -19,8 +18,6 @@ private:
   // Private variables
 
   // -- ROS Parameters --- //
-  // Flatbuffers if false
-  bool use_protobuf_;
   // Don't visualize if false
   bool use_irrlicht_;
   // Socket host name and port number
@@ -83,17 +80,11 @@ private:
   // Sets target controls to send
   void setTargetControls(const common_msgs::Control::ConstPtr &msg);
 
-  // --- Receiving functions --- //
-  void protobufReceiveAndHandle();
-  void flatbufferReceiveAndHandle();
-
   // --- Sending functions --- //
   // Sends configuration message to Chrono
-  void protobufSendConfig();
-  void flatbuffersSendConfig();
+  void sendConfig();
   // Sends control message to Chrono
-  void protobufSendControls();
-  void flatbuffersSendControls();
+  void sendControls();
 
   // Initializes the parameters from ROS
   void initializeROSParameters(ros::NodeHandle &n);

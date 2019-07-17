@@ -16,7 +16,6 @@
 
 // Internal package includes
 #include "ch_ros/ChROSMessages_generated.h"
-#include "protobuf_messages.pb.h"
 
 template <typename msgtype> class Publisher {
 protected:
@@ -29,7 +28,6 @@ public:
     pub_ = n.advertise<msgtype>(node_name, queue_size);
   }
 
-  virtual void publish(std::vector<uint8_t> buffer, int received) = 0;
   virtual void publish(const ChROSMessage::Message *message, int received) = 0;
 };
 
@@ -41,8 +39,6 @@ private:
 
 public:
   Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
-  void tcppublish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
 };
 
@@ -50,7 +46,6 @@ public:
 class IMU : Publisher<sensor_msgs::Imu> {
 public:
   IMU(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
 };
 
@@ -58,7 +53,6 @@ public:
 class GPS : Publisher<sensor_msgs::NavSatFix> {
 public:
   GPS(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
 };
 
@@ -69,7 +63,6 @@ private:
 
 public:
   Time(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
 
   float GetTime() { return time_; }
@@ -82,7 +75,6 @@ private:
 
 public:
   Cones(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
   bool send_cones(common_srvs::ConeMap::Request &req,
                   common_srvs::ConeMap::Response &res);
@@ -93,6 +85,5 @@ public:
 class Vehicle : Publisher<common_msgs::VehState> {
 public:
   Vehicle(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(std::vector<uint8_t> buffer, int received);
   void publish(const ChROSMessage::Message *message, int received);
 };

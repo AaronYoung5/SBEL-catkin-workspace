@@ -9,8 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   roslaunch
 )
 
-find_package(Boost COMPONENTS program_options REQUIRED)
-
 roslaunch_add_file_check(launch)
 
 # Protobuf
@@ -31,7 +29,6 @@ add_executable(ch_ros
   src/ch_ros.cpp
   src/ch_ros_handler.cpp
   src/publishers.cpp
-  src/protobuf_messages.pb.cc
 )
 target_link_libraries(ch_ros ${catkin_LIBRARIES} ${PROTOBUF_LIBRARY} ${Boost_LIBRARIES})
 
