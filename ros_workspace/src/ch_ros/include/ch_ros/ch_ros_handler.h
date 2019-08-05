@@ -28,6 +28,7 @@ private:
   boost::asio::ip::tcp::socket socket_;
 
   // --- Sensor communication handlers --- //
+  Camera camera_;
   Lidar lidar_;
   IMU imu_;
   GPS gps_;
@@ -40,10 +41,6 @@ private:
   ros::Subscriber control_sub_;
   // Respective vehicle values
   float throttle_, steering_, braking_;
-  // Controls send rate
-  float send_rate_;
-  // Boolean describing if controls have been updated
-  bool controls_updated_;
 
   // Boolean denoting if Chrono is running
   bool chrono_ok_;
@@ -61,9 +58,6 @@ public:
   // Uses ros param to specify determine correct receive/handle function
   void receive();
 
-  // Determines if conrtols should update depending on time elapsed
-  bool shouldSend();
-
   // Is Chrono running?
   bool chrono_ok() { return chrono_ok_; }
 
@@ -72,10 +66,7 @@ private:
 
   // --- Message handling functions --- //
   // Allocates message reading to helper methods
-  // Protobuf
-  void handle(std::vector<uint8_t> buffer, int received);
-  // Flatbuffers
-  void handle(const ChROSMessage::Message *message, int received);
+  void handle(const ChRosMessage::Message *message, int received);
 
   // Sets target controls to send
   void setTargetControls(const common_msgs::Control::ConstPtr &msg);

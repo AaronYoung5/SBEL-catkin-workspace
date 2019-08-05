@@ -6,13 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   common_utilities
   common_msgs
   common_srvs
-  roslaunch
+  image_transport
 )
-
-roslaunch_add_file_check(launch)
-
-# Protobuf
-find_package(Protobuf REQUIRED)
 
 include_directories(
   include
@@ -30,7 +25,7 @@ add_executable(ch_ros
   src/ch_ros_handler.cpp
   src/publishers.cpp
 )
-target_link_libraries(ch_ros ${catkin_LIBRARIES} ${PROTOBUF_LIBRARY} ${Boost_LIBRARIES})
+target_link_libraries(ch_ros ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 install(PROGRAMS
   scripts/ch_launch

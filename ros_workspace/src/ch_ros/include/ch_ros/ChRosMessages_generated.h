@@ -6,9 +6,11 @@
 
 #include "flatbuffers/flatbuffers.h"
 
-namespace ChROSMessage {
+namespace ChRosMessage {
 
 struct Vector;
+
+struct Color;
 
 struct Header;
 
@@ -17,6 +19,8 @@ struct Message;
 struct Config;
 
 struct Lidar;
+
+struct Camera;
 
 struct GPS;
 
@@ -35,22 +39,24 @@ struct Exit;
 enum Type {
   Type_NONE = 0,
   Type_Lidar = 1,
-  Type_GPS = 2,
-  Type_IMU = 3,
-  Type_Control = 4,
-  Type_Time = 5,
-  Type_Vehicle = 6,
-  Type_Cones = 7,
-  Type_Exit = 8,
-  Type_Config = 9,
+  Type_Camera = 2,
+  Type_GPS = 3,
+  Type_IMU = 4,
+  Type_Control = 5,
+  Type_Time = 6,
+  Type_Vehicle = 7,
+  Type_Cones = 8,
+  Type_Exit = 9,
+  Type_Config = 10,
   Type_MIN = Type_NONE,
   Type_MAX = Type_Config
 };
 
-inline const Type (&EnumValuesType())[10] {
+inline const Type (&EnumValuesType())[11] {
   static const Type values[] = {
     Type_NONE,
     Type_Lidar,
+    Type_Camera,
     Type_GPS,
     Type_IMU,
     Type_Control,
@@ -64,9 +70,10 @@ inline const Type (&EnumValuesType())[10] {
 }
 
 inline const char * const *EnumNamesType() {
-  static const char * const names[11] = {
+  static const char * const names[12] = {
     "NONE",
     "Lidar",
+    "Camera",
     "GPS",
     "IMU",
     "Control",
@@ -90,39 +97,43 @@ template<typename T> struct TypeTraits {
   static const Type enum_value = Type_NONE;
 };
 
-template<> struct TypeTraits<ChROSMessage::Lidar> {
+template<> struct TypeTraits<ChRosMessage::Lidar> {
   static const Type enum_value = Type_Lidar;
 };
 
-template<> struct TypeTraits<ChROSMessage::GPS> {
+template<> struct TypeTraits<ChRosMessage::Camera> {
+  static const Type enum_value = Type_Camera;
+};
+
+template<> struct TypeTraits<ChRosMessage::GPS> {
   static const Type enum_value = Type_GPS;
 };
 
-template<> struct TypeTraits<ChROSMessage::IMU> {
+template<> struct TypeTraits<ChRosMessage::IMU> {
   static const Type enum_value = Type_IMU;
 };
 
-template<> struct TypeTraits<ChROSMessage::Control> {
+template<> struct TypeTraits<ChRosMessage::Control> {
   static const Type enum_value = Type_Control;
 };
 
-template<> struct TypeTraits<ChROSMessage::Time> {
+template<> struct TypeTraits<ChRosMessage::Time> {
   static const Type enum_value = Type_Time;
 };
 
-template<> struct TypeTraits<ChROSMessage::Vehicle> {
+template<> struct TypeTraits<ChRosMessage::Vehicle> {
   static const Type enum_value = Type_Vehicle;
 };
 
-template<> struct TypeTraits<ChROSMessage::Cones> {
+template<> struct TypeTraits<ChRosMessage::Cones> {
   static const Type enum_value = Type_Cones;
 };
 
-template<> struct TypeTraits<ChROSMessage::Exit> {
+template<> struct TypeTraits<ChRosMessage::Exit> {
   static const Type enum_value = Type_Exit;
 };
 
-template<> struct TypeTraits<ChROSMessage::Config> {
+template<> struct TypeTraits<ChRosMessage::Config> {
   static const Type enum_value = Type_Config;
 };
 
@@ -156,6 +167,38 @@ FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) Vector FLATBUFFERS_FINAL_CLASS {
 };
 FLATBUFFERS_STRUCT_END(Vector, 12);
 
+FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(1) Color FLATBUFFERS_FINAL_CLASS {
+ private:
+  int8_t r_;
+  int8_t g_;
+  int8_t b_;
+  int8_t a_;
+
+ public:
+  Color() {
+    memset(static_cast<void *>(this), 0, sizeof(Color));
+  }
+  Color(int8_t _r, int8_t _g, int8_t _b, int8_t _a)
+      : r_(flatbuffers::EndianScalar(_r)),
+        g_(flatbuffers::EndianScalar(_g)),
+        b_(flatbuffers::EndianScalar(_b)),
+        a_(flatbuffers::EndianScalar(_a)) {
+  }
+  int8_t r() const {
+    return flatbuffers::EndianScalar(r_);
+  }
+  int8_t g() const {
+    return flatbuffers::EndianScalar(g_);
+  }
+  int8_t b() const {
+    return flatbuffers::EndianScalar(b_);
+  }
+  int8_t a() const {
+    return flatbuffers::EndianScalar(a_);
+  }
+};
+FLATBUFFERS_STRUCT_END(Color, 4);
+
 FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) Header FLATBUFFERS_FINAL_CLASS {
  private:
   int32_t size_;
@@ -178,39 +221,42 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_MESSAGE_TYPE = 4,
     VT_MESSAGE = 6
   };
-  ChROSMessage::Type message_type() const {
-    return static_cast<ChROSMessage::Type>(GetField<uint8_t>(VT_MESSAGE_TYPE, 0));
+  ChRosMessage::Type message_type() const {
+    return static_cast<ChRosMessage::Type>(GetField<uint8_t>(VT_MESSAGE_TYPE, 0));
   }
   const void *message() const {
     return GetPointer<const void *>(VT_MESSAGE);
   }
   template<typename T> const T *message_as() const;
-  const ChROSMessage::Lidar *message_as_Lidar() const {
-    return message_type() == ChROSMessage::Type_Lidar ? static_cast<const ChROSMessage::Lidar *>(message()) : nullptr;
+  const ChRosMessage::Lidar *message_as_Lidar() const {
+    return message_type() == ChRosMessage::Type_Lidar ? static_cast<const ChRosMessage::Lidar *>(message()) : nullptr;
   }
-  const ChROSMessage::GPS *message_as_GPS() const {
-    return message_type() == ChROSMessage::Type_GPS ? static_cast<const ChROSMessage::GPS *>(message()) : nullptr;
+  const ChRosMessage::Camera *message_as_Camera() const {
+    return message_type() == ChRosMessage::Type_Camera ? static_cast<const ChRosMessage::Camera *>(message()) : nullptr;
   }
-  const ChROSMessage::IMU *message_as_IMU() const {
-    return message_type() == ChROSMessage::Type_IMU ? static_cast<const ChROSMessage::IMU *>(message()) : nullptr;
+  const ChRosMessage::GPS *message_as_GPS() const {
+    return message_type() == ChRosMessage::Type_GPS ? static_cast<const ChRosMessage::GPS *>(message()) : nullptr;
   }
-  const ChROSMessage::Control *message_as_Control() const {
-    return message_type() == ChROSMessage::Type_Control ? static_cast<const ChROSMessage::Control *>(message()) : nullptr;
+  const ChRosMessage::IMU *message_as_IMU() const {
+    return message_type() == ChRosMessage::Type_IMU ? static_cast<const ChRosMessage::IMU *>(message()) : nullptr;
   }
-  const ChROSMessage::Time *message_as_Time() const {
-    return message_type() == ChROSMessage::Type_Time ? static_cast<const ChROSMessage::Time *>(message()) : nullptr;
+  const ChRosMessage::Control *message_as_Control() const {
+    return message_type() == ChRosMessage::Type_Control ? static_cast<const ChRosMessage::Control *>(message()) : nullptr;
   }
-  const ChROSMessage::Vehicle *message_as_Vehicle() const {
-    return message_type() == ChROSMessage::Type_Vehicle ? static_cast<const ChROSMessage::Vehicle *>(message()) : nullptr;
+  const ChRosMessage::Time *message_as_Time() const {
+    return message_type() == ChRosMessage::Type_Time ? static_cast<const ChRosMessage::Time *>(message()) : nullptr;
   }
-  const ChROSMessage::Cones *message_as_Cones() const {
-    return message_type() == ChROSMessage::Type_Cones ? static_cast<const ChROSMessage::Cones *>(message()) : nullptr;
+  const ChRosMessage::Vehicle *message_as_Vehicle() const {
+    return message_type() == ChRosMessage::Type_Vehicle ? static_cast<const ChRosMessage::Vehicle *>(message()) : nullptr;
   }
-  const ChROSMessage::Exit *message_as_Exit() const {
-    return message_type() == ChROSMessage::Type_Exit ? static_cast<const ChROSMessage::Exit *>(message()) : nullptr;
+  const ChRosMessage::Cones *message_as_Cones() const {
+    return message_type() == ChRosMessage::Type_Cones ? static_cast<const ChRosMessage::Cones *>(message()) : nullptr;
   }
-  const ChROSMessage::Config *message_as_Config() const {
-    return message_type() == ChROSMessage::Type_Config ? static_cast<const ChROSMessage::Config *>(message()) : nullptr;
+  const ChRosMessage::Exit *message_as_Exit() const {
+    return message_type() == ChRosMessage::Type_Exit ? static_cast<const ChRosMessage::Exit *>(message()) : nullptr;
+  }
+  const ChRosMessage::Config *message_as_Config() const {
+    return message_type() == ChRosMessage::Type_Config ? static_cast<const ChRosMessage::Config *>(message()) : nullptr;
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -221,46 +267,50 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
 };
 
-template<> inline const ChROSMessage::Lidar *Message::message_as<ChROSMessage::Lidar>() const {
+template<> inline const ChRosMessage::Lidar *Message::message_as<ChRosMessage::Lidar>() const {
   return message_as_Lidar();
 }
 
-template<> inline const ChROSMessage::GPS *Message::message_as<ChROSMessage::GPS>() const {
+template<> inline const ChRosMessage::Camera *Message::message_as<ChRosMessage::Camera>() const {
+  return message_as_Camera();
+}
+
+template<> inline const ChRosMessage::GPS *Message::message_as<ChRosMessage::GPS>() const {
   return message_as_GPS();
 }
 
-template<> inline const ChROSMessage::IMU *Message::message_as<ChROSMessage::IMU>() const {
+template<> inline const ChRosMessage::IMU *Message::message_as<ChRosMessage::IMU>() const {
   return message_as_IMU();
 }
 
-template<> inline const ChROSMessage::Control *Message::message_as<ChROSMessage::Control>() const {
+template<> inline const ChRosMessage::Control *Message::message_as<ChRosMessage::Control>() const {
   return message_as_Control();
 }
 
-template<> inline const ChROSMessage::Time *Message::message_as<ChROSMessage::Time>() const {
+template<> inline const ChRosMessage::Time *Message::message_as<ChRosMessage::Time>() const {
   return message_as_Time();
 }
 
-template<> inline const ChROSMessage::Vehicle *Message::message_as<ChROSMessage::Vehicle>() const {
+template<> inline const ChRosMessage::Vehicle *Message::message_as<ChRosMessage::Vehicle>() const {
   return message_as_Vehicle();
 }
 
-template<> inline const ChROSMessage::Cones *Message::message_as<ChROSMessage::Cones>() const {
+template<> inline const ChRosMessage::Cones *Message::message_as<ChRosMessage::Cones>() const {
   return message_as_Cones();
 }
 
-template<> inline const ChROSMessage::Exit *Message::message_as<ChROSMessage::Exit>() const {
+template<> inline const ChRosMessage::Exit *Message::message_as<ChRosMessage::Exit>() const {
   return message_as_Exit();
 }
 
-template<> inline const ChROSMessage::Config *Message::message_as<ChROSMessage::Config>() const {
+template<> inline const ChRosMessage::Config *Message::message_as<ChRosMessage::Config>() const {
   return message_as_Config();
 }
 
 struct MessageBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_message_type(ChROSMessage::Type message_type) {
+  void add_message_type(ChRosMessage::Type message_type) {
     fbb_.AddElement<uint8_t>(Message::VT_MESSAGE_TYPE, static_cast<uint8_t>(message_type), 0);
   }
   void add_message(flatbuffers::Offset<void> message) {
@@ -280,7 +330,7 @@ struct MessageBuilder {
 
 inline flatbuffers::Offset<Message> CreateMessage(
     flatbuffers::FlatBufferBuilder &_fbb,
-    ChROSMessage::Type message_type = ChROSMessage::Type_NONE,
+    ChRosMessage::Type message_type = ChRosMessage::Type_NONE,
     flatbuffers::Offset<void> message = 0) {
   MessageBuilder builder_(_fbb);
   builder_.add_message(message);
@@ -290,14 +340,14 @@ inline flatbuffers::Offset<Message> CreateMessage(
 
 struct Config FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
-    VT_VISUALIZE = 4
+    VT_USE_IRRLICHT = 4
   };
-  bool visualize() const {
-    return GetField<uint8_t>(VT_VISUALIZE, 0) != 0;
+  bool use_irrlicht() const {
+    return GetField<uint8_t>(VT_USE_IRRLICHT, 0) != 0;
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<uint8_t>(verifier, VT_VISUALIZE) &&
+           VerifyField<uint8_t>(verifier, VT_USE_IRRLICHT) &&
            verifier.EndTable();
   }
 };
@@ -305,8 +355,8 @@ struct Config FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct ConfigBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_visualize(bool visualize) {
-    fbb_.AddElement<uint8_t>(Config::VT_VISUALIZE, static_cast<uint8_t>(visualize), 0);
+  void add_use_irrlicht(bool use_irrlicht) {
+    fbb_.AddElement<uint8_t>(Config::VT_USE_IRRLICHT, static_cast<uint8_t>(use_irrlicht), 0);
   }
   explicit ConfigBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
@@ -322,9 +372,9 @@ struct ConfigBuilder {
 
 inline flatbuffers::Offset<Config> CreateConfig(
     flatbuffers::FlatBufferBuilder &_fbb,
-    bool visualize = false) {
+    bool use_irrlicht = false) {
   ConfigBuilder builder_(_fbb);
-  builder_.add_visualize(visualize);
+  builder_.add_use_irrlicht(use_irrlicht);
   return builder_.Finish();
 }
 
@@ -332,8 +382,8 @@ struct Lidar FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_POINTS = 4
   };
-  const flatbuffers::Vector<const ChROSMessage::Vector *> *points() const {
-    return GetPointer<const flatbuffers::Vector<const ChROSMessage::Vector *> *>(VT_POINTS);
+  const flatbuffers::Vector<const ChRosMessage::Vector *> *points() const {
+    return GetPointer<const flatbuffers::Vector<const ChRosMessage::Vector *> *>(VT_POINTS);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -346,7 +396,7 @@ struct Lidar FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct LidarBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_points(flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> points) {
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> points) {
     fbb_.AddOffset(Lidar::VT_POINTS, points);
   }
   explicit LidarBuilder(flatbuffers::FlatBufferBuilder &_fbb)
@@ -363,7 +413,7 @@ struct LidarBuilder {
 
 inline flatbuffers::Offset<Lidar> CreateLidar(
     flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> points = 0) {
+    flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> points = 0) {
   LidarBuilder builder_(_fbb);
   builder_.add_points(points);
   return builder_.Finish();
@@ -371,10 +421,96 @@ inline flatbuffers::Offset<Lidar> CreateLidar(
 
 inline flatbuffers::Offset<Lidar> CreateLidarDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const std::vector<ChROSMessage::Vector> *points = nullptr) {
-  auto points__ = points ? _fbb.CreateVectorOfStructs<ChROSMessage::Vector>(*points) : 0;
-  return ChROSMessage::CreateLidar(
+    const std::vector<ChRosMessage::Vector> *points = nullptr) {
+  auto points__ = points ? _fbb.CreateVectorOfStructs<ChRosMessage::Vector>(*points) : 0;
+  return ChRosMessage::CreateLidar(
       _fbb,
+      points__);
+}
+
+struct Camera FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_HEIGHT = 4,
+    VT_WIDTH = 6,
+    VT_BYTES_PER_PIXEL = 8,
+    VT_POINTS = 10
+  };
+  int32_t height() const {
+    return GetField<int32_t>(VT_HEIGHT, 0);
+  }
+  int32_t width() const {
+    return GetField<int32_t>(VT_WIDTH, 0);
+  }
+  int32_t bytes_per_pixel() const {
+    return GetField<int32_t>(VT_BYTES_PER_PIXEL, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *points() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_POINTS);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, VT_HEIGHT) &&
+           VerifyField<int32_t>(verifier, VT_WIDTH) &&
+           VerifyField<int32_t>(verifier, VT_BYTES_PER_PIXEL) &&
+           VerifyOffset(verifier, VT_POINTS) &&
+           verifier.VerifyVector(points()) &&
+           verifier.EndTable();
+  }
+};
+
+struct CameraBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_height(int32_t height) {
+    fbb_.AddElement<int32_t>(Camera::VT_HEIGHT, height, 0);
+  }
+  void add_width(int32_t width) {
+    fbb_.AddElement<int32_t>(Camera::VT_WIDTH, width, 0);
+  }
+  void add_bytes_per_pixel(int32_t bytes_per_pixel) {
+    fbb_.AddElement<int32_t>(Camera::VT_BYTES_PER_PIXEL, bytes_per_pixel, 0);
+  }
+  void add_points(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> points) {
+    fbb_.AddOffset(Camera::VT_POINTS, points);
+  }
+  explicit CameraBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  CameraBuilder &operator=(const CameraBuilder &);
+  flatbuffers::Offset<Camera> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<Camera>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<Camera> CreateCamera(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t height = 0,
+    int32_t width = 0,
+    int32_t bytes_per_pixel = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> points = 0) {
+  CameraBuilder builder_(_fbb);
+  builder_.add_points(points);
+  builder_.add_bytes_per_pixel(bytes_per_pixel);
+  builder_.add_width(width);
+  builder_.add_height(height);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<Camera> CreateCameraDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t height = 0,
+    int32_t width = 0,
+    int32_t bytes_per_pixel = 0,
+    const std::vector<uint8_t> *points = nullptr) {
+  auto points__ = points ? _fbb.CreateVector<uint8_t>(*points) : 0;
+  return ChRosMessage::CreateCamera(
+      _fbb,
+      height,
+      width,
+      bytes_per_pixel,
       points__);
 }
 
@@ -444,20 +580,20 @@ struct IMU FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_LINEAR_ACCELERATION = 6,
     VT_ORIENTATION = 8
   };
-  const ChROSMessage::Vector *angular_velocity() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_ANGULAR_VELOCITY);
+  const ChRosMessage::Vector *angular_velocity() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_ANGULAR_VELOCITY);
   }
-  const ChROSMessage::Vector *linear_acceleration() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_LINEAR_ACCELERATION);
+  const ChRosMessage::Vector *linear_acceleration() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_LINEAR_ACCELERATION);
   }
-  const ChROSMessage::Vector *orientation() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_ORIENTATION);
+  const ChRosMessage::Vector *orientation() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_ORIENTATION);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_ANGULAR_VELOCITY) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_LINEAR_ACCELERATION) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_ORIENTATION) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_ANGULAR_VELOCITY) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_LINEAR_ACCELERATION) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_ORIENTATION) &&
            verifier.EndTable();
   }
 };
@@ -465,13 +601,13 @@ struct IMU FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct IMUBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_angular_velocity(const ChROSMessage::Vector *angular_velocity) {
+  void add_angular_velocity(const ChRosMessage::Vector *angular_velocity) {
     fbb_.AddStruct(IMU::VT_ANGULAR_VELOCITY, angular_velocity);
   }
-  void add_linear_acceleration(const ChROSMessage::Vector *linear_acceleration) {
+  void add_linear_acceleration(const ChRosMessage::Vector *linear_acceleration) {
     fbb_.AddStruct(IMU::VT_LINEAR_ACCELERATION, linear_acceleration);
   }
-  void add_orientation(const ChROSMessage::Vector *orientation) {
+  void add_orientation(const ChRosMessage::Vector *orientation) {
     fbb_.AddStruct(IMU::VT_ORIENTATION, orientation);
   }
   explicit IMUBuilder(flatbuffers::FlatBufferBuilder &_fbb)
@@ -488,9 +624,9 @@ struct IMUBuilder {
 
 inline flatbuffers::Offset<IMU> CreateIMU(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const ChROSMessage::Vector *angular_velocity = 0,
-    const ChROSMessage::Vector *linear_acceleration = 0,
-    const ChROSMessage::Vector *orientation = 0) {
+    const ChRosMessage::Vector *angular_velocity = 0,
+    const ChRosMessage::Vector *linear_acceleration = 0,
+    const ChRosMessage::Vector *orientation = 0) {
   IMUBuilder builder_(_fbb);
   builder_.add_orientation(orientation);
   builder_.add_linear_acceleration(linear_acceleration);
@@ -504,20 +640,20 @@ struct Vehicle FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_VELOCITY = 6,
     VT_ACCELERATION = 8
   };
-  const ChROSMessage::Vector *position() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_POSITION);
+  const ChRosMessage::Vector *position() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_POSITION);
   }
-  const ChROSMessage::Vector *velocity() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_VELOCITY);
+  const ChRosMessage::Vector *velocity() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_VELOCITY);
   }
-  const ChROSMessage::Vector *acceleration() const {
-    return GetStruct<const ChROSMessage::Vector *>(VT_ACCELERATION);
+  const ChRosMessage::Vector *acceleration() const {
+    return GetStruct<const ChRosMessage::Vector *>(VT_ACCELERATION);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_POSITION) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_VELOCITY) &&
-           VerifyField<ChROSMessage::Vector>(verifier, VT_ACCELERATION) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_POSITION) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_VELOCITY) &&
+           VerifyField<ChRosMessage::Vector>(verifier, VT_ACCELERATION) &&
            verifier.EndTable();
   }
 };
@@ -525,13 +661,13 @@ struct Vehicle FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct VehicleBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_position(const ChROSMessage::Vector *position) {
+  void add_position(const ChRosMessage::Vector *position) {
     fbb_.AddStruct(Vehicle::VT_POSITION, position);
   }
-  void add_velocity(const ChROSMessage::Vector *velocity) {
+  void add_velocity(const ChRosMessage::Vector *velocity) {
     fbb_.AddStruct(Vehicle::VT_VELOCITY, velocity);
   }
-  void add_acceleration(const ChROSMessage::Vector *acceleration) {
+  void add_acceleration(const ChRosMessage::Vector *acceleration) {
     fbb_.AddStruct(Vehicle::VT_ACCELERATION, acceleration);
   }
   explicit VehicleBuilder(flatbuffers::FlatBufferBuilder &_fbb)
@@ -548,9 +684,9 @@ struct VehicleBuilder {
 
 inline flatbuffers::Offset<Vehicle> CreateVehicle(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const ChROSMessage::Vector *position = 0,
-    const ChROSMessage::Vector *velocity = 0,
-    const ChROSMessage::Vector *acceleration = 0) {
+    const ChRosMessage::Vector *position = 0,
+    const ChRosMessage::Vector *velocity = 0,
+    const ChRosMessage::Vector *acceleration = 0) {
   VehicleBuilder builder_(_fbb);
   builder_.add_acceleration(acceleration);
   builder_.add_velocity(velocity);
@@ -663,11 +799,11 @@ struct Cones FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_BLUE_CONES = 4,
     VT_YELLOW_CONES = 6
   };
-  const flatbuffers::Vector<const ChROSMessage::Vector *> *blue_cones() const {
-    return GetPointer<const flatbuffers::Vector<const ChROSMessage::Vector *> *>(VT_BLUE_CONES);
+  const flatbuffers::Vector<const ChRosMessage::Vector *> *blue_cones() const {
+    return GetPointer<const flatbuffers::Vector<const ChRosMessage::Vector *> *>(VT_BLUE_CONES);
   }
-  const flatbuffers::Vector<const ChROSMessage::Vector *> *yellow_cones() const {
-    return GetPointer<const flatbuffers::Vector<const ChROSMessage::Vector *> *>(VT_YELLOW_CONES);
+  const flatbuffers::Vector<const ChRosMessage::Vector *> *yellow_cones() const {
+    return GetPointer<const flatbuffers::Vector<const ChRosMessage::Vector *> *>(VT_YELLOW_CONES);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -682,10 +818,10 @@ struct Cones FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct ConesBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
-  void add_blue_cones(flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> blue_cones) {
+  void add_blue_cones(flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> blue_cones) {
     fbb_.AddOffset(Cones::VT_BLUE_CONES, blue_cones);
   }
-  void add_yellow_cones(flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> yellow_cones) {
+  void add_yellow_cones(flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> yellow_cones) {
     fbb_.AddOffset(Cones::VT_YELLOW_CONES, yellow_cones);
   }
   explicit ConesBuilder(flatbuffers::FlatBufferBuilder &_fbb)
@@ -702,8 +838,8 @@ struct ConesBuilder {
 
 inline flatbuffers::Offset<Cones> CreateCones(
     flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> blue_cones = 0,
-    flatbuffers::Offset<flatbuffers::Vector<const ChROSMessage::Vector *>> yellow_cones = 0) {
+    flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> blue_cones = 0,
+    flatbuffers::Offset<flatbuffers::Vector<const ChRosMessage::Vector *>> yellow_cones = 0) {
   ConesBuilder builder_(_fbb);
   builder_.add_yellow_cones(yellow_cones);
   builder_.add_blue_cones(blue_cones);
@@ -712,11 +848,11 @@ inline flatbuffers::Offset<Cones> CreateCones(
 
 inline flatbuffers::Offset<Cones> CreateConesDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
-    const std::vector<ChROSMessage::Vector> *blue_cones = nullptr,
-    const std::vector<ChROSMessage::Vector> *yellow_cones = nullptr) {
-  auto blue_cones__ = blue_cones ? _fbb.CreateVectorOfStructs<ChROSMessage::Vector>(*blue_cones) : 0;
-  auto yellow_cones__ = yellow_cones ? _fbb.CreateVectorOfStructs<ChROSMessage::Vector>(*yellow_cones) : 0;
-  return ChROSMessage::CreateCones(
+    const std::vector<ChRosMessage::Vector> *blue_cones = nullptr,
+    const std::vector<ChRosMessage::Vector> *yellow_cones = nullptr) {
+  auto blue_cones__ = blue_cones ? _fbb.CreateVectorOfStructs<ChRosMessage::Vector>(*blue_cones) : 0;
+  auto yellow_cones__ = yellow_cones ? _fbb.CreateVectorOfStructs<ChRosMessage::Vector>(*yellow_cones) : 0;
+  return ChRosMessage::CreateCones(
       _fbb,
       blue_cones__,
       yellow_cones__);
@@ -768,39 +904,43 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
       return true;
     }
     case Type_Lidar: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Lidar *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Lidar *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Camera: {
+      auto ptr = reinterpret_cast<const ChRosMessage::Camera *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_GPS: {
-      auto ptr = reinterpret_cast<const ChROSMessage::GPS *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::GPS *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_IMU: {
-      auto ptr = reinterpret_cast<const ChROSMessage::IMU *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::IMU *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Control: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Control *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Control *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Time: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Time *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Time *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Vehicle: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Vehicle *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Vehicle *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Cones: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Cones *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Cones *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Exit: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Exit *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Exit *>(obj);
       return verifier.VerifyTable(ptr);
     }
     case Type_Config: {
-      auto ptr = reinterpret_cast<const ChROSMessage::Config *>(obj);
+      auto ptr = reinterpret_cast<const ChRosMessage::Config *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return false;
@@ -819,6 +959,6 @@ inline bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers:
   return true;
 }
 
-}  // namespace ChROSMessage
+}  // namespace ChRosMessage
 
 #endif  // FLATBUFFERS_GENERATED_CHROSMESSAGES_CHROSMESSAGE_H_

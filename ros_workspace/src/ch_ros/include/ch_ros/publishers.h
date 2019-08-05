@@ -7,15 +7,19 @@
 #include "common_srvs/ConeMap.h"
 #include "ros/ros.h"
 #include "rosgraph_msgs/Clock.h"
+#include "sensor_msgs/Image.h"
 #include "sensor_msgs/Imu.h"
 #include "sensor_msgs/NavSatFix.h"
 #include "sensor_msgs/PointCloud2.h"
+#include <sensor_msgs/image_encodings.h>
+
+#include "image_transport/image_transport.h"
 
 // External package includes
 // #include <common_utilities/Vector.h>
 
 // Internal package includes
-#include "ch_ros/ChROSMessages_generated.h"
+#include "ch_ros/ChRosMessages_generated.h"
 
 template <typename msgtype> class Publisher {
 protected:
@@ -28,32 +32,42 @@ public:
     pub_ = n.advertise<msgtype>(node_name, queue_size);
   }
 
-  virtual void publish(const ChROSMessage::Message *message, int received) = 0;
+  virtual void publish(const ChRosMessage::Message *message, int received) = 0;
+};
+
+// --------------------------------- Camera ----------------------------------
+// //
+class Camera : Publisher<sensor_msgs::Image> {
+private:
+  image_transport::Publisher image_pub_;
+
+public:
+  Camera(ros::NodeHandle n, std::string node_name, int queue_size);
+  void publish(const ChRosMessage::Message *message, int received);
+
+private:
+  uint8_t *rev_memcpy(uint8_t *dest, const uint8_t *src, size_t len);
 };
 
 // --------------------------------- Lidar ---------------------------------- //
 class Lidar : Publisher<sensor_msgs::PointCloud2> {
-private:
-  int expected_, last_id_ = 0;
-  bool is_complete_;
-
 public:
   Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- IMU ---------------------------------- //
 class IMU : Publisher<sensor_msgs::Imu> {
 public:
   IMU(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- GPS ---------------------------------- //
 class GPS : Publisher<sensor_msgs::NavSatFix> {
 public:
   GPS(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- TIME ---------------------------------- //
@@ -63,7 +77,7 @@ private:
 
 public:
   Time(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
 
   float GetTime() { return time_; }
 };
@@ -75,7 +89,7 @@ private:
 
 public:
   Cones(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
   bool send_cones(common_srvs::ConeMap::Request &req,
                   common_srvs::ConeMap::Response &res);
 };
@@ -85,5 +99,5 @@ public:
 class Vehicle : Publisher<common_msgs::VehState> {
 public:
   Vehicle(ros::NodeHandle n, std::string node_name, int queue_size);
-  void publish(const ChROSMessage::Message *message, int received);
+  void publish(const ChRosMessage::Message *message, int received);
 };

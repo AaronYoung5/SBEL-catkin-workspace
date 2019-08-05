@@ -1,13 +1,57 @@
 #include "ch_ros/publishers.h"
 
+// --------------------------------- CAMERA ----------------------------------
+// //
+Camera::Camera(ros::NodeHandle n, std::string node_name, int queue_size)
+    : Publisher(n, node_name, queue_size) {
+  image_transport::ImageTransport it(n);
+  image_pub_ = it.advertise("image_transport/camera", 1);
+}
+
+void Camera::publish(const ChRosMessage::Message *message, int received) {
+  // // Parse buffer
+  const ChRosMessage::Camera *camera =
+      static_cast<const ChRosMessage::Camera *>(message->message());
+
+  data_.header.stamp = ros::Time::now();
+  data_.header.frame_id = "base_link";
+
+  data_.height = camera->height();
+  data_.width = camera->width();
+
+  data_.encoding = sensor_msgs::image_encodings::RGBA8;
+
+  int num = 1; // for endianness detection
+  data_.is_bigendian = !(*(char *)&num == 1);
+
+  data_.step = camera->bytes_per_pixel() * data_.width;
+
+  size_t size = data_.width * data_.height * camera->bytes_per_pixel();
+  data_.data.resize(size);
+  memcpy((uint8_t *)(&data_.data[0]), camera->points()->Data(), size);
+  // rev_memcpy((uint8_t *)(&data_.data[0]), camera->points()->Data() + size,
+  // size);
+  // &data_.data[0] = camera->points()->Data();
+
+  image_pub_.publish(data_);
+}
+
+uint8_t *Camera::rev_memcpy(uint8_t *dest, const uint8_t *src, size_t len) {
+  uint8_t *d = dest;
+  const uint8_t *s = src;
+  while (len--)
+    *d++ = *s--;
+  return dest;
+}
+
 // --------------------------------- LIDAR ---------------------------------- //
 Lidar::Lidar(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
-void Lidar::publish(const ChROSMessage::Message *message, int received) {
+void Lidar::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::Lidar *lidar =
-      static_cast<const ChROSMessage::Lidar *>(message->message());
+  const ChRosMessage::Lidar *lidar =
+      static_cast<const ChRosMessage::Lidar *>(message->message());
 
   data_.header.stamp = ros::Time::now();
   data_.header.frame_id = "base_link";
@@ -55,10 +99,10 @@ void Lidar::publish(const ChROSMessage::Message *message, int received) {
 IMU::IMU(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
-void IMU::publish(const ChROSMessage::Message *message, int received) {
+void IMU::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::IMU *imu =
-      static_cast<const ChROSMessage::IMU *>(message->message());
+  const ChRosMessage::IMU *imu =
+      static_cast<const ChRosMessage::IMU *>(message->message());
 
   // Convert to Imu
   data_.header.stamp = ros::Time::now();
@@ -79,10 +123,10 @@ void IMU::publish(const ChROSMessage::Message *message, int received) {
 GPS::GPS(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
-void GPS::publish(const ChROSMessage::Message *message, int received) {
+void GPS::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::GPS *gps =
-      static_cast<const ChROSMessage::GPS *>(message->message());
+  const ChRosMessage::GPS *gps =
+      static_cast<const ChRosMessage::GPS *>(message->message());
 
   // Convert to NavSatFix
   data_.header.stamp = ros::Time::now();
@@ -103,10 +147,10 @@ void GPS::publish(const ChROSMessage::Message *message, int received) {
 Time::Time(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size), time_(0) {}
 
-void Time::publish(const ChROSMessage::Message *message, int received) {
+void Time::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::Time *time =
-      static_cast<const ChROSMessage::Time *>(message->message());
+  const ChRosMessage::Time *time =
+      static_cast<const ChRosMessage::Time *>(message->message());
 
   time_ = time->t();
   data_.clock = ros::Time(time_);
@@ -119,10 +163,10 @@ Cones::Cones(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size),
       srv_(n.advertiseService("cone_map", &Cones::send_cones, this)) {}
 
-void Cones::publish(const ChROSMessage::Message *message, int received) {
+void Cones::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::Cones *cones =
-      static_cast<const ChROSMessage::Cones *>(message->message());
+  const ChRosMessage::Cones *cones =
+      static_cast<const ChRosMessage::Cones *>(message->message());
 
   data_.blue_cones.resize(cones->blue_cones()->Length());
   data_.yellow_cones.resize(cones->yellow_cones()->Length());
@@ -164,13 +208,13 @@ bool Cones::send_cones(common_srvs::ConeMap::Request &req,
 Vehicle::Vehicle(ros::NodeHandle n, std::string node_name, int queue_size)
     : Publisher(n, node_name, queue_size) {}
 
-void Vehicle::publish(const ChROSMessage::Message *message, int received) {
+void Vehicle::publish(const ChRosMessage::Message *message, int received) {
   // Parse buffer
-  const ChROSMessage::Vehicle *vehicle =
-      static_cast<const ChROSMessage::Vehicle *>(message->message());
+  const ChRosMessage::Vehicle *vehicle =
+      static_cast<const ChRosMessage::Vehicle *>(message->message());
 
   data_.header.stamp = ros::Time::now();
-  data_.header.frame_id = "map";
+  data_.header.frame_id = "odom";
 
   data_.state.position.x = vehicle->position()->x();
   data_.state.position.y = vehicle->position()->y();
