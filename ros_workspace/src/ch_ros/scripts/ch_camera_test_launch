@@ -3,9 +3,9 @@ import rospy
 import os
 
 def main():
-    rospy.init_node("chrono_test")
+    rospy.init_node("chrono_launch")
 
-    os.system("/home/aaron/chrono/build/bin/demo_ROS_tests 8080 ")
+    os.system("/home/aaron/chrono/build/bin/demo_ROS_camera_test 8080 ")
 
 if __name__ == "__main__":
     try:
