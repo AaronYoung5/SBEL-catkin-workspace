@@ -1,0 +1,24 @@
+<launch>
+  <!-- Chrono demo to run -->
+  <arg name="chrono_demo"/>
+  <!-- Port to run chrono demo on -->
+  <arg name="chrono_port"/>
+  <!-- yaml include file name to use -->
+  <arg name="chrono_yaml" default="ch_ros.yaml"/>
+  <!-- Topic for image data -->
+  <arg name="image_topic"/>
+  <!-- ch_ros namespace -->
+  <group ns="ch_ros">
+    <!-- Load .yaml config file -->
+    <!-- <rosparam file="$(find ch_ros)/config/$(arg chrono_yaml)"/> -->
+    <!-- Run ch_ros node -->
+    <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen">
+      <!-- Set port parameter -->
+      <param name="port" value="$(arg chrono_port)"/>
+      <!-- Remap camera topic -->
+      <remap from="camera" to="$(arg image_topic)"/>
+    </node>
+    <!-- Run ch_launcher node -->
+    <node pkg="ch_ros" type="ch_camera_test_launch" name="ch_camera_test_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/>
+  </group>
+</launch>

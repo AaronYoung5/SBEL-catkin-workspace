@@ -1,0 +1,23 @@
+<launch>
+  <!-- Control topic to publish to -->
+  <arg name="control_topic" default="/control/control"/>
+  <param name="/control_topic" value="/control/control"/>
+  <!-- Cone topic to subscribe to -->
+  <arg name="cone_topic" default="/perception/cone_image_map"/>
+  <!-- Use simulated sensors -->
+  <arg name="simulating" default="true"/>
+  <!-- Include thresholding launch file -->
+  <include file="$(find thresholding)/launch/thresholding.launch">
+    <arg name="simulating" value="$(arg simulating)"/>
+    <arg name="cone_topic" value="$(arg cone_topic)"/>
+  </include>
+  <group ns="control">
+    <group ns="flat_image">
+      <!-- Launch thresholding node -->
+      <node pkg="cone_bounce_control" type="cone_bounce_control" name="cone_bounce_control" output="screen" required="true">
+        <param name="control_topic" value="$(arg control_topic)"/>
+        <param name="cone_topic" value="$(arg cone_topic)"/>
+      </node>
+    </group>
+  </group>
+</launch>

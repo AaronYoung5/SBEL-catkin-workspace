@@ -4,9 +4,9 @@
     <rosparam file="$(find ch_ros)/config/demo.yaml"/>
   </group>
 
-  <node pkg="ch_ros" type="ch_camera_test_launch" name="ch_camera_test_launch" required="true" output="screen"/>
+  <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
 
   <node pkg="keyboard_control" type="keyboard_control" name="keyboard_control" required="true" output="screen"/>
 
-  <node pkg="opencv_cone_detection" type="opencv_cone_detection" name="opencv_cone_detection" output="screen"/>
+  <!-- <node pkg="rosbag" type="record" name="rosbag" args="-a -O euler_test"/> -->
 </launch>

@@ -1,0 +1,26 @@
+<launch>
+  <!-- Image topic to subscribe to -->
+  <arg name="image_topic" default="/sensor_data/raw_data/camera"/>
+  <!-- Cone topic to publish to -->
+  <arg name="cone_topic" default="/perception/cone_image_map"/>
+  <!-- Use simulated sensors -->
+  <arg name="simulating" default="false"/>
+  <!-- Display opencv window -->
+  <arg name="display" default="true"/>
+  <!-- Include image detection launch file -->
+  <include file="$(find image_detection)/launch/image_detection.launch">
+    <arg name="simulating" value="$(arg simulating)"/>
+    <arg name="image_topic" value="$(arg image_topic)"/>
+  </include>
+  <group ns="perception">
+    <group ns="opencv">
+      <!-- Launch thresholding node -->
+      <node pkg="thresholding" type="thresholding" name="thresholding" output="screen" required="true">
+        <param name="image_topic" value="$(arg image_topic)"/>
+        <param name="cone_topic" type="str" value="$(arg cone_topic)"/>
+        <param name="simulating" type="bool" value="$(arg simulating)"/>
+        <param name="display" type="bool" value="$(arg display)"/>
+      </node>
+    </group>
+  </group>
+</launch>

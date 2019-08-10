@@ -1,0 +1,76 @@
+namespace ChRosMessage;
+
+struct Vector {
+  x:float;
+  y:float;
+  z:float;
+}
+
+struct Color {
+  r:byte;
+  g:byte;
+  b:byte;
+  a:byte;
+}
+
+struct Header {
+  size:int;
+}
+
+union Type { Lidar, Camera, GPS, IMU, Control, Time, Vehicle, Cones, Exit, Config  }
+
+table Message {
+  message:Type;
+}
+
+table Config {
+  use_irrlicht:bool = false;
+}
+
+table Lidar {
+  points:[Vector];
+}
+
+table Camera {
+  height:int;
+  width:int;
+  bytes_per_pixel:int;
+  points:[ubyte];
+}
+
+table GPS {
+  longitude:float;
+  latitude:float;
+  altitude:float;
+}
+
+table IMU {
+  angular_velocity:Vector;
+  linear_acceleration:Vector;
+  orientation:Vector;
+}
+
+table Vehicle {
+  position:Vector;
+  velocity:Vector;
+  acceleration:Vector;
+}
+
+table Control {
+  throttle:float;
+  steering:float;
+  braking:float;
+}
+
+table Time {
+  t:float;
+}
+
+table Cones {
+  blue_cones:[Vector];
+  yellow_cones:[Vector];
+}
+
+table Exit {
+  code:byte;
+}

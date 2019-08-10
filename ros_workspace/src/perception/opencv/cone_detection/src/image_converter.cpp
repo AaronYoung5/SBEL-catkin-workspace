@@ -5,7 +5,7 @@ ImageConverter::ImageConverter(ros::NodeHandle &n)
   // Subscrive to input video feed and publish output video feed
   image_transport::ImageTransport it(n);
 
-  sub_ = it.subscribe("/image_transport/camera", 1,
+  sub_ = it.subscribe("image_transport/camera", 1,
                       &ImageConverter::imageCallback, this);
   pub_ = it.advertise("image_visualizer", 1);
 
@@ -37,6 +37,8 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
 
   cv::Mat1b green_mask, red_mask;
 
+  // CHRONO SETTINGS
+
   // Detects GREEN :: L(50, 50, 50) -> H(175, 175, 175)
   // Also Detects GREEN :: L(50, 50, 50) -> H(75, 255, 255)
   // Green has H value around 60
@@ -47,6 +49,19 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
   // Red has H value around 0
   cv::inRange(image_hsv, cv::Scalar(0, 50, 0), cv::Scalar(2, 200, 255),
               red_mask);
+
+  // REAL LIFE SETTINGS SETTINGS
+
+  // Detects GREEN :: L(50, 50, 50) -> H(175, 175, 175)
+  // Also Detects GREEN :: L(50, 50, 50) -> H(75, 255, 255)
+  // Green has H value around 60
+  // cv::inRange(image_hsv, cv::Scalar(70, 200, 50), cv::Scalar(90, 255, 255),
+  // green_mask);
+  // rgb(25, 213, 149)
+  // Detects RED :: L(0, 50, 0) -> H(2, 200, 255)
+  // Red has H value around 0
+  // cv::inRange(image_hsv, cv::Scalar(0, 200, 50), cv::Scalar(7, 255, 255),
+  // red_mask);
 
   cv::Mat1b mask = green_mask | red_mask;
 
@@ -84,7 +99,7 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
   for (size_t i = 0; i < red_contours.size(); i++) {
     cv::approxPolyDP(red_contours[i], red_contours_poly[i], 3, true);
     cv::Rect temp = cv::boundingRect(red_contours_poly[i]);
-    if (temp.area() > 500) {
+    if (temp.area() > 100) {
       red_cones.push_back(temp);
     }
   }
@@ -121,7 +136,9 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
       if (isInside(avg, tri)) {
         cv::rectangle(cv_ptr->image, green_cones[i].tl(), green_cones[i].br(),
                       blue, 2);
-        control.steering += avg.x < (msg->width / 2) ? 0.6 : avg.x < (msg->width * .75) ? 0.3 : 0.15;
+        control.steering += avg.x < (msg->width / 2)
+                                ? 0.6
+                                : avg.x < (msg->width * .75) ? 0.3 : 0.15;
       } else {
         cv::rectangle(cv_ptr->image, green_cones[i].tl(), green_cones[i].br(),
                       green, 2);
@@ -134,9 +151,11 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
       cv::Point avg((red_cones[i].tl() + red_cones[i].br()) / 2);
       // std::cout << "X coord :: " << avg.x << std::endl;
       if (isInside(avg, tri)) {
-        cv::rectangle(cv_ptr->image, red_cones[i].tl(), red_cones[i].br(),
-                      blue, 2);
-        control.steering += avg.x > (msg->width / 2) ? -0.6 : avg.x > (msg->width * .75) ? -0.3 : -0.15;
+        cv::rectangle(cv_ptr->image, red_cones[i].tl(), red_cones[i].br(), blue,
+                      2);
+        control.steering += avg.x > (msg->width / 2)
+                                ? -0.6
+                                : avg.x > (msg->width * .75) ? -0.3 : -0.15;
       } else {
         cv::rectangle(cv_ptr->image, red_cones[i].tl(), red_cones[i].br(),
                       green, 2);
@@ -152,7 +171,17 @@ void ImageConverter::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
 
   // Output modified video stream
   // pub_.publish(cv_ptr->toImageMsg());
+  clamp(control);
   control_pub_.publish(control);
+}
+
+void ImageConverter::clamp(common_msgs::Control &control) {
+  control.throttle =
+      control.throttle > 1 ? 1 : control.throttle < 0 ? 0 : control.throttle;
+  control.steering =
+      control.steering > 1 ? 1 : control.steering < -1 ? -1 : control.steering;
+  control.braking =
+      control.braking > 1 ? 1 : control.braking < 0 ? 0 : control.braking;
 }
 
 float ImageConverter::areaTriangle(Triangle tri) {

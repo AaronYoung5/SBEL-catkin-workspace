@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen"/>
+  <group ns="ch_ros">
+    <rosparam file="$(find ch_ros)/config/euler.yaml"/>
+  </group>
+
+  <node pkg="rosbag" type="record" name="rosbag" args="-a -O $(find ch_ros)/bags/euler"/>
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+        <node pkg="arduino_interface" name="arduino_interface" type="arduino_interface" required="true" output="screen"/>
+
+        <node pkg="figure_eight" name="figure_eight" type="figure_eight" required="true" output="screen"/>
+</launch>

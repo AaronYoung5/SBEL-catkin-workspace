@@ -1,0 +1,36 @@
+<launch>
+  <arg name="simulating"/>
+  <arg name="image_topic" default="image_data_raw"/>
+  <!-- If simulating (i.e. using chrono) -->
+  <group if="$(arg simulating)">
+    <include file="$(find ch_ros)/launch/ch_ros.launch">
+      <arg name="chrono_demo" value="demo_ROS_camera_test"/>
+      <arg name="chrono_port" value="8080"/>
+      <arg name="image_topic" value="$(arg image_topic)"/>
+    </include>
+  </group>
+
+  <!-- If NOT simulating (i.e. using the zed) -->
+  <group unless="$(arg simulating)">
+    <arg name="svo_file" default=""/>
+    <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+    <arg name="stream" default=""/>
+    <!-- <arg name="stream" default="<ip_address>:<port>"> -->
+
+    <arg name="node_name" default="zed_node"/>
+    <arg name="camera_model" default="zed"/>
+    <!-- 'zed' or 'zedm' -->
+    <arg name="publish_urdf" default="true"/>
+
+    <group ns="zed">
+      <remap from="$(arg node_name)/left/image_rect_color" to="$(arg image_topic)"/>
+      <include file="$(find zed_wrapper)/launch/zed_camera.launch">
+        <arg name="svo_file" value="$(arg svo_file)"/>
+        <arg name="stream" value="$(arg stream)"/>
+        <arg name="node_name" value="$(arg node_name)"/>
+        <arg name="camera_model" value="$(arg camera_model)"/>
+        <arg name="publish_urdf" value="$(arg publish_urdf)"/>
+      </include>
+    </group>
+  </group>
+</launch>

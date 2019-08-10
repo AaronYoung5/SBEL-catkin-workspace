@@ -1,0 +1,2 @@
+use_irrlicht: true
+hostname: "localhost"

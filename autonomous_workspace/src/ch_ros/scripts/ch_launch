@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+import rospy
+import os
+
+def main():
+    rospy.init_node("chrono_launch")
+
+    os.system("/home/aaron/chrono/build/bin/demo_ROS_image_detection 8080 ")
+
+if __name__ == "__main__":
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

@@ -1,0 +1,9 @@
+<launch>
+
+  <include file="$(find ch_ros)/launch/ch_ros.launch">
+    <arg name="chrono_demo" value="demo_ROS_camera_test"/>
+    <arg name="chrono_port" value="8080"/>
+  </include>
+
+  <include file="$(find keyboard_control)/launch/keyboard_control.launch"/>
+</launch>

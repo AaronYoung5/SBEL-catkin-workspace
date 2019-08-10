@@ -1,0 +1,5 @@
+<launch>
+  <node name="joy_node" pkg="joy" type="joy_node"/>
+
+  <node name="wheel_control" pkg="wheel_control" type="wheel_control" />
+</launch>
