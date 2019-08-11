@@ -17,22 +17,18 @@ public:
   void setX(T x) { x_ = x; }
   void setY(T y) { y_ = y; }
 
-  Vec2<T> getUnit() {
-    return Vec2<T>(x_ / length(), y_ / length());
-  }
+  Vec2<T> getUnit() { return Vec2<T>(x_ / length(), y_ / length()); }
 
   T length() { return sqrt(pow(x_, 2) + pow(y_, 2)); }
   T lengthSquared() { return pow(x_, 2) + pow(y_, 2); }
 
   Vec2<T> operator*(T n) { return Vec2<T>(x_ * n, y_ * n); }
 
-  Vec2<T> operator-(Vec2<T> vec) {
-    return Vec2<T>(x_ - vec.x(), y_ - vec.y());
-  }
+  Vec2<T> operator-(Vec2<T> vec) { return Vec2<T>(x_ - vec.x(), y_ - vec.y()); }
 
-  Vec2<T> operator+(Vec2<T> vec) {
-    return Vec2<T>(x_ + vec.x(), y_ + vec.y());
-  }
+  Vec2<T> operator+(Vec2<T> vec) { return Vec2<T>(x_ + vec.x(), y_ + vec.y()); }
+
+  Vec2<T> operator/(T n) { return Vec2<T>(x_ / n, y_ / n); }
 };
 
 template <class T = float> class Vector3D {

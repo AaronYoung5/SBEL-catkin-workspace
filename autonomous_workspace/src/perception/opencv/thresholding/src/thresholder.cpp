@@ -32,10 +32,18 @@ void Thresholder::imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
   if (image_display_)
     cv::imshow(ORIGINAL_WINDOW, cv_ptr->image);
 
-  std::vector<cv::Rect> green_cones =
-      Threshold(cv_ptr, cv::Scalar(70, 200, 50), cv::Scalar(90, 255, 255));
-  std::vector<cv::Rect> red_cones =
-      Threshold(cv_ptr, cv::Scalar(0, 200, 50), cv::Scalar(7, 255, 255));
+  std::vector<cv::Rect> green_cones, red_cones;
+  if (image_simulated_) {
+    green_cones =
+        Threshold(cv_ptr, cv::Scalar(50, 50, 0), cv::Scalar(75, 255, 255));
+    red_cones =
+        Threshold(cv_ptr, cv::Scalar(0, 50, 0), cv::Scalar(2, 200, 255));
+  } else {
+    green_cones =
+        Threshold(cv_ptr, cv::Scalar(70, 200, 50), cv::Scalar(90, 255, 255));
+    red_cones =
+        Threshold(cv_ptr, cv::Scalar(0, 200, 50), cv::Scalar(7, 255, 255));
+  }
 
   if (image_display_)
     cv::imshow(OBJ_WINDOW, cv_ptr->image);

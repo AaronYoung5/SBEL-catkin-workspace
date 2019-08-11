@@ -20,7 +20,7 @@ void Controller::imageCallback(const opencv_msgs::ConeImageMap::ConstPtr &msg) {
 
   float dist_off_screen = 1000;
   float dist_from_top = height / 2.0f;
-  float dist_from_left = height / 2.0f;
+  float dist_from_left = width / 2.0f;
 
   Triangle<> tri(Vec2<>(-dist_off_screen, height),
                  Vec2<>(width + dist_off_screen, height),
@@ -29,8 +29,9 @@ void Controller::imageCallback(const opencv_msgs::ConeImageMap::ConstPtr &msg) {
   if (green_cones.size() == 0 && red_cones.size() == 0) {
     control.throttle = 0;
     control.steering = 0;
+    control.braking = 1;
   } else {
-    for (opencv_msgs::Cone cone : green_cones) {
+    for (opencv_msgs::Cone cone : red_cones) {
       Vec2<> avg((cone.tl.x + cone.br.x) / 2.0f,
                  (cone.tl.y + cone.br.y) / 2.0f);
       if (Triangle<>::IsInside(avg, tri)) {
@@ -39,26 +40,18 @@ void Controller::imageCallback(const opencv_msgs::ConeImageMap::ConstPtr &msg) {
                                 : avg.x() < (width * .75f) ? 0.3f : 0.15f;
       }
     }
-    for (opencv_msgs::Cone cone : red_cones) {
+    for (opencv_msgs::Cone cone : green_cones) {
       Vec2<> avg((cone.tl.x + cone.br.x) / 2.0f,
                  (cone.tl.y + cone.br.y) / 2.0f);
       if (Triangle<>::IsInside(avg, tri)) {
-        control.steering -= avg.x() > (width / 2.0f)
-                                ? 0.6f
-                                : avg.x() > (width * .75f) ? 0.3f : 0.15f;
+        control.steering += avg.x() > (width / 2.0f)
+                                ? -0.6f
+                                : avg.x() > (width * .75f) ? -0.3f : -0.15f;
       }
     }
-    control.throttle = .12;
+    control.throttle = .15;
   }
 
   clamp(control);
   pub_.publish(control);
-  // if (msg->green_cones)
-}
-
-void Controller::clamp(common_msgs::Control &control) {
-  control.throttle =
-      control.throttle > 1 ? 1 : control.throttle < 0 ? 0 : control.throttle;
-  control.steering =
-      control.steering > 1 ? 1 : control.steering < -1 ? -1 : control.steering;
 }

@@ -11,42 +11,44 @@ Controller::Controller(ros::NodeHandle &n) {
 
 void Controller::imageCallback(const opencv_msgs::ConeImageMap::ConstPtr &msg) {
   common_msgs::Control control;
-  //
-  // if (msg->green_cones.size() == 0 && msg->red_cones.size() == 0) {
-  //   control.throttle = 0;
-  //   control.steering = 0;
-  // } else {
-  //   Point avgG;
-  //   avgG.x = (msg->green_cones[0].tl.x + msg->green_cones[0].br.x) / 2;
-  //   avgG.y = (msg->green_cones[0].tl.y + msg->green_cones[0].br.y) / 2;
-  //   for (size_t i = 1; i < msg->green_cones.size(); i++) {
-  //     Point holdG((msg->green_cones[i].tl + msg->green_cones[i].br) / 2);
-  //     if (holdG.y > avgG.y) {
-  //       avgG = holdG;
-  //     }
-  //   }
-  //   Point avgR;
-  //   avgR.x = (msg->red_cones[0].tl.x + msg->red_cones[0].br.x) / 2;
-  //   avgR.y = (msg->red_cones[0].tl.y + msg->red_cones[0].br.y) / 2;
-  //   for (size_t i = 1; i < red_cones.size(); i++) {
-  //     Point holdG((msg->red_cones[i].tl + msg->red_cones[i].br) / 2);
-  //     if (holdG.y > avgR.y) {
-  //       avgR = holdG;
-  //     }
-  //   }
-  //   Point destination((avgR + avgG) / 2);
-  //   Point center(msg->width / 2, msg->height / 2);
-  //   control.steering = (destination.x - center.x) / center.x;
-  //   control.throttle = .12;
-  // }
-  // // Output modified video stream
-  // clamp(control);
-  // control_pub_.publish(control);
-}
+  int height = msg->height;
+  int width = msg->width;
 
-void Controller::clamp(common_msgs::Control &control) {
-  control.throttle =
-      control.throttle > 1 ? 1 : control.throttle < 0 ? 0 : control.throttle;
-  control.steering =
-      control.steering > 1 ? 1 : control.steering < -1 ? -1 : control.steering;
+  std::vector<opencv_msgs::Cone> green_cones = msg->green_cones;
+  std::vector<opencv_msgs::Cone> red_cones = msg->red_cones;
+
+  if (green_cones.size() == 0 && red_cones.size() == 0) {
+    control.throttle = 0;
+    control.steering = 0;
+    control.braking = 1;
+  } else if (green_cones.size() == 0 || red_cones.size() == 0) {
+    control.throttle = .15;
+    control.steering = green_cones.size() == 0 ? .6 : -.6;
+  } else {
+    Vec2<> avgG((green_cones[0].tl.x + green_cones[0].br.x) / 2,
+                (green_cones[0].tl.y + green_cones[0].br.y) / 2);
+    for (int i = 1; i < green_cones.size(); i++) {
+      Vec2<> holdG((green_cones[i].tl.x + green_cones[i].br.x) / 2,
+                   (green_cones[i].tl.y + green_cones[i].br.y) / 2);
+      if (holdG.y() > avgG.y()) {
+        avgG = holdG;
+      }
+    }
+    Vec2<> avgR((red_cones[0].tl.x + red_cones[0].br.x) / 2,
+                (red_cones[0].tl.y + red_cones[0].br.y) / 2);
+    for (int i = 1; i < red_cones.size(); i++) {
+      Vec2<> holdR((red_cones[i].tl.x + red_cones[i].br.x) / 2,
+                   (red_cones[i].tl.y + red_cones[i].br.y) / 2);
+      if (holdR.y() > avgR.y()) {
+        avgR = holdR;
+      }
+    }
+    Vec2<> destination((avgR + avgG) / 2);
+    Vec2<> center(width / 2, height / 2);
+    control.steering = (destination.x() - center.x()) / center.x();
+    control.throttle = .15;
+  }
+
+  clamp(control);
+  pub_.publish(control);
 }

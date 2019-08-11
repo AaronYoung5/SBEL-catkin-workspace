@@ -9,7 +9,7 @@ ChRosHandler::ChRosHandler(ros::NodeHandle &n)
   std::string control_topic;
   n.param<std::string>("/control_topic", control_topic, "control");
   control_sub_ =
-      n.subscribe("control", 1, &ChRosHandler::setTargetControls, this);
+      n.subscribe(control_topic, 1, &ChRosHandler::setTargetControls, this);
   initializeROSParameters(n);
   initializeSocket();
   sendConfig();

@@ -13,6 +13,7 @@
   <depend>common_msgs</depend>
   <depend>opencv_msgs</depend>
   <depend>common_utilities</depend>
+  <depend>control_utilities</depend>
 
   <buildtool_depend>catkin</buildtool_depend>
 </package>

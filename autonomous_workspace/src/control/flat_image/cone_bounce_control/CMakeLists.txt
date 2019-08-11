@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   common_msgs
   common_utilities
+  control_utilities
   opencv_msgs
 )
 
