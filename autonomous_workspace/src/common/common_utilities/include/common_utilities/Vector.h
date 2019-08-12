@@ -11,8 +11,8 @@ private:
 public:
   Vec2(T x, T y) : x_(x), y_(y) {}
 
-  T x() { return x_; }
-  T y() { return y_; }
+  T& x() { return x_; }
+  T& y() { return y_; }
 
   void setX(T x) { x_ = x; }
   void setY(T y) { y_ = y; }

@@ -1,7 +1,0 @@
-<launch>
-
-  <node pkg="arduino_interface" type="arduino_interface" name="arduino_interface" output="screen" required="true" respawn="false"/>
-
-  <node pkg="wheel_control" type="wheel_control" name="wheel_control" output="screen" respawn="false"/>
-
-</launch>

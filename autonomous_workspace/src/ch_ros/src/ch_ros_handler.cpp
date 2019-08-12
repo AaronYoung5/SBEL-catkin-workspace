@@ -18,9 +18,9 @@ ChRosHandler::ChRosHandler(ros::NodeHandle &n)
 ChRosHandler::~ChRosHandler() { socket_.close(); }
 
 void ChRosHandler::initializeROSParameters(ros::NodeHandle &n) {
-  n.param("use_irrlicht", use_irrlicht_, true);
-  n.param<std::string>("hostname", host_name_, "localhost");
-  n.param<std::string>("port", port_num_, "8080");
+  n.param("chrono/use_irrlicht", use_irrlicht_, true);
+  n.param<std::string>("chrono/hostname", host_name_, "localhost");
+  n.param<std::string>("chrono/port", port_num_, "8080");
 }
 
 void ChRosHandler::initializeSocket() {

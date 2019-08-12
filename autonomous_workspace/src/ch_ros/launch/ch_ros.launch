@@ -10,7 +10,7 @@
   <!-- ch_ros namespace -->
   <group ns="ch_ros">
     <!-- Load .yaml config file -->
-    <!-- <rosparam file="$(find ch_ros)/config/$(arg chrono_yaml)"/> -->
+    <rosparam file="$(find ch_ros)/config/$(arg chrono_yaml)"/>
     <!-- Run ch_ros node -->
     <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen">
       <!-- Set port parameter -->

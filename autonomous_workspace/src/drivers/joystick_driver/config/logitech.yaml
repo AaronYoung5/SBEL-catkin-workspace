@@ -1,6 +1,0 @@
-mappings:
-  axes:
-    - axes[0] * -1 # Steering
-    - axes[2] # Clutch
-    - axes[3] # Throttle
-    # - axes[1] # Braking

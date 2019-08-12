@@ -1,2 +1,7 @@
-use_irrlicht: true
-hostname: "localhost"
+chrono:
+  use_irrlicht: true
+  hostname: "localhost"
+  port: "8080"
+ros:
+
+sensors:
