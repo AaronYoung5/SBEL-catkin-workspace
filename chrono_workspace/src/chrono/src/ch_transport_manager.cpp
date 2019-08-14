@@ -1,4 +1,4 @@
-#include "chrono/ch_transport.h"
+#include "chrono/ch_transport_manager.h"
 
 namespace chrono {
 namespace transport {
@@ -24,18 +24,17 @@ void ChTransportManager::loadParameters(ros::NodeHandle &n) {
   n.param("chrono/simulation_step_size", simulation_step_size, "8080");
 
   transports_.push_back(
-      ChPublisher(socket_, n, "clock", 1, simulation_step_size));
-  transports_.push_back(
-      ChPublisher(socket_, n, "clock", 1, simulation_step_size));
+      ChPublisher(socket_, n, "clock", "clock", 1, simulation_step_size));
 
-  const char *sensors[] = {"camera"};
+  const char *sensors[] = {"camera", "lidar", "gps", "imu"};
 
   size_t i = 0;
 
   for (const char *sensor : sensors) {
     std::stringstream ss;
-    ss << "chrono/sensors/" << sensor << i;
-    std::string param_name = ss.str();
+    ss << sensor << i;
+    std::string id = ss.str();
+    std::string param_name = std::string("chrono/sensors/") + ss.str();
     if (n.hasParam(param_name)) {
       int sensor_type;
       n.getParam(param_name, sensor_type);
@@ -46,15 +45,11 @@ void ChTransportManager::loadParameters(ros::NodeHandle &n) {
       int freq;
       n.getParam(param_name + std::string("_freq"), freq);
 
-      switch (sensor_type) {
-      case TransportType::CAMERA: // Camera
-        int queue_size;
-        n.getParam(param_name + std::string("_queue_size"), queue_size);
+      int queue_size;
+      n.getParam(param_name + std::string("_queue_size"), queue_size);
 
-        transports_.push_back(
-            ChPublisher(socket_, n, topic_name, queue_size, freq));
-        break;
-      }
+      transports_.push_back(
+          ChPublisher(socket_, n, id, topic_name, queue_size, freq));
     }
   }
 }
@@ -146,10 +141,6 @@ void ChTransportManager::handleSensorData(size_t size) {
       socket_->shutdown(boost::asio::ip::tcp::socket::shutdown_both);
     }
   });
-}
-
-void ChTransportManager::spinOnce() {
-  // Set a deadline for the
 }
 } // namespace transport
 } // namespace chrono
