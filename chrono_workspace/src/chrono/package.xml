@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>chrono</name>
+  <version>0.0.0</version>
+  <description>
+    chrono package
+  </description>
+
+  <license>TODO</license>
+  <author>TODO</author>
+  <maintainer email="TODO@TODO.com">TODO</maintainer>
+
+  <depend>sensor_msgs</depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>
