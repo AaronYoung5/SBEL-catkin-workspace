@@ -1,9 +1,9 @@
 #include <ros/ros.h>
 
-#include "chrono/ch_interface.h"
+#include "ch_interface/ch_interface.h"
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "chrono");
+  ros::init(argc, argv, "ch_interface");
   ros::NodeHandle n;
 
   ChInterface ch_interface(n);

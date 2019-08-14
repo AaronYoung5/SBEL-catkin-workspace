@@ -3,6 +3,10 @@
 #include <thread>
 #include <mutex>
 
+#include "ch_transport.h"
+#include "ch_publisher.h"
+#include "ch_subscriber.h"
+
 namespace chrono {
 namespace transport {
 class ChTransportManager {

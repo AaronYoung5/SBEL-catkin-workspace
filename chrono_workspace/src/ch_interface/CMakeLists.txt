@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(chrono)
+project(ch_interface)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -17,14 +17,14 @@ catkin_package(
 
 )
 
-add_executable(chrono
+add_executable(ch_interface
   src/main.cpp
   src/ch_transport_manager.cpp
   src/ch_interface.cpp
 )
-target_link_libraries(chrono ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(ch_interface ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
-add_dependencies(chrono ${catkin_EXPORTED_TARGETS})
+add_dependencies(ch_interface ${catkin_EXPORTED_TARGETS})
 
 install(PROGRAMS
   scripts/ch_launch

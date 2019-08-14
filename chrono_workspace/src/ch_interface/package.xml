@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package format="2">
-  <name>chrono</name>
+  <name>ch_interface</name>
   <version>0.0.0</version>
   <description>
-    chrono package
+    ch_interface package
   </description>
 
   <license>TODO</license>

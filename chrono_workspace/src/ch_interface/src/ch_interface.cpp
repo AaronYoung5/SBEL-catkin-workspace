@@ -1,4 +1,4 @@
-#include "chrono/ch_interface.h"
+#include "ch_interface/ch_interface.h"
 
 namespace chrono {
 
