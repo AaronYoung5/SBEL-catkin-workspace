@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 
-#include "chrono/transport/ch_transport_manager.h"
+#include "ch_interface/transport/ch_transport_manager.h"
 
 namespace chrono {
 class ChInterface {
