@@ -24,6 +24,7 @@ add_executable(ch_ros
   src/ch_ros.cpp
   src/ch_ros_handler.cpp
   src/publishers.cpp
+  src/sensor_manager.cpp
 )
 target_link_libraries(ch_ros ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 

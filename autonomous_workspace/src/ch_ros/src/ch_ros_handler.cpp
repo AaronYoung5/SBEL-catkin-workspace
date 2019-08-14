@@ -2,25 +2,52 @@
 #include "ch_ros/ch_ros_handler.h"
 
 ChRosHandler::ChRosHandler(ros::NodeHandle &n)
-    : socket_(*(new boost::asio::io_service)), camera_(n, "camera", 1),
-      lidar_(n, "lidar", 1), imu_(n, "imu", 1), gps_(n, "gps", 1),
-      time_(n, "clock", 1), cones_(n, "cones", 1), vehicle_(n, "vehicle", 1),
-      chrono_ok_(true), throttle_(0), steering_(0), braking_(0) {
+    : socket_(*(new boost::asio::io_service)), chrono_ok_(true), throttle_(0),
+      steering_(0), braking_(0) {
   std::string control_topic;
   n.param<std::string>("/control_topic", control_topic, "control");
   control_sub_ =
       n.subscribe(control_topic, 1, &ChRosHandler::setTargetControls, this);
-  initializeROSParameters(n);
+  loadParams(n);
   initializeSocket();
   sendConfig();
 }
 
 ChRosHandler::~ChRosHandler() { socket_.close(); }
 
-void ChRosHandler::initializeROSParameters(ros::NodeHandle &n) {
+void ChRosHandler::loadParams(ros::NodeHandle &n) {
   n.param("chrono/use_irrlicht", use_irrlicht_, true);
   n.param<std::string>("chrono/hostname", host_name_, "localhost");
   n.param<std::string>("chrono/port", port_num_, "8080");
+
+  const char *sensors[] = {"camera"};
+
+  size_t i = 0;
+
+  for (const char *sensor : sensors) {
+    std::stringstream ss;
+    ss << "chrono/sensors/" << sensor << i;
+    std::string param_name = ss.str();
+    if (n.hasParam(param_name)) {
+      int sensor_type;
+      n.getParam(param_name, sensor_type);
+
+      std::string topic_name;
+      n.getParam(param_name + std::string("_topic"), topic_name);
+
+      int freq;
+      n.getParam(param_name + std::string("_freq"), freq);
+
+      // Publisher *sensor;
+      switch (sensor_type) {
+      case 0: // Camera
+
+        Camera cam(n, topic_name, 1);
+        sensor_manager_.Add(cam);
+        break;
+      }
+    }
+  }
 }
 
 void ChRosHandler::initializeSocket() {
@@ -108,30 +135,30 @@ void ChRosHandler::handle(const ChRosMessage::Message *message, int received) {
   switch (message->message_type()) {
   case ChRosMessage::Type_Camera:
     // std::cout << "Received Lidar Data" << std::endl;
-    camera_.publish(message, received);
+    // camera_.publish(message, received);
     break;
   case ChRosMessage::Type_Lidar:
     // std::cout << "Received Lidar Data" << std::endl;
-    lidar_.publish(message, received);
+    // lidar_.publish(message, received);
     break;
   case ChRosMessage::Type_GPS:
     // std::cout << "Received GPS Data" << std::endl;
-    gps_.publish(message, received);
+    // gps_.publish(message, received);
     break;
   case ChRosMessage::Type_IMU:
     // std::cout << "Received IMU Data" << std::endl;
-    imu_.publish(message, received);
+    // imu_.publish(message, received);
     break;
   case ChRosMessage::Type_Time:
     // std::cout << "Received Time Data" << std::endl;
-    time_.publish(message, received);
+    // time_.publish(message, received);
     break;
   case ChRosMessage::Type_Cones:
     // std::cout << "Received Cones Data" << std::endl;
-    cones_.publish(message, received);
+    // cones_.publish(message, received);
     break;
   case ChRosMessage::Type_Vehicle:
-    vehicle_.publish(message, received);
+    // vehicle_.publish(message, received);
     break;
   case ChRosMessage::Type_Exit:
     // std::cout << "Received Exit Data" << std::endl;

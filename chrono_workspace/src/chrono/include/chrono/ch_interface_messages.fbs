@@ -1,0 +1,39 @@
+namespace ChInterfaceMessages;
+
+table Message {
+  message:Type;
+  bytes_per_pixel:int;
+  data:[ubyte];
+}
+
+union Type { Camera, Lidar, GPS, IMU, Control, Time, Exit, Config  }
+
+table Camera {
+  height: int;
+  width: int;
+}
+
+table Lidar {
+  height: int;
+  width: int;
+  max_vert_range: int;
+  vert_scans: int;
+  max_hor_range: int;
+  hor_scans: int;
+}
+
+table GPS {}
+
+table IMU {}
+
+table Control {}
+
+table Time {}
+
+table Exit {}
+
+table Config {
+  use_irrlicht:bool = false;
+}
+
+root_type Message;
