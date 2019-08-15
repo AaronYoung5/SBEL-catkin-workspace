@@ -11,6 +11,7 @@
   <maintainer email="TODO@TODO.com">TODO</maintainer>
 
   <depend>sensor_msgs</depend>
+  <depend>rosgraph_msgs</depend>
 
   <buildtool_depend>catkin</buildtool_depend>
 </package>

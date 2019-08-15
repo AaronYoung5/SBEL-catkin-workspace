@@ -21,65 +21,72 @@
 // Internal package includes
 #include "ch_ros/ChRosMessages_generated.h"
 
-class FlatBufferConverter {
+template <typename msgtype> class Publisher {
 protected:
+  msgtype data_;
   ros::Publisher pub_;
-  image_transport::Publisher image_pub_;
+  bool data_received_ = false;
 
 public:
-  FlatBufferConverter(ros::Publisher pub) : pub_(pub) {}
-  FlatBufferConverter(image_transport::Publisher pub) : image_pub_(pub) {}
+  Publisher(ros::NodeHandle n, std::string node_name, int queue_size) {
+    if (queue_size != 0)
+      pub_ = n.advertise<msgtype>(node_name, queue_size);
+  }
 
   virtual void publish(const ChRosMessage::Message *message, int received) = 0;
 };
 
-// --------------------------------- Cam ---------------------------------- //
-class Camera : FlatBufferConverter {
+// --------------------------------- Camera ----------------------------------
+// //
+class Camera : Publisher<sensor_msgs::Image> {
+private:
+  image_transport::Publisher image_pub_;
+
 public:
-  Camera(ros::NodeHandle &n, std::string node_name, int queue_size);
-  void ConvertAndPublish(const ChRosMessage::Message *message, int received);
+  Camera(ros::NodeHandle n, std::string node_name, int queue_size);
+  void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- Lidar ---------------------------------- //
-class Lidar : FlatBufferConverter {
+class Lidar : Publisher<sensor_msgs::PointCloud2> {
 public:
-  Lidar(ros::NodeHandle &n, std::string node_name, int queue_size);
+  Lidar(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- IMU ---------------------------------- //
-class IMU : FlatBufferConverter {
+class IMU : Publisher<sensor_msgs::Imu> {
 public:
-  IMU(ros::NodeHandle &n, std::string node_name, int queue_size);
+  IMU(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- GPS ---------------------------------- //
-class GPS : FlatBufferConverter {
+class GPS : Publisher<sensor_msgs::NavSatFix> {
 public:
-  GPS(ros::NodeHandle &n, std::string node_name, int queue_size);
+  GPS(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
 };
 
 // --------------------------------- TIME ---------------------------------- //
-class Time : FlatBufferConverter {
+class Time : Publisher<rosgraph_msgs::Clock> {
 private:
   float time_;
 
 public:
-  Time(ros::NodeHandle &n, std::string node_name, int queue_size);
+  Time(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
 
   float GetTime() { return time_; }
 };
 
 // --------------------------------- CONES ---------------------------------- //
-class Cones : FlatBufferConverter {
+class Cones : Publisher<common_msgs::ConeMap> {
 private:
   ros::ServiceServer srv_;
 
 public:
-  Cones(ros::NodeHandle &n, std::string node_name, int queue_size);
+  Cones(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
   bool send_cones(common_srvs::ConeMap::Request &req,
                   common_srvs::ConeMap::Response &res);
@@ -87,8 +94,8 @@ public:
 
 // --------------------------------- VEHICLE ----------------------------------
 // //
-class Vehicle : FlatBufferConverter {
+class Vehicle : Publisher<common_msgs::VehState> {
 public:
-  Vehicle(ros::NodeHandle &n, std::string node_name, int queue_size);
+  Vehicle(ros::NodeHandle n, std::string node_name, int queue_size);
   void publish(const ChRosMessage::Message *message, int received);
 };

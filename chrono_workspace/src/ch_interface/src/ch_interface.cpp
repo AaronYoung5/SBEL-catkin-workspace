@@ -4,9 +4,10 @@ namespace chrono {
 
 ChInterface::ChInterface(ros::NodeHandle &n) : transport_manager_(n) {}
 
-void run() {
-  while (ros::ok()) {
-    ros::spinOnce();
-  }
+ChInterface::~ChInterface() {}
+
+void ChInterface::run() {
+  transport_manager_.startTransport();
+  ros::spin();
 }
 } // namespace chrono

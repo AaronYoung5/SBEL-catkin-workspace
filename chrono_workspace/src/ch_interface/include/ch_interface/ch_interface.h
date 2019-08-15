@@ -1,6 +1,10 @@
+#pragma once
+
 #include <ros/ros.h>
 
 #include "ch_interface/transport/ch_transport_manager.h"
+
+using namespace chrono::transport;
 
 namespace chrono {
 class ChInterface {
@@ -13,5 +17,5 @@ public:
   ~ChInterface();
 
   void run();
-}
+};
 } // namespace chrono

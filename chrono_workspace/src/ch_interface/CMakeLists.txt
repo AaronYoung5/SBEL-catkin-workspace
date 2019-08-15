@@ -4,6 +4,7 @@ project(ch_interface)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
+  rosgraph_msgs
 )
 
 include_directories(
@@ -17,10 +18,15 @@ catkin_package(
 
 )
 
+file(GLOB transport_SRC "src/transport/*")
+
+file(GLOB flatbuffer_SRC "src/flatbuffer/*")
+
 add_executable(ch_interface
   src/main.cpp
-  src/ch_transport_manager.cpp
   src/ch_interface.cpp
+  ${transport_SRC}
+  ${flatbuffer_SRC}
 )
 target_link_libraries(ch_interface ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 

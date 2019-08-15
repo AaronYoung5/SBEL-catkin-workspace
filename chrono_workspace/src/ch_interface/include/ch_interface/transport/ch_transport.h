@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ros/ros.h>
 
 #include <boost/asio.hpp>
@@ -8,17 +10,17 @@
 namespace chrono {
 namespace transport {
 
-enum TransportType { CAMERA, LIDAR, GPS, IMU, CONTROL, TIME, EXIT, CONFIG };
-
 class ChTransport {
 private:
   std::string id_;
+  int freq_;
 
 public:
-  ChTransport(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
-              std::string id);
+  ChTransport(std::string id, int freq);
 
-  std::string ID() { return id_; }
+  // bool operator!=()
+
+  std::string id() const { return id_; }
 
   virtual void spinOnce();
 };
