@@ -15,14 +15,13 @@ class ChPublisher : public ChTransport {
 private:
   ros::Publisher pub_;
 
-  ChFlatbufferConverter fb_converter_;
+  const ChInterfaceMessage::Message *message_;
 
 public:
-  ChPublisher(ros::Publisher &pub, std::string id, int freq);
+  ChPublisher(ros::Publisher &pub, TransportType type, std::string id, int freq);
 
-  template <class msg_type>
-  void operator()(TransportType type,
-                  const ChInterfaceMessage::Message *message);
+  void update(const ChInterfaceMessage::Message *message);
+  void spinOnce();
 };
 } // namespace transport
 } // namespace chrono

@@ -8,6 +8,8 @@
 
 namespace ChInterfaceMessage {
 
+struct Messages;
+
 struct Message;
 
 struct Camera;
@@ -24,8 +26,6 @@ struct Time;
 
 struct Exit;
 
-struct Config;
-
 enum Type {
   Type_NONE = 0,
   Type_Camera = 1,
@@ -35,12 +35,11 @@ enum Type {
   Type_Control = 5,
   Type_Time = 6,
   Type_Exit = 7,
-  Type_Config = 8,
   Type_MIN = Type_NONE,
-  Type_MAX = Type_Config
+  Type_MAX = Type_Exit
 };
 
-inline const Type (&EnumValuesType())[9] {
+inline const Type (&EnumValuesType())[8] {
   static const Type values[] = {
     Type_NONE,
     Type_Camera,
@@ -49,14 +48,13 @@ inline const Type (&EnumValuesType())[9] {
     Type_IMU,
     Type_Control,
     Type_Time,
-    Type_Exit,
-    Type_Config
+    Type_Exit
   };
   return values;
 }
 
 inline const char * const *EnumNamesType() {
-  static const char * const names[10] = {
+  static const char * const names[9] = {
     "NONE",
     "Camera",
     "Lidar",
@@ -65,14 +63,13 @@ inline const char * const *EnumNamesType() {
     "Control",
     "Time",
     "Exit",
-    "Config",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameType(Type e) {
-  if (e < Type_NONE || e > Type_Config) return "";
+  if (e < Type_NONE || e > Type_Exit) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesType()[index];
 }
@@ -109,12 +106,72 @@ template<> struct TypeTraits<ChInterfaceMessage::Exit> {
   static const Type enum_value = Type_Exit;
 };
 
-template<> struct TypeTraits<ChInterfaceMessage::Config> {
-  static const Type enum_value = Type_Config;
-};
-
 bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type);
 bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types);
+
+struct Messages FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_MESSAGES = 4,
+    VT_TIME = 6
+  };
+  const flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *messages() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *>(VT_MESSAGES);
+  }
+  const ChInterfaceMessage::Message *time() const {
+    return GetPointer<const ChInterfaceMessage::Message *>(VT_TIME);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_MESSAGES) &&
+           verifier.VerifyVector(messages()) &&
+           verifier.VerifyVectorOfTables(messages()) &&
+           VerifyOffset(verifier, VT_TIME) &&
+           verifier.VerifyTable(time()) &&
+           verifier.EndTable();
+  }
+};
+
+struct MessagesBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_messages(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>>> messages) {
+    fbb_.AddOffset(Messages::VT_MESSAGES, messages);
+  }
+  void add_time(flatbuffers::Offset<ChInterfaceMessage::Message> time) {
+    fbb_.AddOffset(Messages::VT_TIME, time);
+  }
+  explicit MessagesBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  MessagesBuilder &operator=(const MessagesBuilder &);
+  flatbuffers::Offset<Messages> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<Messages>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<Messages> CreateMessages(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>>> messages = 0,
+    flatbuffers::Offset<ChInterfaceMessage::Message> time = 0) {
+  MessagesBuilder builder_(_fbb);
+  builder_.add_time(time);
+  builder_.add_messages(messages);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<Messages> CreateMessagesDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const std::vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *messages = nullptr,
+    flatbuffers::Offset<ChInterfaceMessage::Message> time = 0) {
+  auto messages__ = messages ? _fbb.CreateVector<flatbuffers::Offset<ChInterfaceMessage::Message>>(*messages) : 0;
+  return ChInterfaceMessage::CreateMessages(
+      _fbb,
+      messages__,
+      time);
+}
 
 struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
@@ -149,9 +206,6 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const ChInterfaceMessage::Exit *message_as_Exit() const {
     return message_type() == ChInterfaceMessage::Type_Exit ? static_cast<const ChInterfaceMessage::Exit *>(message()) : nullptr;
-  }
-  const ChInterfaceMessage::Config *message_as_Config() const {
-    return message_type() == ChInterfaceMessage::Type_Config ? static_cast<const ChInterfaceMessage::Config *>(message()) : nullptr;
   }
   const flatbuffers::String *id() const {
     return GetPointer<const flatbuffers::String *>(VT_ID);
@@ -193,10 +247,6 @@ template<> inline const ChInterfaceMessage::Time *Message::message_as<ChInterfac
 
 template<> inline const ChInterfaceMessage::Exit *Message::message_as<ChInterfaceMessage::Exit>() const {
   return message_as_Exit();
-}
-
-template<> inline const ChInterfaceMessage::Config *Message::message_as<ChInterfaceMessage::Config>() const {
-  return message_as_Config();
 }
 
 struct MessageBuilder {
@@ -526,34 +576,6 @@ inline flatbuffers::Offset<Exit> CreateExit(
   return builder_.Finish();
 }
 
-struct Config FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
-  bool Verify(flatbuffers::Verifier &verifier) const {
-    return VerifyTableStart(verifier) &&
-           verifier.EndTable();
-  }
-};
-
-struct ConfigBuilder {
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  explicit ConfigBuilder(flatbuffers::FlatBufferBuilder &_fbb)
-        : fbb_(_fbb) {
-    start_ = fbb_.StartTable();
-  }
-  ConfigBuilder &operator=(const ConfigBuilder &);
-  flatbuffers::Offset<Config> Finish() {
-    const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<Config>(end);
-    return o;
-  }
-};
-
-inline flatbuffers::Offset<Config> CreateConfig(
-    flatbuffers::FlatBufferBuilder &_fbb) {
-  ConfigBuilder builder_(_fbb);
-  return builder_.Finish();
-}
-
 inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type) {
   switch (type) {
     case Type_NONE: {
@@ -585,10 +607,6 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
     }
     case Type_Exit: {
       auto ptr = reinterpret_cast<const ChInterfaceMessage::Exit *>(obj);
-      return verifier.VerifyTable(ptr);
-    }
-    case Type_Config: {
-      auto ptr = reinterpret_cast<const ChInterfaceMessage::Config *>(obj);
       return verifier.VerifyTable(ptr);
     }
     default: return false;

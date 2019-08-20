@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   rosgraph_msgs
+  common_msgs
 )
 
 include_directories(

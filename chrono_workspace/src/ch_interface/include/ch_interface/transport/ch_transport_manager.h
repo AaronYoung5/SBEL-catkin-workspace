@@ -5,7 +5,9 @@
 #include <ros/ros.h>
 #include <thread>
 
+#include "ch_interface/flatbuffer/ch_config_message_generated.h"
 #include "ch_interface/flatbuffer/ch_flatbuffer_converter.h"
+#include "ch_interface/flatbuffer/ch_interface_messages_generated.h"
 
 #include "ch_publisher.h"
 #include "ch_subscriber.h"
@@ -13,6 +15,9 @@
 #include "ch_transport_type.h"
 
 #include "rosgraph_msgs/Clock.h"
+
+typedef std::vector<flatbuffers::Offset<ChConfigMessage::Sensor>>
+    FlatbufferSensorVector;
 
 using namespace chrono::flatbuffer;
 
@@ -23,7 +28,7 @@ class ChTransportManager
 private:
   std::shared_ptr<boost::asio::ip::tcp::socket> socket_;
 
-  std::vector<ChTransport> transports_;
+  std::vector<std::shared_ptr<ChTransport>> transports_;
 
   std::thread thread_;
   std::mutex mutex_;
@@ -40,8 +45,10 @@ public:
   void startTransport();
 
 private:
+  void establishConnection();
   void loadParameters(ros::NodeHandle &n);
-  void initChrono();
+  void initChrono(flatbuffers::FlatBufferBuilder &builder,
+                  FlatbufferSensorVector &flatbuffer_transports);
   void readTransportMessage();
   void handleTransportMessage(size_t size);
 };
