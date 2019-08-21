@@ -22,4 +22,5 @@
     <!-- Run ch_launcher node -->
     <node pkg="ch_interface" type="ch_launch" name="ch_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/>
   </group>
+  <node pkg="rosservice" type="rosservice" name="set_logger_level" args="call /ch_interface/ch_interface/set_logger_level '{logger: 'rosout', level: 'DEBUG'}'"/>
 </launch>

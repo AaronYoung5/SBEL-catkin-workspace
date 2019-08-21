@@ -5,11 +5,12 @@ namespace transport {
 ChTransportManager::ChTransportManager(ros::NodeHandle &n)
     : socket_(std::make_shared<boost::asio::ip::tcp::socket>(
           *new boost::asio::io_service)),
-      closed_(false) {
+      resolver_(socket_->get_io_service()) {
   n.param<std::string>("chrono/hostname", host_name_, "localhost");
   n.param<std::string>("chrono/port", port_num_, "8080");
   establishConnection();
-  loadParameters(n);
+  if (ros::ok())
+    loadParameters(n);
 }
 
 ChTransportManager::~ChTransportManager() {
@@ -20,37 +21,61 @@ ChTransportManager::~ChTransportManager() {
 }
 
 void ChTransportManager::establishConnection() {
+  int count = 0;
+  async_start(count);
+  socket_->get_io_service().run();
+  socket_->get_io_service().reset();
+  ROS_INFO("Connection Established.");
+}
+
+void ChTransportManager::async_start(int &count) {
   // Initialize socket
-  int counter = 0;
-  int max_attempts = 5;
-  while (true) {
-    boost::asio::ip::tcp::resolver resolver(socket_->get_io_service());
-    boost::asio::ip::tcp::resolver::query query(host_name_, port_num_);
-    boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-    boost::asio::ip::tcp::resolver::iterator end;
+  boost::asio::ip::tcp::resolver::query query(host_name_, port_num_);
+  resolver_.async_resolve(
+      query, boost::bind(&ChTransportManager::resolve_handler, this,
+                         boost::asio::placeholders::error,
+                         boost::asio::placeholders::iterator, ++count));
+}
 
-    boost::system::error_code error = boost::asio::error::host_not_found;
-    while (error && iter != end) {
-      ROS_INFO_STREAM("Trying to connect to " << iter->endpoint() << "...");
+void ChTransportManager::resolve_handler(
+    const boost::system::error_code &ec,
+    boost::asio::ip::tcp::resolver::iterator it, int &count) {
+  if (!ec) {
+    boost::asio::async_connect(
+        *socket_, it,
+        boost::bind(&ChTransportManager::connect_handler, this,
+                    boost::asio::placeholders::error, ++it, count));
+  } else {
+    ROS_ERROR("Could Not Resolve Connection. Shutting Down.");
+    ros::shutdown();
+    return;
+  }
+}
 
-      socket_->close();
-      // Start the synchronous connect operation.
-      socket_->connect(*iter++, error);
-    }
-    if (!error)
-      break;
-    else if (counter++ > max_attempts) {
+void ChTransportManager::connect_handler(
+    const boost::system::error_code &ec,
+    boost::asio::ip::tcp::resolver::iterator it, int &count) {
+  if (!ec) {
+    ROS_INFO_STREAM("Connection Established With " << it->endpoint() << ".");
+    return;
+  } else if (it != boost::asio::ip::tcp::resolver::iterator()) {
+    ROS_INFO_STREAM("Could not connect to " << it->endpoint()
+                                            << ". Trying next endpoint.");
+    boost::asio::async_connect(
+        *socket_, it,
+        boost::bind(&ChTransportManager::connect_handler, this,
+                    boost::asio::placeholders::error, ++it, count));
+  } else {
+    if (count < 5) {
+      ROS_WARN_STREAM("Connection Attempt " << count
+                                            << " Unsuccessful. Trying Again.");
+      sleep(1);
+      async_start(count);
+    } else {
       ROS_ERROR("Connection Not Established. Shutting Down.");
       ros::shutdown();
-      return;
     }
-
-    ROS_WARN_STREAM("Connection Attempt " << counter
-                                          << " Failed. Trying Again.");
-    sleep(1);
   }
-
-  ROS_INFO("Connection Established.");
 }
 
 void ChTransportManager::loadParameters(ros::NodeHandle &n) {
@@ -61,9 +86,11 @@ void ChTransportManager::loadParameters(ros::NodeHandle &n) {
   transports_.push_back(std::make_shared<ChPublisher>(pub, TransportType::TIME,
                                                       "clock", sim_freq));
 
-  // ros::Subscriber sub(n.subscribe("/control", 1, &ChSubscriber::callback));
-  // transports_.push_back(std::make_shared<ChSubscriber>(sub, TransportType::TIME,
-                                                       // "control", sim_freq));
+  ros::Subscriber sub(n.subscribe("/control", 1,
+                                  &ChFlatbufferHandler::controlCallback,
+                                  &flatbuffer_handler_));
+  transports_.push_back(std::make_shared<ChSubscriber>(sub, TransportType::TIME,
+                                                       "control", sim_freq));
 
   const char *sensors[] = {"camera", "lidar", "gps", "imu"};
 
@@ -148,23 +175,21 @@ void ChTransportManager::startTransport() {
     thread_.join();
   }
 
-  std::thread thr([&, this]() {
-    readTransportMessage();
-    socket_->get_io_service().run();
-  });
+  readTransportMessage();
+  std::thread thr([&, this]() { socket_->get_io_service().run(); });
   thread_ = std::move(thr);
 }
 
 void ChTransportManager::readTransportMessage() {
-  buffer_.resize(4);
+  flatbuffer_handler_.resize(sizeof(int));
   boost::asio::async_read(
-      *socket_, boost::asio::buffer(buffer_.data(), 4),
+      *socket_, boost::asio::buffer(flatbuffer_handler_.data(), sizeof(int)),
       [&](const boost::system::error_code &ec, size_t size) {
         if (!ec) {
-          handleTransportMessage(((int *)buffer_.data())[0]);
+          handleTransportMessage(flatbuffer_handler_.getPrefixedSize());
         } else {
-          ROS_ERROR(
-              "readTransportMessage() :: Error on async_read. Shutting down.");
+          ROS_ERROR("readTransportMessage() :: Error on async_read. Shutting "
+                    "down.");
           socket_->close();
           ros::shutdown();
         }
@@ -175,38 +200,41 @@ void ChTransportManager::readTransportMessage() {
 void ChTransportManager::handleTransportMessage(size_t size) {
   ROS_DEBUG("Reading Transport Message.");
   ROS_DEBUG_STREAM("Bytes Available :: " << size);
-  buffer_.resize(size);
+  flatbuffer_handler_.resize(size);
   boost::asio::async_read(
-      *socket_, boost::asio::buffer(buffer_.data(), size),
+      *socket_, boost::asio::buffer(flatbuffer_handler_.data(), size),
       [&](const boost::system::error_code &ec, size_t size) {
         ROS_DEBUG_STREAM("Bytes Received :: " << size);
         if (!ec) {
-          const ChInterfaceMessage::Messages *messages =
-              flatbuffers::GetRoot<ChInterfaceMessage::Messages>(
-                  buffer_.data());
-
-          for (int i = 0; i < messages->messages()->Length(); i++) {
-            auto message = static_cast<const ChInterfaceMessage::Message *>(
-                messages->messages()->Get(i));
-
-            // Look for transport with the received id
-            auto it = std::find_if(
-                transports_.begin() + 1, transports_.end(),
-                [message](const std::shared_ptr<ChTransport> t) -> bool {
-                  return t->id().compare(message->id()->str()) == 0;
-                });
-
-            if (it == transports_.end()) {
-              ROS_WARN("Transport was not found. Ignoring this message.");
-              continue;
-            }
-
-            std::dynamic_pointer_cast<ChPublisher>((*it))->update(message);
-            (*it)->spinOnce();
+          for (std::shared_ptr<ChTransport> transport : transports_) {
+            transport->spinOnce();
           }
-          std::dynamic_pointer_cast<ChPublisher>(transports_[0])
-              ->update(messages->time());
-          transports_[0]->spinOnce();
+          // const ChInterfaceMessage::Messages *messages =
+          //     flatbuffers::GetRoot<ChInterfaceMessage::Messages>(
+          //         buffer_.data());
+          //
+          // for (int i = 0; i < messages->messages()->Length(); i++) {
+          //   auto message = static_cast<const ChInterfaceMessage::Message *>(
+          //       messages->messages()->Get(i));
+          //
+          //   // Look for transport with the received id
+          //   auto it = std::find_if(
+          //       transports_.begin() + 1, transports_.end(),
+          //       [message](const std::shared_ptr<ChTransport> t) -> bool {
+          //         return t->id().compare(message->id()->str()) == 0;
+          //       });
+          //
+          //   if (it == transports_.end()) {
+          //     ROS_WARN("Transport was not found. Ignoring this message.");
+          //     continue;
+          //   }
+          //
+          //   std::dynamic_pointer_cast<ChPublisher>((*it))->update(message);
+          //   (*it)->spinOnce();
+          // }
+          // std::dynamic_pointer_cast<ChPublisher>(transports_[0])
+          //     ->update(messages->time());
+          // transports_[0]->spinOnce();
 
           readTransportMessage();
         } else {

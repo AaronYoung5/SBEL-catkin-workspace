@@ -7,6 +7,7 @@
 
 #include "ch_interface/flatbuffer/ch_config_message_generated.h"
 #include "ch_interface/flatbuffer/ch_flatbuffer_converter.h"
+#include "ch_interface/flatbuffer/ch_flatbuffer_handler.h"
 #include "ch_interface/flatbuffer/ch_interface_messages_generated.h"
 
 #include "ch_publisher.h"
@@ -23,10 +24,12 @@ using namespace chrono::flatbuffer;
 
 namespace chrono {
 namespace transport {
-class ChTransportManager
-    : public std::enable_shared_from_this<ChTransportManager> {
+class ChTransportManager {
 private:
   std::shared_ptr<boost::asio::ip::tcp::socket> socket_;
+  boost::asio::ip::tcp::resolver resolver_;
+
+  ChFlatbufferHandler flatbuffer_handler_;
 
   std::vector<std::shared_ptr<ChTransport>> transports_;
 
@@ -34,9 +37,6 @@ private:
   std::mutex mutex_;
 
   std::string host_name_, port_num_;
-
-  bool closed_;
-  std::vector<uint8_t> buffer_;
 
 public:
   ChTransportManager(ros::NodeHandle &n);
@@ -46,6 +46,11 @@ public:
 
 private:
   void establishConnection();
+  void async_start(int &count);
+  void resolve_handler(const boost::system::error_code &ec,
+                       boost::asio::ip::tcp::resolver::iterator it, int &count);
+  void connect_handler(const boost::system::error_code &ec,
+                       boost::asio::ip::tcp::resolver::iterator it, int &count);
   void loadParameters(ros::NodeHandle &n);
   void initChrono(flatbuffers::FlatBufferBuilder &builder,
                   FlatbufferSensorVector &flatbuffer_transports);

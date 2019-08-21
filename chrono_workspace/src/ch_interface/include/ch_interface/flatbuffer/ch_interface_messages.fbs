@@ -25,7 +25,11 @@ table GPS {}
 
 table IMU {}
 
-table Control {}
+table Control {
+  throttle: float;
+  steering: float;
+  braking: float;
+}
 
 table Time {
   t:float;

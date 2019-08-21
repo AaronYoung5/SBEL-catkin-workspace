@@ -469,8 +469,25 @@ inline flatbuffers::Offset<IMU> CreateIMU(
 }
 
 struct Control FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_THROTTLE = 4,
+    VT_STEERING = 6,
+    VT_BRAKING = 8
+  };
+  float throttle() const {
+    return GetField<float>(VT_THROTTLE, 0.0f);
+  }
+  float steering() const {
+    return GetField<float>(VT_STEERING, 0.0f);
+  }
+  float braking() const {
+    return GetField<float>(VT_BRAKING, 0.0f);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
+           VerifyField<float>(verifier, VT_THROTTLE) &&
+           VerifyField<float>(verifier, VT_STEERING) &&
+           VerifyField<float>(verifier, VT_BRAKING) &&
            verifier.EndTable();
   }
 };
@@ -478,6 +495,15 @@ struct Control FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct ControlBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+  void add_throttle(float throttle) {
+    fbb_.AddElement<float>(Control::VT_THROTTLE, throttle, 0.0f);
+  }
+  void add_steering(float steering) {
+    fbb_.AddElement<float>(Control::VT_STEERING, steering, 0.0f);
+  }
+  void add_braking(float braking) {
+    fbb_.AddElement<float>(Control::VT_BRAKING, braking, 0.0f);
+  }
   explicit ControlBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
@@ -491,8 +517,14 @@ struct ControlBuilder {
 };
 
 inline flatbuffers::Offset<Control> CreateControl(
-    flatbuffers::FlatBufferBuilder &_fbb) {
+    flatbuffers::FlatBufferBuilder &_fbb,
+    float throttle = 0.0f,
+    float steering = 0.0f,
+    float braking = 0.0f) {
   ControlBuilder builder_(_fbb);
+  builder_.add_braking(braking);
+  builder_.add_steering(steering);
+  builder_.add_throttle(throttle);
   return builder_.Finish();
 }
 

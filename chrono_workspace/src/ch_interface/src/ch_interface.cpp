@@ -7,7 +7,9 @@ ChInterface::ChInterface(ros::NodeHandle &n) : transport_manager_(n) {}
 ChInterface::~ChInterface() {}
 
 void ChInterface::run() {
-  transport_manager_.startTransport();
-  ros::spin();
+  if (ros::ok()) {
+    transport_manager_.startTransport();
+    ros::spin();
+  }
 }
 } // namespace chrono
