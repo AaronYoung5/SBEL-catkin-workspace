@@ -5,7 +5,9 @@
 #include "ch_transport.h"
 #include "ch_transport_type.h"
 
-#include "ch_interface/flatbuffer/ch_flatbuffer_converter.h"
+#include "ch_interface/flatbuffer/ch_flatbuffer_handler.h"
+
+using namespace chrono::flatbuffer;
 
 namespace chrono {
 namespace transport {
@@ -17,7 +19,7 @@ public:
   ChSubscriber(ros::Subscriber &sub, TransportType type, std::string id,
                int freq);
 
-  void spinOnce();
+  void spinOnce(ChFlatbufferHandler &flatbuffer_handler);
 };
 } // namespace transport
 } // namespace chrono

@@ -5,7 +5,7 @@
 #include "ch_transport.h"
 #include "ch_transport_type.h"
 
-#include "ch_interface/flatbuffer/ch_flatbuffer_converter.h"
+#include "ch_interface/flatbuffer/ch_flatbuffer_handler.h"
 
 using namespace chrono::flatbuffer;
 
@@ -15,13 +15,11 @@ class ChPublisher : public ChTransport {
 private:
   ros::Publisher pub_;
 
-  const ChInterfaceMessage::Message *message_;
-
 public:
-  ChPublisher(ros::Publisher &pub, TransportType type, std::string id, int freq);
+  ChPublisher(ros::Publisher &pub, TransportType type, std::string id,
+              int freq);
 
-  void update(const ChInterfaceMessage::Message *message);
-  void spinOnce();
+  void spinOnce(ChFlatbufferHandler &flatbuffer_handler);
 };
 } // namespace transport
 } // namespace chrono

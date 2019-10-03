@@ -42,9 +42,6 @@ public:
   // }
 
   void controlCallback(const common_msgs::Control::ConstPtr &msg) {
-    std::vector<uint8_t> msg_buffer;
-    SerializeToByteArray(*msg, msg_buffer);
-
     flatbuffers::FlatBufferBuilder builder;
 
     flatbuffers::Offset<ChInterfaceMessage::Control> control =

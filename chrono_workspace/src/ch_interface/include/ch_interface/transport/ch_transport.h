@@ -7,8 +7,10 @@
 #include <mutex>
 #include <thread>
 
+#include "ch_interface/flatbuffer/ch_flatbuffer_handler.h"
 #include "ch_transport_type.h"
-#include "ch_interface/flatbuffer/ch_interface_messages_generated.h"
+
+using namespace chrono::flatbuffer;
 
 namespace chrono {
 namespace transport {
@@ -18,6 +20,8 @@ protected:
   TransportType type_;
   std::string id_;
   int freq_;
+  double time_;
+  int num_updates_;
 
 public:
   ChTransport(TransportType type, std::string id, int freq);
@@ -28,7 +32,8 @@ public:
   std::string id() const { return id_; }
   int freq() const { return freq_; }
 
-  virtual void spinOnce() = 0;
+  virtual void spinOnce(double step, ChFlatbufferHandler& flatbuffer_handler);
+  virtual void spinOnce(ChFlatbufferHandler& flatbuffer_handler) = 0;
 };
 } // namespace transport
 } // namespace chrono

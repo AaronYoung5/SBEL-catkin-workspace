@@ -2,8 +2,6 @@
   <param name="/use_sim_time" value="true"/>
   <!-- Chrono demo to run -->
   <arg name="chrono_demo" default="demo_INT"/>
-  <!-- Port to run chrono demo on -->
-  <arg name="chrono_port" default="8080"/>
   <!-- yaml include file name to use -->
   <arg name="chrono_yaml" default="ch_interface.yaml"/>
   <!-- Topic for image data -->
@@ -14,13 +12,11 @@
     <rosparam file="$(find ch_interface)/config/$(arg chrono_yaml)"/>
     <!-- Run ch_ros node -->
     <node pkg="ch_interface" type="ch_interface" name="ch_interface" required="true" output="screen">
-      <!-- Set port parameter -->
-      <param name="port" value="$(arg chrono_port)"/>
+
       <!-- Remap camera topic -->
       <remap from="camera" to="$(arg image_topic)"/>
     </node>
     <!-- Run ch_launcher node -->
-    <node pkg="ch_interface" type="ch_launch" name="ch_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/>
+    <!-- <node pkg="ch_interface" type="ch_launch" name="ch_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/> -->
   </group>
-  <node pkg="rosservice" type="rosservice" name="set_logger_level" args="call /ch_interface/ch_interface/set_logger_level '{logger: 'rosout', level: 'DEBUG'}'"/>
 </launch>

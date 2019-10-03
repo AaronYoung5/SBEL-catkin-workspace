@@ -30,6 +30,7 @@ void ChTransportManager::establishConnection() {
 
 void ChTransportManager::async_start(int &count) {
   // Initialize socket
+  ROS_INFO_STREAM("Trying to connect to :: " << host_name_ << ":" << port_num_);
   boost::asio::ip::tcp::resolver::query query(host_name_, port_num_);
   resolver_.async_resolve(
       query, boost::bind(&ChTransportManager::resolve_handler, this,
@@ -67,8 +68,7 @@ void ChTransportManager::connect_handler(
                     boost::asio::placeholders::error, ++it, count));
   } else {
     if (count < 5) {
-      ROS_WARN_STREAM("Connection Attempt " << count
-                                            << " Unsuccessful. Trying Again.");
+      ROS_WARN_STREAM("Connection Attempt " << count << " Unsuccessful. Trying Again.");
       sleep(1);
       async_start(count);
     } else {
@@ -165,8 +165,10 @@ void ChTransportManager::initChrono(flatbuffers::FlatBufferBuilder &builder,
   // Get buffer pointer from message object
   uint8_t *buffer = builder.GetBufferPointer();
   // Send the message
-  uint32_t send_size = socket_->send(boost::asio::buffer(buffer, size));
-  ROS_INFO_STREAM("Bytes Sent :: " << send_size);
+  socket_->async_send(boost::asio::buffer(buffer, size),
+                      [](const boost::system::error_code &ec, size_t size) {
+                        ROS_INFO_STREAM("Bytes Sent :: " << size);
+                      });
 }
 
 void ChTransportManager::startTransport() {
@@ -206,9 +208,10 @@ void ChTransportManager::handleTransportMessage(size_t size) {
       [&](const boost::system::error_code &ec, size_t size) {
         ROS_DEBUG_STREAM("Bytes Received :: " << size);
         if (!ec) {
-          for (std::shared_ptr<ChTransport> transport : transports_) {
-            transport->spinOnce();
-          }
+          // for (std::shared_ptr<ChTransport> transport : transports_) {
+          // transport->spinOnce(flatbuffer_handler_);
+          // }
+
           // const ChInterfaceMessage::Messages *messages =
           //     flatbuffers::GetRoot<ChInterfaceMessage::Messages>(
           //         buffer_.data());
@@ -233,7 +236,7 @@ void ChTransportManager::handleTransportMessage(size_t size) {
           //   (*it)->spinOnce();
           // }
           // std::dynamic_pointer_cast<ChPublisher>(transports_[0])
-          //     ->update(messages->time());
+          // ->update(messages->time());
           // transports_[0]->spinOnce();
 
           readTransportMessage();

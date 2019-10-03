@@ -1,0 +1,4 @@
+To get rviz to work:
+1. ros_docker_status
+2. get port
+3. set env var ROS_MASTER_URI to http://localhost:PORT
