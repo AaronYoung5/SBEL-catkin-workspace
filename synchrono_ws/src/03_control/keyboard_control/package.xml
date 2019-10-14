@@ -1,0 +1,16 @@
+<package format="2">
+  <name>keyboard_control</name>
+  <version>1.0.0</version>
+  <description>
+    keyboard_control package. Publishes keyboard input to control some robot.
+  </description>
+
+  <license>BSD3</license>
+  <author>Aaron Young</author>
+  <maintainer email="aryoung5@wisc.edu">Aaron Young</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>common_msgs</depend>
+
+</package>

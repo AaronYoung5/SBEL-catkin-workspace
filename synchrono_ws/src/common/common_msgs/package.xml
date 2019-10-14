@@ -1,0 +1,16 @@
+<package format="2">
+  <name>common_msgs</name>
+  <version>1.0.0</version>
+  <description>
+    common_msgs package. Used to manage all of the common msgs used for this control stack
+  </description>
+
+  <license>BSD3</license>
+  <author>Aaron Young</author>
+  <maintainer email="aryoung5@wisc.edu">Aaron Young</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>message_generation</depend>
+  <depend>message_runtime</depend>
+</package>
