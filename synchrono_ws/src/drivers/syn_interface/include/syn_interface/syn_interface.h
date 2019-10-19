@@ -8,6 +8,7 @@
 #include "syn_interface/components/syn_control_component.h"
 #include "syn_interface/components/syn_interface_component.h"
 #include "syn_interface/components/syn_time_component.h"
+#include "syn_interface/components/syn_lidar_component.h"
 #include "syn_interface/syn_flatbuffers_manager.h"
 #include "syn_interface/syn_transport_manager.h"
 

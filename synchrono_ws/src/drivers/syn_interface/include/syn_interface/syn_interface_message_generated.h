@@ -385,8 +385,21 @@ inline flatbuffers::Offset<Camera> CreateCameraDirect(
 }
 
 struct Lidar FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_BYTES_PER_PIXEL = 4,
+    VT_DATA = 6
+  };
+  int32_t bytes_per_pixel() const {
+    return GetField<int32_t>(VT_BYTES_PER_PIXEL, 0);
+  }
+  const flatbuffers::Vector<uint8_t> *data() const {
+    return GetPointer<const flatbuffers::Vector<uint8_t> *>(VT_DATA);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, VT_BYTES_PER_PIXEL) &&
+           VerifyOffset(verifier, VT_DATA) &&
+           verifier.VerifyVector(data()) &&
            verifier.EndTable();
   }
 };
@@ -394,6 +407,12 @@ struct Lidar FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct LidarBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+  void add_bytes_per_pixel(int32_t bytes_per_pixel) {
+    fbb_.AddElement<int32_t>(Lidar::VT_BYTES_PER_PIXEL, bytes_per_pixel, 0);
+  }
+  void add_data(flatbuffers::Offset<flatbuffers::Vector<uint8_t>> data) {
+    fbb_.AddOffset(Lidar::VT_DATA, data);
+  }
   explicit LidarBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
@@ -407,9 +426,24 @@ struct LidarBuilder {
 };
 
 inline flatbuffers::Offset<Lidar> CreateLidar(
-    flatbuffers::FlatBufferBuilder &_fbb) {
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t bytes_per_pixel = 0,
+    flatbuffers::Offset<flatbuffers::Vector<uint8_t>> data = 0) {
   LidarBuilder builder_(_fbb);
+  builder_.add_data(data);
+  builder_.add_bytes_per_pixel(bytes_per_pixel);
   return builder_.Finish();
+}
+
+inline flatbuffers::Offset<Lidar> CreateLidarDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t bytes_per_pixel = 0,
+    const std::vector<uint8_t> *data = nullptr) {
+  auto data__ = data ? _fbb.CreateVector<uint8_t>(*data) : 0;
+  return SynInterfaceMessage::CreateLidar(
+      _fbb,
+      bytes_per_pixel,
+      data__);
 }
 
 struct GPS FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {

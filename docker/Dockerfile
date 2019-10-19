@@ -1,16 +1,18 @@
 FROM osrf/ros:melodic-desktop
 
-RUN apt-get update; apt-get install -y sudo vim xterm x11-xserver-utils mesa-utils ros-melodic-serial ros-melodic-pcl-ros cmake-curses-gui ccache ros-melodic-eigen-stl-containers ros-melodic-graph-msgs ros-melodic-image-geometry ros-melodic-navigation python3-yaml python3-numpy python3-matplotlib mjpegtools ffmpeg mencoder ros-melodic-image-view
-
-#RUN useradd -G sudo -u 1001 -m -s /bin/bash aaron
-#RUN echo "aaron:password" | chpasswd
+RUN apt-get update; apt-get install -y sudo vim xterm x11-xserver-utils mesa-utils ros-melodic-pcl-ros cmake-curses-gui ccache python3-yaml python3-numpy python3-matplotlib python-rospkg ros-melodic-graph-msgs 
 
 RUN ln -sfv /home/aaron/flatbuffers/include/flatbuffers /usr/local/include/flatbuffers
 
-#USER aaron
 WORKDIR /home/aaron
 
 EXPOSE 8080
 EXPOSE 11311
+
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 CMD tail -f /dev/null

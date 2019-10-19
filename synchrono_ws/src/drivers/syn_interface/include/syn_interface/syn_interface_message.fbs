@@ -19,7 +19,10 @@ table Camera {
   data:[ubyte];
 }
 
-table Lidar {}
+table Lidar {
+  bytes_per_pixel: int;
+  data:[ubyte];
+}
 
 table GPS {}
 

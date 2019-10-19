@@ -7,12 +7,12 @@
 
 class SynCameraComponent : public SynInterfaceComponent {
 private:
-  image_transport::Publisher pub_;
+  ros::Publisher pub_;
 
 public:
   SynCameraComponent(ros::NodeHandle &n, std::string name)
       : SynInterfaceComponent(SynComponentType::Receiver, name),
-        pub_(image_transport::ImageTransport(n).advertise(name, 1)) {}
+        pub_(n.advertise<sensor_msgs::Image>(name, 1)) {}
 
   std::shared_ptr<flatbuffers::Offset<SynInterfaceMessage::Message>> toFlatBuffer(flatbuffers::FlatBufferBuilder &builder_) {}
 
