@@ -3,31 +3,15 @@ import rospy
 from ctypes import *
 import os
 import math
-# import cv2
+import cv2 as cv
 import numpy as np
 import time
 import darknet
-# from ZEDStereoCam import ZED
-# import matplotlib.pyplot as plt
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
-frame = None
-
 # Frame scaling for making detection window visible on high resolution screens
 frame_scaling_factor = 1
-
-scaled_width = None
-scaled_height = None
-
-netMain = None
-metaMain = None
-altNames = None
-
-
-# fig = plt.figure()
-# ax1 = fig.add_subplot(111)
-# plt.show(block=False)
 
 lower_white = np.array([0,0,245])
 upper_white = np.array([255,30,255])
@@ -35,6 +19,15 @@ upper_white = np.array([255,30,255])
 lower_black = np.array([0, 0, 0])
 upper_black = np.array([255, 255, 30])
 
+scaled_width = 1280
+scaled_height = 720
+
+netMain = None
+metaMain = None
+altNames = None
+darknet_image = None
+
+bridge = CvBridge()
 
 # Converts YOLO's bounding box format to OpenCV's
 # YOLO returns x and y as the center of the bounding box
@@ -50,7 +43,7 @@ def convertBoxes(x, y, w, h):
 
 
 def cvDrawBoxes(detections, img):
-    print(len(detections))
+    # print(len(detections))
     for detection in detections:
         x, y, w, h = detection[2][0],\
             detection[2][1],\
@@ -62,15 +55,15 @@ def cvDrawBoxes(detections, img):
         lowerRight = (xmax, ymax)
 
         #cropped = img[ymin:ymax,xmin:xmax]
-        #cv2.imshow("cropped",cropped)
-        #black_mask = cv2.inRange(cropped, lower_black, upper_black)
-        #white_mask = cv2.inRange(cropped, lower_white, upper_white)
-        #cv2.imshow("cropped",black_mask)
+        #cv.imshow("cropped",cropped)
+        #black_mask = cv.inRange(cropped, lower_black, upper_black)
+        #white_mask = cv.inRange(cropped, lower_white, upper_white)
+        #cv.imshow("cropped",black_mask)
         #where = np.array(np.where(black_mask))
 
         #x1, y1 = np.amin(where, axis=1)
         #x2, y2 = np.amax(where, axis=1)
-        #cv2.rectangle(img, (x1,y1), (x2,y2), (255, 255, 0), 1)
+        #cv.rectangle(img, (x1,y1), (x2,y2), (255, 255, 0), 1)
 
         angleToCone = round((((xmin + (w / 2)) - (scaled_width / 2)) / scaled_width) * 87, 2)
         distanceToCone = round(12 * 30 / h, 2)
@@ -78,111 +71,74 @@ def cvDrawBoxes(detections, img):
 
 
         # Print just class name
-        #cv2.putText(img,detection[0].decode(),(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
+        #cv.putText(img,detection[0].decode(),(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
         # Print confidence and distance
-        #cv2.putText(img, detection[0].decode() + " " + str(confidence) + '% ' + str(distanceToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
+        #cv.putText(img, detection[0].decode() + " " + str(confidence) + '% ' + str(distanceToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
+        thickness = 2
 
         if detection[0].decode() == 'yellow':
-            cv2.rectangle(img, upperLeft, lowerRight, (255, 255, 0), 1)
+            cv.rectangle(img, upperLeft, lowerRight, (255, 255, 0), thickness)
             # Print distance and angle
-            cv2.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[255, 255, 0])
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 255, 0])
         elif detection[0].decode() == 'blue':
-            cv2.rectangle(img, upperLeft, lowerRight, (0, 200, 255), 1)
+            cv.rectangle(img, upperLeft, lowerRight, (0, 200, 255), thickness)
             # Print distance and angle
-            cv2.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[0, 200, 255])
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[0, 200, 255])
         elif detection[0].decode() == 'orange':
-            cv2.rectangle(img, upperLeft, lowerRight, (255, 190, 0), 1)
+            cv.rectangle(img, upperLeft, lowerRight, (255, 190, 0), thickness)
             # Print distance and angle
-            cv2.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
         elif detection[0].decode() == 'orange-big':
-            cv2.rectangle(img, upperLeft, lowerRight, (255, 190, 0), 1)
+            cv.rectangle(img, upperLeft, lowerRight, (255, 190, 0), thickness)
             # Print distance and angle
-            cv2.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
     return img
 
-
-def plotCones(detections):
-    ax1.clear()
-    yellowConesX = []
-    yellowConesY = []
-    blueConesX = []
-    blueConesY = []
-    for detection in detections:
-        x, y, w, h = detection[2][0], \
-                 detection[2][1], \
-                 detection[2][2], \
-                 detection[2][3]
-        xmin, ymin, xmax, ymax = convertBoxes(
-            float(x), float(y), float(w), float(h))
-        upperLeft = (xmin, ymin)
-        lowerRight = (xmax, ymax)
-
-        angleToCone = round((((xmin + (w / 2)) - (scaled_width / 2)) / scaled_width) * 73,6)
-        angleToCone = math.radians(angleToCone)
-        distanceToCone = round(12 * 30 / h, 6)
-
-        distX = distanceToCone*math.tan(angleToCone)
-        distY = distanceToCone
-
-        if detection[0].decode() == 'yellow':
-            if -10 <= distX <= 40 and distY <= 50:
-                yellowConesX.append(distX)
-                yellowConesY.append(distY)
-
-        elif detection[0].decode() == 'blue':
-            if -10 <= distX <= 40 and distY <= 50:
-                blueConesX.append(distX)
-                blueConesY.append(distY)
-
-    #print(yellowConesX,yellowConesY)
-    # ax1.plot(yellowConesX, yellowConesY, 'yo')
-    # ax1.plot(blueConesX,blueConesY,'bo')
-    # plt.xlim([-10,40])
-    # plt.ylim([0,50])
-    # plt.draw()
-    # plt.pause(0.01)
-
-def callback(data):
+def YOLO(data):
     try:
-        frame = self.bridge.imgmsg_to_cv2(data, "bgr8")
-    except CvBridgeError as e:
+        frame = bridge.imgmsg_to_cv2(data, "rgba8")
+    except CvBridgeError:
         print(e)
 
     prev_time = time.time()
-    ret, frame = cap.read()
-    #frame = cv2.imread("cone_images/cones-8.jpg")
+    #frame = cv.imread("cone_images/cones-8.jpg")
     #scaled_height = round(np.size(frame,0)*frame_scaling_factor,0)
     #scaled_width = round(np.size(frame,1)*frame_scaling_factor,0)
-
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    frame_resized = cv2.resize(frame,(darknet.network_width(netMain),darknet.network_height(netMain)),interpolation=cv2.INTER_LINEAR)
+    # frame = cv.flip(frame,0)
+    frame = cv.cvtColor(frame, cv.COLOR_BGRA2BGR)
+    frame_resized = cv.resize(frame,(416,416),interpolation=cv.INTER_LINEAR)
     darknet.copy_image_from_bytes(darknet_image,frame_resized.tobytes())
 
     detections = darknet.detect_image(netMain, metaMain, darknet_image, thresh=0.5)
     postTime = time.time()
-    frame = cv2.resize(frame, None, fx=frame_scaling_factor, fy=frame_scaling_factor, interpolation=cv2.INTER_NEAREST)
+    frame = cv.resize(frame, None, fx=frame_scaling_factor, fy=frame_scaling_factor, interpolation=cv.INTER_NEAREST)
     frame = cvDrawBoxes(detections, frame)
 
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    # frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
 
 
     # Post processing for FPS and center line
-    #cv2.line(frame, (round(width / 2), 0), (round(width / 2), height), (0, 0, 255), 1)
-    cv2.putText(frame, 'FPS {:.1f}'.format(1 / (time.time() - prev_time)), (10, 30),cv2.FONT_HERSHEY_DUPLEX, 0.8, (0, 0, 255))
-    cv2.putText(frame, 'Render '+str(round((time.time()-postTime)*1000,2))+' ms', (10, 50),cv2.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 255))
+    #cv.line(frame, (round(width / 2), 0), (round(width / 2), height), (0, 0, 255), 1)
+    cv.putText(frame, 'FPS {:.1f}'.format(1 / (time.time() - prev_time)), (10, 30),cv.FONT_HERSHEY_DUPLEX, 0.8, (0, 0, 255))
+    cv.putText(frame, 'Render '+str(round((time.time()-postTime)*1000,2))+' ms', (10, 50),cv.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 255))
 
     #print(1/(time.time()-prev_time))
-    cv2.imshow('Cone Detection', frame)
+    cv.imshow('Cone Detection', frame)
     #plotCones(detections)
-    #while(cv2.waitKey(1) != 13): pass
-    cv2.waitKey(1)
+    #while(cv.waitKey(1) != 13): pass
+    cv.waitKey(1)
+
+def init_image():
+    global netMain, darknet_image
+    # Create an image we reuse for each detect
+    darknet_image = darknet.make_image(darknet.network_width(netMain),
+                                    darknet.network_height(netMain),3)
 
 def main():
     rospy.init_node("yolo_v3", anonymous=True)
-    sub = rospy.Subscriber("/syn_interface/camera_sensor_1", Image, callback)
+    sub = rospy.Subscriber("/syn_interface/camera_sensor_1", Image, YOLO)
 
-    global metaMain, netMain, altNames
-    global scaled_height, scaled_width, height, width
+    global netMain, metaMain, altNames
 
     configPath = "/home/aaron/Downloads/darknet/cfg/yolov3-cones-colab.cfg"
     weightPath = "/home/aaron/Downloads/darknet/weights/yolov3-cones-colab_best.weights"
@@ -196,6 +152,7 @@ def main():
     if not os.path.exists(metaPath):
         raise ValueError("Invalid data file path `" +
                          os.path.abspath(metaPath)+"`")
+
     if netMain is None:
         netMain = darknet.load_net_custom(configPath.encode(
             "ascii"), weightPath.encode("ascii"), 0, 1)  # batch size = 1
@@ -222,27 +179,11 @@ def main():
         except Exception:
             pass
 
-    #
-    # cap = cv2.VideoCapture("IMG_4400.m4v")
-    #cap = cv2.VideoCapture(0)
-    # Set start frame to 0
-    #cap.set(1,250)
-
-    scaled_height = cap.get(4)*frame_scaling_factor
-    scaled_width = cap.get(3)*frame_scaling_factor
-
-    print(scaled_width,scaled_height)
-
-
     print("Starting the YOLO loop...")
 
-    # Create an image we reuse for each detect
-    darknet_image = darknet.make_image(darknet.network_width(netMain),
-                                    darknet.network_height(netMain),3)
+    init_image()
 
     rospy.spin()
-
-
 
 if __name__ == "__main__":
     main()

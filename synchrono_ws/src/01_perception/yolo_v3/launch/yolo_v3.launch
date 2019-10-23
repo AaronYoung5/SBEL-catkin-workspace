@@ -1,0 +1,11 @@
+<launch>
+  <arg name="image_topic" default="/syn_interface/camera_sensor_1"/>
+  <arg name="movie_file" default="/home/aaron/Videos/yolo_simulation.og"/>
+
+  <remap from="/movie" to="$(arg image_topic)"/>
+  <include file="$(find movie_publisher)/movie_publisher.launch">
+    <arg name="movie_file" value="$(arg movie_file)"/>
+  </include>
+
+  <node pkg="yolo_v3" type="yolo_v3" name="yolo_v3" output="screen" required="true"/>
+</launch>
