@@ -10,17 +10,8 @@ import darknet
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
-# Frame scaling for making detection window visible on high resolution screens
-frame_scaling_factor = 1
-
-lower_white = np.array([0,0,245])
-upper_white = np.array([255,30,255])
-
-lower_black = np.array([0, 0, 0])
-upper_black = np.array([255, 255, 30])
-
-scaled_width = 1280
-scaled_height = 720
+frame_width = None
+frame_height = None
 
 netMain = None
 metaMain = None
@@ -34,16 +25,15 @@ bridge = CvBridge()
 # OpenCV functions require x and y be the top left corner of the bounding box
 # Darknet returns bounding boxes for network image size (416x416), function also converts bounding boxes to original (scaled) image size
 def convertBoxes(x, y, w, h):
-    xmin = int(round((x - (w / 2))*(scaled_width/darknet.network_width(netMain))))
-    xmax = int(round((x + (w / 2))*(scaled_width/darknet.network_width(netMain))))
-    ymin = int(round((y - (h / 2))*(scaled_height/darknet.network_height(netMain))))
-    ymax = int(round((y + (h / 2))*(scaled_height/darknet.network_height(netMain))))
+    xmin = int(round((x - (w / 2))*(frame_width/darknet.network_width(netMain))))
+    xmax = int(round((x + (w / 2))*(frame_width/darknet.network_width(netMain))))
+    ymin = int(round((y - (h / 2))*(frame_height/darknet.network_height(netMain))))
+    ymax = int(round((y + (h / 2))*(frame_height/darknet.network_height(netMain))))
 
     return xmin, ymin, xmax, ymax
 
 
 def cvDrawBoxes(detections, img):
-    # print(len(detections))
     for detection in detections:
         x, y, w, h = detection[2][0],\
             detection[2][1],\
@@ -54,18 +44,7 @@ def cvDrawBoxes(detections, img):
         upperLeft = (xmin, ymin)
         lowerRight = (xmax, ymax)
 
-        #cropped = img[ymin:ymax,xmin:xmax]
-        #cv.imshow("cropped",cropped)
-        #black_mask = cv.inRange(cropped, lower_black, upper_black)
-        #white_mask = cv.inRange(cropped, lower_white, upper_white)
-        #cv.imshow("cropped",black_mask)
-        #where = np.array(np.where(black_mask))
-
-        #x1, y1 = np.amin(where, axis=1)
-        #x2, y2 = np.amax(where, axis=1)
-        #cv.rectangle(img, (x1,y1), (x2,y2), (255, 255, 0), 1)
-
-        angleToCone = round((((xmin + (w / 2)) - (scaled_width / 2)) / scaled_width) * 87, 2)
+        angleToCone = round((((xmin + (w / 2)) - (frame_width / 2)) / frame_width) * 87, 2)
         distanceToCone = round(12 * 30 / h, 2)
         confidence = round(detection[1] * 100,1)
 
@@ -95,25 +74,29 @@ def cvDrawBoxes(detections, img):
     return img
 
 def YOLO(data):
+    global netMain, darknet_image, frame_height, frame_width
+
+    prev_time = time.time()
+
     try:
         frame = bridge.imgmsg_to_cv2(data, "rgba8")
     except CvBridgeError:
         print(e)
 
-    prev_time = time.time()
-    #frame = cv.imread("cone_images/cones-8.jpg")
-    #scaled_height = round(np.size(frame,0)*frame_scaling_factor,0)
-    #scaled_width = round(np.size(frame,1)*frame_scaling_factor,0)
-    # frame = cv.flip(frame,0)
-    frame = cv.cvtColor(frame, cv.COLOR_BGRA2BGR)
-    frame_resized = cv.resize(frame,(416,416),interpolation=cv.INTER_LINEAR)
+    frame_height, frame_width = frame.shape[:2]
+    frame_height = float(frame_height)
+    frame_width = float(frame_width)
+
+    frame = cv.flip(frame, -1)
+
+    frame = cv.cvtColor(frame, cv.COLOR_BGRA2RGB)
+    frame_resized = cv.resize(frame,(darknet.network_width(netMain),darknet.network_height(netMain)),interpolation=cv.INTER_LINEAR)
+
     darknet.copy_image_from_bytes(darknet_image,frame_resized.tobytes())
-
     detections = darknet.detect_image(netMain, metaMain, darknet_image, thresh=0.5)
-    postTime = time.time()
-    frame = cv.resize(frame, None, fx=frame_scaling_factor, fy=frame_scaling_factor, interpolation=cv.INTER_NEAREST)
-    frame = cvDrawBoxes(detections, frame)
 
+    postTime = time.time()
+    frame = cvDrawBoxes(detections, frame)
     # frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
 
 
@@ -125,20 +108,10 @@ def YOLO(data):
     #print(1/(time.time()-prev_time))
     cv.imshow('Cone Detection', frame)
     #plotCones(detections)
-    #while(cv.waitKey(1) != 13): pass
     cv.waitKey(1)
 
-def init_image():
-    global netMain, darknet_image
-    # Create an image we reuse for each detect
-    darknet_image = darknet.make_image(darknet.network_width(netMain),
-                                    darknet.network_height(netMain),3)
-
 def main():
-    rospy.init_node("yolo_v3", anonymous=True)
-    sub = rospy.Subscriber("/syn_interface/camera_sensor_1", Image, YOLO)
-
-    global netMain, metaMain, altNames
+    global netMain, metaMain, altNames, darknet_image
 
     configPath = "/home/aaron/Downloads/darknet/cfg/yolov3-cones-colab.cfg"
     weightPath = "/home/aaron/Downloads/darknet/weights/yolov3-cones-colab_best.weights"
@@ -181,8 +154,11 @@ def main():
 
     print("Starting the YOLO loop...")
 
-    init_image()
+    darknet_image = darknet.make_image(darknet.network_width(netMain),
+                                    darknet.network_height(netMain),3)
 
+    rospy.init_node("yolo_v3", anonymous=True)
+    sub = rospy.Subscriber("/syn_interface/camera_sensor_1", Image, YOLO)
     rospy.spin()
 
 if __name__ == "__main__":
