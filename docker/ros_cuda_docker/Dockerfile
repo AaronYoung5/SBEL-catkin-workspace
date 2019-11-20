@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update; apt-get install -y sudo vim build-essential xterm x11-xserver-utils mesa-utils ros-melodic-pcl-ros cmake-curses-gui ccache python3-yaml python3-numpy python3-matplotlib python-rospkg ros-melodic-graph-msgs
 
-RUN ln -sfv /home/aaron/flatbuffers/include/flatbuffers /usr/local/include/flatbuffers
+RUN ln -sfv /home/aaron/packages/flatbuffers/include/flatbuffers /usr/local/include/flatbuffers
 
 # WORKDIR /home/aaron/Downloads/darknet/
 # COPY ./Makefile ./
@@ -57,7 +57,7 @@ RUN ln -sfv /home/aaron/flatbuffers/include/flatbuffers /usr/local/include/flatb
 
 # RUN apt-get update; apt-get install -y python-pip python-dev; pip install --upgrade pip; pip install moviepy
 
-RUN apt-get update; apt-get install -y ros-melodic-movie-publisher python-pip; pip install moviepy
+RUN apt-get install -y ros-melodic-movie-publisher python-pip; pip install moviepy
 
 WORKDIR /home/aaron
 

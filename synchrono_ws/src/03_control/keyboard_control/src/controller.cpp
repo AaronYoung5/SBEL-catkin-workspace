@@ -29,12 +29,12 @@ void Controller::keyLoop() {
     }
 
     switch (c) {
-    case KEYCODE_L:
+    case KEYCODE_R:
       ROS_DEBUG("LEFT");
       msg_.steering -= .01;
       dirty = true;
       break;
-    case KEYCODE_R:
+    case KEYCODE_L:
       ROS_DEBUG("RIGHT");
       msg_.steering += .01;
       dirty = true;

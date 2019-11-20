@@ -158,7 +158,7 @@ def main():
                                     darknet.network_height(netMain),3)
 
     rospy.init_node("yolo_v3", anonymous=True)
-    sub = rospy.Subscriber("/syn_interface/camera_sensor_1", Image, YOLO)
+    sub = rospy.Subscriber("/syn_interface/camera_sensor_2", Image, YOLO)
     rospy.spin()
 
 if __name__ == "__main__":

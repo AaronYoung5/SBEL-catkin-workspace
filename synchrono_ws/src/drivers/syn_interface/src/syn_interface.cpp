@@ -2,6 +2,7 @@
 
 SynInterface::SynInterface(ros::NodeHandle &n) {
   Add(std::make_shared<SynCameraComponent>(n, "camera_sensor_1"));
+  Add(std::make_shared<SynCameraComponent>(n, "camera_sensor_2"));
   Add(std::make_shared<SynTimeComponent>(n, "Time"));
   Add(std::make_shared<SynControlComponent>(n, "Control", "/control"));
   // Add(std::make_shared<SynLidarComponent>(n, "lidar"));
