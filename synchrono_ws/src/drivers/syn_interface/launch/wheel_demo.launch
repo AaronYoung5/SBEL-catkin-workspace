@@ -1,0 +1,7 @@
+<launch>
+
+  <node pkg="syn_interface" name="syn_interface" type="syn_interface" output="screen" required="true"/>
+
+  <include file="$(find wheel_control)/launch/wheel_control.launch"/>
+  <include file="$(find camera_visualizer)/launch/camera_visualizer.launch"/>
+</launch>

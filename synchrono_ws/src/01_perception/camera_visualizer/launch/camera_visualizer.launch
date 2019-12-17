@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="camera_visualizer" type="camera_visualizer" name="camera_visualizer" output="screen" required="true"/>
+</launch>

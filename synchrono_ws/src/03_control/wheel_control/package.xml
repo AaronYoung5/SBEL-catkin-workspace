@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package format="2">
+  <name>wheel_control</name>
+  <version>0.0.0</version>
+  <description> wheel_control package </description>
+
+  <license>TODO</license>
+  <author>TODO</author>
+  <maintainer email="TODO@TODO.com">TODO</maintainer>
+
+  <depend>common_msgs</depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

@@ -4,7 +4,7 @@
 
   <!-- <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/> -->
 
-  <node pkg="wheel_control" name="joystick" type="joy_node" output="screen" required="true"/>
+  <node pkg="wheel_control" name="joystick" type="joystick" output="screen" required="true"/>
 
   <node pkg="wheel_control" name="wheel_control" type="wheel_control" output="screen" required="true"/>
 

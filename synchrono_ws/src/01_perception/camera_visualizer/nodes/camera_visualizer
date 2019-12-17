@@ -1,0 +1,29 @@
+#!/usr/bin/python
+import rospy
+import cv2 as cv
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
+
+bridge = CvBridge()
+
+def callback(data):
+
+    try:
+        frame = bridge.imgmsg_to_cv2(data, "rgba8")
+    except CvBridgeError:
+        print(e)
+
+    frame = cv.flip(frame, 0)
+
+    frame = cv.cvtColor(frame, cv.COLOR_BGRA2RGB)
+
+    cv.imshow('Cone Detection', frame)
+    cv.waitKey(1)
+
+def main():
+    rospy.init_node("camera_visualizer", anonymous=True)
+    rospy.Subscriber("/syn_interface/camera_sensor_2", Image, callback)
+    rospy.spin()
+
+if __name__ == "__main__":
+    main()

@@ -57,7 +57,7 @@ RUN ln -sfv /home/aaron/packages/flatbuffers/include/flatbuffers /usr/local/incl
 
 # RUN apt-get update; apt-get install -y python-pip python-dev; pip install --upgrade pip; pip install moviepy
 
-RUN apt-get install -y ros-melodic-movie-publisher python-pip; pip install moviepy
+RUN apt-get update; apt-get install -y jstest-gtk
 
 WORKDIR /home/aaron
 

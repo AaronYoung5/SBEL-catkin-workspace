@@ -22,7 +22,7 @@ private:
 
   float throttle_;
   float steering_;
-  float braking_;
+  float braking_ = 0;
 
   bool throttle_updated_, steering_updated_, braking_updated_;
 };
@@ -55,7 +55,7 @@ void SteeringWheel::steeringCallback(const sensor_msgs::Joy::ConstPtr &msg) {
   // steering_ = 0;
   // } else {
   // steering_updated_ = true;
-  steering_ = msg->axes[0] * -1;
+  steering_ = msg->axes[0];
   // }
 
   common_msgs::Control control;
