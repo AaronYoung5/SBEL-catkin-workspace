@@ -1,0 +1,27 @@
+chrono:
+  use_irrlicht:   true
+  hostname:       "localhost"
+  port:           "8080"
+
+# ros:
+
+
+# REQUIRED
+# sensorX_topic
+# sensorX_freq
+# sensorX_offset
+sensors:
+  camera0:        0 # 0 (camera), 1 (LiDAR), 2 (GPS), 3(IMU)
+  camera0_topic:  camera
+  camera0_freq:   60
+  camera0_offset: [1, 0, 1,  # x, y, z offset
+                0, 1, 0, 0] # Q_from_AngAxis(0, {1, 0, 0}))
+  camera0_width:  1280
+  camera0_height: 720
+  camera1:        0 # 0 (camera), 1 (LiDAR), 2 (GPS), 3(IMU)
+  camera1_topic:  camera2
+  camera1_freq:   60
+  camera1_offset: [0, -8, 1,  # x, y, z offset
+                1.57, 0, 0, 1] # Q_from_AngAxis(0, {1, 0, 0}))
+  camera1_width:  1280
+  camera1_height: 720
