@@ -47,16 +47,6 @@ RUN apt-get update; apt-get install -y sudo vim build-essential xterm x11-xserve
 
 RUN ln -sfv /home/aaron/packages/flatbuffers/include/flatbuffers /usr/local/include/flatbuffers
 
-# WORKDIR /home/aaron/Downloads/darknet/
-# COPY ./Makefile ./
-# RUN \
-# 	sed -i 's/GPU=.*/GPU=1/' Makefile && \
-# 	make
-# RUN rm /home/aaron/ros/synchrono_ws/src/01_perception/yolo_v3/nodes/libdarknet.so
-# RUN cp libdarknet.so /home/aaron/ros/synchrono_ws/src/01_perception/yolo_v3/nodes/
-
-# RUN apt-get update; apt-get install -y python-pip python-dev; pip install --upgrade pip; pip install moviepy
-
 RUN apt-get update; apt-get install -y jstest-gtk
 
 WORKDIR /home/aaron
