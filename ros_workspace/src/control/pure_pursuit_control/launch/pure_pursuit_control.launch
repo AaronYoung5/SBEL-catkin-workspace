@@ -1,9 +1,0 @@
-<launch>
-
-  <node pkg="pure_pursuit_control" type="pure_pursuit_control" name="pure_pursuit_control" output="screen" respawn="false" />
-
-  <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen"/>
-
-  <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
-
-</launch>

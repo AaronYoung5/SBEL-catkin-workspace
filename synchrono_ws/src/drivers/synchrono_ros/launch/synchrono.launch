@@ -1,0 +1,5 @@
+<launch>
+
+  <node pkg="synchrono" name="synchrono" type="synchrono" output="screen" required="true"/>
+
+</launch>
