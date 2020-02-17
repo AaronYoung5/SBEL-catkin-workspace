@@ -1,0 +1,40 @@
+namespace SynFlatBuffers.Interface;
+
+union Type { Camera, Lidar, GPS, IMU, Control, Time, Exit }
+
+table State {
+  state:Type;
+  time:Time;
+}
+
+table Camera {
+  height: int;
+  width: int;
+  bytes_per_pixel:int;
+  data:[ubyte];
+}
+
+table Lidar {
+  bytes_per_pixel: int;
+  data:[ubyte];
+}
+
+table GPS {}
+
+table IMU {}
+
+table Control {
+  throttle: float;
+  braking: float;
+  steering: float;
+}
+
+table Time {
+  t:float;
+}
+
+table Exit {
+  code:int;
+}
+
+root_type State;

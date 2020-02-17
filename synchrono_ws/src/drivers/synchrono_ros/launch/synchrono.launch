@@ -1,5 +1,5 @@
 <launch>
 
-  <node pkg="synchrono" name="synchrono" type="synchrono" output="screen" required="true"/>
+  <node pkg="synchrono_ros" name="synchrono_ros" type="synchrono_ros" output="screen" required="true"/>
 
 </launch>

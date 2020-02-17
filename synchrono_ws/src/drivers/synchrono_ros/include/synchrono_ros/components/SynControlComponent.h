@@ -1,27 +1,36 @@
-#include "synchrono_interface/SynComponent.h"
+#include "synchrono_ros/components/SynComponent.h"
 
-#include "synchrono_interface/SynInterfaceDriver.h"
+#include "synchrono_ros/flatbuffers/messages/SynControlMessage.h"
 
-#include "synchrono/flatbuffers/messages/SynControlMessage.h"
-
-namespace synchrono {
-namespace interface {
+#include <common_msgs/Control.h>
 
 class SynControlComponent : public SynComponent {
-  private:
-    SynInterfaceDriver& m_driver;
+public:
+  SynControlComponent(ros::NodeHandle &n, std::string id)
+      : SynComponent(SynComponent::SENDER, id),
+        sub_(n.subscribe(id, 1, &SynControlComponent::callback, this)) {}
 
-  public:
-    SynControlComponent(std::string id, SynInterfaceDriver& driver)
-        : SynComponent(SynComponent::RECEIVER, id), m_driver(driver) {}
+  void Advance(double time) {
+    std::shared_ptr<SynControlMessage::State> state =
+        std::static_pointer_cast<SynControlMessage::State>(m_msg->GetState());
 
-    void Advance(double time) {
-        std::shared_ptr<SynControlMessage::State> state =
-            std::static_pointer_cast<SynControlMessage::State>(m_msg->GetState());
-        m_driver.SetTargetThrottle(state->throttle);
-        m_driver.SetTargetSteering(state->steering);
-        m_driver.SetTargetBraking(state->braking);
-    }
+    state->throttle = driver_inputs_.throttle;
+    state->steering = driver_inputs_.steering;
+    state->braking = driver_inputs_.braking;
+  }
+
+  void callback(const common_msgs::Control::ConstPtr &msg) {
+    driver_inputs_.throttle = msg->throttle;
+    driver_inputs_.braking = msg->braking;
+    driver_inputs_.steering = msg->steering;
+  }
+
+private:
+  ros::Subscriber sub_;
+
+  struct DriverInputs {
+    float throttle = 0;
+    float braking = 0;
+    float steering = 0;
+  } driver_inputs_;
 };
-}  // namespace interface
-}  // namespace synchrono

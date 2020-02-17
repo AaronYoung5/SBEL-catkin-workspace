@@ -1,0 +1,23 @@
+include "SPAT.fbs";
+include "Agent.fbs";
+include "MAP.fbs";
+include "Interface.fbs";
+
+namespace SynFlatBuffers;
+
+union Type { Pointer, Agent.State, Interface.State, SPAT.State, MAP.State }
+
+table Buffer {
+  buffer:[Message];
+}
+
+table Message {
+  message:Type;
+  id:string;
+}
+
+table Pointer {
+  pointer:[ubyte];
+}
+
+root_type Buffer;

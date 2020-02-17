@@ -1,0 +1,62 @@
+include "SPAT.fbs";
+include "MAP.fbs";
+
+// Derived "class" of Agent
+// Creates a message for a traffic light
+namespace SynFlatBuffers.Agent.TrafficLight;
+
+table State {
+  time:double;
+
+  map:SynFlatBuffers.MAP.State;
+  spat:SynFlatBuffers.SPAT.State;
+}
+
+root_type State;
+
+// Derived "class" of Agent
+// Creates a sedan agent message
+namespace SynFlatBuffers.Agent.Sedan;
+
+table State {
+  time:double;
+
+  chassis:Pose;
+
+  wheel0:Pose;
+  wheel1:Pose;
+  wheel2:Pose;
+  wheel3:Pose;
+}
+
+root_type State;
+
+// Base "class"
+// Creates an agent message
+namespace SynFlatBuffers.Agent;
+
+union Type { Sedan.State, TrafficLight.State }
+
+table State {
+  message:Type;
+}
+
+//pose
+table Pose {
+  pos:Vector;
+  rot:Quaternion;
+}
+
+table Vector {
+  x:double;
+  y:double;
+  z:double;
+}
+
+table Quaternion {
+  e0:double;
+  e1:double;
+  e2:double;
+  e3:double;
+}
+root_type State;

@@ -1,0 +1,17 @@
+namespace SynFlatBuffers.SPAT;
+
+enum Color : byte { Green, Yellow, Red }
+
+table State {
+  time:double;
+  sender:double;
+  intersection:double;
+
+  lanes:[Lane];
+}
+
+table Lane {
+  color:Color;
+}
+
+root_type State;

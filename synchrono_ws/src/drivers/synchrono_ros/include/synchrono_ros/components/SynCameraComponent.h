@@ -1,41 +1,50 @@
 #pragma once
 
-#include "synchrono_interface/SynComponent.h"
+#include "synchrono_ros/components/SynComponent.h"
 
-#include "chrono_sensor/ChCameraSensor.h"
-#include "chrono_sensor/filters/ChFilterAccess.h"
+#include "synchrono_ros/flatbuffers/messages/SynCameraMessage.h"
 
-#include "synchrono/flatbuffers/messages/SynCameraMessage.h"
-
-using namespace chrono::sensor;
-
-namespace synchrono {
-namespace interface {
+#include <image_transport/image_transport.h>
+#include <sensor_msgs/Image.h>
+#include <sensor_msgs/image_encodings.h>
 
 static int num_cameras = 0;
 
 class SynCameraComponent : public SynComponent {
-  private:
-    std::shared_ptr<ChCameraSensor> m_camera;
+private:
+  image_transport::Publisher pub_;
 
-  public:
-    SynCameraComponent(std::shared_ptr<ChCameraSensor> camera)
-        : SynComponent(SynComponent::SENDER, camera->GetName(), camera->GetUpdateRate()), m_camera(camera) {
-        m_msg = std::make_shared<SynCameraMessage>(num_cameras++);
-    }
+public:
+  SynCameraComponent(ros::NodeHandle &n, std::string id)
+      : SynComponent(SynComponent::RECEIVER, id) {
+    image_transport::ImageTransport it(n);
+    pub_ = it.advertise(id, 1);
+    std::make_shared<SynCameraMessage>(num_cameras++);
+  }
 
-    void Advance(double time) {
-        std::shared_ptr<SynCameraMessage::State> state =
-            std::static_pointer_cast<SynCameraMessage::State>(m_msg->GetState());
+  void Advance(double time) {
+    std::shared_ptr<SynCameraMessage::State> state =
+        std::static_pointer_cast<SynCameraMessage::State>(m_msg->GetState());
 
-        UserR8BufferPtr buffer_ptr = m_camera->GetMostRecentBuffer<UserR8BufferPtr>();
-        state->height = buffer_ptr->Height;
-        state->width = buffer_ptr->Width;
-        state->bytes_per_pixel = sizeof(PixelRGBA8);
-        int size = state->height * state->width * state->bytes_per_pixel;
-        state->data.resize(size);
-        memcpy(state->data.data(), buffer_ptr->Buffer.get(), size);
-    }
+    sensor_msgs::Image msg;
+
+    msg.header.stamp = ros::Time::now();
+    msg.header.frame_id = "base_link";
+
+    msg.height = state->height;
+    msg.width = state->width;
+
+    msg.encoding = sensor_msgs::image_encodings::RGBA8;
+
+    int num = 1; // for endianness detection
+    msg.is_bigendian = !(*(char *)&num == 1);
+
+    msg.step = state->bytes_per_pixel * msg.width;
+
+    size_t size = msg.height * msg.step;
+    msg.data.resize(size);
+    memcpy((uint8_t *)(&msg.data[0]), state->data.data(), size);
+
+    pub_.publish(msg);
+  }
 };
-}  // namespace interface
-}  // namespace synchrono
