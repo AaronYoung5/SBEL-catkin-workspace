@@ -1,0 +1,252 @@
+#!/usr/bin/python
+
+import socket
+# import socket.timeout as TimeoutException
+import flatbuffers
+import struct
+import cv2 as cv
+import numpy as np
+import ctypes
+import struct
+import sensor_msgs.point_cloud2 as pc2
+import InterfaceMessage.Camera
+import InterfaceMessage.Message
+import InterfaceMessage.Lidar
+import InterfaceMessage.Messages
+import InterfaceMessage.Time
+import InterfaceMessage.Type
+import InterfaceMessage.Control
+import InterfaceMessage.IMU
+import InterfaceMessage.GPS
+
+import rospy
+from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud2, PointField
+from geometry_msgs.msg import Vector3
+from cv_bridge import CvBridge, CvBridgeError
+from time import sleep
+from rosgraph_msgs.msg import Clock
+
+class ROSInterface():
+    def __init__(self, hostname='localhost', port=8080):
+        self.sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Connect the socket to the port where the server is listening
+        self.server_address = (hostname, port)
+        # print(sys.stderr, 'connecting to %s port %s' % server_address)
+        trys = 0
+        connected = False
+        while trys < 7 and not connected:
+            try:
+                self.sock.connect(self.server_address)
+            except Exception:
+                print("Connection Attempt #" + str(trys) + ": Failed. Trying Again.")
+                trys += 1
+                sleep(1)
+                continue
+            connected = True
+        if not connected:
+            print("Failed to connect. Exitting...")
+            exit()
+        else:
+            print("Connection Attempt #" + str(trys) + ": Succeeded.")
+
+        self.cam_pub = rospy.Publisher('camera', Image, queue_size=1)
+        self.lidar_pub = rospy.Publisher('lidar', PointCloud2, queue_size=1)
+        self.gps_pub = rospy.Publisher('gps', NavSatFix, queue_size=1)
+        self.imu_pub = rospy.Publisher('imu', Imu, queue_size=1)
+        self.time_pub = rospy.Publisher('/clock', Clock, queue_size=1)
+        self.bridge = CvBridge()
+        self.sock.settimeout(2)
+        self.t = 0
+
+        self.imu_seq = 0
+        self.lidar_seq = 0
+        self.gps_seq = 0
+
+
+    def recvall(self, n):
+        # Helper function to recv n bytes or return None if EOF is hit
+        data = bytearray()
+        while len(data) < n:
+            try:
+                packet = self.sock.recv(n - len(data))
+            except Exception:
+                print("Timeout!!! Exitting...")
+                exit()
+            if not packet:
+                return None
+            data.extend(packet)
+        return data
+
+    def get_data_byte_offset(self, data):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(data._tab.Offset(4))
+        offset = data._tab.Vector(o) if o != 0 else 0
+        return offset
+
+    def start(self):
+        self.builder = flatbuffers.Builder(1024)
+        self.messages = []
+
+    def add_control(self, throttle, steering, braking):
+        InterfaceMessage.Control.ControlStart(self.builder)
+        InterfaceMessage.Control.ControlAddThrottle(self.builder, throttle)
+        InterfaceMessage.Control.ControlAddBraking(self.builder, braking)
+        InterfaceMessage.Control.ControlAddSteering(self.builder, steering)
+        control = InterfaceMessage.Control.ControlEnd(self.builder)
+
+        self.messages.append(control)
+
+    def finish(self):
+        InterfaceMessage.Messages.MessagesStartMessagesVector(self.builder, len(self.messages))
+        for m in reversed(self.messages):
+            self.builder.PrependUOffsetTRelative(m)
+        message_vector = self.builder.EndVector(len(self.messages))
+        InterfaceMessage.Messages.MessagesStart(self.builder)
+        InterfaceMessage.Messages.MessagesAddMessages(self.builder, message_vector)
+        messages = InterfaceMessage.Messages.MessagesEnd(self.builder)
+        self.builder.FinishSizePrefixed(message_vector)
+        self.buf = self.builder.Output()
+
+    def send(self):
+        sock.sendall(self.buf)
+
+    def receive(self):
+        data = self.recvall(4)
+        if data == None:
+            return
+        size = struct.unpack("<I", bytearray(data))[0]
+        if size == 0:
+            return
+        self.buf = (self.recvall(size))
+        self.buf = bytearray(self.buf)
+
+    def analyze(self):
+        if len(self.buf) < 4:
+            return
+
+        msgs = InterfaceMessage.Messages.Messages.GetRootAsMessages(self.buf, 0)
+
+        # print(msgs.MessagesLength())
+        if msgs.MessagesLength() == 0:
+            return
+        for i in range(msgs.MessagesLength()):
+            msg = msgs.Messages(i)
+            union_type = msg.MessageType()
+
+            if union_type == InterfaceMessage.Type.Type().Camera:
+                # print("Camera")
+                cam = InterfaceMessage.Camera.Camera()
+                cam.Init(msg.Message().Bytes, msg.Message().Pos)
+                pts = cam.DataAsNumpy()
+                pts = pts.reshape((cam.Height(), cam.Width(), 4))
+
+                if pts.shape[0] == 0:
+                    return
+
+                # pts = cv.cvtColor(pts, cv.COLOR_BGRA2RGBA)
+                # pts = cv.flip(pts, 0)
+                # cv.imshow('Frame', pts)
+                # key = cv.waitKey()
+                # if key == 113:
+                #     exit(0)
+
+                image_message = self.bridge.cv2_to_imgmsg(pts, encoding="passthrough")
+                self.cam_pub.publish(image_message)
+            elif union_type == InterfaceMessage.Type.Type().Lidar:
+                # print("Lidar")
+                lidar = InterfaceMessage.Lidar.Lidar()
+                lidar.Init(msg.Message().Bytes, msg.Message().Pos)
+                cloud_arr = lidar.DataAsNumpy()
+                cloud_arr = cloud_arr.tobytes()
+
+                # make it 2d (even if height will be 1)
+                cloud_arr = np.atleast_2d(cloud_arr)
+
+                lidar_msg = PointCloud2()
+                lidar_msg.header.stamp = self.t
+                lidar_msg.header.frame_id = "/base_link"
+                lidar_msg.header.seq = self.lidar_seq
+                self.lidar_seq += 1
+
+                lidar_msg.height = 1
+                lidar_msg.width = lidar.Height() * lidar.Width()
+                lidar_msg.fields = [
+                    PointField('x', 0, PointField.FLOAT32, 1),
+                    PointField('y', 4, PointField.FLOAT32, 1),
+                    PointField('z', 8, PointField.FLOAT32, 1),
+                    PointField('i', 12, PointField.FLOAT32, 1)
+                ]
+                lidar_msg.is_bigendian = True # assumption
+                lidar_msg.point_step = 16
+                lidar_msg.row_step = lidar_msg.point_step*lidar_msg.width
+                # cloud_msg.is_dense = all([np.isfinite(cloud_arr[fname]).all() for fname in cloud_arr.dtype.names])
+                lidar_msg.is_dense = True
+                lidar_msg.data = cloud_arr.tostring()
+                self.lidar_pub.publish(lidar_msg)
+
+            elif union_type == InterfaceMessage.Type.Type().GPS:
+                # print("GPS")
+                gps = InterfaceMessage.GPS.GPS()
+                gps.Init(msg.Message().Bytes, msg.Message().Pos)
+
+                gps_msg = NavSatFix()
+
+                gps_msg.header.stamp = self.t
+                gps_msg.header.frame_id = "/base_link"
+                gps_msg.header.seq = self.gps_seq
+                self.gps_seq += 1
+
+                gps_msg.latitude = gps.Latitude()
+                gps_msg.longitude = gps.Longitude()
+                gps_msg.altitude = gps.Altitude()
+
+                self.gps_pub.publish(gps_msg)
+            elif union_type == InterfaceMessage.Type.Type().IMU:
+                # print("IMU")
+                imu = InterfaceMessage.IMU.IMU()
+                imu.Init(msg.Message().Bytes, msg.Message().Pos)
+
+                imu_msg = Imu()
+                imu_msg.header.stamp = self.t
+                imu_msg.header.frame_id = "/base_link"
+                imu_msg.header.seq = self.imu_seq
+                self.imu_seq += 1
+
+                angular_velocity = Vector3()
+                angular_velocity.x = imu.Roll(); angular_velocity.y = imu.Pitch(); angular_velocity.z = imu.Yaw();
+
+                linear_acceleration = Vector3()
+                linear_acceleration.x = imu.Accel(0); linear_acceleration.y = imu.Accel(1);linear_acceleration.z = imu.Accel(2);
+
+                imu_msg.angular_velocity = angular_velocity
+                imu_msg.linear_acceleration = linear_acceleration
+
+                self.imu_pub.publish(imu_msg)
+
+            elif union_type == InterfaceMessage.Type.Type().Time:
+                time = InterfaceMessage.Time.Time()
+                time.Init(msg.Message().Bytes, msg.Message().Pos)
+                self.t = rospy.Time()
+                duration = rospy.Duration(time.T())
+                self.t.secs = duration.secs
+                self.t.nsecs = duration.nsecs
+
+                time_msg = Clock()
+                time_msg.clock = self.t
+
+                self.time_pub.publish(time_msg)
+
+            else:
+                pass
+
+    def __del__(self):
+        # self.sock.shutdown()
+        self.sock.close()
+
+
+if __name__ == '__main__':
+    rospy.init_node("ros_interface", anonymous=True)
+    interface = ROSInterface()
+
+    while True:
+        interface.receive()
+        interface.analyze()

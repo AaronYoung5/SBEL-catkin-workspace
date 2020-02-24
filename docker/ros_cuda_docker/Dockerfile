@@ -85,6 +85,8 @@ WORKDIR /home/aaron
 
 ENV LD_LIBRARY_PATH = $LD_LIBRARY_PATH:/usr/local/cuda/lib64
 
+RUN apt-get update; apt-get install -y ros-melodic-flatbuffers python-pip libgl1-mesa-glx ros-melodic-tf2-web-republisher ros-melodic-web-video-server ros-melodic-roswww ros-melodic-depthcloud-encoder ros-melodic-rosbridge-server ros-melodic-interactive-marker-proxy
+
 COPY ./ros_entrypoint.sh /
 
 CMD tail -f /dev/null

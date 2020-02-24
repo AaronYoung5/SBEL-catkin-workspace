@@ -1,0 +1,13 @@
+<launch>
+  <arg name="record_cam" default="false"/>
+  <arg name="record_lidar" default="false"/>
+  <arg name="record_gps" default="false"/>
+  <arg name="record_imu" default="false"/>
+
+  <node pkg="ros_interface" type="ros_interface" name="ros_interface" output="screen" required="true"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_record_cam" if="$(arg record_cam)" args="record /camera -O /home/aaron/data/evGrand_Prix_sim_camera.bag"/>
+  <node pkg="rosbag" type="record" name="rosbag_record_lidar" if="$(arg record_lidar)" args="record /lidar -O /home/aaron/data/evGrand_Prix_sim_lidar.bag"/>
+  <node pkg="rosbag" type="record" name="rosbag_record_gps" if="$(arg record_gps)" args="record /gps -O /home/aaron/data/evGrand_Prix_sim_gps.bag"/>
+  <node pkg="rosbag" type="record" name="rosbag_record_imu" if="$(arg record_imu)" args="record /imu -O /home/aaron/data/evGrand_Prix_sim_imu.bag"/>
+</launch>

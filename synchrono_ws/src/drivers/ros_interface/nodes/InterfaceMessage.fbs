@@ -1,0 +1,56 @@
+namespace InterfaceMessage;
+
+union Type { Camera, Lidar, GPS, IMU, Control, Time, Exit }
+
+table Messages {
+  messages:[Message];
+  time:Message;
+}
+
+table Message {
+  message:Type;
+  id:string;
+}
+
+table Camera {
+  height: int;
+  width: int;
+  bytes_per_pixel:int;
+  data:[ubyte];
+}
+
+table Lidar {
+  height: int;
+  width: int;
+  bytes_per_pixel:int;
+  data:[ubyte];
+}
+
+table GPS {
+  latitude: double;
+  longitude: double;
+  altitude: double;
+}
+
+table IMU {
+  accel: [double];
+  roll: double;
+  pitch: double;
+  yaw: double;
+}
+
+table Control {
+  throttle: float;
+  steering: float;
+  braking: float;
+}
+
+table Time {
+  t:float;
+}
+
+table Exit {
+  code:int;
+}
+
+root_type Messages;
