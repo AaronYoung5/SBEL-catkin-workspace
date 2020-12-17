@@ -1,0 +1,5 @@
+<launch>
+  <arg name="image_topic" default="/syn_interface/camera_sensor_1"/>
+
+  <node pkg="yolo_v3" type="yolo_v3" name="yolo_v3" output="screen" required="true"/>
+</launch>

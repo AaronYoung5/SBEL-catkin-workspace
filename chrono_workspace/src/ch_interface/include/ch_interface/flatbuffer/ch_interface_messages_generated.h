@@ -8,6 +8,11 @@
 
 namespace ChInterfaceMessage {
 
+<<<<<<< HEAD
+=======
+struct Messages;
+
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 struct Message;
 
 struct Camera;
@@ -24,10 +29,13 @@ struct Time;
 
 struct Exit;
 
+<<<<<<< HEAD
 struct Config;
 
 struct Transport;
 
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 enum Type {
   Type_NONE = 0,
   Type_Camera = 1,
@@ -37,12 +45,20 @@ enum Type {
   Type_Control = 5,
   Type_Time = 6,
   Type_Exit = 7,
+<<<<<<< HEAD
   Type_Config = 8,
   Type_MIN = Type_NONE,
   Type_MAX = Type_Config
 };
 
 inline const Type (&EnumValuesType())[9] {
+=======
+  Type_MIN = Type_NONE,
+  Type_MAX = Type_Exit
+};
+
+inline const Type (&EnumValuesType())[8] {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   static const Type values[] = {
     Type_NONE,
     Type_Camera,
@@ -51,14 +67,22 @@ inline const Type (&EnumValuesType())[9] {
     Type_IMU,
     Type_Control,
     Type_Time,
+<<<<<<< HEAD
     Type_Exit,
     Type_Config
+=======
+    Type_Exit
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   };
   return values;
 }
 
 inline const char * const *EnumNamesType() {
+<<<<<<< HEAD
   static const char * const names[] = {
+=======
+  static const char * const names[9] = {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     "NONE",
     "Camera",
     "Lidar",
@@ -67,14 +91,21 @@ inline const char * const *EnumNamesType() {
     "Control",
     "Time",
     "Exit",
+<<<<<<< HEAD
     "Config",
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameType(Type e) {
+<<<<<<< HEAD
   if (e < Type_NONE || e > Type_Config) return "";
+=======
+  if (e < Type_NONE || e > Type_Exit) return "";
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   const size_t index = static_cast<size_t>(e);
   return EnumNamesType()[index];
 }
@@ -83,6 +114,7 @@ template<typename T> struct TypeTraits {
   static const Type enum_value = Type_NONE;
 };
 
+<<<<<<< HEAD
 template<> struct TypeTraits<Camera> {
   static const Type enum_value = Type_Camera;
 };
@@ -118,20 +150,125 @@ template<> struct TypeTraits<Config> {
 bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type);
 bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types);
 
+=======
+template<> struct TypeTraits<ChInterfaceMessage::Camera> {
+  static const Type enum_value = Type_Camera;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::Lidar> {
+  static const Type enum_value = Type_Lidar;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::GPS> {
+  static const Type enum_value = Type_GPS;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::IMU> {
+  static const Type enum_value = Type_IMU;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::Control> {
+  static const Type enum_value = Type_Control;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::Time> {
+  static const Type enum_value = Type_Time;
+};
+
+template<> struct TypeTraits<ChInterfaceMessage::Exit> {
+  static const Type enum_value = Type_Exit;
+};
+
+bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type);
+bool VerifyTypeVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types);
+
+struct Messages FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_MESSAGES = 4,
+    VT_TIME = 6
+  };
+  const flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *messages() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *>(VT_MESSAGES);
+  }
+  const ChInterfaceMessage::Message *time() const {
+    return GetPointer<const ChInterfaceMessage::Message *>(VT_TIME);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, VT_MESSAGES) &&
+           verifier.VerifyVector(messages()) &&
+           verifier.VerifyVectorOfTables(messages()) &&
+           VerifyOffset(verifier, VT_TIME) &&
+           verifier.VerifyTable(time()) &&
+           verifier.EndTable();
+  }
+};
+
+struct MessagesBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_messages(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>>> messages) {
+    fbb_.AddOffset(Messages::VT_MESSAGES, messages);
+  }
+  void add_time(flatbuffers::Offset<ChInterfaceMessage::Message> time) {
+    fbb_.AddOffset(Messages::VT_TIME, time);
+  }
+  explicit MessagesBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  MessagesBuilder &operator=(const MessagesBuilder &);
+  flatbuffers::Offset<Messages> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<Messages>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<Messages> CreateMessages(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChInterfaceMessage::Message>>> messages = 0,
+    flatbuffers::Offset<ChInterfaceMessage::Message> time = 0) {
+  MessagesBuilder builder_(_fbb);
+  builder_.add_time(time);
+  builder_.add_messages(messages);
+  return builder_.Finish();
+}
+
+inline flatbuffers::Offset<Messages> CreateMessagesDirect(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    const std::vector<flatbuffers::Offset<ChInterfaceMessage::Message>> *messages = nullptr,
+    flatbuffers::Offset<ChInterfaceMessage::Message> time = 0) {
+  auto messages__ = messages ? _fbb.CreateVector<flatbuffers::Offset<ChInterfaceMessage::Message>>(*messages) : 0;
+  return ChInterfaceMessage::CreateMessages(
+      _fbb,
+      messages__,
+      time);
+}
+
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_MESSAGE_TYPE = 4,
     VT_MESSAGE = 6,
+<<<<<<< HEAD
     VT_TIME = 8,
     VT_ID = 10
   };
   Type message_type() const {
     return static_cast<Type>(GetField<uint8_t>(VT_MESSAGE_TYPE, 0));
+=======
+    VT_ID = 8
+  };
+  ChInterfaceMessage::Type message_type() const {
+    return static_cast<ChInterfaceMessage::Type>(GetField<uint8_t>(VT_MESSAGE_TYPE, 0));
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   }
   const void *message() const {
     return GetPointer<const void *>(VT_MESSAGE);
   }
   template<typename T> const T *message_as() const;
+<<<<<<< HEAD
   const Camera *message_as_Camera() const {
     return message_type() == Type_Camera ? static_cast<const Camera *>(message()) : nullptr;
   }
@@ -158,6 +295,28 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const Time *time() const {
     return GetPointer<const Time *>(VT_TIME);
+=======
+  const ChInterfaceMessage::Camera *message_as_Camera() const {
+    return message_type() == ChInterfaceMessage::Type_Camera ? static_cast<const ChInterfaceMessage::Camera *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::Lidar *message_as_Lidar() const {
+    return message_type() == ChInterfaceMessage::Type_Lidar ? static_cast<const ChInterfaceMessage::Lidar *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::GPS *message_as_GPS() const {
+    return message_type() == ChInterfaceMessage::Type_GPS ? static_cast<const ChInterfaceMessage::GPS *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::IMU *message_as_IMU() const {
+    return message_type() == ChInterfaceMessage::Type_IMU ? static_cast<const ChInterfaceMessage::IMU *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::Control *message_as_Control() const {
+    return message_type() == ChInterfaceMessage::Type_Control ? static_cast<const ChInterfaceMessage::Control *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::Time *message_as_Time() const {
+    return message_type() == ChInterfaceMessage::Type_Time ? static_cast<const ChInterfaceMessage::Time *>(message()) : nullptr;
+  }
+  const ChInterfaceMessage::Exit *message_as_Exit() const {
+    return message_type() == ChInterfaceMessage::Type_Exit ? static_cast<const ChInterfaceMessage::Exit *>(message()) : nullptr;
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   }
   const flatbuffers::String *id() const {
     return GetPointer<const flatbuffers::String *>(VT_ID);
@@ -167,14 +326,18 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyField<uint8_t>(verifier, VT_MESSAGE_TYPE) &&
            VerifyOffset(verifier, VT_MESSAGE) &&
            VerifyType(verifier, message(), message_type()) &&
+<<<<<<< HEAD
            VerifyOffset(verifier, VT_TIME) &&
            verifier.VerifyTable(time()) &&
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
            VerifyOffset(verifier, VT_ID) &&
            verifier.VerifyString(id()) &&
            verifier.EndTable();
   }
 };
 
+<<<<<<< HEAD
 template<> inline const Camera *Message::message_as<Camera>() const {
   return message_as_Camera();
 }
@@ -211,14 +374,51 @@ struct MessageBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
   void add_message_type(Type message_type) {
+=======
+template<> inline const ChInterfaceMessage::Camera *Message::message_as<ChInterfaceMessage::Camera>() const {
+  return message_as_Camera();
+}
+
+template<> inline const ChInterfaceMessage::Lidar *Message::message_as<ChInterfaceMessage::Lidar>() const {
+  return message_as_Lidar();
+}
+
+template<> inline const ChInterfaceMessage::GPS *Message::message_as<ChInterfaceMessage::GPS>() const {
+  return message_as_GPS();
+}
+
+template<> inline const ChInterfaceMessage::IMU *Message::message_as<ChInterfaceMessage::IMU>() const {
+  return message_as_IMU();
+}
+
+template<> inline const ChInterfaceMessage::Control *Message::message_as<ChInterfaceMessage::Control>() const {
+  return message_as_Control();
+}
+
+template<> inline const ChInterfaceMessage::Time *Message::message_as<ChInterfaceMessage::Time>() const {
+  return message_as_Time();
+}
+
+template<> inline const ChInterfaceMessage::Exit *Message::message_as<ChInterfaceMessage::Exit>() const {
+  return message_as_Exit();
+}
+
+struct MessageBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_message_type(ChInterfaceMessage::Type message_type) {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     fbb_.AddElement<uint8_t>(Message::VT_MESSAGE_TYPE, static_cast<uint8_t>(message_type), 0);
   }
   void add_message(flatbuffers::Offset<void> message) {
     fbb_.AddOffset(Message::VT_MESSAGE, message);
   }
+<<<<<<< HEAD
   void add_time(flatbuffers::Offset<Time> time) {
     fbb_.AddOffset(Message::VT_TIME, time);
   }
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   void add_id(flatbuffers::Offset<flatbuffers::String> id) {
     fbb_.AddOffset(Message::VT_ID, id);
   }
@@ -236,6 +436,7 @@ struct MessageBuilder {
 
 inline flatbuffers::Offset<Message> CreateMessage(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     Type message_type = Type_NONE,
     flatbuffers::Offset<void> message = 0,
     flatbuffers::Offset<Time> time = 0,
@@ -243,6 +444,13 @@ inline flatbuffers::Offset<Message> CreateMessage(
   MessageBuilder builder_(_fbb);
   builder_.add_id(id);
   builder_.add_time(time);
+=======
+    ChInterfaceMessage::Type message_type = ChInterfaceMessage::Type_NONE,
+    flatbuffers::Offset<void> message = 0,
+    flatbuffers::Offset<flatbuffers::String> id = 0) {
+  MessageBuilder builder_(_fbb);
+  builder_.add_id(id);
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   builder_.add_message(message);
   builder_.add_message_type(message_type);
   return builder_.Finish();
@@ -250,16 +458,24 @@ inline flatbuffers::Offset<Message> CreateMessage(
 
 inline flatbuffers::Offset<Message> CreateMessageDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     Type message_type = Type_NONE,
     flatbuffers::Offset<void> message = 0,
     flatbuffers::Offset<Time> time = 0,
+=======
+    ChInterfaceMessage::Type message_type = ChInterfaceMessage::Type_NONE,
+    flatbuffers::Offset<void> message = 0,
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     const char *id = nullptr) {
   auto id__ = id ? _fbb.CreateString(id) : 0;
   return ChInterfaceMessage::CreateMessage(
       _fbb,
       message_type,
       message,
+<<<<<<< HEAD
       time,
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
       id__);
 }
 
@@ -434,8 +650,30 @@ inline flatbuffers::Offset<IMU> CreateIMU(
 }
 
 struct Control FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+<<<<<<< HEAD
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
+=======
+  enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
+    VT_THROTTLE = 4,
+    VT_STEERING = 6,
+    VT_BRAKING = 8
+  };
+  float throttle() const {
+    return GetField<float>(VT_THROTTLE, 0.0f);
+  }
+  float steering() const {
+    return GetField<float>(VT_STEERING, 0.0f);
+  }
+  float braking() const {
+    return GetField<float>(VT_BRAKING, 0.0f);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<float>(verifier, VT_THROTTLE) &&
+           VerifyField<float>(verifier, VT_STEERING) &&
+           VerifyField<float>(verifier, VT_BRAKING) &&
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
            verifier.EndTable();
   }
 };
@@ -443,6 +681,18 @@ struct Control FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct ControlBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+<<<<<<< HEAD
+=======
+  void add_throttle(float throttle) {
+    fbb_.AddElement<float>(Control::VT_THROTTLE, throttle, 0.0f);
+  }
+  void add_steering(float steering) {
+    fbb_.AddElement<float>(Control::VT_STEERING, steering, 0.0f);
+  }
+  void add_braking(float braking) {
+    fbb_.AddElement<float>(Control::VT_BRAKING, braking, 0.0f);
+  }
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   explicit ControlBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
@@ -456,8 +706,19 @@ struct ControlBuilder {
 };
 
 inline flatbuffers::Offset<Control> CreateControl(
+<<<<<<< HEAD
     flatbuffers::FlatBufferBuilder &_fbb) {
   ControlBuilder builder_(_fbb);
+=======
+    flatbuffers::FlatBufferBuilder &_fbb,
+    float throttle = 0.0f,
+    float steering = 0.0f,
+    float braking = 0.0f) {
+  ControlBuilder builder_(_fbb);
+  builder_.add_braking(braking);
+  builder_.add_steering(steering);
+  builder_.add_throttle(throttle);
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   return builder_.Finish();
 }
 
@@ -541,6 +802,7 @@ inline flatbuffers::Offset<Exit> CreateExit(
   return builder_.Finish();
 }
 
+<<<<<<< HEAD
 struct Config FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_TRANSPORTS_TYPE = 4,
@@ -790,12 +1052,15 @@ inline flatbuffers::Offset<Transport> CreateTransportDirect(
       offset__);
 }
 
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type type) {
   switch (type) {
     case Type_NONE: {
       return true;
     }
     case Type_Camera: {
+<<<<<<< HEAD
       auto ptr = reinterpret_cast<const Camera *>(obj);
       return verifier.VerifyTable(ptr);
     }
@@ -825,6 +1090,33 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
     }
     case Type_Config: {
       auto ptr = reinterpret_cast<const Config *>(obj);
+=======
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::Camera *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Lidar: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::Lidar *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_GPS: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::GPS *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_IMU: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::IMU *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Control: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::Control *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Time: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::Time *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Exit: {
+      auto ptr = reinterpret_cast<const ChInterfaceMessage::Exit *>(obj);
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
       return verifier.VerifyTable(ptr);
     }
     default: return false;

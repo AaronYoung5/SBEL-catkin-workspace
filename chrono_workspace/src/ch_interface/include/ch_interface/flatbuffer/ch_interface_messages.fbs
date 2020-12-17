@@ -1,10 +1,22 @@
 namespace ChInterfaceMessage;
 
+<<<<<<< HEAD
 union Type { Camera, Lidar, GPS, IMU, Control, Time, Exit, Config }
 
 table Message {
   message:Type;
   time:Time;
+=======
+union Type { Camera, Lidar, GPS, IMU, Control, Time, Exit }
+
+table Messages {
+  messages:[Message];
+  time:Message;
+}
+
+table Message {
+  message:Type;
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   id:string;
 }
 
@@ -21,7 +33,15 @@ table GPS {}
 
 table IMU {}
 
+<<<<<<< HEAD
 table Control {}
+=======
+table Control {
+  throttle: float;
+  steering: float;
+  braking: float;
+}
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 
 table Time {
   t:float;
@@ -31,6 +51,7 @@ table Exit {
   code:int;
 }
 
+<<<<<<< HEAD
 table Config {
   transports:[Type];
   freq:int;
@@ -44,4 +65,6 @@ table Transport {
   offset:[float];
 }
 
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 root_type Message;

@@ -1,6 +1,10 @@
 chrono:
   use_irrlicht:   true
+<<<<<<< HEAD
   hostname:       "localhost"
+=======
+  hostname:       "ike.sbel.wisc.edu"
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   port:           "8080"
 
 # ros:

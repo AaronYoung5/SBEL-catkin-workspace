@@ -10,6 +10,11 @@
 #include "sensor_msgs/PointCloud2.h"
 #include "sensor_msgs/image_encodings.h"
 
+<<<<<<< HEAD
+=======
+#include "common_msgs/Control.h"
+
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 #include "ch_interface/transport/ch_transport_type.h"
 
 using namespace chrono::transport;
@@ -48,5 +53,29 @@ toTime(const ChInterfaceMessage::Time *time) {
 
   return msg;
 }
+<<<<<<< HEAD
+=======
+
+static inline void fromControl(const common_msgs::Control::ConstPtr &msg) {
+  // flatbuffers::FlatBufferBuilder builder;
+  //
+  // flatbuffers::Offset<ChInterfaceMessage::Control> control =
+  //     ChInterfaceMessage::CreateControl(builder, msg->throttle, msg->steering,
+  //                                       msg->braking);
+  // flatbuffers::Offset<ChInterfaceMessage::Message> message =
+  //     ChInterfaceMessage::CreateMessage(
+  //         builder, ChInterfaceMessage::Type_Control, control.Union());
+  //
+  // builder.FinishSizePrefixed(message);
+  //
+  // // Get size of FlatBuffer message in bytes
+  // int32_t size = builder.GetSize();
+  // // Get buffer pointer from message object
+  // uint8_t *buffer = builder.GetBufferPointer();
+  // // Send the message
+  // socket_.async_send(boost::asio::buffer(buffer, size),
+  //                    [&](const boost::system::error_code &ec, size_t size) {});
+}
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
 } // namespace flatbuffer
 } // namespace chrono

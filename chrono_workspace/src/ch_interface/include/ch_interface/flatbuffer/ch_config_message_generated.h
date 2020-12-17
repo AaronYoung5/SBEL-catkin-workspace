@@ -42,7 +42,11 @@ inline const Type (&EnumValuesType())[5] {
 }
 
 inline const char * const *EnumNamesType() {
+<<<<<<< HEAD
   static const char * const names[] = {
+=======
+  static const char * const names[6] = {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     "NONE",
     "Camera",
     "Lidar",
@@ -63,6 +67,7 @@ template<typename T> struct TypeTraits {
   static const Type enum_value = Type_NONE;
 };
 
+<<<<<<< HEAD
 template<> struct TypeTraits<Camera> {
   static const Type enum_value = Type_Camera;
 };
@@ -76,6 +81,21 @@ template<> struct TypeTraits<GPS> {
 };
 
 template<> struct TypeTraits<IMU> {
+=======
+template<> struct TypeTraits<ChConfigMessage::Camera> {
+  static const Type enum_value = Type_Camera;
+};
+
+template<> struct TypeTraits<ChConfigMessage::Lidar> {
+  static const Type enum_value = Type_Lidar;
+};
+
+template<> struct TypeTraits<ChConfigMessage::GPS> {
+  static const Type enum_value = Type_GPS;
+};
+
+template<> struct TypeTraits<ChConfigMessage::IMU> {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   static const Type enum_value = Type_IMU;
 };
 
@@ -86,8 +106,13 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_SENSORS = 4
   };
+<<<<<<< HEAD
   const flatbuffers::Vector<flatbuffers::Offset<Sensor>> *sensors() const {
     return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<Sensor>> *>(VT_SENSORS);
+=======
+  const flatbuffers::Vector<flatbuffers::Offset<ChConfigMessage::Sensor>> *sensors() const {
+    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<ChConfigMessage::Sensor>> *>(VT_SENSORS);
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -101,7 +126,11 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 struct MessageBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+<<<<<<< HEAD
   void add_sensors(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<Sensor>>> sensors) {
+=======
+  void add_sensors(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChConfigMessage::Sensor>>> sensors) {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     fbb_.AddOffset(Message::VT_SENSORS, sensors);
   }
   explicit MessageBuilder(flatbuffers::FlatBufferBuilder &_fbb)
@@ -118,7 +147,11 @@ struct MessageBuilder {
 
 inline flatbuffers::Offset<Message> CreateMessage(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<Sensor>>> sensors = 0) {
+=======
+    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<ChConfigMessage::Sensor>>> sensors = 0) {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   MessageBuilder builder_(_fbb);
   builder_.add_sensors(sensors);
   return builder_.Finish();
@@ -126,8 +159,13 @@ inline flatbuffers::Offset<Message> CreateMessage(
 
 inline flatbuffers::Offset<Message> CreateMessageDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     const std::vector<flatbuffers::Offset<Sensor>> *sensors = nullptr) {
   auto sensors__ = sensors ? _fbb.CreateVector<flatbuffers::Offset<Sensor>>(*sensors) : 0;
+=======
+    const std::vector<flatbuffers::Offset<ChConfigMessage::Sensor>> *sensors = nullptr) {
+  auto sensors__ = sensors ? _fbb.CreateVector<flatbuffers::Offset<ChConfigMessage::Sensor>>(*sensors) : 0;
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   return ChConfigMessage::CreateMessage(
       _fbb,
       sensors__);
@@ -141,13 +179,19 @@ struct Sensor FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_FREQ = 10,
     VT_OFFSET = 12
   };
+<<<<<<< HEAD
   Type sensor_type() const {
     return static_cast<Type>(GetField<uint8_t>(VT_SENSOR_TYPE, 0));
+=======
+  ChConfigMessage::Type sensor_type() const {
+    return static_cast<ChConfigMessage::Type>(GetField<uint8_t>(VT_SENSOR_TYPE, 0));
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   }
   const void *sensor() const {
     return GetPointer<const void *>(VT_SENSOR);
   }
   template<typename T> const T *sensor_as() const;
+<<<<<<< HEAD
   const Camera *sensor_as_Camera() const {
     return sensor_type() == Type_Camera ? static_cast<const Camera *>(sensor()) : nullptr;
   }
@@ -159,6 +203,19 @@ struct Sensor FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   const IMU *sensor_as_IMU() const {
     return sensor_type() == Type_IMU ? static_cast<const IMU *>(sensor()) : nullptr;
+=======
+  const ChConfigMessage::Camera *sensor_as_Camera() const {
+    return sensor_type() == ChConfigMessage::Type_Camera ? static_cast<const ChConfigMessage::Camera *>(sensor()) : nullptr;
+  }
+  const ChConfigMessage::Lidar *sensor_as_Lidar() const {
+    return sensor_type() == ChConfigMessage::Type_Lidar ? static_cast<const ChConfigMessage::Lidar *>(sensor()) : nullptr;
+  }
+  const ChConfigMessage::GPS *sensor_as_GPS() const {
+    return sensor_type() == ChConfigMessage::Type_GPS ? static_cast<const ChConfigMessage::GPS *>(sensor()) : nullptr;
+  }
+  const ChConfigMessage::IMU *sensor_as_IMU() const {
+    return sensor_type() == ChConfigMessage::Type_IMU ? static_cast<const ChConfigMessage::IMU *>(sensor()) : nullptr;
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   }
   const flatbuffers::String *id() const {
     return GetPointer<const flatbuffers::String *>(VT_ID);
@@ -183,6 +240,7 @@ struct Sensor FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
 };
 
+<<<<<<< HEAD
 template<> inline const Camera *Sensor::sensor_as<Camera>() const {
   return sensor_as_Camera();
 }
@@ -196,13 +254,32 @@ template<> inline const GPS *Sensor::sensor_as<GPS>() const {
 }
 
 template<> inline const IMU *Sensor::sensor_as<IMU>() const {
+=======
+template<> inline const ChConfigMessage::Camera *Sensor::sensor_as<ChConfigMessage::Camera>() const {
+  return sensor_as_Camera();
+}
+
+template<> inline const ChConfigMessage::Lidar *Sensor::sensor_as<ChConfigMessage::Lidar>() const {
+  return sensor_as_Lidar();
+}
+
+template<> inline const ChConfigMessage::GPS *Sensor::sensor_as<ChConfigMessage::GPS>() const {
+  return sensor_as_GPS();
+}
+
+template<> inline const ChConfigMessage::IMU *Sensor::sensor_as<ChConfigMessage::IMU>() const {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   return sensor_as_IMU();
 }
 
 struct SensorBuilder {
   flatbuffers::FlatBufferBuilder &fbb_;
   flatbuffers::uoffset_t start_;
+<<<<<<< HEAD
   void add_sensor_type(Type sensor_type) {
+=======
+  void add_sensor_type(ChConfigMessage::Type sensor_type) {
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     fbb_.AddElement<uint8_t>(Sensor::VT_SENSOR_TYPE, static_cast<uint8_t>(sensor_type), 0);
   }
   void add_sensor(flatbuffers::Offset<void> sensor) {
@@ -231,7 +308,11 @@ struct SensorBuilder {
 
 inline flatbuffers::Offset<Sensor> CreateSensor(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     Type sensor_type = Type_NONE,
+=======
+    ChConfigMessage::Type sensor_type = ChConfigMessage::Type_NONE,
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     flatbuffers::Offset<void> sensor = 0,
     flatbuffers::Offset<flatbuffers::String> id = 0,
     int32_t freq = 0,
@@ -247,7 +328,11 @@ inline flatbuffers::Offset<Sensor> CreateSensor(
 
 inline flatbuffers::Offset<Sensor> CreateSensorDirect(
     flatbuffers::FlatBufferBuilder &_fbb,
+<<<<<<< HEAD
     Type sensor_type = Type_NONE,
+=======
+    ChConfigMessage::Type sensor_type = ChConfigMessage::Type_NONE,
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
     flatbuffers::Offset<void> sensor = 0,
     const char *id = nullptr,
     int32_t freq = 0,
@@ -403,6 +488,7 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
       return true;
     }
     case Type_Camera: {
+<<<<<<< HEAD
       auto ptr = reinterpret_cast<const Camera *>(obj);
       return verifier.VerifyTable(ptr);
     }
@@ -416,6 +502,21 @@ inline bool VerifyType(flatbuffers::Verifier &verifier, const void *obj, Type ty
     }
     case Type_IMU: {
       auto ptr = reinterpret_cast<const IMU *>(obj);
+=======
+      auto ptr = reinterpret_cast<const ChConfigMessage::Camera *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_Lidar: {
+      auto ptr = reinterpret_cast<const ChConfigMessage::Lidar *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_GPS: {
+      auto ptr = reinterpret_cast<const ChConfigMessage::GPS *>(obj);
+      return verifier.VerifyTable(ptr);
+    }
+    case Type_IMU: {
+      auto ptr = reinterpret_cast<const ChConfigMessage::IMU *>(obj);
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
       return verifier.VerifyTable(ptr);
     }
     default: return false;

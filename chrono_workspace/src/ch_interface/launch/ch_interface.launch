@@ -2,8 +2,11 @@
   <param name="/use_sim_time" value="true"/>
   <!-- Chrono demo to run -->
   <arg name="chrono_demo" default="demo_INT"/>
+<<<<<<< HEAD
   <!-- Port to run chrono demo on -->
   <arg name="chrono_port" default="8080"/>
+=======
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   <!-- yaml include file name to use -->
   <arg name="chrono_yaml" default="ch_interface.yaml"/>
   <!-- Topic for image data -->
@@ -14,12 +17,20 @@
     <rosparam file="$(find ch_interface)/config/$(arg chrono_yaml)"/>
     <!-- Run ch_ros node -->
     <node pkg="ch_interface" type="ch_interface" name="ch_interface" required="true" output="screen">
+<<<<<<< HEAD
       <!-- Set port parameter -->
       <param name="port" value="$(arg chrono_port)"/>
+=======
+
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
       <!-- Remap camera topic -->
       <remap from="camera" to="$(arg image_topic)"/>
     </node>
     <!-- Run ch_launcher node -->
+<<<<<<< HEAD
     <node pkg="ch_interface" type="ch_launch" name="ch_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/>
+=======
+    <!-- <node pkg="ch_interface" type="ch_launch" name="ch_launch" args="$(arg chrono_demo) $(arg chrono_port)" required="true" output="screen"/> -->
+>>>>>>> d84456083cd1453b3a85c92286e5fa9be41093f3
   </group>
 </launch>

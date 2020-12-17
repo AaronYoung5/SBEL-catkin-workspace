@@ -1,12 +1,11 @@
 <launch>
-  <node pkg="ch_ros" type="ch_ros" name="ch_ros" required="true" output="screen"/>
-  <group ns="ch_ros">
-    <rosparam file="$(find ch_ros)/config/demo.yaml"/>
-  </group>
+  <arg name="image_topic" default="image_data_raw"/>
 
-  <node pkg="ch_ros" type="ch_launch" name="ch_launch" required="true" output="screen"/>
+  <include file="$(find ch_ros)/launch/ch_ros.launch">
+    <arg name="chrono_demo" value="demo_ROS_camera_test"/>
+    <arg name="chrono_port" value="8080"/>
+    <arg name="image_topic" value="$(arg image_topic)"/>
+  </include>
 
-  <node pkg="keyboard_control" type="keyboard_control" name="keyboard_control" required="true" output="screen"/>
-
-  <!-- <node pkg="rosbag" type="record" name="rosbag" args="-a -O euler_test"/> -->
+  <include file="$(find keyboard_control)/launch/keyboard_control.launch"/>
 </launch>

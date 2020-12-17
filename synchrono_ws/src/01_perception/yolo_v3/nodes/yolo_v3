@@ -1,0 +1,165 @@
+#!/usr/bin/python
+import rospy
+from ctypes import *
+import os
+import math
+import cv2 as cv
+import numpy as np
+import time
+import darknet
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
+
+frame_width = None
+frame_height = None
+
+netMain = None
+metaMain = None
+altNames = None
+darknet_image = None
+
+bridge = CvBridge()
+
+# Converts YOLO's bounding box format to OpenCV's
+# YOLO returns x and y as the center of the bounding box
+# OpenCV functions require x and y be the top left corner of the bounding box
+# Darknet returns bounding boxes for network image size (416x416), function also converts bounding boxes to original (scaled) image size
+def convertBoxes(x, y, w, h):
+    xmin = int(round((x - (w / 2))*(frame_width/darknet.network_width(netMain))))
+    xmax = int(round((x + (w / 2))*(frame_width/darknet.network_width(netMain))))
+    ymin = int(round((y - (h / 2))*(frame_height/darknet.network_height(netMain))))
+    ymax = int(round((y + (h / 2))*(frame_height/darknet.network_height(netMain))))
+
+    return xmin, ymin, xmax, ymax
+
+
+def cvDrawBoxes(detections, img):
+    for detection in detections:
+        x, y, w, h = detection[2][0],\
+            detection[2][1],\
+            detection[2][2],\
+            detection[2][3]
+        xmin, ymin, xmax, ymax = convertBoxes(
+            float(x), float(y), float(w), float(h))
+        upperLeft = (xmin, ymin)
+        lowerRight = (xmax, ymax)
+
+        angleToCone = round((((xmin + (w / 2)) - (frame_width / 2)) / frame_width) * 87, 2)
+        distanceToCone = round(12 * 30 / h, 2)
+        confidence = round(detection[1] * 100,1)
+
+
+        # Print just class name
+        #cv.putText(img,detection[0].decode(),(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
+        # Print confidence and distance
+        #cv.putText(img, detection[0].decode() + " " + str(confidence) + '% ' + str(distanceToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[r, g, b])
+        thickness = 2
+
+        if detection[0].decode() == 'yellow':
+            cv.rectangle(img, upperLeft, lowerRight, (255, 255, 0), thickness)
+            # Print distance and angle
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 255, 0])
+        elif detection[0].decode() == 'blue':
+            cv.rectangle(img, upperLeft, lowerRight, (0, 200, 255), thickness)
+            # Print distance and angle
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[0, 200, 255])
+        elif detection[0].decode() == 'orange':
+            cv.rectangle(img, upperLeft, lowerRight, (255, 190, 0), thickness)
+            # Print distance and angle
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
+        elif detection[0].decode() == 'orange-big':
+            cv.rectangle(img, upperLeft, lowerRight, (255, 190, 0), thickness)
+            # Print distance and angle
+            # cv.putText(img, detection[0].decode() + " " + str(distanceToCone) + 'ft ' + str(angleToCone) + ' deg',(upperLeft[0], upperLeft[1] - 5), cv.FONT_HERSHEY_SIMPLEX, 0.5,[255, 190, 0])
+    return img
+
+def YOLO(data):
+    global netMain, darknet_image, frame_height, frame_width
+
+    prev_time = time.time()
+
+    try:
+        frame = bridge.imgmsg_to_cv2(data, "rgba8")
+    except CvBridgeError:
+        print(e)
+
+    frame_height, frame_width = frame.shape[:2]
+    frame_height = float(frame_height)
+    frame_width = float(frame_width)
+
+    frame = cv.flip(frame, -1)
+
+    frame = cv.cvtColor(frame, cv.COLOR_BGRA2RGB)
+    frame_resized = cv.resize(frame,(darknet.network_width(netMain),darknet.network_height(netMain)),interpolation=cv.INTER_LINEAR)
+
+    darknet.copy_image_from_bytes(darknet_image,frame_resized.tobytes())
+    detections = darknet.detect_image(netMain, metaMain, darknet_image, thresh=0.5)
+
+    postTime = time.time()
+    frame = cvDrawBoxes(detections, frame)
+    # frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+
+
+    # Post processing for FPS and center line
+    #cv.line(frame, (round(width / 2), 0), (round(width / 2), height), (0, 0, 255), 1)
+    cv.putText(frame, 'FPS {:.1f}'.format(1 / (time.time() - prev_time)), (10, 30),cv.FONT_HERSHEY_DUPLEX, 0.8, (0, 0, 255))
+    cv.putText(frame, 'Render '+str(round((time.time()-postTime)*1000,2))+' ms', (10, 50),cv.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 255))
+
+    #print(1/(time.time()-prev_time))
+    cv.imshow('Cone Detection', frame)
+    #plotCones(detections)
+    cv.waitKey(1)
+
+def main():
+    global netMain, metaMain, altNames, darknet_image
+
+    configPath = "/home/aaron/Downloads/darknet/cfg/yolov3-cones-colab.cfg"
+    weightPath = "/home/aaron/Downloads/darknet/weights/yolov3-cones-colab_best.weights"
+    metaPath = "/home/aaron/Downloads/darknet/cfg/cones.data"
+    if not os.path.exists(configPath):
+        raise ValueError("Invalid config path `" +
+                         os.path.abspath(configPath)+"`")
+    if not os.path.exists(weightPath):
+        raise ValueError("Invalid weight path `" +
+                         os.path.abspath(weightPath)+"`")
+    if not os.path.exists(metaPath):
+        raise ValueError("Invalid data file path `" +
+                         os.path.abspath(metaPath)+"`")
+
+    if netMain is None:
+        netMain = darknet.load_net_custom(configPath.encode(
+            "ascii"), weightPath.encode("ascii"), 0, 1)  # batch size = 1
+    if metaMain is None:
+        metaMain = darknet.load_meta(metaPath.encode("ascii"))
+    if altNames is None:
+        try:
+            with open(metaPath) as metaFH:
+                metaContents = metaFH.read()
+                import re
+                match = re.search("names *= *(.*)$", metaContents,
+                                  re.IGNORECASE | re.MULTILINE)
+                if match:
+                    result = match.group(1)
+                else:
+                    result = None
+                try:
+                    if os.path.exists(result):
+                        with open(result) as namesFH:
+                            namesList = namesFH.read().strip().split("\n")
+                            altNames = [x.strip() for x in namesList]
+                except TypeError:
+                    pass
+        except Exception:
+            pass
+
+    print("Starting the YOLO loop...")
+
+    darknet_image = darknet.make_image(darknet.network_width(netMain),
+                                    darknet.network_height(netMain),3)
+
+    rospy.init_node("yolo_v3", anonymous=True)
+    sub = rospy.Subscriber("/syn_interface/camera_sensor_2", Image, YOLO)
+    rospy.spin()
+
+if __name__ == "__main__":
+    main()
